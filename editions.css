@@ -68,6 +68,7 @@ html[data-edition="en"] .comp-photo{background-image:url("./assets/edition-en.sv
 
 /* Edition 03: Red lacquer — contemporary typography, cinnabar seal and warm rice paper. */
 html[data-edition="zh"]{
+ --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",Arial,sans-serif;
  --paper:#f3e8d9;--ink:#33221d;--accent:#b22c23;
  --hero-bg:#f4e9da;--hero-fg:#321f1c;--hero-muted:#846a60;
  --header-bg:#92261f;--header-fg:#fff0dd;
