@@ -69,6 +69,7 @@ html[data-edition="en"] .comp-photo{background-image:url("./assets/edition-en.sv
 /* Edition 03: Red lacquer — contemporary typography, cinnabar seal and warm rice paper. */
 html[data-edition="zh"]{
  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+ --display:"Noto Sans SC","Manrope",Arial,sans-serif;
  --paper:#f3e8d9;--ink:#33221d;--accent:#b22c23;
  --hero-bg:#f4e9da;--hero-fg:#321f1c;--hero-muted:#846a60;
  --header-bg:#92261f;--header-fg:#fff0dd;
@@ -84,7 +85,7 @@ html[data-edition="zh"]{
 html[data-edition="zh"] body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",var(--sans)}
 html[data-edition="zh"] .hero-name{font-family:"Songti SC","STSong","Noto Serif SC","Noto Serif CJK SC","SimSun",serif;font-size:clamp(89px,8vw,151px);font-weight:700;line-height:1.2;letter-spacing:-.045em;margin-top:clamp(12px,2.1vw,42px);margin-bottom:clamp(22px,3vw,48px);color:#7c251e}
 html[data-edition="zh"] .hero-name span,html[data-edition="zh"] .hero-name em{font-family:inherit;font-weight:700;letter-spacing:-.04em}
-html[data-edition="zh"] .hero-pretitle{font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-style:normal;font-size:16px;letter-spacing:.15em;color:#a32c25}
+html[data-edition="zh"] .hero-pretitle{font-family:var(--sans);font-weight:600;font-style:normal;font-size:14px;letter-spacing:.09em;color:#a32c25}
 html[data-edition="zh"] .hero-statement{font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(29px,2.7vw,45px);font-weight:600;letter-spacing:-.035em}
 html[data-edition="zh"] .hero-name:after{width:72px;height:8px;background:#bd332a}
 html[data-edition="zh"] .artwork{background-color:#9d2922}

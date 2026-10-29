@@ -15,7 +15,7 @@
 <path d="M98 200H866 M98 1056H866 M132 85V1156 M832 85V1156" fill="none" stroke="#e2eaff" stroke-width="1" stroke-dasharray="4 19" opacity=".33"/>
 <rect x="106" y="116" width="17" height="17" fill="#f4f6fa"/>
 <rect x="125" y="116" width="17" height="17" fill="#f4f6fa" opacity=".5"/>
-<g fill="#f5f8ff" font-family="Arial,Helvetica,sans-serif"><text x="100" y="88" font-size="19" font-weight="700" letter-spacing="5">PAVEL / MARKOV</text><text x="105" y="1158" font-size="17" letter-spacing="6">GLOBAL EDITION</text><text x="843" y="1158" text-anchor="end" font-size="17" letter-spacing="5">02 — 03</text></g>
+
 <g fill="none" stroke="#f7faff" opacity=".8"><path d="M325 98H356M340 83V114 M764 978H804 M784 959V998" stroke-width="1.5"/></g>
 <rect width="960" height="1240" filter="url(#noise)" opacity=".3"/>
 </svg>

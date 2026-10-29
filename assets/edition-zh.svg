@@ -14,9 +14,7 @@
 <circle cx="490" cy="562" r="395" fill="none" stroke="#d89d83" stroke-width="1" opacity=".4"/>
 <circle cx="490" cy="562" r="439" fill="none" stroke="#d89d83" stroke-width=".8" opacity=".22"/>
 <path d="M488 180V915M120 562H852" stroke="#eecfb2" stroke-width=".7" opacity=".22" stroke-dasharray="3 11"/>
-<g fill="#f0d9bf"><text x="124" y="169" font-size="18" font-family="Arial, sans-serif" letter-spacing="5">PAVEL MARKOV / 2026</text>
-<text x="123" y="1091" font-family="'Noto Sans CJK SC','Microsoft YaHei',sans-serif" font-size="26" letter-spacing="8">帕维尔 · 马尔科夫</text>
-<text x="811" y="1090" font-family="Arial,sans-serif" text-anchor="end" font-size="16" letter-spacing="4">03/03</text></g>
-<g transform="translate(827 271)"><text font-family="'Noto Sans CJK SC','Microsoft YaHei',sans-serif" font-size="25" fill="#e6b599" writing-mode="vertical-rl" letter-spacing="12">当代人物影像</text></g>
+
+
 <rect width="960" height="1240" filter="url(#noise)" opacity=".37"/>
 </svg>
