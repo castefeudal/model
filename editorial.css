@@ -355,3 +355,32 @@ body.motion-enabled .reveal:nth-child(2){transition-delay:.1s}
 @media(max-width:900px){.gallery.contact-sheet{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:620px){.gallery.contact-sheet{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.gallery.contact-sheet .gallery-caption{font-size:7px}.view-toggle{float:none;margin:0 0 22px}}
 @media print{.comp-extra{break-inside:avoid}.comp-extra img{max-height:150px}}
+
+/* Mobile casting-first composition: name, authentic photo/artwork, then biography. */
+.hero-photo-cta{display:none}
+@media(max-width:760px){
+ .hero{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"kicker" "name" "visual" "bottom";gap:0}
+ .hero-copy{display:contents}
+ .hero-copy>.section-kicker{grid-area:kicker;margin:33px 5vw 0;max-width:none;align-self:start}
+ .hero-copy>.hero-name{grid-area:name;margin:39px 5vw 38px;align-self:start}
+ .hero>.hero-visual{grid-area:visual;height:min(120vw,72svh);min-height:420px}
+ .hero-copy>.hero-bottom{grid-area:bottom;padding:46px 5vw 67px;display:block;align-self:start}
+ .hero-copy>.hero-bottom .hero-intro{max-width:580px}
+ .hero-copy>.hero-bottom .hero-statement{font-size:clamp(29px,7.2vw,44px)}
+ .hero-photo-cta{display:inline-flex;align-items:center;gap:18px;position:absolute;bottom:68px;left:6%;z-index:7;min-height:44px;padding:0 15px;border:1px solid #e1e4d6;background:#e9ebe0;color:#253226;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;box-shadow:0 6px 20px #0003}
+ .hero-photo-cta:hover{background:#fff}
+ .artwork-bottom{bottom:23%}
+}
+@media(max-width:440px){
+ .hero-copy>.hero-name{margin:33px 5vw 34px}
+ .hero>.hero-visual{height:116vw;min-height:375px}
+ .hero-copy>.hero-bottom{padding:41px 5vw 60px}
+ .hero-photo-cta{bottom:64px;font-size:9px}
+}
+html:lang(zh-CN) body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",var(--sans)}
+html:lang(zh-CN) .display-heading{letter-spacing:-.065em;line-height:1.13}
+html:lang(zh-CN) .display-heading em{font-family:"Songti SC","Noto Serif SC",serif;font-weight:500;font-style:normal;letter-spacing:-.04em}
+html:lang(zh-CN) .screen-big,html:lang(zh-CN) .about-opening,html:lang(zh-CN) .contact-lead{font-family:"Songti SC","Noto Serif SC",serif;letter-spacing:-.015em;line-height:1.35}
+html:lang(zh-CN) .interlude-heading{letter-spacing:-.06em}
+html:lang(zh-CN) .interlude-heading em{font-family:"Songti SC","Noto Serif SC",serif;font-style:normal}
+@media(prefers-reduced-motion:reduce){.hero-photo-cta{transition:none}}
