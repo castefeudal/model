@@ -1,0 +1,22 @@
+name: Browser UI smoke
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Start static server
+        run: python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/portfolio-server.log 2>&1 &
+      - name: Check real browser rendering and interactions
+        run: node tools/browser-qa.mjs
