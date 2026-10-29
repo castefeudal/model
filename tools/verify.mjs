@@ -10,7 +10,7 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","styles.css","editorial.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/hero-art.svg","assets/study-portrait.svg","assets/study-form.svg","assets/study-motion.svg","assets/social-cover.svg","assets/favicon.svg",".nojekyll"];
+const required=["index.html","atelier.css","editions.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -38,7 +38,14 @@ if(!html.includes('rel="canonical"'))fail("Missing canonical");
 if(!html.includes('name="description"'))fail("Missing description");
 if(!html.includes('application/ld+json'))fail("Missing structured data");
 if(!html.includes('id="compDialog"'))fail("Missing comp card");
-for(const cssfile of ["styles.css","editorial.css"]){
+if(!html.includes('href="./atelier.css"')||!html.includes('href="./editions.css"'))fail("Edition styles are not linked");
+for(const edition of ["ru","en","zh"]){
+ if(!read("editions.css").includes('data-edition="'+edition+'"'))fail("Missing theme "+edition);
+ if(!read("editions.css").includes('edition-'+edition+'.svg'))fail("Missing art binding "+edition);
+}
+if(!html.includes('data-i18n="heroName1"')||!html.includes('data-i18n="heroName2"'))fail("Heading is not localized");
+
+for(const cssfile of ["atelier.css","editions.css"]){
  const css=read(cssfile);
  for(const m of css.matchAll(/url\((['"]?)([^)'"]+)\1\)/g)){
    const v=m[2];if(v.startsWith("http")||v.startsWith("data:"))continue;

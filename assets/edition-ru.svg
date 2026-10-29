@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1240" role="img" aria-labelledby="t d">
+<title id="t">СИЛА / НОВАЯ ФОРМА</title><desc id="d">Абстрактная композиция из бордовых металлических плоскостей, архитектурных арок и типографики, без изображения человека.</desc>
+<defs>
+<linearGradient id="br" x1="0" y1="0" x2="1" y2=".8"><stop stop-color="#6c2733"/><stop offset=".52" stop-color="#ad5960"/><stop offset="1" stop-color="#3a1821"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e7d2b6"/><stop offset=".26" stop-color="#ad9d8d"/><stop offset=".45" stop-color="#f5e3cc"/><stop offset=".62" stop-color="#4e4947"/><stop offset="1" stop-color="#d0b8a5"/></linearGradient>
+<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#d8bdab" stroke-opacity=".11" stroke-width=".6"/></pattern>
+<filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="2" seed="11" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".14"/></feComponentTransfer></filter>
+</defs>
+<rect width="960" height="1240" fill="#20171b"/>
+<rect width="960" height="1240" fill="url(#grid)"/>
+<path d="M170 142H835V1098H170Z" fill="none" stroke="#b98a7d" stroke-width="1" opacity=".56"/>
+<path d="M215 180H789V1048H215Z" fill="none" stroke="#b98a7d" stroke-width=".5" opacity=".3"/>
+<rect x="660" y="-100" width="360" height="1570" fill="#481923" transform="rotate(22 660 0)"/>
+<path d="M70 980 675 -180 840 -180 234 1215Z" fill="url(#br)" stroke="#e6a3a1" stroke-opacity=".28" stroke-width="2"/>
+<path d="M320 1115 847 100 934 120 417 1200Z" fill="#21171a" opacity=".94"/>
+<path d="M363 1090 895 89 920 101 389 1114Z" fill="url(#metal)" opacity=".9"/>
+<path d="M88 1020 594 44" fill="none" stroke="#f3d6bb" stroke-width="2" opacity=".72"/>
+<path d="M115 1070 621 94" fill="none" stroke="#f3d6bb" stroke-width="1" opacity=".3"/>
+<path d="M315 1203C480 990 578 770 602 552c19-193 98-275 211-343" fill="none" stroke="#e5c8b2" stroke-width="2" opacity=".45"/>
+<circle cx="442" cy="609" r="229" fill="none" stroke="#d7c0a4" stroke-width="1.2" opacity=".52"/>
+<circle cx="442" cy="609" r="194" fill="none" stroke="#d7c0a4" stroke-width=".7" opacity=".3"/>
+<circle cx="442" cy="609" r="158" fill="none" stroke="#d7c0a4" stroke-width=".5" opacity=".22"/>
+<path d="M442 309V910 M160 609H725" stroke="#e0cbb5" stroke-width="1" opacity=".28" stroke-dasharray="3 15"/>
+<rect x="122" y="69" width="58" height="6" fill="#ae5661"/>
+<g font-family="Arial, sans-serif" fill="#eee0cd"><text x="118" y="112" font-size="18" letter-spacing="6">PAVEL MARKOV</text><text x="722" y="1161" font-size="15" letter-spacing="4" text-anchor="end">РУССКАЯ РЕДАКЦИЯ</text><text x="120" y="1161" font-size="16" letter-spacing="3">NO. 01 / 03</text></g>
+<g transform="translate(752 392) rotate(90)" fill="#f0d5c5"><text font-family="Arial, sans-serif" font-size="12" letter-spacing="7">ФОРМА — ХАРАКТЕР — ПРИСУТСТВИЕ</text></g>
+<rect width="960" height="1240" filter="url(#noise)" opacity=".6"/>
+</svg>

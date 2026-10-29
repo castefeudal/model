@@ -1,59 +1,65 @@
-# PAVEL MARKOV — MODEL / ACTOR / ON-CAMERA TALENT
+# PAVEL MARKOV / THREE EDITIONS
 
 **Live:** https://castefeudal.github.io/model/  
 **Repository:** https://github.com/castefeudal/model
 
-A responsive, cinematic editorial portfolio for model agencies, casting directors, filmmakers, photographers and brands. Static HTML/CSS/vanilla JavaScript, deployed via GitHub Pages without a build pipeline or paid APIs.
+An international casting / model portfolio designed as **three distinct editorial editions** that change in one click with the language. Plain HTML, CSS, vanilla JS; GitHub Pages, no paid service or build step.
 
-## What is included
+## Visual editions
 
-- High-fashion / cinema-inspired art direction with custom, original SVG artwork, color system and serif/sans editorial typography.
-- Responsive mobile-first casting presentation, desktop spreads and prominent measurements.
-- Russian, English and Simplified Chinese localization; shared URLs using `?lang=ru|en|zh`; persistent language selection.
-- Photo book infrastructure: category filters, editorial/contact-sheet layouts, accessible lightbox with keyboard, buttons and mobile swipe gestures.
-- Actual compact casting specifications, automatic omission of unknown fields, printable A4 comp card.
-- Confirmed contact buttons (shown only when verified), share/copy page, copy casting specifications.
-- Verified real video support (local MP4/WebM or YouTube embed); empty sections remain hidden.
-- SEO, Person schema, hreflang, robots.txt/sitemap, custom favicon and a **PNG social preview**.
-- Built-in tests: static validation and real Chromium smoke tests covering RU/EN/Chinese, 1440/768/390/360px and comp-card dialog.
+| Language | Edition | Approach |
+| --- | --- | --- |
+| **RU** | **IMPERIAL NOIR** | Black ink, warm paper, oxblood pigment, assertive Russian typography and architectural forms |
+| **EN** | **STUDIO / INTERNATIONAL** | Cool ivory, electric cobalt, chrome-cut shapes, inverse split composition and editorial serif typography |
+| **中文** | **朱印 / RED LACQUER** | Cinnabar, rice paper, modern Chinese seal visual grammar and Chinese-language display typography |
 
-**Integrity:** Never use another person's photo, fabricated film credits, invented booking emails or manipulated headshots to stand in for Pavel. Current illustrations are clearly abstract visual studies, not photos.
+This is one coherent personal brand with three visually different treatments, **not three disconnected sites**. Switching language instantly updates typography, art, palette, navigation copy, page title and shareable URL without reloading. Choice persists on future visits. Direct links: `?lang=ru`, `?lang=en`, `?lang=zh`.
 
-## What to update first
+No clip-art flags, dragons, stock models, AI faces or counterfeit acting credits. Cultural motifs are used as contemporary editorial references, not stereotypes.
 
-1. **Your real casting photographs:** see [PHOTO_GUIDE.md](PHOTO_GUIDE.md). Upload to `assets/photos/`, then list them in `data/media.js`. A professional portfolio needs recent, unaltered headshots and full-length shots.
-2. **Booking contact:** confirm a public email and/or a Telegram/Instagram account for casting enquiries, then update `data/profile.js`.
-3. **Measurements:** confirm current weight, waist, clothing and shoe sizes in `data/profile.js`.
-4. **Screen footage:** upload genuine footage in `assets/video/` and register in `data/media.js`. Do not call ordinary creator content an acting showreel.
+## Where to edit
 
-## File map
-
-| File | Purpose |
+| Path | Purpose |
 | --- | --- |
-| `index.html` | Semantic page, SEO, layout, dialogs |
-| `styles.css` | Core layout and print card |
-| `editorial.css` | Art direction, cinematic sections, responsive editorial system |
-| `app.js` | Localization, media, gallery viewer, contact and share logic |
-| `polish.js` | Scroll progress, active navigation, reveal, casting utilities |
-| `data/profile.js` | Single source for model details and verified contacts |
-| `data/media.js` | Photo order, category, hero image, videos |
-| `data/i18n.js` | Three professionally adapted locales |
-| `assets/hero-art.svg` | Abstract cover until a real hero photograph is provided |
-| `assets/study-*.svg` | Original photo-shoot art direction plates |
-| `assets/social-cover.png` | PNG for chat previews |
-| `tools/verify.mjs` | Zero-dependency structural and translation checks |
-| `tools/browser-qa.mjs` | Headless Chromium responsive/browser checks |
+| `index.html` | Editorial layouts, metadata, gallery and casting-card dialogs |
+| `atelier.css` | Entire core layout, mobile, accessibility and A4 print |
+| `editions.css` | Palette and composition for the RU / EN / ZH themes |
+| `assets/edition-ru.svg`, `assets/edition-en.svg`, `assets/edition-zh.svg` | Original vector art for the three editions |
+| `data/i18n.js` | RU / EN / 简体中文 translation strings |
+| `app.js` | Instant language + edition change, profile, gallery, lightbox, verified contact links, print |
+| `polish.js` | Active navigation, scroll progress, accessibility refinements |
+| `data/profile.js` | Central casting specs and verified contacts |
+| `data/media.js` | Order of real photos, hero photo and real videos |
+| `PHOTO_GUIDE.md` | Photo requirements and import instructions |
+| `tools/verify.mjs` | No-dependency integrity/translation/syntax checks |
+| `tools/browser-qa.mjs` | Actual Chromium tests at desktop/tablet/mobile widths and for all editions |
 
-## Deployment
+**Current media limitation:** Real photos and videos have not yet been supplied. The elaborate image compositions are deliberately **abstract vector art** and are not presented as Pavel's photographs. Authentic, recent headshots and full-body shots are essential before sending this as a finished casting portfolio.
 
-GitHub → **Settings → Pages** → **Build and deployment** → **Deploy from a branch**, branch `main`, directory `/(root)` → Save. The site is published at `https://castefeudal.github.io/model/`. The existing repository has a successful Pages deployment.
+## Features
 
-## Local QA
+- Responsive fashion-oriented landing screen with different compositions by locale
+- True casting profile; unknown measurements hidden; approximate values marked
+- Printable PDF-style A4 comp card through the browser
+- Image gallery with filters, editorial/contact-sheet views, keyboard/swipe full-screen viewer
+- Video support without fabricated clips
+- Sharing, copying measurements and confirmed booking details
+- Language-specific URLs, sitemap/hreflang, structured Person metadata and PNG social preview
+- Accessible keyboard focus, reduced-motion support, and no mandatory JS frameworks
 
-```bash
+## Production
+
+Deployment: GitHub → Settings → Pages → Deploy from a branch → `main` → `/(root)`.  
+Validation: both Actions workflows **Portfolio quality checks** and **Browser UI smoke** should pass before presenting the version to agents.
+
+## Local checks
+```sh
 node tools/verify.mjs
 python3 -m http.server 8765
-# In another terminal (requires a current Chrome): node tools/browser-qa.mjs
+# Separate terminal, Chrome installed:
+node tools/browser-qa.mjs
 ```
 
-CI workflows automatically verify code, accessibility-sensitive structural elements, responsive geometry and dialogs. Because no authentic portfolio photos were supplied, the gallery remains intentionally empty while retaining ready-to-use functionality.
+## Photo and contact setup
+
+Read [PHOTO_GUIDE.md](PHOTO_GUIDE.md) to add only actual pictures of Pavel into `assets/photos/` and `data/media.js`. The gallery and cover appear automatically. Update only publicly confirmed email / Telegram / Instagram in `data/profile.js`; no working email is invented. Exact clothes, shoes and travel availability also remain unset until confirmed.

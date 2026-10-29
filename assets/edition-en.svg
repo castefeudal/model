@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1240" role="img" aria-labelledby="t d">
+<title id="t">FRAME / 02</title><desc id="d">Contemporary cobalt-blue fashion editorial composition featuring typographic cutouts, paper shapes and crisp geometry without a human likeness.</desc>
+<defs><linearGradient id="chrome" x1="0" y1=".2" x2="1" y2=".8"><stop stop-color="#f3f6fc"/><stop offset=".22" stop-color="#7a9ce8"/><stop offset=".52" stop-color="#e6f0fc"/><stop offset=".73" stop-color="#8aa3cb"/><stop offset="1" stop-color="#f9fbff"/></linearGradient><pattern id="lines" patternUnits="userSpaceOnUse" width="24" height="24"><path d="M24 0H0V24" fill="none" stroke="#dfe8ff" stroke-width=".7" opacity=".22"/></pattern><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="24"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".1"/></feComponentTransfer></filter></defs>
+<rect width="960" height="1240" fill="#1847db"/><rect width="960" height="1240" fill="url(#lines)"/>
+<path d="M-175 0H282L-70 1240H-312Z" fill="#0431a4"/>
+<path d="M-140 0H10L-250 1240H-390Z" fill="#aec8ff" opacity=".54"/>
+<circle cx="553" cy="577" r="348" fill="none" stroke="#e8edfc" stroke-width="1.5" opacity=".44"/>
+<circle cx="553" cy="577" r="309" fill="none" stroke="#e8edfc" stroke-width="1" opacity=".4"/>
+<circle cx="553" cy="577" r="266" fill="none" stroke="#e8edfc" stroke-width="1" opacity=".4"/>
+<circle cx="553" cy="577" r="218" fill="#e7ecfa"/>
+<path d="M464 324H754V837H464Z" fill="#1847db"/>
+<path d="M496 356H727V807H496Z" fill="#09267f"/>
+<path d="M-36 930L1000 100L1116 232L80 1062Z" fill="url(#chrome)"/>
+<path d="M-52 970L983 140" fill="none" stroke="#0e38bb" stroke-width="6" opacity=".6"/>
+<path d="M98 200H866 M98 1056H866 M132 85V1156 M832 85V1156" fill="none" stroke="#e2eaff" stroke-width="1" stroke-dasharray="4 19" opacity=".33"/>
+<rect x="106" y="116" width="17" height="17" fill="#f4f6fa"/>
+<rect x="125" y="116" width="17" height="17" fill="#f4f6fa" opacity=".5"/>
+<g fill="#f5f8ff" font-family="Arial,Helvetica,sans-serif"><text x="100" y="88" font-size="19" font-weight="700" letter-spacing="5">PAVEL / MARKOV</text><text x="105" y="1158" font-size="17" letter-spacing="6">GLOBAL EDITION</text><text x="843" y="1158" text-anchor="end" font-size="17" letter-spacing="5">02 — 03</text></g>
+<g fill="none" stroke="#f7faff" opacity=".8"><path d="M325 98H356M340 83V114 M764 978H804 M784 959V998" stroke-width="1.5"/></g>
+<rect width="960" height="1240" filter="url(#noise)" opacity=".3"/>
+</svg>

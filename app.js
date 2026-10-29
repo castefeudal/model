@@ -30,7 +30,18 @@ function renderSpecs(){
  qs("#compSpecs").innerHTML=items.map(([key,value])=>'<div><dt>'+safe(t(key))+'</dt><dd>'+safe(value)+'</dd></div>').join("");
 }
 function setLanguage(next){
+ const previous=document.documentElement.dataset.edition;
  lang=next;document.documentElement.lang=lang==="zh"?"zh-CN":lang;
+ document.documentElement.dataset.edition=lang;
+ document.documentElement.style.colorScheme=lang==="ru"?"dark":"light";
+ const themeColor={ru:"#18181a",en:"#f5f6f4",zh:"#f2e5d2"};
+ document.querySelector('meta[name="theme-color"]')?.setAttribute("content",themeColor[lang]);
+ if(previous&&previous!==lang && !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+   document.documentElement.classList.remove("edition-switch");
+   void document.documentElement.offsetWidth;
+   document.documentElement.classList.add("edition-switch");
+   window.setTimeout(()=>document.documentElement.classList.remove("edition-switch"),650);
+ }
  try{localStorage.setItem("pm-lang",lang)}catch{}
  const url=new URL(location.href);url.searchParams.set("lang",lang);history.replaceState(null,"",url);
  qsa("[data-i18n]").forEach(node=>{const k=node.dataset.i18n;if(dict[lang][k])node.innerHTML=dict[lang][k]});
@@ -38,6 +49,8 @@ function setLanguage(next){
  qs("#menuToggle").setAttribute("aria-label",t("menu"));
  document.querySelector('meta[property="og:locale"]')?.setAttribute("content",lang==="ru"?"ru_RU":lang==="zh"?"zh_CN":"en_US");
  document.title=lang==="ru"?"Павел Марков — модель / актёр / съёмки":lang==="zh"?"帕维尔·马尔科夫 — 模特与镜头表现":"Pavel Markov — Model / Actor / On-camera Talent";
+ const heroPhoto=qs("#heroImage");
+ if(heroPhoto && !heroPhoto.hidden)heroPhoto.alt=media[0]?.alt?.[lang]||"Pavel Markov portrait";
  document.querySelector('meta[name="description"]').content=lang==="ru"?"Павел Марков — модель и талант для съёмок. Рост 188 см, атлетический типаж, Беларусь.":lang==="zh"?"帕维尔·马尔科夫个人模特与选角作品集。身高188厘米，运动型外形，来自白俄罗斯。":"Pavel Markov: model and on-camera talent. 188 cm, athletic build, based in Belarus.";
  renderSpecs();renderGallery();renderVideos();renderContacts();
 }

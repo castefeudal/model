@@ -1,40 +1,50 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-edition="ru">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#18201b">
-  <meta name="description" content="Павел Марков — модель и talent для съёмок. Атлетический типаж, рост 188 см, Беларусь. Портфолио, модельная анкета, кастинг и контакты.">
+  <meta name="theme-color" content="#18181a">
+  <meta name="description" content="Павел Марков — модель и on-camera talent. Рост 188 см, атлетический типаж, Беларусь. Модельная анкета и контакты для кастинга.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://castefeudal.github.io/model/">
   <link rel="alternate" hreflang="ru" href="https://castefeudal.github.io/model/?lang=ru">
   <link rel="alternate" hreflang="en" href="https://castefeudal.github.io/model/?lang=en">
   <link rel="alternate" hreflang="zh-CN" href="https://castefeudal.github.io/model/?lang=zh">
   <link rel="alternate" hreflang="x-default" href="https://castefeudal.github.io/model/">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
-  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Pavel Markov — Model & On-Camera Talent">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
-  <meta property="og:site_name" content="Pavel Markov — Model & Actor">
   <meta property="og:title" content="PAVEL MARKOV — Model / Actor / On-camera Talent">
-  <meta property="og:description" content="Model profile, casting information and selected work. Athletic presence. Based in Belarus.">
+  <meta property="og:description" content="International casting portfolio. Athletic presence, 188 cm, based in Belarus.">
   <meta property="og:url" content="https://castefeudal.github.io/model/">
   <meta property="og:image" content="https://castefeudal.github.io/model/assets/social-cover.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta name="twitter:image" content="https://castefeudal.github.io/model/assets/social-cover.png">
-  <meta property="og:image:alt" content="PAVEL MARKOV — model, actor, on-camera talent">
+  <meta property="og:image:alt" content="Pavel Markov — model and on-camera talent">
   <meta name="twitter:card" content="summary_large_image">
-  <title>Pavel Markov — Model / Actor / On-camera Talent</title>
+  <meta name="twitter:image" content="https://castefeudal.github.io/model/assets/social-cover.png">
+  <title>Павел Марков — Model / Actor / On-camera Talent</title>
+  <script>
+    (function(){
+      var p=new URLSearchParams(location.search).get("lang"),s="ru";
+      try{s=localStorage.getItem("pm-lang")||"ru"}catch(e){}
+      var l=["ru","en","zh"].indexOf(p)>-1?p:(["ru","en","zh"].indexOf(s)>-1?s:"ru");
+      document.documentElement.dataset.edition=l;
+      document.documentElement.lang=l==="zh"?"zh-CN":l;
+      document.querySelector('meta[name="theme-color"]').setAttribute("content",{ru:"#18181a",en:"#f5f6f4",zh:"#f2e5d2"}[l]);
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
-  <link rel="stylesheet" href="./editorial.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Pavel Markov","alternateName":["Павел Марков","帕维尔·马尔科夫"],"description":"Model and on-camera talent with an athletic physique and experience presenting on camera.","height":{"@type":"QuantitativeValue","value":188,"unitCode":"CMT"},"homeLocation":{"@type":"Place","name":"Belarus"},"url":"https://castefeudal.github.io/model/"}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./atelier.css">
+  <link rel="stylesheet" href="./editions.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Pavel Markov","alternateName":["Павел Марков","帕维尔·马尔科夫"],"description":"Athletic model and on-camera talent based in Belarus.","height":{"@type":"QuantitativeValue","value":188,"unitCode":"CMT"},"homeLocation":{"@type":"Place","name":"Belarus"},"url":"https://castefeudal.github.io/model/"}</script>
   <script src="./data/profile.js" defer></script>
   <script src="./data/media.js" defer></script>
   <script src="./data/i18n.js" defer></script>
@@ -43,124 +53,175 @@
 </head>
 <body>
   <div class="page-progress" aria-hidden="true"><span id="readingProgress"></span></div>
-  <a class="skip-link" href="#main" data-i18n="skip">Перейти к содержимому</a>
-  <div class="meta-rail"><span data-i18n="railLeft">PAVEL MARKOV / ПОРТФОЛИО</span><span data-i18n="railRight">БЕЛАРУСЬ · МЕЖДУНАРОДНЫЙ ФОРМАТ</span></div>
+  <a class="skip-link" href="#main" data-i18n="skip">К содержимому</a>
+  <div class="meta-rail"><span data-i18n="railLeft">ПАВЕЛ МАРКОВ / ЛИЧНЫЙ КАСТИНГ-БУК</span><span class="rail-center">PM — <span data-i18n="editionIndex">РЕДАКЦИЯ 01 / 03</span></span><span data-i18n="railRight">БЕЛАРУСЬ · МЕЖДУНАРОДНЫЕ ПРОЕКТЫ</span></div>
   <header class="site-header" id="top">
-    <a class="wordmark" href="#top" aria-label="Pavel Markov — home">PM<span class="wordmark-point">.</span></a>
+    <a class="wordmark" href="#top" aria-label="Pavel Markov — home">P<span class="wordmark-slash">/</span>M<span class="wordmark-point">.</span></a>
     <nav class="site-nav" id="siteNav" aria-label="Main navigation">
       <a href="#portfolio" data-i18n="navPortfolio">Портфолио</a>
       <a href="#profile" data-i18n="navProfile">Параметры</a>
-      <a href="#screen" data-i18n="navScreen">В кадре</a>
+      <a href="#screen" data-i18n="navScreen">Работа в кадре</a>
       <a href="#about" data-i18n="navAbout">Обо мне</a>
       <a href="#contact" data-i18n="navContact">Контакт</a>
     </nav>
     <div class="header-tools">
-      <div class="lang-switch" role="group" aria-label="Site language">
-        <button type="button" class="lang-btn" data-lang="ru" aria-pressed="true">RU</button>
-        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-        <button type="button" class="lang-btn" data-lang="zh" aria-pressed="false">中文</button>
+      <span class="edition-label" data-i18n="editionLabel">IMPERIAL NOIR</span>
+      <div class="lang-switch" role="group" aria-label="Choose language and visual edition">
+        <button type="button" class="lang-btn" data-lang="ru" aria-pressed="true" title="Русская редакция"><span class="lang-dot"></span>RU</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English edition"><span class="lang-dot"></span>EN</button>
+        <button type="button" class="lang-btn" data-lang="zh" aria-pressed="false" title="中文版本"><span class="lang-dot"></span>中文</button>
       </div>
-      <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu"><span></span><span></span></button>
+      <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Открыть меню"><span></span><span></span></button>
     </div>
   </header>
 
   <main id="main">
     <section class="hero" aria-labelledby="heroHeading">
       <div class="hero-copy">
-        <div class="section-kicker"><span class="signal-dot"></span><span data-i18n="heroEyebrow">ПОРТФОЛИО / ПРЕДСТАВЛЕНИЕ</span><span class="rule"></span><span>01—06</span></div>
-        <h1 id="heroHeading" class="hero-name"><span>PAVEL</span><em>MARKOV</em></h1>
+        <div class="section-kicker"><span class="signal-dot" aria-hidden="true"></span><span data-i18n="heroEyebrow">ЛИЧНОЕ ДОСЬЕ / 2026</span><span class="kicker-line"></span><span data-i18n="editionCode">01 / RU</span></div>
+        <p class="hero-pretitle" data-i18n="heroPrelude">Лицо. Форма. Характер.</p>
+        <h1 class="hero-name" id="heroHeading"><span data-i18n="heroName1">ПАВЕЛ</span><em data-i18n="heroName2">МАРКОВ</em></h1>
         <div class="hero-bottom">
           <div class="hero-intro">
-            <p class="overline" data-i18n="heroRole">MODEL / ACTOR / ON-CAMERA TALENT</p>
-            <p class="hero-statement" data-i18n="heroLine">Характер. Движение. Присутствие в кадре.</p>
-            <p class="hero-detail" data-i18n="heroDetail">Атлетический типаж и опыт работы перед камерой. Для рекламных, editorial и экранных проектов.</p>
+            <p class="overline" data-i18n="heroRole">МОДЕЛЬ / АКТЁРСКИЕ КАСТИНГИ / В КАДРЕ</p>
+            <p class="hero-statement" data-i18n="heroLine">Не только внешность. Присутствие.</p>
+            <p class="hero-detail" data-i18n="heroDetail">Атлетический типаж. Работа с движением и камерой. Открыт к коммерческим и творческим проектам.</p>
             <div class="hero-actions">
               <a class="action action-dark" href="#portfolio"><span data-i18n="viewPortfolio">Смотреть портфолио</span><span aria-hidden="true">↗</span></a>
               <button class="action action-outline" type="button" data-open-card><span data-i18n="openCard">Кастинг-анкета</span><span aria-hidden="true">↗</span></button>
             </div>
           </div>
           <div class="hero-metrics" aria-label="Casting highlights">
-            <div><span class="metric-number">188</span><span class="metric-unit">CM</span><small data-i18n="height">Рост</small></div>
-            <div><span class="metric-title" data-i18n="athletic">ATHLETIC</span><small data-i18n="build">Телосложение</small></div>
+            <div class="hero-metric"><span class="metric-number">188</span><span class="metric-unit">CM</span><small data-i18n="height">Рост</small></div>
+            <div class="hero-metric"><span class="metric-title" data-i18n="athletic">ATHLETIC</span><small data-i18n="build">Телосложение</small></div>
           </div>
         </div>
       </div>
       <figure class="hero-visual" id="heroVisual">
         <img id="heroImage" class="hero-photo" alt="" fetchpriority="high" hidden>
-        <div class="artwork" id="heroArtwork" role="img" aria-label="Abstract editorial design in place of an upcoming real portrait">
-          <span class="artwork-grain" aria-hidden="true"></span>
-          <div class="artwork-top"><span>PM—001</span><span>CASTING FILE</span></div>
-          <div class="artwork-monogram" aria-hidden="true"><span>P</span><span>M</span></div>
-          <div class="artwork-stamp" aria-hidden="true"><span>PM</span><small>PAVEL MARKOV</small></div>
-          <div class="artwork-sideword" aria-hidden="true">PERSONAL CASTING BOOK / 2026</div>
-          <div class="artwork-bottom"><span data-i18n="heroVisualCaption">ПРОСТРАНСТВО ДЛЯ ПОРТРЕТА</span><span>188 / BY</span></div>
+        <div class="artwork" id="heroArtwork" role="img" aria-label="Original abstract edition artwork">
+          <div class="art-top" aria-hidden="true"><span data-i18n="artSeries">PERSONAL / CASTING</span><span class="art-counter" data-i18n="editionCode">01 / RU</span></div>
+          <span class="art-stamp" aria-hidden="true" data-i18n="artStamp">Ф / М</span>
+          <span class="art-side" aria-hidden="true" data-i18n="artSide">ОБРАЗ И ХАРАКТЕР</span>
+          <div class="art-bottom" aria-hidden="true"><span data-i18n="artFooter">FIELD NOTES / PAVEL MARKOV</span><span>188 — 2026</span></div>
         </div>
         <button class="hero-photo-cta" type="button" data-open-card><span data-i18n="openCard">Кастинг-анкета</span><span aria-hidden="true">↗</span></button>
-        <figcaption class="visual-caption"><span data-i18n="heroVisualCredit">ОСНОВНОЙ КАДР / ДОБАВИТЬ АКТУАЛЬНОЕ ФОТО</span><span>FRAME 001 — PM</span></figcaption>
+        <figcaption class="visual-caption"><span data-i18n="artDisclaimer">Авторская графика. Реальные фотографии будут добавлены отдельно.</span><span data-i18n="editionMark">EDITION / 01</span></figcaption>
       </figure>
-      <a href="#portfolio" class="scroll-note" aria-label="Scroll to portfolio"><span data-i18n="scroll">ЛИСТАЙТЕ</span><span aria-hidden="true">↓</span></a>
+      <a href="#portfolio" class="scroll-note"><span data-i18n="scroll">Листайте</span><span aria-hidden="true">↓</span></a>
     </section>
 
-    <div class="ticker" aria-hidden="true"><div>CHARACTER <i>✳</i> MOVEMENT <i>✳</i> PRESENCE <i>✳</i> FORM <i>✳</i> CHARACTER <i>✳</i> MOVEMENT <i>✳</i> PRESENCE <i>✳</i></div></div>
+    <div class="ticker" aria-hidden="true"><div data-i18n="ticker">ХАРАКТЕР <i>×</i> ФОРМА <i>×</i> ДВИЖЕНИЕ <i>×</i> ПРИСУТСТВИЕ <i>×</i> ХАРАКТЕР <i>×</i> ФОРМА <i>×</i> ДВИЖЕНИЕ <i>×</i></div></div>
 
     <section class="portfolio-section section-pad" id="portfolio" aria-labelledby="portfolioTitle">
-      <div class="section-topline"><span>01 / PORTFOLIO</span><span data-i18n="sectionPortfolioNote">ИЗБРАННЫЕ КАДРЫ</span></div>
+      <div class="section-topline"><span>01 / PORTFOLIO</span><span data-i18n="sectionPortfolioNote">ОТБОР КАДРОВ / ПОРТФОЛИО</span></div>
       <div class="section-heading">
-        <h2 id="portfolioTitle" class="display-heading" data-i18n="portfolioTitle">Работа <em>в кадре.</em></h2>
-        <p class="section-description" data-i18n="portfolioIntro">Портрет, форма, движение, характер. Актуальные фотографии появятся здесь после загрузки оригиналов.</p>
+        <h2 class="display-heading" id="portfolioTitle" data-i18n="portfolioTitle">Кадр <em>решает.</em></h2>
+        <p class="section-description" data-i18n="portfolioIntro">Портрет, пластика, характер. Галерея подготовлена для оригинальных съёмок — без чужих лиц и искусственных «кастинг-фото».</p>
       </div>
       <div class="filters" id="galleryFilters" role="group" aria-label="Photo filters" hidden></div>
       <div class="gallery" id="gallery" aria-live="polite"></div>
       <div class="portfolio-empty" id="portfolioEmpty">
         <div class="empty-lead">
-          <div class="empty-lead-inner"><span class="empty-index">CONTACT SHEET / 001</span><span class="empty-cross">＋</span><strong data-i18n="emptyHeading">В ожидании<br>первого кадра.</strong><span class="empty-foot" data-i18n="emptyFoot">РЕАЛЬНЫЕ ФОТОГРАФИИ. БЕЗ ПОДМЕНЫ ЛИЦ.</span></div>
+          <div class="empty-meta"><span data-i18n="emptyIssue">PHOTOGRAPHY / IN PROGRESS</span><span aria-hidden="true">PM—01</span></div>
+          <strong class="empty-display" data-i18n="emptyHeading">Сильный кадр<br><em>не подменишь.</em></strong>
+          <p class="empty-foot" data-i18n="emptyFoot">Раздел ждёт реальные фотографии Павла. Визуальные материалы здесь — только авторская графика.</p>
+          <span class="empty-signet" aria-hidden="true">P/M</span>
         </div>
-        <div class="empty-card"><span>01 / HEADSHOT</span><div class="empty-card-center">01</div><p data-i18n="emptyShot1">Естественный портрет, анфас и ¾</p></div>
-        <div class="empty-card"><span>02 / FULL BODY</span><div class="empty-card-center">02</div><p data-i18n="emptyShot2">Ростовой кадр, нейтральный свет</p></div>
-        <div class="empty-card"><span>03 / MOTION</span><div class="empty-card-center">03</div><p data-i18n="emptyShot3">Движение, спортивная динамика</p></div>
+        <div class="empty-shotlist">
+          <div class="shotlist-head"><span data-i18n="shotlistHead">КАДРЫ ДЛЯ КАСТИНГА</span><span>03 / CORE</span></div>
+          <div class="shotrow"><span class="shot-number">01</span><span class="shot-label">HEADSHOT</span><p data-i18n="emptyShot1">Портрет анфас и ¾, естественный свет</p><span class="shot-arrow" aria-hidden="true">↗</span></div>
+          <div class="shotrow"><span class="shot-number">02</span><span class="shot-label">FULL LENGTH</span><p data-i18n="emptyShot2">Ростовой кадр с честными пропорциями</p><span class="shot-arrow" aria-hidden="true">↗</span></div>
+          <div class="shotrow"><span class="shot-number">03</span><span class="shot-label">MOVEMENT</span><p data-i18n="emptyShot3">Динамика, спортивная пластика, характер</p><span class="shot-arrow" aria-hidden="true">↗</span></div>
+          <div class="shotlist-foot"><span data-i18n="shotlistFoot">ФОТОГРАФИИ БУДУТ ДОБАВЛЕНЫ ПО МЕРЕ ГОТОВНОСТИ</span></div>
+        </div>
       </div>
-      <p class="editorial-footnote" id="galleryFootnote" data-i18n="galleryFootnote">Галерея подключается автоматически, когда появляются подтверждённые фотографии.</p>
+      <p class="editorial-footnote" id="galleryFootnote" data-i18n="galleryFootnote">Здесь появятся только оригинальные фотографии для реального кастинга.</p>
     </section>
 
     <section class="profile-section section-pad" id="profile" aria-labelledby="profileTitle">
-      <div class="section-topline"><span>02 / MODEL PROFILE</span><span data-i18n="profileOverline">ОСНОВНЫЕ ПАРАМЕТРЫ</span></div>
+      <div class="section-topline"><span>02 / MODEL PROFILE</span><span data-i18n="profileOverline">ПАРАМЕТРЫ ДЛЯ КАСТИНГА</span></div>
       <div class="profile-layout">
         <div class="profile-statement">
-          <h2 id="profileTitle" class="display-heading" data-i18n="profileTitle">Профиль <em>модели.</em></h2>
-          <p data-i18n="profileLead">Профессиональная анкета для кастинга. Изменяемые параметры помечены как ориентировочные.</p>
-          <div class="height-lockup"><strong>188</strong><span>CM<span class="height-rule"></span><span data-i18n="height">Рост</span></span></div>
+          <h2 class="display-heading" id="profileTitle" data-i18n="profileTitle">Факты. <em>Не поза.</em></h2>
+          <p data-i18n="profileLead">Без придуманных параметров и пустых обещаний. Только то, что действительно поможет при кастинге.</p>
+          <div class="height-lockup"><strong>188</strong><span>CM<span class="height-rule"></span><span data-i18n="height">РОСТ</span></span></div>
           <button class="action action-dark profile-action" type="button" data-open-card><span data-i18n="downloadCard">Открыть comp card</span><span aria-hidden="true">↗</span></button>
         </div>
-        <div class="profile-data"><p class="overline" data-i18n="profileFacts">CASTING SPECIFICATIONS / 2026</p><dl class="spec-grid" id="specGrid"></dl><p class="data-note" data-i18n="measurementDisclaimer">Вес и талия — ориентировочные. Точные параметры уточняются перед съёмкой.</p></div>
+        <div class="profile-data">
+          <p class="overline" data-i18n="profileFacts">CASTING SPECS / 2026</p>
+          <dl class="spec-grid" id="specGrid"></dl>
+          <p class="data-note" data-i18n="measurementDisclaimer">Вес и талия ориентировочные. Уточняются перед подтверждением съёмок.</p>
+        </div>
       </div>
     </section>
 
     <section class="screen-section section-pad" id="screen" aria-labelledby="screenTitle">
-      <div class="section-topline"><span>03 / SCREEN</span><span data-i18n="screenOverline">КАСТИНГ / КОММЕРЧЕСКИЕ ПРОЕКТЫ</span></div>
+      <div class="section-topline"><span>03 / SCREEN</span><span data-i18n="screenOverline">ДВИЖЕНИЕ / ХАРАКТЕР / КАМЕРА</span></div>
       <div class="screen-layout">
-        <div class="screen-intro"><h2 id="screenTitle" class="display-heading" data-i18n="screenTitle">Присутствие <em>в кадре.</em></h2><p class="screen-big" data-i18n="screenStatement">Уверенная пластика. Контроль движения. Естественное взаимодействие с камерой.</p></div>
-        <div class="screen-details"><div class="line-heading"><span>01</span><h3 data-i18n="screenTypesTitle">Направления</h3></div><p data-i18n="screenTypes">Fashion, спортивная реклама, lifestyle, кинематографический портрет, характерные рекламные роли.</p><div class="line-heading"><span>02</span><h3 data-i18n="screenSkillsTitle">Физические навыки</h3></div><p data-i18n="screenSkills">Многолетняя силовая и спортивная подготовка, бодибилдинг, кикбоксинг, работа с движением.</p><div class="line-heading"><span>03</span><h3 data-i18n="screenExperienceTitle">Опыт перед камерой</h3></div><p data-i18n="screenExperience">Съёмки собственного контента и выступления перед камерой. Профессиональные актёрские роли не заявлены.</p></div>
+        <div class="screen-intro"><h2 class="display-heading" id="screenTitle" data-i18n="screenTitle">Нужен <em>характер.</em></h2><p class="screen-big" data-i18n="screenStatement">Уверенный в движении. Естественный перед камерой.</p></div>
+        <div class="screen-details">
+          <div class="line-heading"><span>01</span><h3 data-i18n="screenTypesTitle">НАПРАВЛЕНИЯ</h3></div><p data-i18n="screenTypes">Fashion, спортивная реклама, lifestyle, кинематографический портрет, характерная реклама.</p>
+          <div class="line-heading"><span>02</span><h3 data-i18n="screenSkillsTitle">ФИЗИЧЕСКИЕ НАВЫКИ</h3></div><p data-i18n="screenSkills">Многолетняя силовая подготовка, бодибилдинг, кикбоксинг, динамическая работа.</p>
+          <div class="line-heading"><span>03</span><h3 data-i18n="screenExperienceTitle">ОПЫТ В КАДРЕ</h3></div><p data-i18n="screenExperience">Собственные видеосъёмки и работа перед камерой. Профессиональная фильмография не заявляется.</p>
+        </div>
       </div>
       <div class="video-section" id="videoSection" hidden><div class="line-heading"><span>04</span><h3 data-i18n="motionTitle">Видео / Motion</h3></div><div class="video-grid" id="videoGrid"></div></div>
-      <div class="screen-footer"><span data-i18n="screenTag">CHARACTER BEFORE THE CAMERA</span><span>PM / 03</span></div>
+      <div class="screen-footer"><span data-i18n="screenTag">CHARACTER BEFORE CAMERA</span><span>PM / 03</span></div>
     </section>
 
-    <div class="motion-interlude" aria-hidden="true"><div class="interlude-heading" data-i18n="interludeTitle">FORM <em>in</em><br>MOTION.</div><span>PM / 04 — FRAME STUDY</span></div>
+    <div class="motion-interlude" aria-hidden="true">
+      <span class="interlude-mark" data-i18n="editionMark">EDITION / 01</span>
+      <div class="interlude-heading" data-i18n="interludeTitle">ФОРМА <em>И</em><br>ХАРАКТЕР.</div>
+      <span class="interlude-side" data-i18n="interludeSide">THE PERSONAL EDITION</span>
+    </div>
+
     <section class="about-section section-pad" id="about" aria-labelledby="aboutTitle">
-      <div class="section-topline"><span>04 / ABOUT</span><span data-i18n="aboutOverline">ЗА КАДРОМ</span></div>
-      <div class="about-layout"><h2 id="aboutTitle" class="display-heading" data-i18n="aboutTitle">Не только <em>форма.</em></h2><div class="about-copy"><p class="about-opening" data-i18n="aboutOpening">Меня зовут Павел Марков. Я работаю с людьми, движением и камерой.</p><p data-i18n="aboutBody1">Больше 14 лет спорт остаётся важной частью моей жизни. Он сформировал мою физическую подготовку, дисциплину и внимание к деталям движения.</p><p data-i18n="aboutBody2">Опыт тренера и создания собственного видеоконтента научил меня уверенно чувствовать себя перед людьми и в кадре. Открыт к съёмкам, где нужны атлетический типаж, характер и естественная подача.</p><div class="about-sign"><strong>PAVEL MARKOV</strong><span data-i18n="aboutSign">BELARUS / MODEL & ON-CAMERA TALENT</span></div></div></div>
+      <div class="section-topline"><span>04 / ABOUT</span><span data-i18n="aboutOverline">ЗА ПРЕДЕЛАМИ КАДРА</span></div>
+      <div class="about-layout">
+        <h2 class="display-heading" id="aboutTitle" data-i18n="aboutTitle">За <em>кадром.</em></h2>
+        <div class="about-copy">
+          <p class="about-opening" data-i18n="aboutOpening">Я — Павел Марков. Мой язык — движение, характер и работа с людьми.</p>
+          <p data-i18n="aboutBody1">Больше 14 лет спорт — часть моей жизни. Силовая подготовка, дисциплина и внимание к деталям движения сформировали мой типаж.</p>
+          <p data-i18n="aboutBody2">Работа тренером и съёмки видеоконтента дали опыт публичного общения и присутствия перед камерой. Мне интересны роли и проекты, где есть характер, физика и смысл.</p>
+          <div class="about-sign"><strong>PAVEL MARKOV</strong><span data-i18n="aboutSign">BELARUS / MODEL & ON-CAMERA TALENT</span></div>
+        </div>
+      </div>
     </section>
 
     <section class="contact-section section-pad" id="contact" aria-labelledby="contactTitle">
-      <div class="section-topline"><span>05 / CASTING INQUIRIES</span><span data-i18n="contactOverline">СВЯЗЬ И ПРЕДЛОЖЕНИЯ</span></div>
-      <div class="contact-layout"><div><h2 id="contactTitle" class="contact-heading">BOOK<br><em>PAVEL.</em></h2><p class="contact-lead" data-i18n="contactLead">Кастинги, рекламные кампании, editorial и съёмки для брендов.</p></div><div class="contact-side"><p class="overline" data-i18n="contactDetails">ПОДТВЕРЖДЁННЫЕ КОНТАКТЫ</p><div class="contact-methods" id="contactMethods"></div><p class="contact-pending" id="contactPending" data-i18n="contactPending">Контакт для бронирований пока уточняется. Это поле появится после подтверждения адреса или аккаунта.</p><div class="contact-actions"><button type="button" class="action action-light" id="shareButton"><span data-i18n="sharePage">Поделиться страницей</span><span aria-hidden="true">↗</span></button><button type="button" class="text-button" id="copyButton" data-i18n="copyLink">Скопировать ссылку</button><button type="button" class="text-button" data-open-card data-i18n="openCard">Кастинг-анкета</button></div><p class="feedback" id="feedback" role="status" aria-live="polite"></p></div></div>
-      <footer class="footer"><span>© <span id="footerYear">2026</span> PAVEL MARKOV</span><span data-i18n="footerNote">PERSONAL CASTING PORTFOLIO</span><a href="#top" data-i18n="backTop">НАВЕРХ ↑</a></footer>
+      <div class="section-topline"><span>05 / CASTING INQUIRIES</span><span data-i18n="contactOverline">ДЛЯ РЕЖИССЁРОВ, БРЕНДОВ И АГЕНТСТВ</span></div>
+      <div class="contact-layout">
+        <div class="contact-main"><h2 class="contact-heading" id="contactTitle"><span data-i18n="contactHead1">В КАДР</span><em data-i18n="contactHead2">ВМЕСТЕ.</em></h2><p class="contact-lead" data-i18n="contactLead">Коммерческие, fashion, спортивные и экранные проекты. Открыт к предложениям.</p></div>
+        <div class="contact-side">
+          <p class="overline" data-i18n="contactDetails">КОНТАКТЫ ДЛЯ БУКИНГА</p>
+          <div class="contact-methods" id="contactMethods"></div>
+          <p class="contact-pending" id="contactPending" data-i18n="contactPending">Контакт для кастингов появится после подтверждения. Пока можно поделиться этой страницей или сохранить анкету.</p>
+          <div class="contact-actions">
+            <button type="button" class="action action-light" id="shareButton"><span data-i18n="sharePage">Поделиться</span><span aria-hidden="true">↗</span></button>
+            <button type="button" class="text-button" id="copyButton" data-i18n="copyLink">Скопировать ссылку</button>
+            <button type="button" class="text-button" data-open-card data-i18n="openCard">Кастинг-анкета</button>
+          </div>
+          <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <footer class="footer"><span>© <span id="footerYear">2026</span> PAVEL MARKOV</span><span data-i18n="footerNote">THREE EDITIONS / ONE PERSON</span><a href="#top" data-i18n="backTop">НАВЕРХ ↑</a></footer>
     </section>
   </main>
 
-  <dialog class="lightbox" id="lightbox" aria-label="Photo viewer"><button class="lb-close" type="button" id="lbClose" aria-label="Close viewer">×</button><button class="lb-arrow lb-prev" type="button" id="lbPrev" aria-label="Previous photo">←</button><div class="lb-stage"><img id="lbImage" alt=""><p id="lbCaption"></p></div><button class="lb-arrow lb-next" type="button" id="lbNext" aria-label="Next photo">→</button><span class="lb-counter" id="lbCounter"></span></dialog>
-
-  <dialog class="comp-dialog" id="compDialog" aria-label="Casting card"><div class="comp-toolbar"><strong data-i18n="cardTitle">CASTING CARD / PAVEL MARKOV</strong><div><button type="button" class="comp-print" id="printButton" data-i18n="printCard">Печать / PDF</button><button type="button" id="closeComp" aria-label="Close casting card">×</button></div></div><div class="comp-sheet" id="compSheet"><div class="comp-brand"><span>PM.</span><span>MODEL / ACTOR / TALENT</span></div><h2>PAVEL<br>MARKOV</h2><div class="comp-body"><div class="comp-photo" id="compPhoto"><span>PHOTO / PENDING</span></div><div class="comp-info"><p data-i18n="cardIntro">MODEL / ACTOR / ON-CAMERA TALENT</p><dl id="compSpecs"></dl><div class="comp-contact" id="compContact"></div></div></div><p class="comp-bottom" data-i18n="cardDisclaimer">Актуальные фото и параметры уточняются перед кастингом.</p></div></dialog>
-  <script>document.getElementById("footerYear").textContent = new Date().getFullYear();</script>
+  <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+    <button class="lb-close" type="button" id="lbClose" aria-label="Close viewer">×</button>
+    <button class="lb-arrow lb-prev" type="button" id="lbPrev" aria-label="Previous photo">←</button>
+    <div class="lb-stage"><img id="lbImage" alt=""><p id="lbCaption"></p></div>
+    <button class="lb-arrow lb-next" type="button" id="lbNext" aria-label="Next photo">→</button><span class="lb-counter" id="lbCounter"></span>
+  </dialog>
+  <dialog class="comp-dialog" id="compDialog" aria-label="Casting card">
+    <div class="comp-toolbar"><strong data-i18n="cardTitle">CASTING CARD / PAVEL MARKOV</strong><div><button type="button" class="comp-print" id="printButton" data-i18n="printCard">Печать / PDF</button><button type="button" id="closeComp" aria-label="Close casting card">×</button></div></div>
+    <div class="comp-sheet" id="compSheet"><div class="comp-brand"><span>PM.</span><span>MODEL / ACTOR / TALENT</span></div><h2>PAVEL<br>MARKOV</h2>
+      <div class="comp-body"><div class="comp-photo" id="compPhoto"><span>PHOTO / PENDING</span></div><div class="comp-info"><p data-i18n="cardIntro">MODEL / ACTOR / ON-CAMERA TALENT</p><dl id="compSpecs"></dl><div class="comp-contact" id="compContact"></div></div></div>
+      <p class="comp-bottom" data-i18n="cardDisclaimer">Актуальные фото и параметры уточняются перед кастингом.</p>
+    </div>
+  </dialog>
+  <script>document.getElementById("footerYear").textContent=new Date().getFullYear()</script>
 </body>
 </html>
