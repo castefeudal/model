@@ -1,0 +1,16 @@
+{
+  "name": "Pavel Markov — Model & Actor",
+  "short_name": "Pavel Markov",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#eeece5",
+  "theme_color": "#161917",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
