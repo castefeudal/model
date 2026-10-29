@@ -387,3 +387,20 @@ html:lang(zh-CN) .interlude-heading em{font-family:"Songti SC","Noto Serif SC",s
 
 /* Keep the real-photo disclosure in the caption, not under mobile casting CTA. */
 @media(max-width:760px){.artwork-bottom span:first-child{display:none}}
+
+/* Faster first useful casting data on narrow screens */
+@media(max-width:760px){
+ .profile-layout{padding-top:46px;gap:32px}
+ .profile-statement>p{margin:22px 0 32px}
+ .profile-action{margin-top:30px}
+ .profile-copy{margin-top:14px}
+ .profile-data{padding-top:0}
+ .spec-grid{margin-top:19px}
+ .spec-grid>div{min-height:85px;padding:15px 5px 17px 0}
+}
+@media(max-width:440px){
+ .profile-layout{padding-top:39px;gap:25px}
+ .height-lockup strong{font-size:clamp(130px,29vw,170px)}
+ .profile-statement>p{margin:18px 0 25px}
+ .profile-action{margin-top:23px}
+}
