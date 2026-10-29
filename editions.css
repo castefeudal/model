@@ -104,6 +104,11 @@ html[data-edition="zh"] .contact-heading{font-family:"Songti SC","STSong","Noto 
 html[data-edition="zh"] .contact-heading em{font-family:inherit;font-style:normal;font-weight:500;line-height:1.1;letter-spacing:-.05em;color:#d68762}
 html[data-edition="zh"] .lang-btn[aria-pressed=true]{background:#f4dec3;color:#8f251e}
 html[data-edition="zh"] .comp-photo{background-image:url("./assets/edition-zh.svg")}
+html[data-edition="zh"] .wordmark-slash,
+html[data-edition="zh"] .wordmark-point,
+html[data-edition="zh"] .edition-label{color:#f3d3a6}
+html[data-edition="zh"] .site-nav a:hover:after{background:#f3d3a6}
+
 
 /* Keep a consistent print object, independent of locale colours. */
 html .comp-sheet{background:#f2efe8;color:#151819}
