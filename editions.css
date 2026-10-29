@@ -80,8 +80,8 @@ html[data-edition="zh"]{
  --plate-bg:#98251e;--plate-fg:#f8e8d2;
  --art-image:url("./assets/edition-zh.svg");--art-fg:#fae2c4
 }
-html[data-edition="zh"] body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",var(--sans)}
-html[data-edition="zh"] .hero-name{font-family:"Songti SC","STSong","Noto Serif CJK SC","SimSun",serif;font-size:clamp(89px,8vw,151px);font-weight:700;line-height:1.2;letter-spacing:-.045em;margin-top:clamp(12px,2.1vw,42px);margin-bottom:clamp(22px,3vw,48px);color:#7c251e}
+html[data-edition="zh"] body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",var(--sans)}
+html[data-edition="zh"] .hero-name{font-family:"Songti SC","STSong","Noto Serif SC","Noto Serif CJK SC","SimSun",serif;font-size:clamp(89px,8vw,151px);font-weight:700;line-height:1.2;letter-spacing:-.045em;margin-top:clamp(12px,2.1vw,42px);margin-bottom:clamp(22px,3vw,48px);color:#7c251e}
 html[data-edition="zh"] .hero-name span,html[data-edition="zh"] .hero-name em{font-family:inherit;font-weight:700;letter-spacing:-.04em}
 html[data-edition="zh"] .hero-pretitle{font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-style:normal;font-size:16px;letter-spacing:.15em;color:#a32c25}
 html[data-edition="zh"] .hero-statement{font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(29px,2.7vw,45px);font-weight:600;letter-spacing:-.035em}

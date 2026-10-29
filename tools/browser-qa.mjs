@@ -86,8 +86,9 @@ try{
  }
  // No navigation/reload during theme and language switching; URL and content follow.
  await send("Emulation.setDeviceMetricsOverride",{width:1440,height:900,deviceScaleFactor:1,mobile:false});
- await go("http://127.0.0.1:8765/?lang=ru#profile");
- await exec('window.__editionProbe="retained";document.querySelector(".lang-btn[data-lang=en]").click();true');
+ // Stay on the same document. A hash-only navigation does not emit loadEventFired in Chrome.
+ await exec('window.__editionProbe="retained";document.querySelector(".lang-btn[data-lang=ru]").click();true');
+ await exec('document.querySelector(".lang-btn[data-lang=en]").click();true');
  let change=await exec('({edition:document.documentElement.dataset.edition,text:document.querySelector("#heroHeading").innerText,url:location.search,probe:window.__editionProbe,lang:document.documentElement.lang})');
  assert.equal(change.edition,"en");assert.equal(change.probe,"retained");assert(change.url.includes("lang=en"));assert(change.text.includes("PAVEL"));
  await exec('document.querySelector(".lang-btn[data-lang=zh]").click();true');
