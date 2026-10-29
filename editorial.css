@@ -384,3 +384,6 @@ html:lang(zh-CN) .screen-big,html:lang(zh-CN) .about-opening,html:lang(zh-CN) .c
 html:lang(zh-CN) .interlude-heading{letter-spacing:-.06em}
 html:lang(zh-CN) .interlude-heading em{font-family:"Songti SC","Noto Serif SC",serif;font-style:normal}
 @media(prefers-reduced-motion:reduce){.hero-photo-cta{transition:none}}
+
+/* Keep the real-photo disclosure in the caption, not under mobile casting CTA. */
+@media(max-width:760px){.artwork-bottom span:first-child{display:none}}
