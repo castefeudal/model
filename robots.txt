@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://castefeudal.github.io/model/sitemap.xml
