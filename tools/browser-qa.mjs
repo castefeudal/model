@@ -62,6 +62,16 @@ try{
    console.log("SCREENSHOT_"+test.label+"_BEGIN");
    console.log(shot.data);
    console.log("SCREENSHOT_"+test.label+"_END");
+   if(test.label==="DESKTOP"||test.label==="MOBILE_EN"){
+    const section=test.label==="DESKTOP"?"#portfolio":"#profile";
+    await evaluate('document.documentElement.style.scrollBehavior="auto";document.querySelector("'+section+'").scrollIntoView({behavior:"instant"});true');
+    await sleep(1100);
+    const extra=await send("Page.captureScreenshot",{format:"jpeg",quality:64,captureBeyondViewport:false});
+    const name=test.label==="DESKTOP"?"PORTFOLIO":"MOBILE_PROFILE";
+    console.log("SCREENSHOT_"+name+"_BEGIN");
+    console.log(extra.data);
+    console.log("SCREENSHOT_"+name+"_END");
+   }
   }
  }
  assert(!faults.length,"Browser JS exception(s): "+faults.join(" | "));
