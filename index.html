@@ -3,10 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#161917">
+  <meta name="theme-color" content="#18201b">
   <meta name="description" content="Павел Марков — модель и talent для съёмок. Атлетический типаж, рост 188 см, Беларусь. Портфолио, модельная анкета, кастинг и контакты.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://castefeudal.github.io/model/">
+  <link rel="alternate" hreflang="ru" href="https://castefeudal.github.io/model/?lang=ru">
+  <link rel="alternate" hreflang="en" href="https://castefeudal.github.io/model/?lang=en">
+  <link rel="alternate" hreflang="zh-CN" href="https://castefeudal.github.io/model/?lang=zh">
+  <link rel="alternate" hreflang="x-default" href="https://castefeudal.github.io/model/">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <meta property="og:type" content="profile">
@@ -18,14 +22,20 @@
   <meta property="og:image:alt" content="PAVEL MARKOV — model, actor, on-camera talent">
   <meta name="twitter:card" content="summary_large_image">
   <title>Pavel Markov — Model / Actor / On-camera Talent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./editorial.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Pavel Markov","alternateName":["Павел Марков","帕维尔·马尔科夫"],"description":"Model and on-camera talent with an athletic physique and experience presenting on camera.","height":{"@type":"QuantitativeValue","value":188,"unitCode":"CMT"},"homeLocation":{"@type":"Place","name":"Belarus"},"url":"https://castefeudal.github.io/model/"}</script>
   <script src="./data/profile.js" defer></script>
   <script src="./data/media.js" defer></script>
   <script src="./data/i18n.js" defer></script>
   <script src="./app.js" defer></script>
+  <script src="./polish.js" defer></script>
 </head>
 <body>
+  <div class="page-progress" aria-hidden="true"><span id="readingProgress"></span></div>
   <a class="skip-link" href="#main" data-i18n="skip">Перейти к содержимому</a>
   <div class="meta-rail"><span data-i18n="railLeft">PAVEL MARKOV / ПОРТФОЛИО</span><span data-i18n="railRight">БЕЛАРУСЬ · МЕЖДУНАРОДНЫЙ ФОРМАТ</span></div>
   <header class="site-header" id="top">
@@ -70,10 +80,12 @@
       </div>
       <figure class="hero-visual" id="heroVisual">
         <img id="heroImage" class="hero-photo" alt="" fetchpriority="high" hidden>
-        <div class="artwork" id="heroArtwork" aria-label="Typographic portrait placeholder">
+        <div class="artwork" id="heroArtwork" role="img" aria-label="Abstract editorial design in place of an upcoming real portrait">
           <span class="artwork-grain" aria-hidden="true"></span>
           <div class="artwork-top"><span>PM—001</span><span>CASTING FILE</span></div>
           <div class="artwork-monogram" aria-hidden="true"><span>P</span><span>M</span></div>
+          <div class="artwork-stamp" aria-hidden="true"><span>PM</span><small>PAVEL MARKOV</small></div>
+          <div class="artwork-sideword" aria-hidden="true">PERSONAL CASTING BOOK / 2026</div>
           <div class="artwork-bottom"><span data-i18n="heroVisualCaption">ПРОСТРАНСТВО ДЛЯ ПОРТРЕТА</span><span>188 / BY</span></div>
         </div>
         <figcaption class="visual-caption"><span data-i18n="heroVisualCredit">ОСНОВНОЙ КАДР / ДОБАВИТЬ АКТУАЛЬНОЕ ФОТО</span><span>FRAME 001 — PM</span></figcaption>
@@ -125,6 +137,7 @@
       <div class="screen-footer"><span data-i18n="screenTag">CHARACTER BEFORE THE CAMERA</span><span>PM / 03</span></div>
     </section>
 
+    <div class="motion-interlude" aria-hidden="true"><div class="interlude-heading" data-i18n="interludeTitle">FORM <em>in</em><br>MOTION.</div><span>PM / 04 — FRAME STUDY</span></div>
     <section class="about-section section-pad" id="about" aria-labelledby="aboutTitle">
       <div class="section-topline"><span>04 / ABOUT</span><span data-i18n="aboutOverline">ЗА КАДРОМ</span></div>
       <div class="about-layout"><h2 id="aboutTitle" class="display-heading" data-i18n="aboutTitle">Не только <em>форма.</em></h2><div class="about-copy"><p class="about-opening" data-i18n="aboutOpening">Меня зовут Павел Марков. Я работаю с людьми, движением и камерой.</p><p data-i18n="aboutBody1">Больше 14 лет спорт остаётся важной частью моей жизни. Он сформировал мою физическую подготовку, дисциплину и внимание к деталям движения.</p><p data-i18n="aboutBody2">Опыт тренера и создания собственного видеоконтента научил меня уверенно чувствовать себя перед людьми и в кадре. Открыт к съёмкам, где нужны атлетический типаж, характер и естественная подача.</p><div class="about-sign"><strong>PAVEL MARKOV</strong><span data-i18n="aboutSign">BELARUS / MODEL & ON-CAMERA TALENT</span></div></div></div>

@@ -3,7 +3,9 @@
 const p=window.MODEL_PROFILE, media=window.MODEL_PHOTOS||[],videos=window.MODEL_VIDEOS||[],dict=window.MODEL_I18N;
 const qs=s=>document.querySelector(s), qsa=s=>Array.from(document.querySelectorAll(s));
 const locale=new URLSearchParams(location.search).get("lang");
-let lang=["ru","en","zh"].includes(locale)?locale:(["ru","en","zh"].includes(localStorage.getItem("pm-lang"))?localStorage.getItem("pm-lang"):"ru");
+let persisted="ru";
+try{persisted=localStorage.getItem("pm-lang")||"ru"}catch{}
+let lang=["ru","en","zh"].includes(locale)?locale:(["ru","en","zh"].includes(persisted)?persisted:"ru");
 let visible=[],active=0,filter="all",lastFocus=null;
 const t=k=>dict[lang][k]??dict.en[k]??k;
 const safe=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -18,7 +20,7 @@ function profileItems(){
  ["hair",val(p.hair)&&t(p.hair)],
  ["beard",val(p.beard)&&t(p.beard)],
  ["bodyType",val(p.build)&&t(p.build==="athletic"?"athleticValue":p.build)],
- ["location",val(p.base)&&t("belarus")],
+ ["location",val(p.base)&&(p.base==="Belarus"?t("belarus"):p.base)],
  ["clothes",val(p.clothes)],["shoes",val(p.shoes)],["chest",val(p.chest)],["hips",val(p.hips)],["availability",val(p.availability)]
  ].filter(x=>x[1] != null);
 }
@@ -29,11 +31,12 @@ function renderSpecs(){
 }
 function setLanguage(next){
  lang=next;document.documentElement.lang=lang==="zh"?"zh-CN":lang;
- localStorage.setItem("pm-lang",lang);
+ try{localStorage.setItem("pm-lang",lang)}catch{}
  const url=new URL(location.href);url.searchParams.set("lang",lang);history.replaceState(null,"",url);
  qsa("[data-i18n]").forEach(node=>{const k=node.dataset.i18n;if(dict[lang][k])node.innerHTML=dict[lang][k]});
  qsa(".lang-btn").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));
  qs("#menuToggle").setAttribute("aria-label",t("menu"));
+ document.querySelector('meta[property="og:locale"]')?.setAttribute("content",lang==="ru"?"ru_RU":lang==="zh"?"zh_CN":"en_US");
  document.title=lang==="ru"?"Павел Марков — модель / актёр / съёмки":lang==="zh"?"帕维尔·马尔科夫 — 模特与镜头表现":"Pavel Markov — Model / Actor / On-camera Talent";
  document.querySelector('meta[name="description"]').content=lang==="ru"?"Павел Марков — модель и талант для съёмок. Рост 188 см, атлетический типаж, Беларусь.":lang==="zh"?"帕维尔·马尔科夫个人模特与选角作品集。身高188厘米，运动型外形，来自白俄罗斯。":"Pavel Markov: model and on-camera talent. 188 cm, athletic build, based in Belarus.";
  renderSpecs();renderGallery();renderVideos();renderContacts();
@@ -52,6 +55,7 @@ function openLightbox(index){
  if(!visible.length)return;
  active=(index+visible.length)%visible.length;
  const im=visible[active];qs("#lbImage").src=im.full||im.src;
+ qs("#lbImage").onerror=()=>{qs("#lbImage").removeAttribute("src");qs("#lbCaption").textContent=t("missingImage")};
  qs("#lbImage").alt=im.alt?.[lang]||im.alt?.en||"Pavel Markov";
  qs("#lbCaption").textContent=im.caption||"PAVEL MARKOV";
  qs("#lbCounter").textContent=(active+1)+" / "+visible.length;
@@ -82,7 +86,7 @@ function setHero(){
  const src=window.HERO_IMAGE||media[0]?.src;
  if(!src)return;
  const img=qs("#heroImage");img.src=src;img.alt=media[0]?.alt?.[lang]||"Pavel Markov portrait";
- img.onload=()=>{img.hidden=false;qs("#heroArtwork").hidden=true;qs("#compPhoto").style.backgroundImage='url("'+src.replace(/["\\]/g,"")+'")';qs("#compPhoto").textContent="";};
+ img.onload=()=>{img.hidden=false;qs("#heroVisual").classList.add("hero-image-ready");qs("#heroArtwork").hidden=true;qs("#compPhoto").style.backgroundImage='url("'+src.replace(/["\\]/g,"")+'")';qs("#compPhoto").textContent="";};
  img.onerror=()=>{img.hidden=true;qs("#heroArtwork").hidden=false;};
 }
 function copyLink(){

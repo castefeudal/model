@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1320" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#313c36"/><stop offset=".39" stop-color="#171f1b"/><stop offset="1" stop-color="#080f0c"/></linearGradient>
+ <radialGradient id="light" cx=".50" cy=".4" r=".65"><stop stop-color="#ced2ad" stop-opacity=".44"/><stop offset=".48" stop-color="#78866a" stop-opacity=".12"/><stop offset="1" stop-color="#111914" stop-opacity="0"/></radialGradient>
+ <linearGradient id="steel" x1=".05" y1=".0" x2=".92" y2="1"><stop stop-color="#d9dfc2" stop-opacity=".8"/><stop offset=".26" stop-color="#727d6a" stop-opacity=".15"/><stop offset=".6" stop-color="#dde3c4" stop-opacity=".5"/><stop offset="1" stop-color="#a0ab91" stop-opacity=".07"/></linearGradient>
+ <linearGradient id="beam"><stop stop-color="#e4e8c7" stop-opacity=".0"/><stop offset=".5" stop-color="#e4e8c7" stop-opacity=".13"/><stop offset="1" stop-color="#e4e8c7" stop-opacity="0"/></linearGradient>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".63" numOctaves="3" seed="12" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".11"/></feComponentTransfer></filter>
+ <clipPath id="frame"><rect x="0" y="0" width="1000" height="1320"/></clipPath>
+</defs>
+<g clip-path="url(#frame)">
+ <rect width="1000" height="1320" fill="url(#bg)"/>
+ <ellipse cx="580" cy="545" rx="550" ry="720" fill="url(#light)"/>
+ <path d="M-240 1200 435 -80 690 -80 10 1320Z" fill="url(#beam)" opacity=".55"/>
+ <path d="M730 -100 1050 -100 290 1430 10 1430Z" fill="url(#beam)" opacity=".4"/>
+ <g opacity=".16" stroke="#d5debf" stroke-width="1"><path d="M0 150H1000 M0 1140H1000 M80 0V1320 M920 0V1320"/><path d="M0 250H1000 M0 1050H1000 M150 0V1320 M850 0V1320" stroke-dasharray="2 17"/></g>
+ <g transform="rotate(-24 505 650)" fill="none">
+  <ellipse cx="505" cy="650" rx="265" ry="485" stroke="url(#steel)" stroke-width="76" opacity=".86"/>
+  <ellipse cx="505" cy="650" rx="266" ry="485" stroke="#d8dfbd" stroke-width="1.4" opacity=".7"/>
+  <ellipse cx="505" cy="650" rx="223" ry="448" stroke="#d9ddc3" stroke-width="1.5" opacity=".3"/>
+  <ellipse cx="505" cy="650" rx="315" ry="536" stroke="#d1d8b3" stroke-width="1" opacity=".4"/>
+  <ellipse cx="505" cy="650" rx="347" ry="571" stroke="#d1d8b3" stroke-width="1" opacity=".15" stroke-dasharray="6 22"/>
+  <path d="M504 136V1166M60 650H950" stroke="#bcc9ab" stroke-width=".8" opacity=".2"/>
+  <path d="M244 470 C315 280 515 205 700 315M307 917 C433 1107 664 1047 732 819" stroke="#f6f1d5" stroke-width="3" opacity=".25" stroke-linecap="round"/>
+ </g>
+ <g fill="#f0edda" opacity=".16"><circle cx="330" cy="299" r="3"/><circle cx="736" cy="1071" r="3"/><circle cx="218" cy="980" r="2"/></g>
+ <g stroke="#dfdec6" opacity=".4"><path d="M480 120V164 M458 142H502 M782 1060V1104 M760 1082H804" stroke-width="1"/></g>
+ <rect width="1000" height="1320" filter="url(#grain)" opacity=".65"/>
+</g></svg>
