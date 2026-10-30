@@ -208,3 +208,7 @@ Production design is judged against actual desktop/mobile screenshots, a working
 
 ## Edition 10 — directors cut
 Responsive 1x/2x mobile cover, accessible mobile lookbook controls, progressive motion with an opt-out and reduced-motion, localized casting data copy. The archived photography remains honestly labelled.
+
+## ISSUE 11 — casting director's route and keyboard reliability
+
+The first-screen mobile primary action opens a factual casting overview, with a direct handoff to the six-photo real archive; the enquiry action remains one tap away. The mobile strip is a keyboard-focusable region supporting arrow navigation, instead of only registering keys while unreachable. The footer retains a legible motion label after hydration; `prefers-reduced-motion` and manual opt-out remain respected. The Chinese edition does **not fetch Google Fonts**: the Latin CSS connection is created only on RU/EN and on a subsequent switch from Chinese. Desktop editorial treatment remains unchanged.

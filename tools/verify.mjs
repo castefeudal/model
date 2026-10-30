@@ -10,7 +10,7 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","issue09.css","casting-desk.js","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt","assets/fonts/serif-covered-glyphs.txt",".nojekyll"];
+const required=["index.html","issue09.css","casting-desk.js","experience.js","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt","assets/fonts/serif-covered-glyphs.txt",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -31,7 +31,7 @@ if(read("tools/build-css.mjs").includes('"atelier.css"')||read("tools/build-css.
 if(!read("bundle.css").includes("PM CJK Sans"))fail("Self-hosted Simplified Chinese font missing from production CSS");
 if(!read("tools/build-css.mjs").includes('"issue09.css"'))fail("Single design source must be ISSUE 09");
 ok("One editorial CSS source, performance budget and local Chinese typography");
-const scripts=["data/profile.js","data/media.js","data/i18n.js","app.js","polish.js","premiere.js","casting-desk.js","tools/browser-qa.mjs"];
+const scripts=["data/profile.js","data/media.js","data/i18n.js","app.js","polish.js","premiere.js","casting-desk.js","experience.js","tools/browser-qa.mjs"];
 scripts.forEach(p=>{if(!exists(p))return;try{execFileSync(process.execPath,["--check",path.join(root,p)],{stdio:"pipe"});ok("Syntax "+p)}catch(e){fail("JavaScript syntax: "+p+" "+e.stderr?.toString())}});
 const sandbox={window:{}};
 for(const p of scripts.slice(0,3))if(exists(p))vm.runInNewContext(read(p),sandbox,{filename:p});
@@ -104,6 +104,10 @@ for(const key of ["bookingAction","bookingTitle","bookingYourBrief","bookingEmai
   for(const l of ["ru","en","zh"])if(!d?.[l]?.[key])fail("Premiere translation "+l+":"+key);
 }
 if(!html.includes('src="./premiere.js"')||!html.includes('src="./casting-desk.js"')||!read("tools/build-css.mjs").includes('"issue09.css"'))fail("Edition 09 must ship its single design source and casting desk");
+if(!html.includes('id="peekGallery"')||!html.includes('id="motionToggle"')||!html.includes('role="region" tabindex="0"'))fail("Casting-first controls and keyboard filmstrip missing");
+if(!html.includes('PMEnsureLatinFonts')||!read("app.js").includes('PMEnsureLatinFonts'))fail("Locale-aware Latin font loader missing");
+if(!html.includes('class="motion-switch-label"')||!read("experience.js").includes("querySelector('.motion-switch-icon')"))fail("Motion text must remain visible on controls");
+ok("Edition 11: keyboard filmstrip, casting-first route, visible motion switch, China font isolation");
 ok("Premiere: 6 source images, booking controls and tri-lingual copy");
 const sm=read("sitemap.xml");
 for(const lang of ["ru","en","zh"])if(!sm.includes("?lang="+lang))fail("Sitemap missing locale "+lang);

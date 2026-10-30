@@ -49,6 +49,7 @@
   $("#peekEnquiry")?.addEventListener("click",()=>handoff(".header-enquiry"));
   $("#peekComp")?.addEventListener("click",()=>handoff(".profile-action"));
   const tr=key=>window.MODEL_I18N?.[document.documentElement.dataset.edition]?.[key]||window.MODEL_I18N?.en?.[key]||key;
+  $("#peekGallery")?.addEventListener("click",()=>close());
   $("#peekCopy")?.addEventListener("click",async()=>{
     render();
     const rows=[...dialog.querySelectorAll("#peekSpecs .peek-spec")].map(el=>{
