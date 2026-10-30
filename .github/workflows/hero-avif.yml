@@ -30,7 +30,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/portrait-fashion-960.avif assets/portrait-fashion-1600.avif
+          git add assets/portrait-fashion-1600.avif
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Optimize verified archival hero photograph as responsive AVIF'
           for attempt in 1 2 3 4 5; do
