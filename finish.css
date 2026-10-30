@@ -1,0 +1,170 @@
+/*
+ * ISSUE 07 / FINAL EDIT — editorial details and honest casting references.
+ * No decorative cards, fake ratings, animated gradients or invented campaigns.
+ */
+
+/* Give every personal photograph an intentional, accessible large-view action. */
+.folio-frame{min-width:0}
+.folio-open{
+ position:relative;display:block;isolation:isolate;overflow:hidden;
+ width:100%;margin:0;padding:0;border:0;border-radius:0;
+ color:#f5f2ed;background:#191a1e;text-align:left;cursor:zoom-in
+}
+.folio-open img{
+ display:block;width:100%;height:auto;
+ transform:none;transition:transform .62s cubic-bezier(.22,1,.36,1),filter .35s ease
+}
+.folio-open:focus-visible{
+ outline:3px solid var(--folio-accent,#934b51)!important;
+ outline-offset:5px!important
+}
+.folio-frame-archival{
+ position:absolute;z-index:2;left:12px;top:12px;
+ display:inline-flex;align-items:center;min-height:29px;
+ border:1px solid rgba(255,255,255,.5);
+ background:rgba(10,11,14,.72);padding:6px 10px;
+ color:#f9f7f3;font:800 10px/1.15 var(--sans);
+ letter-spacing:.075em;pointer-events:none
+}
+.folio-frame-zoom{
+ position:absolute;right:12px;bottom:12px;z-index:3;
+ width:46px;height:46px;background:#f5f1e8;color:#222228;
+ display:flex;align-items:center;justify-content:center;
+ font:400 27px/1 var(--sans);border-radius:50%;
+ transition:background-color .22s,transform .3s cubic-bezier(.22,1,.36,1);
+ pointer-events:none
+}
+.folio-open:hover img,.folio-open:focus-visible img{
+ transform:scale(1.025);filter:saturate(1)
+}
+.folio-open:hover .folio-frame-zoom,.folio-open:focus-visible .folio-frame-zoom{
+ background:#fff;transform:translate(2px,-2px)
+}
+.folio-frame figcaption{
+ border-bottom:1px solid color-mix(in srgb,var(--folio-ink) 15%,transparent);
+ padding-bottom:14px;min-height:53px
+}
+.folio-frame figcaption strong{font-variant-numeric:tabular-nums;letter-spacing:.08em}
+.folio-frame figcaption span{max-width:none;text-align:right}
+.folio-swipe{display:none;font:780 10px/1.5 var(--sans);letter-spacing:.06em;color:var(--folio-ink);opacity:.85}
+
+/* The portable casting card now shows an explicitly identified archived face.
+   Never silently represent an editorial reference as a current agency digital. */
+.comp-photo.comp-photo-archive{
+ position:relative;overflow:hidden;isolation:isolate;padding:0!important;
+ min-height:355px;background:#17191c;background-image:none!important;
+ align-items:stretch;justify-content:flex-end
+}
+.comp-photo .comp-archive-image{
+ position:absolute;inset:0;display:block;width:100%;height:100%;
+ object-fit:cover;object-position:50% 34%;max-width:none;max-height:none;
+ filter:saturate(.88);z-index:1
+}
+.comp-photo .comp-archive-mark{
+ position:relative;z-index:2;align-self:end;display:block;
+ width:100%;min-height:47px;padding:15px 17px;
+ background:#141820;color:#fff;
+ font:800 10px/1.48 var(--sans);
+ letter-spacing:.055em;text-align:left
+}
+.comp-sheet .comp-body{align-items:stretch}
+.comp-dialog .comp-photo-archive img{height:100%}
+/* The cover, work pages and comp card use the same unambiguous typographic cadence. */
+.comp-sheet .comp-brand{border-color:#17191c}
+.comp-sheet .comp-bottom{font-size:12px;line-height:1.6}
+.comp-dialog .comp-sheet h2{letter-spacing:-.105em}
+.comp-dialog .comp-info{min-width:0}
+.comp-dialog .comp-info dl dd,.comp-dialog .comp-contact{overflow-wrap:anywhere}
+.comp-sheet .comp-brand span:last-child{font-weight:800;letter-spacing:.07em}
+
+/* The full-resolution photograph takes precedence over the dialog's chrome. */
+.lightbox{background:#0d1014;color:#f4f2ed}
+.lb-stage{
+ max-width:min(1680px,100%);
+ margin-inline:auto;
+ padding:clamp(55px,6vw,90px) clamp(46px,8vw,148px) clamp(65px,6vw,88px)
+}
+.lb-stage img{
+ max-height:calc(100% - 55px);
+ box-shadow:0 16px 80px rgba(0,0,0,.25)
+}
+.lb-stage p{font:700 12px/1.55 var(--sans);letter-spacing:.045em;text-align:center}
+.lb-counter{font-variant-numeric:tabular-nums;letter-spacing:.1em}
+.lightbox:before{
+ content:"P / M    ·    PERSONAL ARCHIVE";
+ position:absolute;top:23px;left:clamp(19px,2.6vw,48px);
+ color:#f4f2edb8;font:800 10px/1.5 var(--sans);letter-spacing:.13em;pointer-events:none
+}
+/* Small distinct section markers; editing and photographs remain the focus. */
+.section-topline,.folio-strip-head,.portrait-interlude-index{
+ letter-spacing:.04em;
+ border-color:color-mix(in srgb,currentColor 26%,transparent)
+}
+.portfolio-section .archive-heading p,
+.profile-data .data-note,.about-copy p:not(.about-opening){text-wrap:pretty}
+.contact-methods a span:last-child{overflow-wrap:anywhere}
+.contact-section .contact-actions button{min-height:44px}
+.contact-section .contact-methods a:focus-visible{
+ outline-color:var(--contact-fg)!important
+}
+@media(min-width:1100px){
+ .folio-frame:nth-child(1) .folio-frame-zoom,
+ .folio-frame:nth-child(3) .folio-frame-zoom,
+ .folio-frame:nth-child(6) .folio-frame-zoom{width:53px;height:53px}
+}
+@media(max-width:880px){
+ .folio-swipe{display:block;grid-column:1/-1;grid-row:3;padding-top:5px}
+ .folio-frame-archival{font-size:9px;padding:5px 8px;min-height:26px;left:9px;top:9px}
+ .folio-frame-zoom{right:9px;bottom:9px;width:44px;height:44px;font-size:25px}
+ .folio-frame figcaption{font-size:11px;min-height:60px}
+ .comp-photo.comp-photo-archive{min-height:275px}
+ .lightbox:before{top:19px;left:20px;font-size:9px}
+ .lb-stage{padding:65px 49px 72px}
+}
+@media(max-width:620px){
+ .folio-swipe{font-size:10px}
+ .folio-open .folio-frame-zoom{width:46px;height:46px}
+ .folio-frame-archival{font-size:9px}
+ .folio-frame figcaption{min-height:65px}
+ .comp-photo.comp-photo-archive{min-height:260px}
+ .comp-photo .comp-archive-mark{font-size:9px;padding:11px;min-height:42px}
+ .lb-stage{padding:74px 15px 100px}
+ .lb-stage img{max-height:calc(100% - 80px)}
+ .lb-arrow{min-width:43px;min-height:43px}
+ .lightbox:before{top:19px;left:14px;max-width:calc(100% - 105px)}
+}
+@media(hover:none){
+ .folio-open:hover img{transform:none}
+ .folio-open:hover .folio-frame-zoom{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .folio-open img,.folio-frame-zoom{transition:none!important}
+}
+@media print{
+ .comp-photo.comp-photo-archive{
+  print-color-adjust:exact;-webkit-print-color-adjust:exact;
+  min-height:355px!important
+ }
+ .comp-photo .comp-archive-image{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .comp-photo .comp-archive-mark{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .folio-frame .folio-frame-zoom,.folio-swipe{display:none!important}
+}
+/* First-party type: 437 required Simplified Chinese glyphs, OFL-licensed and
+   hosted here rather than on Google services inaccessible in mainland China. */
+@font-face{
+ font-family:"PM CJK Sans";
+ src:url("./assets/fonts/NotoSansSC-subset.woff2") format("woff2");
+ font-style:normal;font-weight:100 900;font-display:swap;
+ unicode-range:U+3000-303F,U+3400-4DBF,U+4E00-9FFF,U+FF00-FFEF
+}
+@font-face{
+ font-family:"PM CJK Serif";
+ src:url("./assets/fonts/NotoSerifSC-subset.woff2") format("woff2");
+ font-style:normal;font-weight:200 900;font-display:swap;
+ unicode-range:U+3000-303F,U+3400-4DBF,U+4E00-9FFF,U+FF00-FFEF
+}
+html[data-edition="zh"]{
+ --sans:"PM CJK Sans","Manrope","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
+ --display:"PM CJK Sans","Manrope","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+ --serif:"PM CJK Serif","Cormorant Garamond","Songti SC","Noto Serif CJK SC",serif
+}

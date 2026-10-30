@@ -1,5 +1,8 @@
 window.MODEL_I18N = {
   "ru": {
+    "folioOpen": "Открыть архивный кадр",
+    "folioSwipe": "Листайте фотографии →",
+    "compArchiveLabel": "АРХИВНЫЙ ПОРТРЕТ · НЕ АКТУАЛЬНЫЕ КАСТИНГОВЫЕ DIGITALS",
     "folioAria": "Шесть фотографий из личного архива",
     "folioCharacterAlt": "Павел Марков в художественном костюмном образе среди зимних деревьев — архивное фото",
     "folioAboutCaption": "ХАРАКТЕР / ЛИЧНЫЙ АРХИВ",
@@ -220,6 +223,9 @@ window.MODEL_I18N = {
     "compCloseAria": "Закрыть кастинг-анкету"
   },
   "en": {
+    "folioOpen": "Open archival photograph",
+    "folioSwipe": "Swipe through the portraits →",
+    "compArchiveLabel": "ARCHIVAL PORTRAIT · NOT CURRENT CASTING DIGITALS",
     "folioAria": "Six photographs from the personal archive",
     "folioCharacterAlt": "Pavel Markov in an artistic costume among snowy trees — archival character study",
     "folioAboutCaption": "CHARACTER / PERSONAL ARCHIVE",
@@ -440,6 +446,9 @@ window.MODEL_I18N = {
     "compCloseAria": "Close casting card"
   },
   "zh": {
+    "folioOpen": "打开档案照片",
+    "folioSwipe": "左右滑动查看照片 →",
+    "compArchiveLabel": "个人档案肖像 · 非近期试镜原片",
     "folioAria": "个人照片档案中的六组造型",
     "folioCharacterAlt": "帕维尔·马尔科夫在雪林中的艺术服装造型，个人档案照片",
     "folioAboutCaption": "人物造型 / 个人档案",

@@ -65,6 +65,13 @@ try{
   console.log("TEST "+x.label+" "+JSON.stringify(v));
   assert.equal(v.edition,x.lang,"Wrong edition after direct language link");
   assert(v.lang.toLowerCase().startsWith(x.lang),"Wrong HTML lang");
+  if(x.lang==="zh"){
+    const cjk=await exec('(()=>({fonts:[...document.fonts].filter(f=>f.family.includes("PM CJK")).map(f=>({family:f.family,status:f.status})),remote:!!document.getElementById("pm-fonts-cjk")}))()');
+    console.log("LOCAL_CJK_TYPE "+x.label+" "+JSON.stringify(cjk));
+    assert(!cjk.remote,"Chinese edition should not request blocked Google font service");
+    assert(cjk.fonts.some(f=>f.family==="PM CJK Serif"&&f.status==="loaded"),"Chinese headline font failed to load locally");
+    assert(cjk.fonts.some(f=>f.family==="PM CJK Sans"&&f.status==="loaded"),"Chinese UI font failed to load locally");
+  }
   assert(v.art.includes("edition-"+x.lang+".svg"),"Art not tied to edition");
   assert(v.overflow<=2,"Horizontal overflow "+v.overflow);
   const clarity=await exec('(()=>{const s=x=>parseFloat(getComputedStyle(document.querySelector(x)).fontSize);return {body:s("body"),detail:s(".hero-detail"),section:s(".section-description"),screen:s(".screen-details>p"),about:s(".about-copy>p:not(.about-opening)"),contact:s(".contact-pending"),nav:s(".site-nav a"),language:s(".lang-btn"),button:s(".hero-actions .action"),specLabel:s(".spec-grid dt"),factLabel:s(".fact-label"),facts:!!document.querySelector(".facts-bar"),shots:document.querySelectorAll(".shot-card").length,portfolioEmpty:!!document.querySelector(".portfolio-pending")};})()');
@@ -119,9 +126,9 @@ try{
   assert(await exec('document.querySelector("#portfolioEmpty").open'),"Casting photo requirements cannot be opened");
   await exec('document.querySelector("#portfolioEmpty").open=false');
 
-  const portrait=await exec('(()=>{const img=document.querySelector("#heroImage"),comp=document.querySelector("#compPhoto");return {loaded:img.complete&&img.naturalWidth>0,visible:!img.hidden,editorial:document.querySelector("#heroVisual").classList.contains("editorial-cover"),compPending:comp.textContent.includes("PHOTO / PENDING"),imageWidth:img.naturalWidth};})()');
+  const portrait=await exec('(()=>{const img=document.querySelector("#heroImage"),comp=document.querySelector("#compPhoto");return {loaded:img.complete&&img.naturalWidth>0,visible:!img.hidden,editorial:document.querySelector("#heroVisual").classList.contains("editorial-cover"),compArchive:!!comp.querySelector(".comp-archive-image"),archiveDisclosure:!!comp.querySelector(".comp-archive-mark")?.textContent.trim(),imageWidth:img.naturalWidth};})()');
   assert(portrait.loaded&&portrait.visible&&portrait.editorial,"Owned editorial image failed to display");
-  assert(portrait.compPending,"Branded editorial cover must not be passed off as a casting headshot");
+  assert(portrait.compArchive&&portrait.archiveDisclosure,"Comp card requires an explicitly labeled archival photograph");
   const lookData=await exec('(()=>{const b=[...document.querySelectorAll(".cover-choice")];const i=document.querySelector("#heroImage");return {buttons:b.length,pressed:b.filter(x=>x.getAttribute("aria-pressed")==="true").length,image:i.getAttribute("src"),caption:document.querySelector(".visual-caption").innerText,loaded:i.complete&&i.naturalWidth>0}})()');
   assert(lookData.buttons===3&&lookData.pressed===1&&lookData.loaded,"Editorial look selector failed to initialise");
   assert(lookData.image.includes("portrait-fashion.webp"),"First-look cover is not an actual personal archive image");
@@ -145,6 +152,9 @@ try{
   // Real dialog, not a dead placeholder.
   await exec('document.querySelector("[data-open-card]").click()');
   assert(await exec('document.querySelector("#compDialog").open'),"Comp card did not open");
+  const compImage=await exec('(()=>{const p=document.querySelector("#compPhoto"),i=p.querySelector("img"),cap=p.querySelector(".comp-archive-mark");return {src:i?.getAttribute("src"),ready:i?.complete&&i.naturalWidth>0,label:cap?.textContent.trim(),height:p.getBoundingClientRect().height}})()');
+  assert(compImage.src?.includes("portrait-digital.webp")&&compImage.ready&&compImage.label&&compImage.height>220,"Portable casting card must display a real, labeled archive reference");
+  if(x.label==="EN_DESKTOP"||x.label==="RU_MOBILE")await screenshot("CASTING_CARD_"+x.label);
   await exec('document.querySelector("#closeComp").click()');
   assert(!(await exec('document.querySelector("#compDialog").open')),"Comp card did not close");
   // Premiere regression: real inquiry dialog, source archive and accessible labels.
@@ -160,8 +170,28 @@ try{
   console.log("BOOKING_FIELD_DIMENSIONS "+x.label+" "+JSON.stringify(fieldHeights));
   assert(fieldHeights[0].height>=42&&fieldHeights[1].height>=42&&fieldHeights[2].height>=100,"Casting enquiry fields lost usable touch dimensions");
 
+  if(x.label==="EN_DESKTOP"){
+    await exec('document.querySelector("#bookingEmail").value="casting@example.com";document.querySelector("#bookingDetails").value="Editorial project, Berlin, 2027, 2 days";Object.defineProperty(navigator,"clipboard",{configurable:true,value:{writeText:async t=>{window.__castingCopy=t}}});document.querySelector("#bookingCopy").click();true');
+    await sleep(35);
+    const copied=await exec('window.__castingCopy||""');
+    assert(copied.includes("casting@example.com")&&copied.includes("Berlin")&&copied.includes("Pavel Markov"),"Booking copy does not contain the actual inquiry");
+  }
   await exec('document.querySelector("[data-close-booking]").click()');
   assert(!(await exec('document.querySelector("#bookingDialog").open')),"Direct casting enquiry failed to close");
+
+  // Every photographic contact-sheet image opens its OWN full-resolution
+  // source, not an unrelated filtered gallery item.
+  await exec('document.querySelectorAll(".folio-open")[4].click()');
+  assert(await exec('document.querySelector("#lightbox").open'),"Lookbook photo viewer does not open");
+  assert.equal(await exec('document.querySelector("#lbCounter").innerText'),"5 / 6","Wrong archival frame");
+  assert(await exec('document.querySelector("#lbImage").getAttribute("src").includes("portrait-character.webp")'),"Lookbook is not displaying source photograph");
+  await exec('document.querySelector("#lbNext").click()');
+  assert.equal(await exec('document.querySelector("#lbCounter").innerText'),"6 / 6","Lookbook next failed");
+  await exec('document.querySelector("#lbNext").click()');
+  assert.equal(await exec('document.querySelector("#lbCounter").innerText'),"1 / 6","Lookbook wrap-around failed");
+  if(x.label==="EN_DESKTOP"){await exec('document.querySelector("#lbImage").decode().then(()=>true).catch(()=>false)');await screenshot("FULLSCREEN_ARCHIVE");}
+  await exec('document.querySelector("#lbClose").click()');
+  assert(!(await exec('document.querySelector("#lightbox").open')),"Lookbook photo viewer did not close");
   await screenshot(x.label);
   if(x.label==="EN_DESKTOP"){
    await exec('document.querySelector("[data-filter=portraits]").click()');

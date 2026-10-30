@@ -148,11 +148,29 @@ An internationally localized **casting-first editorial experience**. This releas
 **Casting experience**
 - Direct enquiry button in the desktop masthead, hero, mobile hero, and editorial chapter.
 - Native, keyboard-accessible modal with project type, email and brief. Email requests are created locally in a mailto URL; clipboard is a fallback; no endpoint, cookies, analytics or stored personal information.
-- Keep current cast measurements marked approximate, exclude styled archive from the printable comp card, and never invent roles or credits.
+- Keep current cast measurements marked approximate, display a clearly labeled archive reference photograph in the printable comp card without representing it as a current casting digital, and never invent roles or credits.
 
 **Engineering**
 - Original scripts retained. `premiere.js` is progressive enhancement for the casting request.
-- Edit `folio.css` and `premiere.css` as source files; both are compiled with four existing CSS layers into **one production `bundle.css`** via `node tools/build-css.mjs`.
+- Edit `folio.css`, `premiere.css` and `finish.css` as source files; all three are compiled with four existing CSS layers into **one production `bundle.css`** via `node tools/build-css.mjs`.
 - Quality CI checks syntax, translations, archive provenance, image paths, unique HTML IDs and bundle freshness.
 - Chromium smoke runs on pull requests and the main branch, checking RU/EN/ZH responsive rendering, color contrast, keyboard/dialog behaviors and casting flows.
 - Genuine current unretouched headshots, full-length digitals and optional self-tape remain the decisive outstanding production inputs.
+
+## ISSUE 07 — THE COMPLETE CASTING BOOK
+
+- All **six owner-owned archival frames** are now functional photographic buttons, with a single full-screen high-resolution viewer, keyboard arrows, swipe gestures, wrap-around navigation and localized screen-reader labels.
+- The formerly empty print / PDF comp card now includes a **real archival face reference, visibly marked as not current casting digitals**. Do not remove that disclosure until new confirmed headshots are supplied.
+- Optimized cached WebP thumbnails are used in the contact sheet and character study, leaving originals accessible in the viewer.
+- Language-specific archive and comp-card labels are available in RU / EN / 中文. Chinese text uses native fallback stacks, avoiding the heavy/fragile remote Noto webfont download.
+- Social sharing artwork is generated from the user's existing image at 1200×630 with the active editorial identity. Re-run `python tools/build_social.py` when source imagery changes.
+- `tools/browser-qa.mjs` validates opening every photo, full-resolution navigation, archive disclaimers and the actual enquiry clipboard content on desktop/tablet/mobile.
+- This release improves visual completeness **without fabricating representation, past clients, acting roles, image provenance or up-to-date measurements**.
+
+**Remaining source-data prerequisites (not solvable by CSS):** one current unretouched face portrait, full-length original casting digitals, verified clothes/shoe measurements, and a current 30–60-second on-camera introduction if a film-facing showreel is desired.
+
+### Locally hosted CJK type
+
+The Chinese edition uses OFL-licensed, version-pinned Noto Sans SC and Noto Serif SC **subset WOFF2** files in `assets/fonts/`. A CI builder `tools/build_cjk_font.py` regenerates those assets from Google's upstream OFL font revisions and publishes licence texts. Production never contacts Google Fonts for CJK glyphs, which is important in mainland China. If Chinese copy changes, rerun the builder so `covered-glyphs.txt` and assets stay in sync; the structural gate rejects missing glyph coverage. The generator uses pinned upstream source commits and stores no external URLs in the runtime CSS.
+
+The checked-in first-party CJK font subsets have a generated UTF-8 glyph manifest. The build does not infer glyph completeness from synthetic Lighthouse scores: Chromium must render both local typefaces, and structural checks compare the current Chinese copy against the committed manifest.

@@ -1,49 +1,54 @@
 #!/usr/bin/env python3
-"""Editorial social cover matching Issue 04. Uses owned archival imagery, not casting digitals."""
+"""Produce the 1200x630 editorial Open Graph cover from the owner's own archive."""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "assets" / "portrait-fashion.webp"
 OUTPUT = ROOT / "assets" / "social-cover.png"
-W, H, PHOTO_W = 1200, 630, 682
-INK = (32, 31, 35)
-PAPER = (246, 241, 231)
-RED = (190, 133, 132)
-MUTED = (221, 214, 207)
+W, H, PHOTO_W = 1200, 630, 678
+INK = (29, 28, 32)
+IVORY = (247, 243, 233)
+ACCENT = (196, 139, 131)
+MUTED = (202, 197, 190)
 SANS = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 REG = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 SERIF = "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"
 
-portrait = Image.open(SOURCE).convert("RGB")
-crop = ImageOps.fit(portrait, (PHOTO_W, H), method=Image.Resampling.LANCZOS, centering=(0.52, 0.38))
-cover = Image.new("RGB", (W, H), INK)
-cover.paste(crop, (0, 0))
-draw = ImageDraw.Draw(cover)
-
 def font(path, size):
     return ImageFont.truetype(path, size)
 
-def fitted(word, size, max_width, path):
-    while draw.textlength(word, font=font(path, size)) > max_width:
+portrait = Image.open(SOURCE)
+portrait = ImageOps.exif_transpose(portrait).convert("RGB")
+portrait = ImageOps.fit(portrait, (PHOTO_W, H), method=Image.Resampling.LANCZOS, centering=(.52,.34))
+cover = Image.new("RGB", (W, H), INK)
+cover.paste(portrait, (0, 0))
+draw = ImageDraw.Draw(cover)
+x = PHOTO_W + 52
+# The portrait is real archive material; editorial styling is not a casting claim.
+draw.rectangle((PHOTO_W, 0, PHOTO_W + 4, H), fill=ACCENT)
+draw.rectangle((23, 22, 167, 76), fill=(29, 28, 32))
+draw.text((42, 34), "P / M", fill=IVORY, font=font(SANS, 24))
+draw.rectangle((25, 560, 425, 607), fill=(29, 28, 32))
+draw.text((44, 574), "THE HUMAN FRAME  /  2026", fill=IVORY, font=font(SANS, 14))
+draw.text((x, 44), "PERSONAL EDITION     /     ISSUE 07", fill=ACCENT, font=font(SANS, 15))
+draw.line((x, 94, W - 48, 94), fill=(91, 87, 89), width=2)
+
+def fit_label(value, max_width, size):
+    while size > 18 and draw.textlength(value, font=font(SANS, size)) > max_width:
         size -= 1
-    return font(path, size)
+    return font(SANS, size)
 
-# An editorial vertical split, not a generic gradient overlay.
-draw.rectangle((PHOTO_W, 0, PHOTO_W + 7, H), fill=RED)
-draw.text((45, 43), "P / M", font=font(SANS, 25), fill=PAPER, stroke_width=0)
-draw.line((43, 86, 144, 86), fill=PAPER, width=2)
-draw.text((45, 572), "THE PERSONAL ARCHIVE   /   2026", font=font(SANS, 13), fill=PAPER)
-draw.text((PHOTO_W + 52, 49), "ISSUE 04   /   CASTING BOOK", font=font(SANS, 16), fill=RED)
-draw.line((PHOTO_W + 52, 101, W - 47, 101), fill=(109, 103, 103), width=1)
+draw.text((x - 5, 155), "PAVEL", font=fit_label("PAVEL", 453, 94), fill=IVORY)
+draw.text((x - 5, 267), "MARKOV", font=fit_label("MARKOV", 453, 82), fill=IVORY)
+draw.rectangle((x, 395, x + 76, 401), fill=ACCENT)
+draw.text((x, 427), "MODEL  /  ON CAMERA", font=font(SERIF, 26), fill=IVORY)
+draw.text((x, 471), "EDITORIAL  /  ATHLETIC", font=font(SERIF, 23), fill=MUTED)
+draw.line((x, 550, W - 48, 550), fill=(91, 87, 89), width=1)
+draw.text((x, 569), "188 CM   /   BELARUS", font=font(REG, 18), fill=MUTED)
 
-draw.text((PHOTO_W + 43, 165), "PAVEL", font=fitted("PAVEL", 99, 457, SANS), fill=PAPER)
-draw.text((PHOTO_W + 43, 276), "MARKOV", font=fitted("MARKOV", 87, 457, SANS), fill=PAPER)
-draw.rectangle((PHOTO_W + 52, 397, PHOTO_W + 116, 402), fill=RED)
-draw.text((PHOTO_W + 52, 428), "MODEL  /  ON-CAMERA", font=font(SERIF, 25), fill=PAPER)
-draw.text((PHOTO_W + 52, 467), "ATHLETIC PRESENCE", font=font(SERIF, 25), fill=MUTED)
-draw.line((PHOTO_W + 52, 547, W - 47, 547), fill=(109, 103, 103), width=1)
-draw.text((PHOTO_W + 52, 568), "188 CM    /    BELARUS", font=font(REG, 17), fill=MUTED)
-
-cover.save(OUTPUT, "PNG", optimize=True, compress_level=9)
-print(f"Created editorial social cover: {OUTPUT} ({OUTPUT.stat().st_size} bytes)")
+OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+cover.save(OUTPUT, format="PNG", optimize=True, compress_level=9)
+with Image.open(OUTPUT) as saved:
+    assert saved.size == (1200, 630)
+print(f"Created editorial social preview: {OUTPUT} ({OUTPUT.stat().st_size} bytes)")
