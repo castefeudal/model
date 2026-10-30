@@ -87,6 +87,11 @@ try{
 
   assert(v.headingLeft>=-5&&v.headingRight<=x.width+5,"Heading outside viewport");
   assert(v.headingScroll<=4,"Heading text overflow "+v.headingScroll);
+  const coverUX=await exec('(()=>{const box=document.querySelector(".hero-shortcuts");const z=document.querySelector(".lang-btn[data-lang=zh]");const r=box.getBoundingClientRect();return {shortcuts:getComputedStyle(box).display,visible:r.height>0 && r.width>0,buttons:box.querySelectorAll("a,button").length,chineseLabel:z.innerText.trim(),imageDisplay:getComputedStyle(document.querySelector("#heroVisual")).backgroundColor}})()');
+  if(x.width<=880)assert(coverUX.shortcuts==="grid" && coverUX.visible && coverUX.buttons===2,"Mobile casting actions missing");
+  if(x.width>880)assert(coverUX.shortcuts==="none","Desktop should keep original primary actions");
+  assert(coverUX.chineseLabel===(x.lang==="zh"?"中文":"ZH"),"Chinese language switch is not legible in "+x.lang);
+
   const clipped=await exec('(()=>{const selectors=[".hero-name",".portfolio-section .display-heading",".spread-editorial h3",".profile-statement .display-heading",".screen-intro .display-heading",".about-layout .display-heading",".contact-heading"];return selectors.flatMap(sel=>Array.from(document.querySelectorAll(sel)).map(e=>{const r=document.createRange();r.selectNodeContents(e);const b=r.getBoundingClientRect();return {name:sel,left:+b.left.toFixed(1),right:+b.right.toFixed(1)}})).filter(x=>x.left < -6 || x.right>innerWidth+6)})()');
   console.log("CLIPPED_HEADINGS "+x.label+" "+JSON.stringify(clipped));
   assert(!clipped.length,"Text clipped outside viewport: "+JSON.stringify(clipped));

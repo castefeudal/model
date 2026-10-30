@@ -22,7 +22,7 @@ window.MODEL_I18N = {
     "scroll": "ЛИСТАЙТЕ",
     "sectionPortfolioNote": "ЛИЧНЫЙ КАСТИНГ-БУК / 2026",
     "portfolioTitle": "Портфолио<em>.</em>",
-    "portfolioIntro": "Несколько сторон одного человека: портрет, мода, физическая форма и работа перед аудиторией. Отобранные материалы из личного архива.",
+    "portfolioIntro": "Портреты, движение, характер, сцена. Разные стороны личности в отобранных материалах из личного архива.",
     "emptyHeading": "Без подмен.<br><em>Только я.</em>",
     "emptyFoot": "Сейчас здесь авторская графика. Реальные фотографии для модельных агентств и режиссёров добавляются отдельно.",
     "emptyShot1": "Анфас и три четверти при естественном освещении. Без ретуши, меняющей лицо.",
@@ -160,7 +160,9 @@ window.MODEL_I18N = {
     "archiveExplainer": "Архивные фотографии и стилизованные брендовые образы разных периодов. Они показывают диапазон, но не заменяют актуальные агентские digitals.",
     "fashionPortraitAlt": "Стилизованный fashion-портрет Павла Маркова в чёрном жакете и очках.",
     "stagePortraitAlt": "Павел Марков выступает на сцене с микрофоном перед публикой.",
-    "stageCaption": "ПУБЛИЧНОЕ ВЫСТУПЛЕНИЕ / АРХИВ 2022"
+    "stageCaption": "ПУБЛИЧНОЕ ВЫСТУПЛЕНИЕ / АРХИВ 2022",
+    "heroQuickGallery": "Смотреть кадры",
+    "heroQuickCard": "Кастинг-анкета"
   },
   "en": {
     "skip": "Skip to content",
@@ -185,7 +187,7 @@ window.MODEL_I18N = {
     "scroll": "SCROLL",
     "sectionPortfolioNote": "PERSONAL CASTING BOOK / 2026",
     "portfolioTitle": "Selected <em>work.</em>",
-    "portfolioIntro": "A curated archive of distinct looks: portraiture, fashion, athletic presence and speaking on stage. No fabricated campaigns or casting credits.",
+    "portfolioIntro": "Portraits, movement, character and the stage. A curated look at different sides of one person.",
     "emptyHeading": "Real presence.<br><em>Real images.</em>",
     "emptyFoot": "The current art direction is original artwork, not a portrait. Authentic casting photographs will be added separately.",
     "emptyShot1": "Front and three-quarter angles in natural light. No face-altering retouching.",
@@ -323,7 +325,9 @@ window.MODEL_I18N = {
     "archiveExplainer": "Archived photographs and styled brand imagery from different periods. They show range, but do not replace current agency digitals.",
     "fashionPortraitAlt": "Styled fashion portrait of Pavel Markov in a dark open jacket and sunglasses.",
     "stagePortraitAlt": "Pavel Markov presenting on stage with a microphone before an audience.",
-    "stageCaption": "PUBLIC SPEAKING / ARCHIVE 2022"
+    "stageCaption": "PUBLIC SPEAKING / ARCHIVE 2022",
+    "heroQuickGallery": "View the work",
+    "heroQuickCard": "Casting card"
   },
   "zh": {
     "skip": "跳转到主要内容",
@@ -348,7 +352,7 @@ window.MODEL_I18N = {
     "scroll": "向下浏览",
     "sectionPortfolioNote": "个人选角作品集 / 2026",
     "portfolioTitle": "精选<em>作品。</em>",
-    "portfolioIntro": "通过不同阶段的肖像、时尚造型、运动状态和舞台演讲，展示人物的多面气质；不虚构品牌合作或影视履历。",
+    "portfolioIntro": "人物肖像、动作、气质与舞台表现。精选个人档案中的不同面貌。",
     "emptyHeading": "真实形象，<br><em>留待呈现。</em>",
     "emptyFoot": "目前展示的是原创图形设计，不是本人肖像。真实选角照片将于上传后展示。",
     "emptyShot1": "自然光下的正面与四分之三侧面肖像，不改变脸部特征。",
@@ -486,6 +490,8 @@ window.MODEL_I18N = {
     "archiveExplainer": "来自不同阶段的照片和风格化品牌素材，用于展示个人气质与表现范围，不替代近期经纪公司选角照。",
     "fashionPortraitAlt": "帕维尔·马尔科夫穿着敞开的深色外套、佩戴墨镜的风格化时尚肖像。",
     "stagePortraitAlt": "帕维尔·马尔科夫在公众面前手持麦克风进行舞台演讲。",
-    "stageCaption": "舞台演讲 / 2022年档案"
+    "stageCaption": "舞台演讲 / 2022年档案",
+    "heroQuickGallery": "查看作品",
+    "heroQuickCard": "模特资料"
   }
 };

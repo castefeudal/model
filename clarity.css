@@ -916,3 +916,169 @@ html[data-edition=zh] .screen-archive figcaption{background:#43201f}
  #gallery .gallery-item:hover img{transform:none!important}
  .screen-archive>img{transition:none!important}
 }
+
+
+/* COVER / The first fold is an art-directed model book, not a dashboard.
+   Full-bleed image, measured text and direct mobile casting actions. */
+.lang-cn{display:none}
+.lang-latin{display:inline}
+html[data-edition=zh] .lang-cn{display:inline}
+html[data-edition=zh] .lang-latin{display:none}
+html:not([data-edition=zh]) .lang-btn[data-lang=zh]{font-family:var(--sans)}
+.hero-shortcuts{display:none}
+@media(min-width:881px){
+ .hero{
+  grid-template-columns:minmax(0,51%) minmax(0,49%);
+  min-height:clamp(730px,calc(100svh - 115px),940px)
+ }
+ html[data-edition=en] .hero{grid-template-columns:minmax(0,49%) minmax(0,51%)}
+ .hero-copy{
+  padding-top:clamp(45px,4.6vw,72px);
+  padding-bottom:clamp(50px,4.8vw,75px);
+  padding-right:clamp(27px,3vw,55px)
+ }
+ .hero-copy::after{display:none}
+ html[data-edition=en] .hero-copy{
+  padding-left:clamp(40px,4.4vw,75px);padding-right:clamp(45px,5vw,85px)
+ }
+ .hero-name{
+  font-size:clamp(82px,8.7vw,143px);
+  line-height:.92;
+  margin-top:14px;
+  margin-bottom:clamp(25px,3vw,47px)
+ }
+ html[data-edition=ru] .hero-name{font-size:clamp(83px,8.45vw,136px)}
+ html[data-edition=en] .hero-name{font-size:clamp(79px,7.4vw,126px)}
+ html[data-edition=zh] .hero-name{
+  font-size:clamp(73px,6.1vw,105px);
+  line-height:1.18;letter-spacing:-.045em
+ }
+ .hero-intro{max-width:630px}
+ .hero-statement{max-width:610px}
+ .hero-detail{max-width:590px;font-size:16px}
+ .hero-metrics{display:none!important}
+ .hero-bottom{align-items:start}
+ .hero-actions{margin-top:27px}
+}
+.hero-visual{
+ min-height:640px;padding:0!important;background:#101013;
+ overflow:hidden
+}
+.hero-image-ready .hero-photo{
+ position:absolute;inset:0!important;
+ width:100%!important;height:100%!important;
+ max-width:none;object-fit:cover;object-position:50% 34%;
+ filter:saturate(.91) contrast(1.03)
+}
+.hero-visual.editorial-cover .hero-photo{
+ object-position:50% 33%;
+ filter:saturate(.88) contrast(1.05)
+}
+html[data-edition=en] .hero-visual.editorial-cover .hero-photo{
+ filter:saturate(.89) contrast(1.045)
+}
+html[data-edition=zh] .hero-visual.editorial-cover .hero-photo{
+ filter:saturate(.87) contrast(1.055)
+}
+.hero-visual::after{
+ inset:clamp(16px,2vw,28px)!important;
+ border:1px solid rgba(255,255,255,.28)!important
+}
+.hero-visual.editorial-cover::before{
+ top:clamp(26px,3vw,48px);right:clamp(27px,3.2vw,51px);
+ border:1px solid rgba(255,255,255,.38)
+}
+.hero-visual .artwork{inset:0;background-size:cover}
+.visual-caption{
+ position:absolute;inset:auto 0 0!important;
+ display:flex;align-items:end;justify-content:space-between;gap:28px;
+ padding:48px clamp(29px,3vw,53px) 26px!important;
+ min-height:121px!important;
+ background:linear-gradient(to bottom,transparent,rgba(8,9,12,.78) 55%,rgba(8,9,12,.94));
+ color:#faf5eb!important;font:650 12px/1.55 var(--sans)!important;
+ z-index:5
+}
+.visual-caption span:first-child{max-width:390px}
+.visual-caption span:last-child{opacity:.82;white-space:nowrap}
+.scroll-note{font-weight:750;font-size:12px}
+@media(min-width:881px) and (max-width:1190px){
+ .hero-copy{padding-top:45px;padding-bottom:54px}
+ .hero-name{font-size:clamp(75px,8vw,99px)}
+ html[data-edition=en] .hero-name{font-size:clamp(71px,7vw,96px)}
+ html[data-edition=zh] .hero-name{font-size:clamp(67px,6vw,87px)}
+ .hero-visual{min-height:620px}
+}
+@media(max-width:880px){
+ .hero,html[data-edition=en] .hero{
+  grid-template-areas:"kicker" "pretitle" "name" "shortcuts" "visual" "bottom"!important;
+  grid-template-columns:minmax(0,1fr)
+ }
+ .hero-shortcuts{
+  display:grid;grid-area:shortcuts;
+  grid-template-columns:minmax(0,1fr) minmax(0,.84fr);
+  gap:9px;margin:0 var(--space) clamp(25px,4vw,36px);
+  max-width:570px
+ }
+ .hero-shortcuts a,.hero-shortcuts button{
+  display:flex;align-items:center;justify-content:space-between;gap:9px;
+  min-width:0;min-height:49px;padding:12px 16px;
+  border-radius:2px;font:750 13px/1.38 var(--sans);
+  text-align:left;text-decoration:none;cursor:pointer;
+ }
+ .hero-shortcut-primary{
+  background:var(--hero-fg);color:var(--hero-bg);
+  border:1px solid var(--hero-fg)
+ }
+ .hero-shortcut-secondary{
+  background:transparent;color:var(--hero-fg);
+  border:1px solid color-mix(in srgb,var(--hero-fg) 60%,transparent)
+ }
+ .hero-shortcuts a span:last-child,.hero-shortcuts button span:last-child{
+  flex:none;font-size:20px;line-height:1
+ }
+ .hero-shortcuts :is(a,button):focus-visible{
+  outline:3px solid var(--space-accent);outline-offset:3px
+ }
+ .hero-copy .hero-actions{display:none!important}
+ .hero-copy>.hero-name,html[data-edition=en] .hero-copy>.hero-name,
+ html[data-edition=zh] .hero-copy>.hero-name{margin-bottom:23px}
+ .hero>.hero-visual,html[data-edition=en] .hero>.hero-visual{
+  grid-area:visual;height:clamp(415px,91vw,650px);
+  min-height:0!important;padding:0!important
+ }
+ .hero-image-ready .hero-photo{object-position:50% 31%}
+ .hero-visual::after{inset:15px!important}
+ .visual-caption{
+  min-height:103px!important;
+  padding:41px 26px 21px!important;
+  font-size:12px!important
+ }
+ .hero-visual.editorial-cover::before{top:28px;right:28px}
+ .hero-copy>.hero-bottom{padding:clamp(26px,4vw,42px) var(--space) 50px}
+ .hero-pretitle{color:var(--hero-muted)}
+}
+@media(max-width:640px){
+ .hero-copy>.hero-name,html[data-edition=en] .hero-copy>.hero-name{
+  margin-bottom:20px
+ }
+ .hero-shortcuts{margin-bottom:23px}
+ .hero-shortcuts a,.hero-shortcuts button{min-height:49px;padding:10px 13px;font-size:12px}
+ .hero>.hero-visual,html[data-edition=en] .hero>.hero-visual{
+  height:clamp(355px,107vw,540px)
+ }
+ .hero-visual.editorial-cover .hero-photo{object-position:50% 31%}
+ .hero-visual::after{inset:12px!important}
+ .visual-caption{
+  gap:14px!important;min-height:100px!important;
+  padding:38px 20px 18px!important;
+  font-size:11px!important
+ }
+ .visual-caption span:first-child{max-width:76%}
+ .hero-visual.editorial-cover::before{top:23px;right:23px}
+ .hero-copy>.hero-bottom{padding:27px var(--space) 43px}
+}
+@media(max-width:370px){
+ .hero-shortcuts{grid-template-columns:1fr 1fr;gap:7px}
+ .hero-shortcuts a,.hero-shortcuts button{padding:10px;font-size:11px;min-height:49px}
+ .visual-caption{font-size:10px!important;padding:36px 16px 14px!important}
+}

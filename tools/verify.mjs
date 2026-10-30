@@ -99,6 +99,9 @@ if(archive.filter(im=>im.featured).length!==2)fail("Two lead archive images shou
 if(!html.includes('src="./assets/portrait-fashion.webp"'))fail("Fashion editorial spread missing");
 if(!html.includes('src="./assets/portrait-stage.webp"'))fail("On-stage proof image missing");
 if(!html.includes('id="archiveHeading"'))fail("Archive gallery heading missing");
+if(!html.includes('class="hero-shortcuts"'))fail("Above-the-fold mobile casting actions absent");
+if(!html.includes('class="lang-latin"')||!html.includes('class="lang-cn"'))fail("CJK language toggle lacks Latin fallback");
+
 if(sandbox.window.HERO_IMAGE&&!exists(sandbox.window.HERO_IMAGE))fail("Hero asset missing");
 if(sandbox.window.EDITORIAL_PORTRAIT&&!exists(sandbox.window.EDITORIAL_PORTRAIT))fail("Editorial portrait file missing");
 ok("Media paths & contacts");
