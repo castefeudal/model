@@ -149,3 +149,22 @@
  .comp-photo .comp-archive-mark{print-color-adjust:exact;-webkit-print-color-adjust:exact}
  .folio-frame .folio-frame-zoom,.folio-swipe{display:none!important}
 }
+/* First-party type: 437 required Simplified Chinese glyphs, OFL-licensed and
+   hosted here rather than on Google services inaccessible in mainland China. */
+@font-face{
+ font-family:"PM CJK Sans";
+ src:url("./assets/fonts/NotoSansSC-subset.woff2") format("woff2");
+ font-style:normal;font-weight:100 900;font-display:swap;
+ unicode-range:U+3000-303F,U+3400-4DBF,U+4E00-9FFF,U+FF00-FFEF
+}
+@font-face{
+ font-family:"PM CJK Serif";
+ src:url("./assets/fonts/NotoSerifSC-subset.woff2") format("woff2");
+ font-style:normal;font-weight:200 900;font-display:swap;
+ unicode-range:U+3000-303F,U+3400-4DBF,U+4E00-9FFF,U+FF00-FFEF
+}
+html[data-edition="zh"]{
+ --sans:"PM CJK Sans","Manrope","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
+ --display:"PM CJK Sans","Manrope","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+ --serif:"PM CJK Serif","Cormorant Garamond","Songti SC","Noto Serif CJK SC",serif
+}
