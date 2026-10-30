@@ -10,7 +10,7 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
+const required=["index.html","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -61,14 +61,17 @@ for(const k of ["data-i18n-aria","id=\"editorialSpreadTitle\""])if(!html.include
 // VOL.06: every archive image is in the editorial book and every booking control has a functional target.
 for(const id of ["bookingDialog","bookingForm","bookingEmail","bookingDetails","bookingCopy","bookingStatus","portraitHeading"])if(!ids.includes(id))fail("Premiere element missing #"+id);
 if(!html.includes('src="./assets/portrait-digital.webp"'))fail("Direct portrait feature missing");
-const folioFiles=[...html.matchAll(/class="folio-frame"><img src="\.\/assets\/([^"]+)"/g)].map(x=>x[1]);
+const folioFiles=[...html.matchAll(/class="folio-open"[^>]*><img src="\.\/assets\/([^"]+)"/g)].map(x=>x[1]);
 if(folioFiles.length!==6 || new Set(folioFiles).size!==6)fail("Contact sheet must include six distinct archival photos");
+if((html.match(/data-folio-index="/g)||[]).length!==6)fail("All lookbook frames must open in a full-resolution viewer");
+if(!html.includes('class="comp-archive-image"')||!html.includes('data-i18n="compArchiveLabel"'))fail("Comp card requires an honestly labelled real archival portrait");
+for(const l of ["ru","en","zh"])for(const key of ["folioOpen","folioSwipe","compArchiveLabel"])if(!d[l][key])fail("Untranslated finished-book label "+l+":"+key);
 for(const f of folioFiles)if(!exists("assets/"+f))fail("Folio image missing "+f);
 if(!html.includes('data-open-booking')||!html.includes('id="bookingDialog"'))fail("Direct booking trigger missing");
 for(const key of ["bookingAction","bookingTitle","bookingYourBrief","bookingEmailSubject","bookingOpening","bookingPrivacy","portraitHeadline","portraitStory"]){
   for(const l of ["ru","en","zh"])if(!d?.[l]?.[key])fail("Premiere translation "+l+":"+key);
 }
-if(!html.includes('src="./premiere.js"')||!read("tools/build-css.mjs").includes('"premiere.css"')||!read("tools/build-css.mjs").includes('"folio.css"'))fail("Premiere assets are not present in the production bundle");
+if(!html.includes('src="./premiere.js"')||!read("tools/build-css.mjs").includes('"premiere.css"')||!read("tools/build-css.mjs").includes('"folio.css"')||!read("tools/build-css.mjs").includes('"finish.css"'))fail("Editorial source assets must be present in the production bundle");
 ok("Premiere: 6 source images, booking controls and tri-lingual copy");
 const sm=read("sitemap.xml");
 for(const lang of ["ru","en","zh"])if(!sm.includes("?lang="+lang))fail("Sitemap missing locale "+lang);
@@ -76,7 +79,7 @@ if((sm.match(/<url>/g)||[]).length!==3)fail("Three canonical URLs expected in si
 
 
 
-for(const cssfile of ["atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css"]){
+for(const cssfile of ["atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css"]){
  const css=read(cssfile);
  for(const m of css.matchAll(/url\((['"]?)([^)'"]+)\1\)/g)){
    const v=m[2];if(v.startsWith("http")||v.startsWith("data:"))continue;
