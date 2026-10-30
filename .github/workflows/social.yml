@@ -30,7 +30,15 @@ jobs:
           git add assets/social-cover.png
           if ! git diff --cached --quiet; then
             git commit -m 'Add optimized social sharing preview image'
-            git fetch origin main
-            git rebase origin/main
-            git push origin HEAD:main
+            for attempt in 1 2 3 4 5 6; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              echo "Concurrent main update: retrying photo preview publication ($attempt)"
+              sleep "$attempt"
+            done
+            echo "Failed to publish social artwork after guarded retries" >&2
+            exit 1
           fi
