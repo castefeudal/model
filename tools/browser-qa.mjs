@@ -291,6 +291,7 @@ try{
  await send("Emulation.setDeviceMetricsOverride",{width:1440,height:900,deviceScaleFactor:1,mobile:false});
  // Stay on the same document. A hash-only navigation does not emit loadEventFired in Chrome.
  await exec('window.__editionProbe="retained";document.querySelector(".lang-btn[data-lang=ru]").click();true');
+ assert(await exec('!!document.getElementById("pm-latin-fonts")'),"Switching from ZH to RU must load Latin display fonts");
  await exec('document.querySelector(".lang-btn[data-lang=en]").click();true');
  let change=await exec('({edition:document.documentElement.dataset.edition,text:document.querySelector("#heroHeading").innerText,url:location.search,probe:window.__editionProbe,lang:document.documentElement.lang})');
  assert.equal(change.edition,"en");assert.equal(change.probe,"retained");assert(change.url.includes("lang=en"));assert(change.text.includes("PAVEL"));
@@ -299,6 +300,19 @@ try{
  assert.equal(change.edition,"zh");assert.equal(change.probe,"retained");assert(change.url.includes("lang=zh"));assert(change.text.includes("帕维尔"));assert.equal(change.lang,"zh-CN"); assert.equal(await exec('document.querySelector("link[rel=canonical]").href.endsWith("?lang=zh")'),true,"Canonicals must update on language switch");
  await exec('document.querySelector(".lang-btn[data-lang=ru]").click();true');
  assert.equal(await exec('document.documentElement.dataset.edition'),"ru");
+ // Motion must remain user-controlled, legible and safe under OS accessibility rules.
+ const beforeMotion=await exec('(()=>{const b=document.querySelector("#motionToggle");return {text:b.innerText.trim(),on:document.documentElement.dataset.motion,pressed:b.getAttribute("aria-pressed")}})()');
+ assert(beforeMotion.text.length>0,"Motion button must retain visible localized text");
+ await send("Emulation.setEmulatedMedia",{features:[{name:"prefers-reduced-motion",value:"reduce"}]});
+ await sleep(80);
+ const reducedState=await exec('({motion:document.documentElement.dataset.motion,disabled:document.querySelector("#motionToggle").disabled})');
+ assert(reducedState.motion==="off"&&reducedState.disabled,"prefers-reduced-motion must disable editorial motion");
+ await send("Emulation.setEmulatedMedia",{features:[{name:"prefers-reduced-motion",value:"no-preference"}]});
+ await sleep(80);
+ await exec('document.querySelector("#motionToggle").click()');
+ assert(await exec('document.documentElement.dataset.motion==="off"&&localStorage.getItem("pm-motion")==="off"'),"Manual opt-out not persisted");
+ await exec('document.querySelector("#motionToggle").click()');
+ assert(await exec('document.documentElement.dataset.motion==="on"&&localStorage.getItem("pm-motion")==="on"'),"Manual motion opt-in not restored");
  if(errors.length)throw Error("Runtime exceptions: "+errors.join(" | "));
  console.log("PASS: "+passed.join(", ")+"; theme-switch RU→EN→ZH→RU without reload; dialogs; URLs; no JS exceptions.");
 }catch(err){console.error("FAIL — "+err.stack);process.exitCode=1}
