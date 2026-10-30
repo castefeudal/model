@@ -108,6 +108,10 @@ try{
   assert(archiveData.digitalsVisible,"Authentic casting photo placeholder must remain available");
   assert(archiveData.screen?.includes("portrait-stage.webp") && archiveData.fashion?.includes("portrait-athletic.webp"),"Distinct editorial images not loaded");
 
+  // The new portrait and expanded photo-story move this lazy image well below the fold.
+  // Decode explicitly rather than falsely treating correct lazy loading as a missing file.
+  await exec('document.querySelector("#editorialSpread img").loading="eager";true');
+  await exec('document.querySelector("#editorialSpread img").decode().then(()=>true).catch(()=>false)');
   const editorial=await exec('(()=>{const s=document.querySelector("#editorialSpread"),d=document.querySelector("#portfolioEmpty"),i=s.querySelector("img");return {has:s.getBoundingClientRect().height>0,portrait:i.complete&&i.naturalWidth>0,alt:i.alt,folded:!d.open,native:d.tagName==="DETAILS",canonical:document.querySelector("link[rel=canonical]").href,og:document.querySelector("meta[property=\\\"og:url\\\"]").content,heading:document.querySelector("#editorialSpreadTitle").innerText};})()');
   assert(editorial.has&&editorial.portrait&&editorial.alt&&editorial.folded&&editorial.native,"Editorial feature/photo disclosure incomplete");
   assert(editorial.canonical.endsWith("?lang="+x.lang)&&editorial.og.endsWith("?lang="+x.lang),"Localized SEO metadata incorrect");
