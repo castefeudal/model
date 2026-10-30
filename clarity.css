@@ -639,3 +639,13 @@ html[data-edition=zh] .hero-visual.editorial-cover::before{
  .hero-visual.editorial-cover::before{right:25px;top:25px;padding:8px;font-size:11px}
  html[data-edition=zh] .hero-visual.editorial-cover::before{font-size:18px}
 }
+
+/* Chinese language control remains legible even while the RU/EN edition is active. */
+.lang-btn[data-lang="zh"]{
+ font-family:"Noto Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;
+ font-weight:750;
+}
+@media(max-width:370px){
+ .hero-copy>.section-kicker [data-i18n="editionCode"]{display:none}
+ .hero-copy>.section-kicker .kicker-line{min-width:9px}
+}
