@@ -664,7 +664,7 @@ html[data-edition=zh] .editorial-spread{--sbg:#f1e1cd;--sfg:#39251f;--smute:#665
 .spread-caption{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:57px;padding:15px 22px;color:#f1eee9;background:#181b1f;font:700 12px/1.4 var(--sans);letter-spacing:.03em}
 .spread-editorial{display:flex;flex-direction:column;justify-content:space-between;position:relative;isolation:isolate;overflow:hidden;padding:clamp(30px,4.5vw,70px);background:var(--sbg);color:var(--sfg);min-width:0}
 .spread-identifier{position:relative;z-index:1;padding-top:13px;border-top:1px solid color-mix(in srgb,var(--sfg) 40%,transparent);font:700 12px/1.5 var(--sans);letter-spacing:.05em}
-.spread-oversize{position:absolute;left:-20px;top:22%;color:var(--sfg);opacity:.045;font:800 clamp(150px,18vw,280px)/.9 var(--display);letter-spacing:-.14em;white-space:nowrap;user-select:none;pointer-events:none}
+
 .spread-editorial h3{position:relative;z-index:1;color:var(--sfg);font:760 clamp(48px,5.4vw,85px)/1.06 var(--display);letter-spacing:-.075em;margin:auto 0 22px;text-wrap:balance}
 .spread-editorial h3 em{font:500 italic 1.1em/1 var(--serif);letter-spacing:-.035em;color:var(--saccent)}
 .spread-body{position:relative;z-index:1;max-width:510px;color:var(--smute);font:450 17px/1.75 var(--sans);margin-bottom:45px}

@@ -7,6 +7,14 @@ let persisted="ru";
 try{persisted=localStorage.getItem("pm-lang")||"ru"}catch{}
 let lang=["ru","en","zh"].includes(locale)?locale:(["ru","en","zh"].includes(persisted)?persisted:"ru");
 let visible=[],active=0,filter="all",lastFocus=null;
+function loadChineseFonts(){
+ if(document.getElementById("pm-fonts-cjk"))return;
+ const link=document.createElement("link");
+ link.id="pm-fonts-cjk";link.rel="stylesheet";
+ link.href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap";
+ document.head.append(link);
+}
+
 const t=k=>dict[lang][k]??dict.en[k]??k;
 const safe=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const val=x=>x==null||x===""?null:x;
@@ -33,6 +41,7 @@ function setLanguage(next){
  const previous=document.documentElement.dataset.edition;
  lang=next;document.documentElement.lang=lang==="zh"?"zh-CN":lang;
  document.documentElement.dataset.edition=lang;
+ if(lang==="zh")loadChineseFonts();
  document.documentElement.style.colorScheme=lang==="ru"?"dark":"light";
  const themeColor={ru:"#18181a",en:"#f5f6f4",zh:"#f2e5d2"};
  document.querySelector('meta[name="theme-color"]')?.setAttribute("content",themeColor[lang]);
