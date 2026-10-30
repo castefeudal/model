@@ -6,7 +6,7 @@ const locale=new URLSearchParams(location.search).get("lang");
 let persisted="ru";
 try{persisted=localStorage.getItem("pm-lang")||"ru"}catch{}
 let lang=["ru","en","zh"].includes(locale)?locale:(["ru","en","zh"].includes(persisted)?persisted:"ru");
-let visible=[],active=0,filter="all",lastFocus=null,coverIndex=0;
+let visible=[],lightboxItems=[],active=0,filter="all",lastFocus=null,coverIndex=0;
 // CJK is optional and non-blocking: native PingFang/Songti/YaHei still render
 // when Google font services are inaccessible; preview/testing gets full glyph coverage.
 function loadChineseFonts(){
@@ -61,6 +61,13 @@ function setLanguage(next){
  qsa("[data-i18n]").forEach(node=>{const k=node.dataset.i18n;if(Object.hasOwn(dict[lang],k))node.innerHTML=dict[lang][k]});
  qsa("[data-i18n-alt]").forEach(node=>node.setAttribute("alt",t(node.dataset.i18nAlt)));
  qsa("[data-i18n-aria]").forEach(node=>node.setAttribute("aria-label",t(node.dataset.i18nAria)));
+ qsa("[data-folio-index]").forEach(node=>{
+   const index=Number(node.dataset.folioIndex);
+   node.setAttribute("aria-label",t("folioOpen")+" "+String(index+1).padStart(2,"0")+" / "+String(archive.length).padStart(2,"0"));
+ });
+ qsa(".folio-frame-archival").forEach((node,index)=>{
+   node.textContent=t("archiveBadge")+" / "+String(index+1).padStart(2,"0");
+ });
  qsa(".lang-btn").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));
  qs("#menuToggle").setAttribute("aria-label",t("menu"));
  document.querySelector('meta[property="og:locale"]')?.setAttribute("content",lang==="ru"?"ru_RU":lang==="zh"?"zh_CN":"en_US");
@@ -92,15 +99,20 @@ function renderGallery(){
  qs("#portfolioEmpty").hidden=media.length>0;
  qs("#galleryFootnote").hidden=media.length>0;
 }
-function openLightbox(index){
- if(!visible.length)return;
- active=(index+visible.length)%visible.length;
- const im=visible[active];qs("#lbImage").src=im.full||im.src;
+function openLightbox(index,collection=null){
+ // The archive lookbook contains all six photographs, while the casting
+ // gallery intentionally remains filtered. One accessible dialog serves both.
+ if(collection)lightboxItems=collection;
+ else if(!qs("#lightbox").open)lightboxItems=visible;
+ const items=lightboxItems;
+ if(!items.length)return;
+ active=(index+items.length)%items.length;
+ const im=items[active];qs("#lbImage").src=im.full||im.src;
  qs("#lbImage").onerror=()=>{qs("#lbImage").removeAttribute("src");qs("#lbCaption").textContent=t("missingImage")};
  qs("#lbImage").alt=im.alt?.[lang]||im.alt?.en||"Pavel Markov";
  qs("#lbCaption").textContent=captionText(im);
- qs("#lbCounter").textContent=(active+1)+" / "+visible.length;
- [visible[(active+1)%visible.length],visible[(active-1+visible.length)%visible.length]].forEach(x=>{if(x){const image=new Image();image.src=x.full||x.src;}});
+ qs("#lbCounter").textContent=(active+1)+" / "+items.length;
+ [items[(active+1)%items.length],items[(active-1+items.length)%items.length]].forEach(x=>{if(x){const image=new Image();image.src=x.full||x.src;}});
  if(!qs("#lightbox").open){lastFocus=document.activeElement;qs("#lightbox").showModal();}
 }
 function renderVideos(){
@@ -155,6 +167,7 @@ function setHero(){
    if(castingSrc){
      qs("#compPhoto").style.backgroundImage='url("'+src.replace(/["\\]/g,"")+'")';
      qs("#compPhoto").textContent="";
+     qs("#compPhoto").classList.remove("comp-photo-archive");
    }
  };
  img.onload=finish;
@@ -192,6 +205,10 @@ qs("#menuToggle").addEventListener("click",()=>{const open=qs("#siteNav").classL
 qsa("#siteNav a").forEach(a=>a.addEventListener("click",()=>{qs("#siteNav").classList.remove("open");qs("#menuToggle").setAttribute("aria-expanded","false")}));
 qs("#galleryFilters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(!b)return;filter=b.dataset.filter;renderGallery()});
 qs("#gallery").addEventListener("click",e=>{const b=e.target.closest("[data-index]");if(b)openLightbox(Number(b.dataset.index))});
+qs(".folio-track")?.addEventListener("click",e=>{
+ const b=e.target.closest("[data-folio-index]");
+ if(b)openLightbox(Number(b.dataset.folioIndex),archive);
+});
 qs("#lbPrev").addEventListener("click",()=>openLightbox(active-1));
 qs("#lbNext").addEventListener("click",()=>openLightbox(active+1));
 qs("#lbClose").addEventListener("click",()=>qs("#lightbox").close());
