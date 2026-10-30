@@ -174,7 +174,11 @@ window.MODEL_I18N = {
     "coverControlsAria": "Выбор образа для обложки",
     "coverIndex": "ТРИ ОБРАЗА / ОДИН ЧЕЛОВЕК",
     "athleticPortraitAlt": "Павел Марков у воды на фоне закатного неба, спортивный образ из личного архива.",
-    "wordmarkAria": "P/M. — Павел Марков, в начало страницы"
+    "wordmarkAria": "P/M. — Павел Марков, в начало страницы",
+    "lbCloseAria": "Закрыть просмотр фотографии",
+    "lbPrevAria": "Предыдущая фотография",
+    "lbNextAria": "Следующая фотография",
+    "compCloseAria": "Закрыть кастинг-анкету"
   },
   "en": {
     "skip": "Skip to content",
@@ -351,7 +355,11 @@ window.MODEL_I18N = {
     "coverControlsAria": "Select a cover look",
     "coverIndex": "THREE LOOKS / ONE PERSON",
     "athleticPortraitAlt": "Pavel Markov in an athletic image by the water at sunset, from his personal archive.",
-    "wordmarkAria": "P/M. — Pavel Markov, back to top"
+    "wordmarkAria": "P/M. — Pavel Markov, back to top",
+    "lbCloseAria": "Close photo viewer",
+    "lbPrevAria": "Previous photo",
+    "lbNextAria": "Next photo",
+    "compCloseAria": "Close casting card"
   },
   "zh": {
     "skip": "跳转到主要内容",
@@ -528,6 +536,10 @@ window.MODEL_I18N = {
     "coverControlsAria": "选择封面形象",
     "coverIndex": "三种形象 / 同一个人",
     "athleticPortraitAlt": "帕维尔·马尔科夫在日落海边的运动形象，来自个人档案。",
-    "wordmarkAria": "P/M. — 帕维尔·马尔科夫，返回顶部"
+    "wordmarkAria": "P/M. — 帕维尔·马尔科夫，返回顶部",
+    "lbCloseAria": "关闭照片查看器",
+    "lbPrevAria": "上一张照片",
+    "lbNextAria": "下一张照片",
+    "compCloseAria": "关闭选角资料卡"
   }
 };
