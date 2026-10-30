@@ -25,3 +25,24 @@ const md=[
 fs.writeFileSync("lighthouse-scorecard.md",md);
 console.log("\n"+md);
 if(rows.length!==variants.length)process.exitCode=1;
+
+/* Fail on meaningful regressions without treating one throttled Chinese mobile run as an invariant. ZH threshold is calibrated against observed baseline scores 79-92 and LCP 3.4-5.6 s; A11Y/SEO are always >=95. */
+const failures=[];
+for(const r of rows){
+ const mobile=r.edition.endsWith("-mobile");
+ const minScore=r.edition==="zh-mobile"?78:(mobile?85:95);
+ if(r.categories.performance<minScore)failures.push(r.edition+": Performance "+r.categories.performance+" below "+minScore);
+ for(const category of ["accessibility","best-practices","seo"]){
+  if(r.categories[category]<95)failures.push(r.edition+": "+category+" below 95");
+ }
+ const report=JSON.parse(fs.readFileSync("lighthouse-"+r.edition+".json","utf8"));
+ const lcp=report.audits["largest-contentful-paint"]?.numericValue;
+ const limit=r.edition==="zh-mobile"?5200:(mobile?4600:2500);
+ if(!Number.isFinite(lcp)||lcp>limit)failures.push(r.edition+": LCP "+lcp+" ms above "+limit+" ms");
+}
+if(failures.length){
+ console.error("LIGHTHOUSE REGRESSION:\n"+failures.map(x=>"- "+x).join("\n"));
+ process.exitCode=1;
+}else if(rows.length===variants.length){
+ console.log("PASS — all 6 editions meet Lighthouse quality and speed gates.");
+}

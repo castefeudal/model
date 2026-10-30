@@ -1509,3 +1509,37 @@ html[data-motion="off"]{scroll-behavior:auto}
 html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="off"] *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 @media(prefers-reduced-motion:reduce){.folio-navigation button{transition:none}}
 @media print{.folio-navigation,.motion-switch,.peek-utility{display:none!important}}
+
+
+/* ISSUE 11 / casting-first navigation and precisely constrained microinteractions.
+   No scroll hijack, no hidden content, no visual change to archival imagery. */
+.hero-shortcuts button.hero-shortcut-primary{
+ cursor:pointer;text-align:left;border-color:var(--hero-text)
+}
+.motion-switch{white-space:nowrap}
+.motion-switch-icon{display:inline-grid;place-items:center;width:17px;min-width:17px}
+.motion-switch-label{display:inline-block}
+.peek-utility>a{
+ display:inline-flex;align-items:center;min-height:35px;
+ font:780 12px/1.4 var(--font);color:inherit;
+ text-underline-offset:5px;text-decoration-thickness:1px
+}
+.peek-utility>a:hover{text-decoration-thickness:2px}
+.folio-track[tabindex="0"]:focus-visible{
+ outline:3px solid var(--accent);outline-offset:4px
+}
+@media(max-width:880px){
+ .hero-shortcuts .hero-shortcut-primary{
+  background:var(--hero-text);color:#171717
+ }
+ .hero-shortcuts .hero-shortcut-secondary{
+  background:transparent;color:#fff
+ }
+}
+@media(max-width:375px){
+ .peek-utility{gap:10px 16px}
+ .peek-utility>a,.peek-utility button{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+ .motion-switch,.peek-utility>a{transition:none}
+}

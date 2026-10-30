@@ -208,3 +208,15 @@ Production design is judged against actual desktop/mobile screenshots, a working
 
 ## Edition 10 — directors cut
 Responsive 1x/2x mobile cover, accessible mobile lookbook controls, progressive motion with an opt-out and reduced-motion, localized casting data copy. The archived photography remains honestly labelled.
+
+## ISSUE 11 — casting director's route and keyboard reliability
+
+The first-screen mobile primary action opens a factual casting overview, with a direct handoff to the six-photo real archive; the enquiry action remains one tap away. The mobile strip is a keyboard-focusable region supporting arrow navigation, instead of only registering keys while unreachable. The footer retains a legible motion label after hydration; `prefers-reduced-motion` and manual opt-out remain respected. The Chinese edition does **not fetch Google Fonts**: the Latin CSS connection is created only on RU/EN and on a subsequent switch from Chinese. Desktop editorial treatment remains unchanged.
+
+### Real-photo delivery and rejected image experiments
+
+All six photographs remain the owner's identifiable personal **archive**, never current unretouched agency digitals. The website retains the original WebP imagery and responsive cover thumbnails. The manually selectable three-cover set still updates images, translations, captions and accessibility controls together.
+
+An AVIF experiment was evaluated, not shipped. Desktop saved approximately 34 KB of image transfer but already scored 98–100 Performance; mobile Lighthouse was inconsistent and Chinese mobile tests fell as low as 77/100 with LCP 5.6 s. Both 960px and 1600px mobile AVIF variants were therefore rejected and the temporary generator and files removed. Keeping proven photograph presentation and coherent typography is more valuable than a marginal compression win.
+
+Lighthouse is **synthetic and variable**: baseline Chinese mobile lab runs on otherwise similar designs ranged from roughly 80 to 92. Review run-to-run variations and real-user Web Vitals before claiming a causal optimization. See [AUDIT.md](AUDIT.md).

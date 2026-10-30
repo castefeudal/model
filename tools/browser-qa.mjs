@@ -44,6 +44,11 @@ async function screenshot(label){
 const state='(()=>{const $=s=>document.querySelector(s),h=$("#heroHeading"),v=$("#heroArtwork"),r=h.getBoundingClientRect();return {lang:document.documentElement.lang,edition:document.documentElement.dataset.edition,width:innerWidth,scrollWidth:document.documentElement.scrollWidth,overflow:document.documentElement.scrollWidth-innerWidth,heroBg:getComputedStyle($(".hero")).backgroundColor,art:getComputedStyle(v).backgroundImage,heading:h.innerText,headingScroll:h.scrollWidth-headingWidth(),headingLeft:r.left,headingRight:r.right,hasGallery:!!$("#gallery"),specs:document.querySelectorAll("#specGrid>div").length,cardActions:document.querySelectorAll("[data-open-card]").length,menuVisible:getComputedStyle($("#menuToggle")).display!=="none"};function headingWidth(){return h.clientWidth}})()';
 const tests=[
  {label:"RU_DESKTOP",lang:"ru",width:1440,height:900},
+ {label:"RU_1920",lang:"ru",width:1920,height:1080},
+ {label:"EN_1920",lang:"en",width:1920,height:1080},
+ {label:"ZH_1920",lang:"zh",width:1920,height:1080},
+ {label:"EN_375",lang:"en",width:375,height:812},
+ {label:"ZH_414",lang:"zh",width:414,height:896},
  {label:"EN_DESKTOP",lang:"en",width:1440,height:900},
  {label:"ZH_DESKTOP",lang:"zh",width:1440,height:900},
  {label:"RU_MOBILE",lang:"ru",width:390,height:844},
@@ -94,8 +99,22 @@ try{
 
   assert(v.headingLeft>=-5&&v.headingRight<=x.width+5,"Heading outside viewport");
   assert(v.headingScroll<=4,"Heading text overflow "+v.headingScroll);
+  const latinCss=await exec('!!document.getElementById("pm-latin-fonts")');
+  assert.equal(latinCss,x.lang!=="zh","Chinese edition must not download Latin Google Fonts");
+  const motionLabel=await exec('(()=>{const b=document.querySelector("#motionToggle"),label=b.querySelector(".motion-switch-label");return {exists:!!label,text:label?.innerText.trim(),icon:!!b.querySelector(".motion-switch-icon")}})()');
+  assert(motionLabel.exists&&motionLabel.text&&motionLabel.icon,"Motion switch lost its visible label");
   const coverUX=await exec('(()=>{const box=document.querySelector(".hero-shortcuts");const z=document.querySelector(".lang-btn[data-lang=zh]");const r=box.getBoundingClientRect();return {shortcuts:getComputedStyle(box).display,visible:r.height>0 && r.width>0,buttons:box.querySelectorAll("a,button").length,chineseLabel:z.innerText.trim(),imageDisplay:getComputedStyle(document.querySelector("#heroVisual")).backgroundColor}})()');
-  if(x.width<=880)assert(coverUX.shortcuts==="grid" && coverUX.visible && coverUX.buttons===2,"Mobile casting actions missing");
+  if(x.width<=880){
+    assert(coverUX.shortcuts==="grid" && coverUX.visible && coverUX.buttons===2,"Mobile casting actions missing");
+    const first=await exec('document.querySelector(".hero-shortcuts [data-open-casting-peek]")?.tagName');
+    assert(first==="BUTTON","Mobile primary action must open verified casting specs, not jump over them");
+    const keyboard=await exec('(()=>{const e=document.querySelector("#folioTrack");return {focusable:e.tabIndex===0,region:e.getAttribute("role")==="region"}})()');
+    assert(keyboard.focusable&&keyboard.region,"Mobile filmstrip not keyboard accessible");
+    await exec('(()=>{const e=document.querySelector("#folioTrack");e.focus();e.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowRight",bubbles:true}));return true})()');
+    await sleep(650);
+    const position=await exec('document.querySelector("#folioTrack").scrollLeft');
+    assert(position>20,"Keyboard ArrowRight did not advance the photo filmstrip");
+  }
   if(x.width>880)assert(coverUX.shortcuts==="none","Desktop should keep original primary actions");
   assert(coverUX.chineseLabel===(x.lang==="zh"?"中文":"ZH"),"Chinese language switch is not legible in "+x.lang);
 
@@ -159,9 +178,17 @@ try{
   assert(snap.rows>=7&&snap.real&&snap.height>=(x.width<=880?125:260),"Casting Desk must display archival face and verified specifications");
   if(x.width<=880)assert(snap.firstSpecTop<=(x.height-52),"Mobile casting specs should be visible in the first viewport");
   assert(snap.specs.some(x=>x.includes("188")),"Casting Desk lost the verified height");
+  assert(await exec('document.querySelector("#peekGallery").getAttribute("href")==="#lookbook"'),"Casting dossier lacks direct photo handoff");
   if(["EN_DESKTOP","RU_MOBILE","ZH_MOBILE"].includes(x.label))await screenshot("CASTING_DESK_"+x.label);
   await exec('document.querySelector("#peekClose").click()');
   assert(!(await exec('document.querySelector("#castingPeek").open')),"Casting overview did not close");
+  if(x.label==="RU_MOBILE"){
+    await exec('document.querySelector(".hero-shortcuts [data-open-casting-peek]").click()');
+    assert(await exec('document.querySelector("#castingPeek").open'),"Above-the-fold casting shortcut failed");
+    await exec('document.querySelector("#peekGallery").click()');
+    assert(await exec('!document.querySelector("#castingPeek").open && location.hash==="#lookbook"'),"Casting dossier did not hand off to photography");
+    await exec('document.querySelector("#top").scrollIntoView({behavior:"instant"})');
+  }
   if(x.label==="EN_DESKTOP"){
     await exec('document.querySelector(".hero-proof").click()');
     assert(await exec('document.querySelector("#castingPeek").open'),"Archival face teaser must open Casting Desk");
@@ -264,6 +291,7 @@ try{
  await send("Emulation.setDeviceMetricsOverride",{width:1440,height:900,deviceScaleFactor:1,mobile:false});
  // Stay on the same document. A hash-only navigation does not emit loadEventFired in Chrome.
  await exec('window.__editionProbe="retained";document.querySelector(".lang-btn[data-lang=ru]").click();true');
+ assert(await exec('!!document.getElementById("pm-latin-fonts")'),"Switching from ZH to RU must load Latin display fonts");
  await exec('document.querySelector(".lang-btn[data-lang=en]").click();true');
  let change=await exec('({edition:document.documentElement.dataset.edition,text:document.querySelector("#heroHeading").innerText,url:location.search,probe:window.__editionProbe,lang:document.documentElement.lang})');
  assert.equal(change.edition,"en");assert.equal(change.probe,"retained");assert(change.url.includes("lang=en"));assert(change.text.includes("PAVEL"));
@@ -272,6 +300,19 @@ try{
  assert.equal(change.edition,"zh");assert.equal(change.probe,"retained");assert(change.url.includes("lang=zh"));assert(change.text.includes("帕维尔"));assert.equal(change.lang,"zh-CN"); assert.equal(await exec('document.querySelector("link[rel=canonical]").href.endsWith("?lang=zh")'),true,"Canonicals must update on language switch");
  await exec('document.querySelector(".lang-btn[data-lang=ru]").click();true');
  assert.equal(await exec('document.documentElement.dataset.edition'),"ru");
+ // Motion must remain user-controlled, legible and safe under OS accessibility rules.
+ const beforeMotion=await exec('(()=>{const b=document.querySelector("#motionToggle");return {text:b.innerText.trim(),on:document.documentElement.dataset.motion,pressed:b.getAttribute("aria-pressed")}})()');
+ assert(beforeMotion.text.length>0,"Motion button must retain visible localized text");
+ await send("Emulation.setEmulatedMedia",{features:[{name:"prefers-reduced-motion",value:"reduce"}]});
+ await sleep(80);
+ const reducedState=await exec('({motion:document.documentElement.dataset.motion,disabled:document.querySelector("#motionToggle").disabled})');
+ assert(reducedState.motion==="off"&&reducedState.disabled,"prefers-reduced-motion must disable editorial motion");
+ await send("Emulation.setEmulatedMedia",{features:[{name:"prefers-reduced-motion",value:"no-preference"}]});
+ await sleep(80);
+ await exec('document.querySelector("#motionToggle").click()');
+ assert(await exec('document.documentElement.dataset.motion==="off"&&localStorage.getItem("pm-motion")==="off"'),"Manual opt-out not persisted");
+ await exec('document.querySelector("#motionToggle").click()');
+ assert(await exec('document.documentElement.dataset.motion==="on"&&localStorage.getItem("pm-motion")==="on"'),"Manual motion opt-in not restored");
  if(errors.length)throw Error("Runtime exceptions: "+errors.join(" | "));
  console.log("PASS: "+passed.join(", ")+"; theme-switch RU→EN→ZH→RU without reload; dialogs; URLs; no JS exceptions.");
 }catch(err){console.error("FAIL — "+err.stack);process.exitCode=1}

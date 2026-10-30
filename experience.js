@@ -23,7 +23,9 @@
     if(!b)return;
     b.setAttribute('aria-pressed',String(!canAnimate()));
     b.setAttribute('aria-label',t(canAnimate()?'motionDisable':reduced.matches?'motionSystem':'motionEnable'));
-    b.title=b.getAttribute('aria-label');b.disabled=reduced.matches;const icon=document.createElement('span');icon.setAttribute('aria-hidden','true');icon.textContent=canAnimate()?'II':'\u25b7';b.replaceChildren(icon);
+    b.title=b.getAttribute('aria-label');b.disabled=reduced.matches;
+    const icon=b.querySelector('.motion-switch-icon');
+    if(icon)icon.textContent=canAnimate()?'Ⅱ':'▷';
     if(!canAnimate())document.getAnimations().forEach(a=>a.cancel());
     document.dispatchEvent(new Event('pm:motionchange'));
   }
@@ -52,6 +54,13 @@
   if(track&&prev&&next){
     let queued=false;
     const frames=[...track.querySelectorAll('.folio-frame')];
+    const mobile=matchMedia('(max-width: 880px)');
+    function updateFocusable(){
+      if(mobile.matches){track.tabIndex=0;track.setAttribute('role','region')}
+      else{track.removeAttribute('tabindex');track.removeAttribute('role')}
+    }
+    updateFocusable();
+    mobile.addEventListener?.('change',updateFocusable);
     function position(){
       const bounds=track.getBoundingClientRect();
       let index=0,distance=Infinity;

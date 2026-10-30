@@ -35,6 +35,7 @@ function renderSpecs(){
 function setLanguage(next){
  const previous=document.documentElement.dataset.edition;
  lang=next;document.documentElement.lang=lang==="zh"?"zh-CN":lang;
+ if(lang!=="zh")window.PMEnsureLatinFonts?.();
  document.documentElement.dataset.edition=lang;
 
 
@@ -176,11 +177,10 @@ function setHero(){
  }
  if(img.complete&&img.naturalWidth>0)finish();
 }
-function copyLink(){
+async function copyLink(){
  const url=new URL(location.href);url.searchParams.set("lang",lang);
- const success=()=>{qs("#feedback").textContent=t("copied")};
- if(navigator.clipboard?.writeText){navigator.clipboard.writeText(url.href).then(success,()=>qs("#feedback").textContent=t("notCopied"))}
- else {const a=document.createElement("textarea");a.value=url.href;a.style.position="fixed";a.style.opacity=0;document.body.append(a);a.select();const ok=document.execCommand("copy");a.remove();qs("#feedback").textContent=t(ok?"copied":"notCopied")}
+ const ok=window.PMExperience?.copyText?await window.PMExperience.copyText(url.href):false;
+ qs("#feedback").textContent=t(ok?"copied":"notCopied");
 }
 qsa(".lang-btn").forEach(b=>b.addEventListener("click",()=>setLanguage(b.dataset.lang)));
 const setCover=(index,focus=false)=>{
