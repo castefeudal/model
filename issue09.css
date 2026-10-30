@@ -1107,7 +1107,7 @@ html[data-edition="zh"] .booking-modal-heading h2 em{font-style:normal;line-heig
  .contact-lead{font-size:clamp(30px,6.8vw,43px)}
  .contact-methods a{font-size:14px;min-height:70px}
  .footer{flex-wrap:wrap;gap:13px;font-size:10px}
- .footer span:nth-child(2){display:none}
+ .footer > span:nth-child(2){display:none}
  .lb-stage{padding:65px 15px 98px}
  .lb-stage img{max-height:calc(100% - 85px)}
  .lb-arrow{width:42px;height:42px}
