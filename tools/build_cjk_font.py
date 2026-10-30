@@ -28,6 +28,9 @@ charsets = {
 }
 charsets.update(range(0x20, 0x7F))
 charsets.update(map(ord, "—–·“”‘’«»→↑↗℃×°"))
+(DEST / "covered-glyphs.txt").write_text(
+    "".join(chr(c) for c in sorted(charsets) if c >= 0x3000), encoding="utf-8"
+)
 if len(charsets) < 170:
     raise SystemExit("Unexpectedly small Chinese character coverage: "+str(len(charsets)))
 
