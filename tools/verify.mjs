@@ -10,7 +10,7 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt",".nojekyll"];
+const required=["index.html","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt","assets/fonts/serif-covered-glyphs.txt",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -36,6 +36,18 @@ const sandbox={window:{}};
 for(const p of scripts.slice(0,3))if(exists(p))vm.runInNewContext(read(p),sandbox,{filename:p});
 const d=sandbox.window.MODEL_I18N,p=sandbox.window.MODEL_PROFILE,photos=sandbox.window.MODEL_PHOTOS||[],archive=sandbox.window.MODEL_ARCHIVE||[],videos=sandbox.window.MODEL_VIDEOS||[];
 for(const l of ["ru","en","zh"])if(!d[l])fail("Missing language: "+l);
+
+const serifKeys=["heroName1","heroName2","heroLine","portraitHeadline","folioTitle","spreadTitle","archiveTitle","screenStatement","aboutOpening","contactHead2","contactLead","interludeTitle","bookingTitle","portfolioTitle","screenTitle","profileTitle","aboutTitle"];
+if(d?.zh && exists("assets/fonts/serif-covered-glyphs.txt")){
+ const glyphs=new Set([...read("assets/fonts/serif-covered-glyphs.txt")]);
+ const headline=[...serifKeys.map(k=>d.zh[k]||"").join("")].filter(ch=>ch.codePointAt(0)>=0x3000);
+ const missing=[...new Set(headline)].filter(ch=>!glyphs.has(ch));
+ if(missing.length)fail("Chinese editorial display type misses glyphs: "+missing.join(""));
+ else ok("Chinese editorial font covers "+new Set(headline).size+" selected display glyphs");
+ if(fs.statSync(path.join(root,"assets/fonts/NotoSerifSC-subset.woff2")).size>130000)fail("Editorial serif font exceeds 130 KB budget");
+ if(fs.statSync(path.join(root,"assets/fonts/NotoSansSC-subset.woff2")).size>185000)fail("Chinese body font exceeds 185 KB budget");
+}
+
 if(d?.ru && d?.en && d?.zh){
  const sets=Object.fromEntries(["ru","en","zh"].map(l=>[l,new Set(Object.keys(d[l]))]));
  const union=[...new Set(Object.keys(d).flatMap(l=>Object.keys(d[l])))];
