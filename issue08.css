@@ -972,7 +972,7 @@ html[data-edition="zh"] .booking-modal-heading h2 em{font-style:normal;line-heig
  .facts-inner{min-height:100px;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding:10px var(--g)}
  .fact+.fact{padding-left:15px}
  .fact strong{font-size:clamp(14px,2.5vw,22px)}
- .fact-label{font-size:10px}
+ .fact-label{font-size:11px}
  .fact-link{display:none}
  .portrait-interlude{grid-template-columns:1fr;min-height:0;display:flex;flex-direction:column}
  .portrait-interlude-image{min-height:0;height:clamp(455px,94vw,780px)}
@@ -1055,7 +1055,7 @@ html[data-edition="zh"] .booking-modal-heading h2 em{font-style:normal;line-heig
  .hero-statement{font-size:clamp(31px,7.4vw,43px)}
  .facts-inner{min-height:92px}
  .fact strong{font-size:clamp(13px,4vw,18px);line-height:1.3}
- .fact-label{font-size:10px}
+ .fact-label{font-size:11px}
  .portrait-interlude-image{height:clamp(440px,117vw,670px)}
  .portrait-interlude-caption{left:var(--g);right:var(--g);bottom:22px;font-size:9px}
  .portrait-interlude-index{font-size:9px}
