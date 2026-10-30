@@ -216,3 +216,5 @@ The first-screen mobile primary action opens a factual casting overview, with a 
 ### Verified owner-archive AVIF delivery
 
 `tools/build_hero_avif.py` generates AVIF renditions of the already published original fashion archive, without editing features or image content. Full-size 1600px AVIF = 44,004 B (56% of source); mobile 960px AVIF = 22,610 B (29% of source). The unmodified WebP source remains in the repository for full browser fallback. The hero `<picture>` selects AVIF automatically when supported and the cover selector changes sources together. Authentic casting photos added later automatically disable these archive AVIF sources. Encoding is deterministic via a GitHub Actions workflow with verification.
+
+The mobile cover intentionally uses the 960px/22.6 KB AVIF variant at every device-pixel ratio; the larger 1600px/44 KB asset is for desktop. This avoids costly mobile AVIF decoding during simultaneous CJK font loading. Mobile WebP fallback retains its 1x/2x responsive sources.

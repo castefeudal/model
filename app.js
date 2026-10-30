@@ -140,7 +140,7 @@ function setHero(){
  // AVIF remains a compressed rendering of the exact verified original photo.
  // Disable archival sources when a true casting photograph is supplied.
  const selectedAvif=castingSrc?null:cover?.avif||null;
- if(mobileAvif)mobileAvif.srcset=selectedAvif?(cover?.mobileAvif?cover.mobileAvif+' 1x, '+selectedAvif+' 2x':selectedAvif):'';
+ if(mobileAvif)mobileAvif.srcset=selectedAvif?(cover?.mobileAvif||selectedAvif):'';
  if(desktopAvif)desktopAvif.srcset=selectedAvif||'';
  if(!src)return;
  const figure=qs("#heroVisual"),img=qs("#heroImage"),caption=qs('[data-i18n="artDisclaimer"]');

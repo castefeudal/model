@@ -30,3 +30,5 @@ The project still requires recent verified front/three-quarter/profile/full-body
 ## Responsive image delivery
 
 The optimized archival fashion image is delivered in AVIF variants (960/1600; 22.6/44 KB), preserving the 78.1 KB WebP fallback untouched. 1x/2x density sources are first; AVIF is never used for an arbitrary new verified casting image or the non-AVIF athletic cover. Compare Lighthouse after this change. The encoding is lossy compression, not a new or fabricated photograph.
+
+Initial AVIF Lighthouse measurements showed a **regression** on ZH mobile (LCP 5.6 s, score 77) when the full-size 1600px AVIF was selected for a 412px-wide hero. This experiment was not shipped. The revised mobile source always uses the 960px asset, and the high-density full-size rendition remains desktop-only; repeat CI before publishing.

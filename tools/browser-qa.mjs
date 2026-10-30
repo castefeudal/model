@@ -149,6 +149,8 @@ try{
   assert(portrait.loaded&&portrait.visible&&portrait.editorial,"Owned editorial image failed to display");
   const avifDelivery=await exec('(()=>({current:document.querySelector("#heroImage").currentSrc,mobile:document.querySelector("#coverMobileAvif").getAttribute("srcset"),desktop:document.querySelector("#coverDesktopAvif").getAttribute("srcset")}))()');
   assert(avifDelivery.current.includes(".avif")&&avifDelivery.mobile.includes(".avif")&&avifDelivery.desktop.includes(".avif"),"Real optimized AVIF hero not selected by Chromium");
+  if(x.width<=880)assert(avifDelivery.current.includes("portrait-fashion-960.avif"),"Mobile should decode the efficient 960 AVIF, not the heavy full-size portrait");
+  else assert(avifDelivery.current.includes("portrait-fashion-1600.avif"),"Desktop hero must retain high resolution");
   assert(portrait.compArchive&&portrait.archiveDisclosure,"Comp card requires an explicitly labeled archival photograph");
   const lookData=await exec('(()=>{const b=[...document.querySelectorAll(".cover-choice")];const i=document.querySelector("#heroImage");return {buttons:b.length,pressed:b.filter(x=>x.getAttribute("aria-pressed")==="true").length,image:i.getAttribute("src"),caption:document.querySelector(".visual-caption").innerText,loaded:i.complete&&i.naturalWidth>0}})()');
   assert(lookData.buttons===3&&lookData.pressed===1&&lookData.loaded,"Editorial look selector failed to initialise");
