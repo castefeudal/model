@@ -33,7 +33,6 @@ function renderSpecs(){
  qs("#compSpecs").innerHTML=items.map(([key,value])=>'<div><dt>'+safe(t(key))+'</dt><dd>'+safe(value)+'</dd></div>').join("");
 }
 function setLanguage(next){
- const previous=document.documentElement.dataset.edition;
  lang=next;document.documentElement.lang=lang==="zh"?"zh-CN":lang;
  document.documentElement.dataset.edition=lang;
 
@@ -41,12 +40,6 @@ function setLanguage(next){
  document.documentElement.style.colorScheme=lang==="ru"?"dark":"light";
  const themeColor={ru:"#18181a",en:"#f5f6f4",zh:"#f2e5d2"};
  document.querySelector('meta[name="theme-color"]')?.setAttribute("content",themeColor[lang]);
- if(previous&&previous!==lang && !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-   document.documentElement.classList.remove("edition-switch");
-   void document.documentElement.offsetWidth;
-   document.documentElement.classList.add("edition-switch");
-   window.setTimeout(()=>document.documentElement.classList.remove("edition-switch"),650);
- }
  try{localStorage.setItem("pm-lang",lang)}catch{}
  const url=new URL(location.href);url.searchParams.set("lang",lang);history.replaceState(null,"",url);
  const canonical="https://castefeudal.github.io/model/?lang="+lang;
@@ -68,7 +61,7 @@ function setLanguage(next){
  document.title=lang==="ru"?"Павел Марков — модель / актёр / съёмки":lang==="zh"?"帕维尔·马尔科夫 — 模特与镜头表现":"Pavel Markov — Model / Actor / On-camera Talent";
 
  document.querySelector('meta[name="description"]').content=lang==="ru"?"Павел Марков — модель и талант для съёмок. Рост 188 см, атлетический типаж, Беларусь.":lang==="zh"?"帕维尔·马尔科夫个人模特与选角作品集。身高188厘米，运动型外形，来自白俄罗斯。":"Pavel Markov: model and on-camera talent. 188 cm, athletic build, based in Belarus.";
- renderSpecs();renderGallery();renderVideos();renderContacts();setHero();
+ renderSpecs();renderGallery();renderVideos();renderContacts();renderDirectEnquiry();setHero();
  document.dispatchEvent(new Event('pm:languagechange'));
 }
 const captionText=im=>typeof im.caption==="object"?(im.caption[lang]||im.caption.en||"PAVEL MARKOV"):im.caption||"PAVEL MARKOV";
@@ -118,6 +111,13 @@ function renderVideos(){
  if(!/^(?:assets\/video\/)[\w./-]+\.(mp4|webm)$/.test(v.src))return "";
  return '<div><video controls playsinline preload="metadata" '+(v.poster?'poster="'+safe(v.poster)+'"':"")+'><source src="'+src+'" type="'+safe(v.type||"video/mp4")+'"></video><p>'+name+'</p></div>';
  }).join("");
+}
+function renderDirectEnquiry(){
+ const address=p.contacts?.email;
+ const href=address&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)
+   ?"mailto:"+address+"?subject="+encodeURIComponent(t("bookingEmailSubject"))
+   :"#contact";
+ qsa("[data-direct-enquiry]").forEach(link=>link.setAttribute("href",href));
 }
 function renderContacts(){
  const configs=[["telegram","Telegram",v=>"https://t.me/"+v.replace(/^@/,"")+"?text="+encodeURIComponent(t("inquiryTelegram"))],["email","Email",v=>"mailto:"+v+"?subject="+encodeURIComponent(t("inquirySubject"))],["instagram","Instagram",v=>"https://instagram.com/"+v.replace(/^@/,"")],["agency","Agency",v=>v]];
@@ -198,7 +198,11 @@ qs(".cover-deck")?.addEventListener("keydown",event=>{
 
 qs("#menuToggle").addEventListener("click",()=>{const open=qs("#siteNav").classList.toggle("open");qs("#menuToggle").setAttribute("aria-expanded",String(open))});
 qsa("#siteNav a").forEach(a=>a.addEventListener("click",()=>{qs("#siteNav").classList.remove("open");qs("#menuToggle").setAttribute("aria-expanded","false")}));
-qs("#galleryFilters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(!b)return;filter=b.dataset.filter;renderGallery()});
+qs("#galleryFilters").addEventListener("click",e=>{
+ const b=e.target.closest("[data-filter]");if(!b)return;
+ filter=b.dataset.filter;renderGallery();
+ qs('#galleryFilters [data-filter="'+filter+'"]')?.focus({preventScroll:true});
+});
 qs("#gallery").addEventListener("click",e=>{const b=e.target.closest("[data-index]");if(b)openLightbox(Number(b.dataset.index))});
 qs(".folio-track")?.addEventListener("click",e=>{
  const b=e.target.closest("[data-folio-index]");

@@ -39,6 +39,10 @@ No clip-art flags, dragons, stock models, AI faces or counterfeit acting credits
 
 **Media integrity:** The site uses one explicitly credited branded editorial portrait, plus original vector edition art. That portrait is not a certified untouched casting headshot and is excluded from the official comp card. Genuine casting photographs, showreel and a verified booking contact are still required.
 
+## October 31 casting-path refinement
+
+The original photo-led editions remain intact. The reading sequence now prioritizes **face → confirmed/estimated casting measurements → archival portfolio → contact**, and the primary hero enquiry is a localized, direct email link (no mandatory form). An optional enquiry composer, printable card and compact casting desk remain available. The visible motion preference retains its translated label; photo filters restore keyboard focus, and scroll progress uses a composited transform. The original archival-image disclosures remain unchanged. CI tests cover all three editions from 320 px through 1920 px.
+
 ## Features
 
 - Responsive fashion-oriented landing screen with different compositions by locale
