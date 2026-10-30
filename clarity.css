@@ -1082,3 +1082,18 @@ html[data-edition=zh] .hero-visual.editorial-cover .hero-photo{
  .hero-shortcuts a,.hero-shortcuts button{padding:10px;font-size:11px;min-height:49px}
  .visual-caption{font-size:10px!important;padding:36px 16px 14px!important}
 }
+
+
+/* The hero credit is a short studio signature; details stay in archive disclosure. */
+.visual-caption{
+ min-height:88px!important;
+ padding-top:27px!important;
+ padding-bottom:22px!important;
+ background:linear-gradient(to bottom,transparent 0%,rgba(8,9,12,.58) 58%,rgba(8,9,12,.94) 100%)!important
+}
+@media(max-width:880px){
+ .visual-caption{min-height:80px!important;padding-top:25px!important;padding-bottom:18px!important}
+}
+@media(max-width:640px){
+ .visual-caption{min-height:75px!important;padding-top:22px!important;padding-bottom:16px!important}
+}
