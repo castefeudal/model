@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-const sources=["issue08.css"];
+const sources=["issue09.css"];
 const text=sources.map(p=>fs.readFileSync(p,"utf8")).join("\n");
 const compressed=text.replace(/\/\*[\s\S]*?\*\//g,"").replace(/\s+/g," ").replace(/\s*([{};,])\s*/g,"$1").replace(/:\s+/g,":").replace(/;}/g,"}").trim();
 if(process.argv.includes("--check")){
