@@ -100,8 +100,9 @@
             <p class="hero-detail" data-i18n="heroDetail">Атлетический типаж. Работа с движением и камерой. Открыт к коммерческим и творческим проектам.</p>
             <div class="hero-actions">
               <button class="action action-dark" type="button" data-open-booking><span data-i18n="bookingAction">Запросить съёмку</span><span aria-hidden="true">↗</span></button>
-              <button class="action action-outline" type="button" data-open-card><span data-i18n="openCard">Кастинг-анкета</span><span aria-hidden="true">↗</span></button>
+              <button class="action action-outline" type="button" data-open-casting-peek><span data-i18n="peekAction">Быстрый кастинг-профиль</span><span aria-hidden="true">↗</span></button>
             </div>
+            <button class="hero-compact-casting" type="button" data-open-casting-peek><span data-i18n="peekAction">Быстрый кастинг-профиль</span><span aria-hidden="true">↗</span></button>
           </div>
           <div class="hero-metrics" aria-label="Casting highlights">
             <div class="hero-metric"><span class="metric-number">188</span><span class="metric-unit">CM</span><small data-i18n="height">Рост</small></div>
@@ -121,6 +122,10 @@
         </div>
         <button class="hero-photo-cta" type="button" data-open-card><span data-i18n="openCard">Кастинг-анкета</span><span aria-hidden="true">↗</span></button>
         <div class="cover-edition-mark" aria-hidden="true"><span>MODEL</span><span>ON CAMERA</span><span>CASTING</span></div>
+        <button type="button" class="hero-proof" data-open-casting-peek aria-label="Open the casting profile" data-i18n-aria="peekAria">
+          <span class="hero-proof-photo"><img src="./assets/thumbs/portrait-digital.webp" alt="" loading="lazy" decoding="async" width="176" height="220"></span>
+          <span class="hero-proof-caption"><small>02 / 06 · ARCHIVE</small><strong data-i18n="peekProof">Лицо без стилизации</strong><span aria-hidden="true">↗</span></span>
+        </button>
         <div class="cover-deck" role="group" aria-label="Выбор образа" data-i18n-aria="coverControlsAria">
           <span class="cover-deck-label" data-i18n="coverIndex">ТРИ ОБРАЗА / ОДИН ЧЕЛОВЕК</span>
           <div class="cover-deck-options">
@@ -139,7 +144,7 @@
         <div class="fact"><span class="fact-label" data-i18n="factHeight">РОСТ</span><strong>188 <small>CM</small></strong></div>
         <div class="fact"><span class="fact-label" data-i18n="factBuild">ТИПАЖ</span><strong data-i18n="factAthletic">Атлетический</strong></div>
         <div class="fact"><span class="fact-label" data-i18n="factBase">ЛОКАЦИЯ</span><strong data-i18n="factBelarus">Беларусь</strong></div>
-        <a class="fact-link" href="#profile"><span data-i18n="factView">Все параметры</span><span aria-hidden="true">↗</span></a>
+        <button type="button" class="fact-link" data-open-casting-peek><span data-i18n="peekAction">Быстрый кастинг-профиль</span><span aria-hidden="true">↗</span></button>
       </div>
     </aside>
 
@@ -184,6 +189,8 @@
           </div>
         </div>
       </div>
+      <details class="archive-cabinet" id="archiveCabinet">
+        <summary class="archive-cabinet-summary"><span class="archive-cabinet-index">03 / PERSONAL ARCHIVE</span><strong data-i18n="peekArchive">Ещё три грани — открыть архив</strong><span class="archive-cabinet-plus" aria-hidden="true">+</span></summary>
       <div class="archive-heading" aria-labelledby="archiveHeading">
         <div><span class="archive-eyebrow" data-i18n="archiveEyebrow">ЛИЧНЫЙ АРХИВ / ВЫБРАННЫЕ КАДРЫ</span>
           <h3 id="archiveHeading" data-i18n="archiveTitle">Разные <em>грани.</em></h3></div>
@@ -191,6 +198,7 @@
       </div>
       <div class="archive-controls"><div class="filters" id="galleryFilters" role="group" aria-label="Фильтры фотографий" data-i18n-aria="filtersAria" hidden></div></div>
       <div class="gallery" id="gallery" aria-live="polite"></div>
+      </details>
       <details class="portfolio-empty casting-digitals" id="portfolioEmpty">
         <summary class="casting-summary"><span class="summary-indicator" aria-hidden="true"></span><span class="summary-copy"><strong data-i18n="digitalsSummary">Профессиональные фотографии для кастинга</strong><small data-i18n="digitalsDescription">Кадры в подготовке — открыть список необходимых фото</small></span><span class="summary-action" aria-hidden="true">+</span></summary>
         <div class="casting-digitals-body">
@@ -281,6 +289,7 @@
     </section>
 
     <section class="contact-section section-pad" id="contact" aria-labelledby="contactTitle">
+      <img class="contact-backdrop" src="./assets/portrait-stage.webp" alt="" loading="lazy" decoding="async" width="1200" height="803" aria-hidden="true">
       <div class="section-topline"><span>07 / CASTING INQUIRIES</span><span data-i18n="contactOverline">ДЛЯ РЕЖИССЁРОВ, БРЕНДОВ И АГЕНТСТВ</span></div>
       <div class="contact-layout">
         <div class="contact-main"><h2 class="contact-heading" id="contactTitle"><span data-i18n="contactHead1">В КАДР</span><em data-i18n="contactHead2">ВМЕСТЕ.</em></h2><p class="contact-lead" data-i18n="contactLead">Коммерческие, fashion, спортивные и экранные проекты. Открыт к предложениям.</p></div>
@@ -300,6 +309,29 @@
     </section>
   </main>
 
+
+  <dialog class="casting-peek" id="castingPeek" aria-labelledby="peekTitle" aria-describedby="peekDescription">
+    <div class="peek-shell">
+      <div class="peek-picture">
+        <img src="./assets/portrait-digital.webp" loading="lazy" decoding="async" width="640" height="800" alt="Павел Марков, архивный портрет" data-i18n-alt="portraitAlt">
+        <span class="peek-picture-label" data-i18n="compArchiveLabel">АРХИВНЫЙ ПОРТРЕТ · НЕ АКТУАЛЬНЫЕ КАСТИНГОВЫЕ DIGITALS</span>
+      </div>
+      <div class="peek-info">
+        <div class="peek-masthead"><span>PM / CASTING DESK</span><button type="button" id="peekClose" aria-label="Закрыть кастинговый профиль" data-i18n-aria="peekClose">×</button></div>
+        <span class="peek-overline" data-i18n="peekOverline">ПРОФИЛЬ ДЛЯ КАСТИНГА · КРАТКО</span>
+        <h2 id="peekTitle">PAVEL<br>MARKOV</h2>
+        <p id="peekDescription" class="peek-intro" data-i18n="peekDescription">Внешность, параметры, фотографии и прямой контакт — на одной странице.</p>
+        <div class="peek-specs" id="peekSpecs"></div>
+        <p class="peek-disclaimer" data-i18n="cardDisclaimer">Актуальные фотографии и параметры уточняются перед кастингом.</p>
+        <div class="peek-actions">
+          <button type="button" class="peek-primary" id="peekEnquiry"><span data-i18n="bookingAction">Запросить съёмку</span><span aria-hidden="true">↗</span></button>
+          <button type="button" class="peek-secondary" id="peekComp"><span data-i18n="openCard">Кастинг-анкета</span><span aria-hidden="true">↗</span></button>
+        </div>
+        <a class="peek-direct" href="mailto:castefeudal@gmail.com">castefeudal@gmail.com <span aria-hidden="true">↗</span></a>
+        <div class="peek-bottom"><span>188 CM · ATHLETIC · BELARUS</span><span>PERSONAL ARCHIVE / 2026</span></div>
+      </div>
+    </div>
+  </dialog>
 
   <dialog class="booking-dialog" id="bookingDialog" aria-labelledby="bookingTitle" aria-describedby="bookingLead">
     <div class="booking-modal">
@@ -333,6 +365,7 @@
       <p class="comp-bottom" data-i18n="cardDisclaimer">Актуальные фото и параметры уточняются перед кастингом.</p>
     </div>
   </dialog>
+  <script src="./casting-desk.js" defer></script>
   <script>document.getElementById("footerYear").textContent=new Date().getFullYear()</script>
 </body>
 </html>
