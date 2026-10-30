@@ -1,7 +1,7 @@
 name: Build first-party CJK type subsets
 on:
   push:
-    branches: [main, feat/issue07-final-casting-book]
+    branches: [main, "feat/**"]
     paths:
       - tools/build_cjk_font.py
       - .github/workflows/cjk-font.yml
