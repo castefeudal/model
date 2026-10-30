@@ -1,5 +1,14 @@
 window.MODEL_I18N = {
   "ru": {
+    "folioAria": "Шесть фотографий из личного архива",
+    "folioCharacterAlt": "Павел Марков в художественном костюмном образе среди зимних деревьев — архивное фото",
+    "folioAboutCaption": "ХАРАКТЕР / ЛИЧНЫЙ АРХИВ",
+    "folioLook1": "FASHION / ОБРАЗ",
+    "folioLook2": "ПОРТРЕТ / АРХИВ",
+    "folioLook3": "АТЛЕТИКА / ДВИЖЕНИЕ",
+    "folioLook4": "СЦЕНА / 2022",
+    "folioLook5": "ХАРАКТЕР / ОБРАЗ",
+    "folioLook6": "КЛАССИКА / БРЕНД",
     "bookingAction": "Запросить съёмку",
     "bookingShort": "Пригласить на съёмку",
     "portraitArchive": "АРХИВНЫЙ ПОРТРЕТ / НЕ АКТУАЛЬНЫЕ DIGITALS",
@@ -211,6 +220,15 @@ window.MODEL_I18N = {
     "compCloseAria": "Закрыть кастинг-анкету"
   },
   "en": {
+    "folioAria": "Six photographs from the personal archive",
+    "folioCharacterAlt": "Pavel Markov in an artistic costume among snowy trees — archival character study",
+    "folioAboutCaption": "CHARACTER / PERSONAL ARCHIVE",
+    "folioLook1": "FASHION / EDITORIAL",
+    "folioLook2": "PORTRAIT / ARCHIVE",
+    "folioLook3": "ATHLETIC / MOVEMENT",
+    "folioLook4": "ON STAGE / 2022",
+    "folioLook5": "CHARACTER / STUDY",
+    "folioLook6": "CLASSIC / BRAND",
     "bookingAction": "Casting enquiry",
     "bookingShort": "Enquire about a shoot",
     "portraitArchive": "ARCHIVE PORTRAIT / NOT CURRENT CASTING DIGITALS",
@@ -422,6 +440,15 @@ window.MODEL_I18N = {
     "compCloseAria": "Close casting card"
   },
   "zh": {
+    "folioAria": "个人照片档案中的六组造型",
+    "folioCharacterAlt": "帕维尔·马尔科夫在雪林中的艺术服装造型，个人档案照片",
+    "folioAboutCaption": "人物造型 / 个人档案",
+    "folioLook1": "时尚 / 造型",
+    "folioLook2": "肖像 / 档案",
+    "folioLook3": "运动 / 动感",
+    "folioLook4": "舞台 / 2022",
+    "folioLook5": "人物 / 造型",
+    "folioLook6": "经典 / 品牌",
     "bookingAction": "拍摄合作咨询",
     "bookingShort": "洽谈拍摄",
     "portraitArchive": "个人肖像档案 / 非近期试镜原片",
