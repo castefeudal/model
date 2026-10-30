@@ -31,7 +31,7 @@ draw.rectangle((23, 22, 167, 76), fill=(29, 28, 32))
 draw.text((42, 34), "P / M", fill=IVORY, font=font(SANS, 24))
 draw.rectangle((25, 560, 425, 607), fill=(29, 28, 32))
 draw.text((44, 574), "THE HUMAN FRAME  /  2026", fill=IVORY, font=font(SANS, 14))
-draw.text((x, 44), "THE HUMAN FRAME     /     ISSUE 08", fill=ACCENT, font=font(SANS, 15))
+draw.text((x, 44), "THE PRIVATE VIEW     /     ISSUE 09", fill=ACCENT, font=font(SANS, 15))
 draw.line((x, 94, W - 48, 94), fill=(91, 87, 89), width=2)
 
 def fit_label(value, max_width, size):
@@ -42,7 +42,7 @@ def fit_label(value, max_width, size):
 draw.text((x - 5, 155), "PAVEL", font=fit_label("PAVEL", 453, 94), fill=IVORY)
 draw.text((x - 5, 267), "MARKOV", font=fit_label("MARKOV", 453, 82), fill=IVORY)
 draw.rectangle((x, 395, x + 76, 401), fill=ACCENT)
-draw.text((x, 427), "MODEL  /  ON CAMERA", font=font(SERIF, 26), fill=IVORY)
+draw.text((x, 427), "MODEL  /  SCREEN  /  CASTING", font=font(SERIF, 26), fill=IVORY)
 draw.text((x, 471), "EDITORIAL  /  ATHLETIC", font=font(SERIF, 23), fill=MUTED)
 draw.line((x, 550, W - 48, 550), fill=(91, 87, 89), width=1)
 draw.text((x, 569), "188 CM   /   BELARUS", font=font(REG, 18), fill=MUTED)
