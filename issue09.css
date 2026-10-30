@@ -1485,3 +1485,9 @@ html[data-edition="zh"] .archive-cabinet-summary>strong{font-family:var(--serif)
  .peek-mobile-ident>span{font-size:8px}
  .casting-peek .peek-info{padding:14px 15px 23px}
 }
+
+/* Avoid breaking a long physical-type value inside an individual Russian word. */
+@media(max-width:620px){
+ .casting-peek .peek-spec{flex-wrap:wrap;gap:2px 8px}
+ .casting-peek .peek-spec strong{white-space:nowrap;overflow-wrap:normal;word-break:normal}
+}
