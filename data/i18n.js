@@ -1,5 +1,6 @@
 window.MODEL_I18N = {
   "ru": {
+    "folioTitle": "Шесть образов. <em>Один человек.</em>",
     "skip": "Перейти к содержимому",
     "railLeft": "ПАВЕЛ МАРКОВ / КАСТИНГ-БУК",
     "railRight": "БЕЛАРУСЬ / КАСТИНГ И КАМЕРА",
@@ -181,6 +182,7 @@ window.MODEL_I18N = {
     "compCloseAria": "Закрыть кастинг-анкету"
   },
   "en": {
+    "folioTitle": "Six looks. <em>One person.</em>",
     "skip": "Skip to content",
     "railLeft": "PAVEL MARKOV / CASTING BOOK",
     "railRight": "BELARUS / GLOBAL PROJECTS",
@@ -362,6 +364,7 @@ window.MODEL_I18N = {
     "compCloseAria": "Close casting card"
   },
   "zh": {
+    "folioTitle": "六种造型。<em>同一个人。</em>",
     "skip": "跳转到主要内容",
     "railLeft": "帕维尔·马尔科夫 / 选角作品集",
     "railRight": "白俄罗斯 / 国际项目",
