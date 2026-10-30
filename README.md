@@ -199,6 +199,9 @@ The site is both an image-led personal fashion editorial and a professional, fas
 - One authored visual source (`issue09.css`) compiles to `bundle.css`. The old editorial CSS files remain in Git history, but are not loaded by visitors.
 - The builder regenerates local OFL Chinese font subsets when `data/i18n.js` or `index.html` changes. The structural checks and browser screenshots catch missing glyphs and layout regressions.
 
+
+**Release integrity:** The browser QA checks mobile Casting Desk sizing, the native dialog and close behavior, the actual booking/PDF handoffs, six owned source photographs, opt-in archive expansion, RU/EN/Chinese glyph rendering and 320px layouts. The production Lighthouse gate also catches invalid image aspect-ratio metadata; source dimensions must be accurate.
+
 **Commission-ready next assets:** a genuine current neutral headshot, plain full-body images, neutral profile angles, accurately remeasured sizing, and an unretouched short on-camera introduction. These cannot be credibly manufactured by the page or a generative model and remain the highest-impact limitations.
 
 Production design is judged against actual desktop/mobile screenshots, a working casting path, legal photo provenance, and measured page load. Lighthouse scores are not a substitute for a casting director's judgement or for new professional photography.
