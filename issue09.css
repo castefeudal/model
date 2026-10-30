@@ -1543,3 +1543,16 @@ html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="of
 @media(prefers-reduced-motion:reduce){
  .motion-switch,.peek-utility>a{transition:none}
 }
+
+
+/* ISSUE 11 / China-first mobile font budget.
+   Keep branded self-hosted serif display for editorial titles, but let native
+   PingFang / Microsoft YaHei / Android CJK render interface text immediately.
+   Saves the full 170 KB variable sans font on initial mobile presentation. */
+@media(max-width:880px){
+ html[data-edition="zh"]{
+  --font:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC",sans-serif;
+  --display:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC",sans-serif;
+  --serif:"PM CJK Serif","Songti SC","Noto Serif CJK SC",Georgia,serif;
+ }
+}

@@ -75,7 +75,8 @@ try{
     console.log("LOCAL_CJK_TYPE "+x.label+" "+JSON.stringify(cjk));
     assert(!cjk.remote,"Chinese edition should not request blocked Google font service");
     assert(cjk.fonts.some(f=>f.family==="PM CJK Serif"&&f.status==="loaded"),"Chinese headline font failed to load locally");
-    assert(cjk.fonts.some(f=>f.family==="PM CJK Sans"&&f.status==="loaded"),"Chinese UI font failed to load locally");
+    if(x.width>880)assert(cjk.fonts.some(f=>f.family==="PM CJK Sans"&&f.status==="loaded"),"Desktop Chinese body font failed to load locally");
+    else assert(!cjk.fonts.some(f=>f.family==="PM CJK Sans"&&f.status==="loaded"),"Mobile must avoid downloading the heavy 170KB Chinese sans face");
   }
   assert(v.art.includes("edition-"+x.lang+".svg"),"Art not tied to edition");
   assert(v.overflow<=2,"Horizontal overflow "+v.overflow);
