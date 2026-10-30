@@ -51,10 +51,10 @@ window.MODEL_PHOTOS = [
 Не добавляйте в публичный репозиторий паспорт, адрес, телефон без согласия, секреты и точную дату рождения.
 
 ## Archive is not agency digitals
-The website includes `MODEL_ARCHIVE` in `data/media.js`, drawn from existing user-controlled MarkovMade materials. Some visuals are styled/processed, may be older and need not accurately show current appearance or measurements. Do not move them into `MODEL_PHOTOS` or the printable comp card automatically. New authentic photos should include an updated, unfiltered portrait, left and right profile, full-length front/back and current measurements. Only those belong in the official casting set.
+The website includes `MODEL_ARCHIVE` in `data/media.js`, drawn from existing user-controlled MarkovMade materials. Some visuals are styled/processed, may be older and need not accurately show current appearance or measurements. Do not move them into `MODEL_PHOTOS`. Until verified recent digitals are available, the printable comp card shows a clearly identified **archival reference photograph**, never passed off as a current agency casting headshot. New authentic photos should include an updated, unfiltered portrait, left and right profile, full-length front/back and current measurements. Only those belong in the official casting set.
 
 ### The cover is an archive, not a proof of fresh castings
-Three manually selectable cover images are stored as `MODEL_COVERS`. The first is a styled personal fashion image, the second a branded formal portrait, and the third an athletic image. They are deliberately labelled `archive` or `styled`, and **must not automatically become** `MODEL_PHOTOS` or an agency comp card. Always require unretouched, recent photos and casting measurements for a real talent submission.
+Three manually selectable cover images are stored as `MODEL_COVERS`. The first is a styled personal fashion image, the second a branded formal portrait, and the third an athletic image. They are deliberately labelled `archive` or `styled`, and **must not automatically become** `MODEL_PHOTOS` or a verified agency headshot. The labelled archival reference on the comp card is provisional. Always require unretouched, recent photos and casting measurements for a real talent submission.
 
 
 ## Международное портфолио — правило качества
