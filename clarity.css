@@ -600,3 +600,13 @@ html[data-edition=zh] .lang-btn[aria-pressed=true]{background:var(--header-fg);c
  body.print-comp .comp-sheet h2{font-size:92px}
  body.print-comp .comp-toolbar{display:none!important}
 }
+
+/* Mobile specificity safeguard: old layout rules must never shrink CTA or description. */
+@media(max-width:1050px){
+ .hero-bottom .hero-detail{font-size:16px;line-height:1.72}
+ .hero-actions .action{font-size:14px;line-height:1.35;min-height:50px}
+}
+@media(max-width:640px){
+ .hero-bottom .hero-detail{font-size:16px;line-height:1.68}
+ .hero-actions .action{font-size:14px;padding:12px 17px;min-height:51px}
+}
