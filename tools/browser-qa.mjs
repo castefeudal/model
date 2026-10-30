@@ -108,7 +108,7 @@ try{
     await exec('document.querySelector("#menuToggle").click()');
     assert(await exec('document.querySelector("#siteNav").classList.contains("open") && document.querySelector("#menuToggle").getAttribute("aria-expanded")==="true"'),"Navigation did not open");
     await exec('document.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true}))');
-    assert(!(await exec('document.querySelector("#siteNav").classList.contains("open"')),"Escape did not close navigation");
+    assert(!(await exec('document.querySelector("#siteNav").classList.contains("open")')),"Escape did not close navigation");
   }
 
   // Real dialog, not a dead placeholder.
