@@ -10,7 +10,7 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","atelier.css","editions.css","clarity.css","bundle.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
+const required=["index.html","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -52,9 +52,10 @@ if(!html.includes('class="facts-bar"'))fail("Casting profile quick facts are mis
 if(!html.includes('class="shot-card"'))fail("Photo portfolio guide is missing");
 if(!html.includes('class="editorial-spread"'))fail("Curated portrait feature missing");
 if(!html.includes('<details class="portfolio-empty casting-digitals"'))fail("Accessible authentic-photo requirements missing");
-if(!html.includes('src="./assets/editorial-markovmade.webp"'))fail("Hero lacks early image src; LCP regression");
-if(!html.includes('type="image/avif"')||!html.includes('id="editorialAvifSource"'))fail("Responsive AVIF hero source not registered");
-if(!html.includes('data-i18n-alt="editorialPortraitAlt"'))fail("Localised image alt missing");
+if(!html.includes('src="./assets/portrait-fashion.webp"'))fail("Optimized, visible archival cover image missing");
+if(!html.includes('id="heroImage"')||!html.includes('fetchpriority="high"'))fail("High-priority LCP hero missing");
+if(!html.includes('class="cover-deck"')||!html.includes('data-cover="2"'))fail("Cover selector missing");
+if(!html.includes('data-i18n-alt="fashionPortraitAlt"'))fail("Localized main portrait alt missing");
 for(const k of ["data-i18n-aria","id=\"editorialSpreadTitle\""])if(!html.includes(k))fail("Accessibility data missing: "+k);
 const sm=read("sitemap.xml");
 for(const lang of ["ru","en","zh"])if(!sm.includes("?lang="+lang))fail("Sitemap missing locale "+lang);
@@ -62,7 +63,7 @@ if((sm.match(/<url>/g)||[]).length!==3)fail("Three canonical URLs expected in si
 
 
 
-for(const cssfile of ["atelier.css","editions.css","clarity.css","bundle.css"]){
+for(const cssfile of ["atelier.css","editions.css","clarity.css","art-direction.css","bundle.css"]){
  const css=read(cssfile);
  for(const m of css.matchAll(/url\((['"]?)([^)'"]+)\1\)/g)){
    const v=m[2];if(v.startsWith("http")||v.startsWith("data:"))continue;
@@ -85,7 +86,7 @@ for(const v of videos){
 }
 const actualArchive=new Set();
 for(const img of archive){
- if(!img.src?.startsWith("assets/portrait-"))fail("Archive photo path not in curated set: "+img.src);
+ if(!img.src?.startsWith("assets/portrait-")&&img.src!=="assets/editorial-markovmade.webp")fail("Archive photo path not in curated set: "+img.src);
  if(!categories.has(img.category))fail("Archive category is invalid: "+img.category);
  if(!exists(img.src))fail("Archive photo missing "+img.src);
  if(!img.archive)fail("Unlabelled archived image "+img.src);
@@ -95,12 +96,21 @@ for(const img of archive){
  actualArchive.add(img.src);
 }
 if(archive.length<5)fail("At least five verified source archive images expected");
-if(archive.filter(im=>im.featured).length!==2)fail("Two lead archive images should be used outside the gallery");
-if(!html.includes('src="./assets/portrait-fashion.webp"'))fail("Fashion editorial spread missing");
+if(archive.filter(im=>im.featured).length!==3)fail("Three lead archive images expected: cover / movement / stage");
+if(!html.includes('src="./assets/portrait-athletic.webp"'))fail("Athletic editorial spread missing");
 if(!html.includes('src="./assets/portrait-stage.webp"'))fail("On-stage proof image missing");
 if(!html.includes('id="archiveHeading"'))fail("Archive gallery heading missing");
 if(!html.includes('class="hero-shortcuts"'))fail("Above-the-fold mobile casting actions absent");
 if(!html.includes('class="lang-latin"')||!html.includes('class="lang-cn"'))fail("CJK language toggle lacks Latin fallback");
+const covers=sandbox.window.MODEL_COVERS||[];
+if(covers.length!==3)fail("Exactly three manually selectable cover looks required");
+for(const [i,c] of covers.entries()){
+ if(!exists(c.src))fail("Cover #"+i+" asset missing: "+c.src);
+ if(!c.altKey||!c.captionKey||!c.labelKey)fail("Cover #"+i+" localized metadata missing");
+ for(const l of ["ru","en","zh"])for(const key of [c.altKey,c.captionKey,c.labelKey])if(!d[l][key])fail("Untranslated cover #"+i+" "+l+":"+key);
+}
+if(!html.includes('id="heroImage"')||!html.includes('class="hero-shortcuts"'))fail("Direct portfolio actions missing");
+
 
 if(sandbox.window.HERO_IMAGE&&!exists(sandbox.window.HERO_IMAGE))fail("Hero asset missing");
 if(sandbox.window.EDITORIAL_PORTRAIT&&!exists(sandbox.window.EDITORIAL_PORTRAIT))fail("Editorial portrait file missing");

@@ -52,3 +52,6 @@ window.MODEL_PHOTOS = [
 
 ## Archive is not agency digitals
 The website includes `MODEL_ARCHIVE` in `data/media.js`, drawn from existing user-controlled MarkovMade materials. Some visuals are styled/processed, may be older and need not accurately show current appearance or measurements. Do not move them into `MODEL_PHOTOS` or the printable comp card automatically. New authentic photos should include an updated, unfiltered portrait, left and right profile, full-length front/back and current measurements. Only those belong in the official casting set.
+
+### The cover is an archive, not a proof of fresh castings
+Three manually selectable cover images are stored as `MODEL_COVERS`. The first is a styled personal fashion image, the second a branded formal portrait, and the third an athletic image. They are deliberately labelled `archive` or `styled`, and **must not automatically become** `MODEL_PHOTOS` or an agency comp card. Always require unretouched, recent photos and casting measurements for a real talent submission.

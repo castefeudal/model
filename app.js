@@ -1,20 +1,13 @@
 (() => {
 "use strict";
-const p=window.MODEL_PROFILE,media=window.MODEL_PHOTOS||[],archive=window.MODEL_ARCHIVE||[],videos=window.MODEL_VIDEOS||[],dict=window.MODEL_I18N;
+const p=window.MODEL_PROFILE,media=window.MODEL_PHOTOS||[],archive=window.MODEL_ARCHIVE||[],covers=window.MODEL_COVERS||[],videos=window.MODEL_VIDEOS||[],dict=window.MODEL_I18N;
 const qs=s=>document.querySelector(s), qsa=s=>Array.from(document.querySelectorAll(s));
 const locale=new URLSearchParams(location.search).get("lang");
 let persisted="ru";
 try{persisted=localStorage.getItem("pm-lang")||"ru"}catch{}
 let lang=["ru","en","zh"].includes(locale)?locale:(["ru","en","zh"].includes(persisted)?persisted:"ru");
-let visible=[],active=0,filter="all",lastFocus=null;
-function loadChineseFonts(){
- if(document.getElementById("pm-fonts-cjk"))return;
- const link=document.createElement("link");
- link.id="pm-fonts-cjk";link.rel="stylesheet";
- link.href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap";
- document.head.append(link);
-}
-
+let visible=[],active=0,filter="all",lastFocus=null,coverIndex=0;
+// CJK uses native PingFang/Songti/YaHei/Noto fallbacks: reliable when Google Fonts is blocked.
 const t=k=>dict[lang][k]??dict.en[k]??k;
 const safe=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const val=x=>x==null||x===""?null:x;
@@ -41,7 +34,7 @@ function setLanguage(next){
  const previous=document.documentElement.dataset.edition;
  lang=next;document.documentElement.lang=lang==="zh"?"zh-CN":lang;
  document.documentElement.dataset.edition=lang;
- if(lang==="zh")loadChineseFonts();
+
  document.documentElement.style.colorScheme=lang==="ru"?"dark":"light";
  const themeColor={ru:"#18181a",en:"#f5f6f4",zh:"#f2e5d2"};
  document.querySelector('meta[name="theme-color"]')?.setAttribute("content",themeColor[lang]);
@@ -63,10 +56,9 @@ function setLanguage(next){
  qs("#menuToggle").setAttribute("aria-label",t("menu"));
  document.querySelector('meta[property="og:locale"]')?.setAttribute("content",lang==="ru"?"ru_RU":lang==="zh"?"zh_CN":"en_US");
  document.title=lang==="ru"?"Павел Марков — модель / актёр / съёмки":lang==="zh"?"帕维尔·马尔科夫 — 模特与镜头表现":"Pavel Markov — Model / Actor / On-camera Talent";
- const heroPhoto=qs("#heroImage");
- if(heroPhoto && !heroPhoto.hidden)heroPhoto.alt=(window.HERO_IMAGE||media[0]?.src)?(media[0]?.alt?.[lang]||t("portraitAlt")):t("editorialPortraitAlt");
+
  document.querySelector('meta[name="description"]').content=lang==="ru"?"Павел Марков — модель и талант для съёмок. Рост 188 см, атлетический типаж, Беларусь.":lang==="zh"?"帕维尔·马尔科夫个人模特与选角作品集。身高188厘米，运动型外形，来自白俄罗斯。":"Pavel Markov: model and on-camera talent. 188 cm, athletic build, based in Belarus.";
- renderSpecs();renderGallery();renderVideos();renderContacts();
+ renderSpecs();renderGallery();renderVideos();renderContacts();setHero();
 }
 const captionText=im=>typeof im.caption==="object"?(im.caption[lang]||im.caption.en||"PAVEL MARKOV"):im.caption||"PAVEL MARKOV";
 function renderGallery(){
@@ -124,26 +116,46 @@ function renderContacts(){
 }
 function setHero(){
  const castingSrc=window.HERO_IMAGE||media[0]?.src;
- const src=castingSrc||window.EDITORIAL_PORTRAIT;
- if(castingSrc)qs("#editorialAvifSource")?.remove();
+ const cover=covers[coverIndex]||null;
+ const src=castingSrc||cover?.src||window.EDITORIAL_PORTRAIT;
  if(!src)return;
- const figure=qs("#heroVisual"), img=qs("#heroImage"), caption=qs('[data-i18n="artDisclaimer"]');
- if(caption){caption.dataset.i18n=castingSrc?"realHeroCaption":"editorialHeroCaption";caption.textContent=t(caption.dataset.i18n);}
- const render=()=>{
-   if(!img.naturalWidth)return;
-   img.hidden=false;figure.classList.add("hero-image-ready");
+ const figure=qs("#heroVisual"),img=qs("#heroImage"),caption=qs('[data-i18n="artDisclaimer"]');
+ const deck=qs(".cover-deck"),count=qs(".visual-caption-index");
+ if(deck)deck.hidden=!!castingSrc;
+ qsa("[data-cover]").forEach((button,i)=>{
+   button.setAttribute("aria-pressed",String(!castingSrc&&i===coverIndex));
+   button.tabIndex=!castingSrc&&i===coverIndex?0:-1;
+ });
+ if(count)count.textContent=castingSrc?"01 / 01":String(coverIndex+1).padStart(2,"0")+" / "+String(covers.length).padStart(2,"0");
+ if(caption){
+   const key=castingSrc?"realHeroCaption":cover?.captionKey||"editorialHeroCaption";
+   caption.dataset.i18n=key;
+   caption.textContent=t(key);
+ }
+ img.alt=castingSrc?(media[0]?.alt?.[lang]||t("portraitAlt")):(cover?.altKey?t(cover.altKey):t("editorialPortraitAlt"));
+ img.style.objectPosition=castingSrc?"50% 30%":cover?.position||"50% 33%";
+ const finish=()=>{
+   if(img.naturalWidth<1)return;
+   img.hidden=false;
+   figure.classList.add("hero-image-ready");
    figure.classList.toggle("editorial-cover",!castingSrc);
+   figure.classList.remove("cover-loading");
    qs("#heroArtwork").hidden=true;
    if(castingSrc){
      qs("#compPhoto").style.backgroundImage='url("'+src.replace(/["\\]/g,"")+'")';
      qs("#compPhoto").textContent="";
    }
  };
- img.alt=castingSrc?(media[0]?.alt?.[lang]||t("portraitAlt")):t("editorialPortraitAlt");
- img.onload=render;
- img.onerror=()=>{img.hidden=true;qs("#heroArtwork").hidden=false;figure.classList.remove("hero-image-ready","editorial-cover");};
- if(img.currentSrc!==new URL(src,document.baseURI).href && img.src!==new URL(src,document.baseURI).href)img.src=src;
- if(img.complete&&img.naturalWidth>0)render();
+ img.onload=finish;
+ img.onerror=()=>{
+   img.hidden=true;figure.classList.remove("hero-image-ready","editorial-cover","cover-loading");
+   qs("#heroArtwork").hidden=false;
+ };
+ if(img.src!==new URL(src,document.baseURI).href){
+   figure.classList.add("cover-loading");
+   img.src=src;
+ }
+ if(img.complete&&img.naturalWidth>0)finish();
 }
 function copyLink(){
  const url=new URL(location.href);url.searchParams.set("lang",lang);
@@ -152,6 +164,19 @@ function copyLink(){
  else {const a=document.createElement("textarea");a.value=url.href;a.style.position="fixed";a.style.opacity=0;document.body.append(a);a.select();const ok=document.execCommand("copy");a.remove();qs("#feedback").textContent=t(ok?"copied":"notCopied")}
 }
 qsa(".lang-btn").forEach(b=>b.addEventListener("click",()=>setLanguage(b.dataset.lang)));
+const setCover=(index,focus=false)=>{
+ if(!covers.length||window.HERO_IMAGE||media[0]?.src)return;
+ coverIndex=(index+covers.length)%covers.length;
+ setHero();
+ if(focus)qs('[data-cover="'+coverIndex+'"]')?.focus();
+};
+qsa("[data-cover]").forEach(button=>button.addEventListener("click",()=>setCover(Number(button.dataset.cover),true)));
+qs(".cover-deck")?.addEventListener("keydown",event=>{
+ if(event.key!=="ArrowRight"&&event.key!=="ArrowLeft")return;
+ event.preventDefault();
+ setCover(coverIndex+(event.key==="ArrowRight"?1:-1),true);
+});
+
 qs("#menuToggle").addEventListener("click",()=>{const open=qs("#siteNav").classList.toggle("open");qs("#menuToggle").setAttribute("aria-expanded",String(open))});
 qsa("#siteNav a").forEach(a=>a.addEventListener("click",()=>{qs("#siteNav").classList.remove("open");qs("#menuToggle").setAttribute("aria-expanded","false")}));
 qs("#galleryFilters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(!b)return;filter=b.dataset.filter;renderGallery()});
@@ -172,5 +197,5 @@ qs("#printButton").addEventListener("click",()=>{document.body.classList.add("pr
 window.addEventListener("afterprint",()=>document.body.classList.remove("print-comp"));
 qs("#copyButton").addEventListener("click",copyLink);
 qs("#shareButton").addEventListener("click",async()=>{const url=new URL(location.href);url.searchParams.set("lang",lang);if(navigator.share){try{await navigator.share({title:document.title,url:url.href})}catch(e){if(e.name!=="AbortError")copyLink()}}else copyLink()});
-setLanguage(lang);setHero();
+setLanguage(lang);
 })();

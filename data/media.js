@@ -53,7 +53,8 @@ window.MODEL_ARCHIVE = [
       "zh": "运动形象 / 档案"
     },
     "position": "50% 45%",
-    "archive": true
+    "archive": true,
+    "featured": true
   },
   {
     "src": "assets/portrait-stage.webp",
@@ -87,7 +88,46 @@ window.MODEL_ARCHIVE = [
     },
     "position": "50% 45%",
     "archive": true
+  },
+  {
+    "src": "assets/editorial-markovmade.webp",
+    "category": "editorial",
+    "alt": {
+      "ru": "Брендовый портрет Павла Маркова в белом смокинге на чёрном фоне",
+      "en": "Styled brand portrait of Pavel Markov in a white tuxedo against a black background",
+      "zh": "帕维尔·马尔科夫身穿白色礼服、黑色背景的品牌风格化肖像"
+    },
+    "caption": {
+      "ru": "Классический образ / Брендовый архив",
+      "en": "Classic / Styled brand archive",
+      "zh": "经典形象 / 风格化品牌档案"
+    },
+    "position": "50% 32%",
+    "archive": true
   }
 ];
 // Verified video clips may be added here when available.
+window.MODEL_COVERS = [
+  {
+    "src": "assets/portrait-fashion.webp",
+    "altKey": "fashionPortraitAlt",
+    "labelKey": "coverLook1",
+    "captionKey": "coverCaption1",
+    "position": "50% 30%"
+  },
+  {
+    "src": "assets/editorial-markovmade.webp",
+    "altKey": "editorialPortraitAlt",
+    "labelKey": "coverLook2",
+    "captionKey": "coverCaption2",
+    "position": "50% 32%"
+  },
+  {
+    "src": "assets/portrait-athletic.webp",
+    "altKey": "athleticPortraitAlt",
+    "labelKey": "coverLook3",
+    "captionKey": "coverCaption3",
+    "position": "48% 38%"
+  }
+];
 window.MODEL_VIDEOS = [];

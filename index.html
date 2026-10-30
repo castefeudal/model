@@ -107,10 +107,7 @@
         </div>
       </div>
       <figure class="hero-visual" id="heroVisual">
-        <picture class="hero-picture">
-          <source id="editorialAvifSource" type="image/avif" srcset="./assets/editorial-markovmade-960.avif 960w, ./assets/editorial-markovmade-1600.avif 1600w" sizes="(max-width: 880px) 100vw, 52vw">
-          <img id="heroImage" class="hero-photo" src="./assets/editorial-markovmade.webp" width="1600" height="1067" alt="Стилизованный портрет Павла Маркова из проекта MarkovMade" data-i18n-alt="editorialPortraitAlt" fetchpriority="high" decoding="async">
-        </picture>
+        <picture class="hero-picture"><img id="heroImage" class="hero-photo" src="./assets/portrait-fashion.webp" width="1000" height="1550" alt="Павел Марков в стилизованном fashion-образе" data-i18n-alt="fashionPortraitAlt" fetchpriority="high" decoding="async"></picture>
         <div class="artwork" id="heroArtwork" role="img" aria-label="Original abstract edition artwork">
           <div class="art-top" aria-hidden="true"><span data-i18n="artSeries">PERSONAL / CASTING</span><span class="art-counter" data-i18n="editionCode">01 / RU</span></div>
           <span class="art-stamp" aria-hidden="true" data-i18n="artStamp">Ф / М</span>
@@ -119,7 +116,15 @@
           <div class="art-bottom" aria-hidden="true"><span data-i18n="artFooter">FIELD NOTES / PAVEL MARKOV</span><span>188 — 2026</span></div>
         </div>
         <button class="hero-photo-cta" type="button" data-open-card><span data-i18n="openCard">Кастинг-анкета</span><span aria-hidden="true">↗</span></button>
-        <figcaption class="visual-caption"><span data-i18n="artDisclaimer">БРЕНДОВЫЙ ПОРТРЕТ / MARKOVMADE</span><span data-i18n="editionMark">EDITION / 01</span></figcaption>
+        <div class="cover-deck" role="group" aria-label="Выбор образа" data-i18n-aria="coverControlsAria">
+          <span class="cover-deck-label" data-i18n="coverIndex">ТРИ ОБРАЗА / ОДИН ЧЕЛОВЕК</span>
+          <div class="cover-deck-options">
+            <button type="button" class="cover-choice" data-cover="0" aria-pressed="true"><span>01</span><span data-i18n="coverLook1">ХАРАКТЕР</span></button>
+            <button type="button" class="cover-choice" data-cover="1" aria-pressed="false"><span>02</span><span data-i18n="coverLook2">ПОРТРЕТ</span></button>
+            <button type="button" class="cover-choice" data-cover="2" aria-pressed="false"><span>03</span><span data-i18n="coverLook3">ФОРМА</span></button>
+          </div>
+        </div>
+        <figcaption class="visual-caption"><span data-i18n="artDisclaimer">АРХИВ / FASHION & CHARACTER</span><span class="visual-caption-index">01 / 03</span></figcaption>
       </figure>
       <a href="#portfolio" class="scroll-note"><span data-i18n="scroll">Листайте</span><span aria-hidden="true">↓</span></a>
     </section>
@@ -142,7 +147,7 @@
       <div class="editorial-spread" id="editorialSpread" aria-labelledby="editorialSpreadTitle">
         <figure class="spread-portrait">
           <div class="spread-image">
-            <img src="./assets/portrait-fashion.webp" alt="Павел Марков в модном образе из личного архива" data-i18n-alt="fashionPortraitAlt" loading="lazy" decoding="async" width="1000" height="1600">
+            <img src="./assets/portrait-athletic.webp" alt="Павел Марков у моря на закате" data-i18n-alt="athleticPortraitAlt" loading="lazy" decoding="async" width="1200" height="1500">
             <span class="spread-photo-index" aria-hidden="true">PM / 01</span>
           </div>
           <figcaption class="spread-caption"><span data-i18n="spreadCaption">BRAND EDITORIAL / MARKOVMADE</span><span>01 — 2026</span></figcaption>

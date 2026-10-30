@@ -121,3 +121,9 @@ The first fold is now a full-bleed editorial cover: portrait fills the photograp
 ## Public project contacts / provenance
 
 Contact links use channels already publicly listed by the owner on `castefeudal/markovmade/index.html`: Telegram `https://t.me/markovmade`, email `castefeudal@gmail.com`, and Instagram `https://instagram.com/markovmade`. They are general owner-published project contacts, not a modeling agency or a guaranteed dedicated booking desk. The email subject and Telegram enquiry draft are translated into RU/EN/中文. If a private casting-only contact is supplied later, update `data/profile.js` without changing the page templates.
+
+## Issue 04 — photographic casting book (Oct 30, 2026)
+
+This release replaces the generic feel of stacked UI blocks with a photo-first editorial identity, while keeping functional casting and multi-language content. The cover uses three manually selectable, clearly labelled archived images: fashion/character, styled portrait, and athletic study. No autoplay, parallax scroll hijacking, or false representation credits. Navigation, contact links, printing, real digitals disclosure, gallery filtering and dialog keyboard controls remain usable.
+
+The initial LCP photo is an owned 78 KB WebP and is not artificially created to represent new casting credentials. The athletic image leads the movement spread; the real stage image remains in the on-camera section; the three-image gallery is independently curated. A native-font CJK stack avoids downloading large Google-hosted Chinese fonts in mainland China. All three visual editions use the same semantic content, with intentional local colour and typography treatments. Styling is maintained in `art-direction.css` (compiled with the other three CSS sources into `bundle.css` using `node tools/build-css.mjs`). A keyboard-accessible three-look control has direct focus, arrow-key switching and reduced-motion safeguards.
