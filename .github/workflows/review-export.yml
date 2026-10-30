@@ -1,0 +1,23 @@
+name: Export source for production review
+on:
+  push:
+    branches: [feat/production-motion-audit]
+    paths: [.github/workflows/review-export.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Package tracked source only
+        run: git archive --format=zip --output=/tmp/model-source.zip HEAD
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-source-review
+          path: /tmp/model-source.zip
+          retention-days: 1
