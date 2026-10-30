@@ -23,7 +23,8 @@ No clip-art flags, dragons, stock models, AI faces or counterfeit acting credits
 | --- | --- |
 | `index.html` | Editorial layouts, metadata, gallery and casting-card dialogs |
 | `atelier.css` | Entire core layout, mobile, accessibility and A4 print |
-| `editions.css` | Palette and composition for the RU / EN / ZH themes |
+| `editions.css` | Locale-specific foundations for RU / EN / ZH |
+| `clarity.css` | Final responsive layout, reading sizes, contrast and casting usability; edit here before touching legacy CSS |
 | `assets/edition-ru.svg`, `assets/edition-en.svg`, `assets/edition-zh.svg` | Original vector art for the three editions |
 | `data/i18n.js` | RU / EN / 简体中文 translation strings |
 | `app.js` | Instant language + edition change, profile, gallery, lightbox, verified contact links, print |
@@ -74,3 +75,15 @@ This is **branded editorial imagery**, not a certified natural, unretouched cast
 headshot. It is excluded from the comp card and from the real-photo portfolio.
 When authentic headshots are provided, set `window.HERO_IMAGE` and
 `window.MODEL_PHOTOS` in `data/media.js` to replace the editorial cover.
+
+## Readability and QA contract
+
+- Main reading text: 16–17px or larger; critical buttons: 14px or larger on mobile.
+- Labels and casting specifications remain readable and visually distinct.
+- Actual browser CI checks multiple desktop/tablet/mobile widths, three translations,
+  no horizontal overflow, comp-card behavior, visual-theme switching and critical
+  text size/contrast. WCAG AA contrast of at least 4.5:1 is the target for reading text.
+- Gallery media must be genuine for casting; the owned branded editorial portrait
+  is deliberately excluded from the printable comp card.
+- `atelier.css` and `editions.css` are legacy foundations; `clarity.css` is loaded last.
+

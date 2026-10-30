@@ -49,7 +49,10 @@ const tests=[
  {label:"RU_MOBILE",lang:"ru",width:390,height:844},
  {label:"EN_MOBILE",lang:"en",width:390,height:844},
  {label:"ZH_MOBILE",lang:"zh",width:360,height:800},
- {label:"RU_TABLET",lang:"ru",width:768,height:1024}
+ {label:"RU_TABLET",lang:"ru",width:768,height:1024},
+ {label:"EN_SMALL_LAPTOP",lang:"en",width:1024,height:768},
+ {label:"RU_320",lang:"ru",width:320,height:740},
+ {label:"ZH_320",lang:"zh",width:320,height:740}
 ];
 let errors=[],passed=[];
 try{
@@ -78,6 +81,10 @@ try{
   assert(clarity.specLabel>=12,"Casting labels too small");
   assert(clarity.factLabel>=11,"Stats labels too small");
   assert(clarity.facts&&clarity.portfolioEmpty&&clarity.shots===3,"Casting layout incomplete");
+  const colors=await exec('(()=>{const samples=[".hero-detail",".section-description",".portfolio-pending>p",".shot-card p",".spec-grid dt",".spec-grid dd",".screen-details>p",".about-copy>p:not(.about-opening)",".contact-pending",".site-nav a",".lang-btn[aria-pressed=true]"];function parse(s){if(s.startsWith("color(srgb")){const m=s.match(/color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+))?\)/);if(m)return [+m[1]*255,+m[2]*255,+m[3]*255,m[4]==null?1:+m[4]];}const m=s.match(/rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:\s*[,\/]\s*([\d.]+))?\)/);return m?[+m[1],+m[2],+m[3],m[4]==null?1:+m[4]]:[0,0,0,1]}function blend(a,b){return a.slice(0,3).map((x,i)=>x*a[3]+b[i]*(1-a[3]))}function bg(el){const list=[];for(let n=el;n;n=n.parentElement)list.push(parse(getComputedStyle(n).backgroundColor));let c=[255,255,255];for(let i=list.length-1;i>=0;i--)c=blend(list[i],c);return c;}function lum(a){const c=a.map(x=>x/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]}function ratio(el){const f=parse(getComputedStyle(el).color),back=bg(el),fg=blend(f,back),l1=lum(fg),l2=lum(back);return +((Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05)).toFixed(2)}return Object.fromEntries(samples.map(s=>[s,ratio(document.querySelector(s))]))})()');
+  console.log("CONTRAST "+x.label+" "+JSON.stringify(colors));
+  for(const [selector,ratio] of Object.entries(colors))assert(ratio>=4.5,"Text contrast below WCAG AA at "+x.label+" "+selector+": "+ratio);
+
   assert(v.headingLeft>=-5&&v.headingRight<=x.width+5,"Heading outside viewport");
   assert(v.headingScroll<=4,"Heading text overflow "+v.headingScroll);
   assert(v.specs>=7&&v.cardActions>=2&&v.hasGallery,"Casting functions unavailable");
