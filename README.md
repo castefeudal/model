@@ -3,7 +3,7 @@
 **Live:** https://castefeudal.github.io/model/  
 **Repository:** https://github.com/castefeudal/model
 
-An international casting / model portfolio designed as **three distinct editorial editions** that change in one click with the language. Plain HTML, CSS, vanilla JS; GitHub Pages, no paid service or build step.
+An international casting / model portfolio designed as **three distinct editorial editions** that change in one click with the language. Plain HTML, single-source CSS, vanilla JS; GitHub Pages and no paid runtime services. A tiny local script rebuilds the single production stylesheet.
 
 ## Visual editions
 
@@ -22,9 +22,8 @@ No clip-art flags, dragons, stock models, AI faces or counterfeit acting credits
 | Path | Purpose |
 | --- | --- |
 | `index.html` | Editorial layouts, metadata, gallery and casting-card dialogs |
-| `atelier.css` | Entire core layout, mobile, accessibility and A4 print |
-| `editions.css` | Locale-specific foundations for RU / EN / ZH |
-| `clarity.css` | Final responsive layout, reading sizes, contrast and casting usability |
+| **`issue08.css`** | **The sole active design source:** visual system, all RU / EN / ZH palettes, desktop/mobile layout, focus/accessibility, booking/lightbox dialogs, and print casting card |
+| `atelier.css`, `editions.css`, `clarity.css`, `art-direction.css`, `folio.css`, `premiere.css`, `finish.css` | Previous editions retained for history only; never shipped in the current bundle |
 | `bundle.css` | Minified production bundle loaded in browsers (generated) |
 | `tools/build-css.mjs` | Rebuild CSS bundle after changing source stylesheets |
 | `assets/edition-ru.svg`, `assets/edition-en.svg`, `assets/edition-zh.svg` | Original vector art for the three editions |
@@ -174,3 +173,15 @@ An internationally localized **casting-first editorial experience**. This releas
 The Chinese edition uses OFL-licensed, version-pinned Noto Sans SC and Noto Serif SC **subset WOFF2** files in `assets/fonts/`. A CI builder `tools/build_cjk_font.py` regenerates those assets from Google's upstream OFL font revisions and publishes licence texts. Production never contacts Google Fonts for CJK glyphs, which is important in mainland China. If Chinese copy changes, rerun the builder so `covered-glyphs.txt` and assets stay in sync; the structural gate rejects missing glyph coverage. The generator uses pinned upstream source commits and stores no external URLs in the runtime CSS.
 
 The checked-in first-party CJK font subsets have a generated UTF-8 glyph manifest. The build does not infer glyph completeness from synthetic Lighthouse scores: Chromium must render both local typefaces, and structural checks compare the current Chinese copy against the committed manifest.
+
+## ISSUE 08 — THE HUMAN FRAME / ART DIRECTOR'S CUT
+
+**A single authored design source replaced seven progressively cascading stylesheets** (generated production CSS reduced from ~170 KB to ~55 KB). No JS framework or new runtime dependency was added.
+
+**Visual decisions:** full-bleed editorial portrait with large legible name; precise archive look selector rather than decorative UI cards; tightened pacing; architectural photo spreads with deliberate whitespace; a true camera-work chapter, compact factual casting specification, and direct booking at the start and end. The Russian, English and Chinese editions share the same photographic concept and vary with intentional palette and script typography—not clip-art stereotypes.
+
+**Photographic discipline:** use only the user's owned archived material and explicit provenance captions. Do not synthesize fashion client logos, campaign credits, actor roles, current unretouched agency digitals, testimonials, or availability. Six curated frames remain navigable in a full-resolution viewer. The cast card's temporary face reference is honestly labelled as archival.
+
+**Code owner workflow:** edit **only `issue08.css`** for production visual changes, then run `node tools/build-css.mjs` and `node tools/verify.mjs`. Keep `bundle.css` generated. The verification gate rejects any accidental legacy CSS inclusion, stale bundle, missing self-hosted CJK type, or a bundle above 65 KB. Browser QA covers ten viewports/languages, WCAG AA text contrast, modal flows, archive navigation, copyable casting enquiries, and photo provenance. Lighthouse is a synthetic speed check, not a judgement of photographic art direction or a conversion study.
+
+**Remaining genuine inputs:** recent photographer-approved unretouched headshots/digitals and a short real self-tape. This is an authenticity limitation, not a page-layout defect.
