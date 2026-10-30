@@ -14,7 +14,7 @@ if not features.check("avif"):
 
 with Image.open(SOURCE) as input_image:
     src = ImageOps.exif_transpose(input_image).convert("RGB")
-    for edge in (960, 1600):
+    for edge in (1600,):
         frame = src.copy()
         frame.thumbnail((edge, edge), Image.Resampling.LANCZOS)
         target = ROOT / f"assets/portrait-fashion-{edge}.avif"
