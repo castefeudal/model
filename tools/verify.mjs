@@ -68,7 +68,7 @@ if(!html.includes('data-open-booking')||!html.includes('id="bookingDialog"'))fai
 for(const key of ["bookingAction","bookingTitle","bookingYourBrief","bookingEmailSubject","bookingOpening","bookingPrivacy","portraitHeadline","portraitStory"]){
   for(const l of ["ru","en","zh"])if(!d?.[l]?.[key])fail("Premiere translation "+l+":"+key);
 }
-if(!html.includes('src="./premiere.js"')||!html.includes('href="./premiere.css"'))fail("Premiere assets are not linked");
+if(!html.includes('src="./premiere.js"')||!read("tools/build-css.mjs").includes('"premiere.css"')||!read("tools/build-css.mjs").includes('"folio.css"'))fail("Premiere assets are not present in the production bundle");
 ok("Premiere: 6 source images, booking controls and tri-lingual copy");
 const sm=read("sitemap.xml");
 for(const lang of ["ru","en","zh"])if(!sm.includes("?lang="+lang))fail("Sitemap missing locale "+lang);
