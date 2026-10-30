@@ -85,7 +85,7 @@ main{overflow:clip}
 .lang-btn[aria-pressed=true]{box-shadow:none}
 .lang-cn{display:none}
 .lang-latin{display:inline}
-html[data-edition=zh] .lang-cn{display:inline;font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+html[data-edition=zh] .lang-cn{display:inline;font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
 html[data-edition=zh] .lang-latin{display:none}
 /* Cover: photograph as the subject, typography as its counterweight. */
 .hero,html[data-edition=en] .hero{
@@ -539,7 +539,7 @@ html[data-edition=zh] .contact-lead{font-family:var(--serif);line-height:1.5}
 /* Small-screen editorial layout: controls fit hands, no ghost text or overflow. */
 @media(max-width:1180px) and (min-width:881px){
  .site-header .site-nav{gap:10px}
- .site-header .site-nav a{font-size:11px}
+ .site-header .site-nav a{font-size:12px}
  .edition-label{display:none}
  .hero,html[data-edition=en] .hero{min-height:650px;grid-template-columns:52% 48%}
  html[data-edition=en] .hero{grid-template-columns:48% 52%}
