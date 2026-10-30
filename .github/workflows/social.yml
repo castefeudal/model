@@ -1,6 +1,7 @@
 name: Generate Open Graph image
 on:
   push:
+    branches: [main]
     paths:
       - tools/build_social.py
       - .github/workflows/social.yml
