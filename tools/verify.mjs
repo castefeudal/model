@@ -16,7 +16,7 @@ assert(exists("index.html"),"index missing");
 const html=read("index.html");
 try{execFileSync(process.execPath,["tools/build-css.mjs","--check"],{cwd:root,stdio:"pipe"});ok("Production CSS bundle is fresh")}
 catch(e){fail("Production CSS bundle out of date: run node tools/build-css.mjs")}
-const scripts=["data/profile.js","data/media.js","data/i18n.js","app.js","polish.js","premiere.js"];
+const scripts=["data/profile.js","data/media.js","data/i18n.js","app.js","polish.js","premiere.js","tools/browser-qa.mjs"];
 scripts.forEach(p=>{if(!exists(p))return;try{execFileSync(process.execPath,["--check",path.join(root,p)],{stdio:"pipe"});ok("Syntax "+p)}catch(e){fail("JavaScript syntax: "+p+" "+e.stderr?.toString())}});
 const sandbox={window:{}};
 for(const p of scripts.slice(0,3))if(exists(p))vm.runInNewContext(read(p),sandbox,{filename:p});
