@@ -181,6 +181,18 @@ try{
    await screenshot("CONTACT");
   }
   if(x.label==="EN_DESKTOP"){
+   await exec('document.querySelector(".portrait-interlude").scrollIntoView({behavior:"instant"})');
+   await sleep(440);
+   await screenshot("PORTRAIT_CHAPTER");
+   await exec('document.querySelector(".folio-strip").scrollIntoView({behavior:"instant"})');
+   await sleep(440);
+   await screenshot("LOOKBOOK_GRID");
+   await exec('document.querySelector(".header-enquiry").click()');
+   assert(await exec('document.querySelector("#bookingDialog").open'),"Header booking control not interactive");
+   await screenshot("BOOKING_DIALOG");
+   await exec('document.querySelector("[data-close-booking]").click()');
+  }
+  if(x.label==="EN_DESKTOP"){
    await exec('document.querySelector("#portfolio").scrollIntoView({behavior:"instant"})');
    await sleep(500);await screenshot("PORTFOLIO");
   }
