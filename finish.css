@@ -112,10 +112,6 @@
  .folio-frame:nth-child(3) .folio-frame-zoom,
  .folio-frame:nth-child(6) .folio-frame-zoom{width:53px;height:53px}
 }
-/* Avoid eager decoding of long photo spreads and future content. */
-@supports(content-visibility:auto){
- .about-section,.screen-section{content-visibility:auto;contain-intrinsic-size:auto 850px}
-}
 @media(max-width:880px){
  .folio-swipe{display:block;grid-column:1/-1;grid-row:3;padding-top:5px}
  .folio-frame-archival{font-size:9px;padding:5px 8px;min-height:26px;left:9px;top:9px}
