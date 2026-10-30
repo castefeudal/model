@@ -630,7 +630,7 @@ html[data-edition=zh] .contact-lead{font-family:var(--serif);line-height:1.5}
  .hero-copy .hero-actions{display:none!important}
  .facts-inner{min-height:0;grid-template-columns:repeat(3,minmax(0,1fr));padding:0 var(--issue-outer)}
  .fact{margin-right:0;padding:19px 9px 18px;border-right:1px solid #ffffff2b;display:block}
- .fact .fact-label{display:block;margin-bottom:7px;font-size:10px}
+ .fact .fact-label{display:block;margin-bottom:7px;font-size:11px}
  .fact strong{font-size:clamp(14px,2.8vw,19px)}
  .fact-link{display:none!important}
  .section-pad{padding:clamp(69px,9vw,115px) var(--issue-outer)}
@@ -694,7 +694,7 @@ html[data-edition=zh] .contact-lead{font-family:var(--serif);line-height:1.5}
  .visual-caption,.hero-visual .visual-caption{padding:0 14px 14px!important;font-size:10px!important}
  .facts-inner{grid-template-columns:repeat(3,minmax(0,1fr))}
  .fact{padding:16px 7px 15px}
- .fact .fact-label{font-size:9px}
+ .fact .fact-label{font-size:11px}
  .fact strong{font-size:clamp(12px,3vw,17px)}
  .section-pad{padding:63px var(--issue-outer) 77px}
  .section-topline{font-size:10px;letter-spacing:.025em;gap:11px}
@@ -722,7 +722,7 @@ html[data-edition=zh] .contact-lead{font-family:var(--serif);line-height:1.5}
 @media(max-width:370px){
  .site-header .wordmark{font-size:25px}
  .header-tools{gap:5px}
- .lang-btn{min-width:38px;font-size:11px}
+ .lang-btn{min-width:38px;font-size:12px}
  .hero-copy>.hero-name,html[data-edition=ru] .hero-copy>.hero-name,html[data-edition=en] .hero-copy>.hero-name{font-size:clamp(44px,12.3vw,51px)!important}
  html[data-edition=zh] .hero-copy>.hero-name{font-size:44px!important}
  .hero-shortcuts{gap:7px}

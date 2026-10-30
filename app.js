@@ -124,7 +124,7 @@ function setHero(){
  if(deck)deck.hidden=!!castingSrc;
  qsa("[data-cover]").forEach((button,i)=>{
    button.setAttribute("aria-pressed",String(!castingSrc&&i===coverIndex));
-   button.tabIndex=!castingSrc&&i===coverIndex?0:-1;
+   // Each cover button remains directly reachable by Tab; arrows are an optional shortcut.
  });
  if(count)count.textContent=castingSrc?"01 / 01":String(coverIndex+1).padStart(2,"0")+" / "+String(covers.length).padStart(2,"0");
  if(caption){
