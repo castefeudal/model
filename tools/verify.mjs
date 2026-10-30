@@ -10,7 +10,7 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","atelier.css","editions.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
+const required=["index.html","atelier.css","editions.css","clarity.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -44,8 +44,13 @@ for(const edition of ["ru","en","zh"]){
  if(!read("editions.css").includes('edition-'+edition+'.svg'))fail("Missing art binding "+edition);
 }
 if(!html.includes('data-i18n="heroName1"')||!html.includes('data-i18n="heroName2"'))fail("Heading is not localized");
+if(!html.includes('href="./clarity.css"'))fail("Clarity stylesheet not linked");
+for(const id of ["portfolioEmpty","specGrid","contactMethods","compDialog","readingProgress"])if(!html.includes('id="'+id+'"'))fail("Missing UX element "+id);
+if(!html.includes('class="facts-bar"'))fail("Casting profile quick facts are missing");
+if(!html.includes('class="shot-card"'))fail("Photo portfolio guide is missing");
 
-for(const cssfile of ["atelier.css","editions.css"]){
+
+for(const cssfile of ["atelier.css","editions.css","clarity.css"]){
  const css=read(cssfile);
  for(const m of css.matchAll(/url\((['"]?)([^)'"]+)\1\)/g)){
    const v=m[2];if(v.startsWith("http")||v.startsWith("data:"))continue;

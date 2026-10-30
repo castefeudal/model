@@ -44,6 +44,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./atelier.css">
   <link rel="stylesheet" href="./editions.css">
+  <link rel="stylesheet" href="./clarity.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Pavel Markov","alternateName":["Павел Марков","帕维尔·马尔科夫"],"description":"Athletic model and on-camera talent based in Belarus.","height":{"@type":"QuantitativeValue","value":188,"unitCode":"CMT"},"homeLocation":{"@type":"Place","name":"Belarus"},"url":"https://castefeudal.github.io/model/"}</script>
   <script src="./data/profile.js" defer></script>
   <script src="./data/media.js" defer></script>
@@ -102,6 +103,7 @@
         <div class="artwork" id="heroArtwork" role="img" aria-label="Original abstract edition artwork">
           <div class="art-top" aria-hidden="true"><span data-i18n="artSeries">PERSONAL / CASTING</span><span class="art-counter" data-i18n="editionCode">01 / RU</span></div>
           <span class="art-stamp" aria-hidden="true" data-i18n="artStamp">Ф / М</span>
+          <span class="art-watermark" aria-hidden="true">PM—26</span>
           <span class="art-side" aria-hidden="true" data-i18n="artSide">ОБРАЗ И ХАРАКТЕР</span>
           <div class="art-bottom" aria-hidden="true"><span data-i18n="artFooter">FIELD NOTES / PAVEL MARKOV</span><span>188 — 2026</span></div>
         </div>
@@ -111,7 +113,14 @@
       <a href="#portfolio" class="scroll-note"><span data-i18n="scroll">Листайте</span><span aria-hidden="true">↓</span></a>
     </section>
 
-    <div class="ticker" aria-hidden="true"><div data-i18n="ticker">ХАРАКТЕР <i>×</i> ФОРМА <i>×</i> ДВИЖЕНИЕ <i>×</i> ПРИСУТСТВИЕ <i>×</i> ХАРАКТЕР <i>×</i> ФОРМА <i>×</i> ДВИЖЕНИЕ <i>×</i></div></div>
+    <aside class="facts-bar" aria-label="Casting profile at a glance">
+      <div class="facts-inner">
+        <div class="fact"><span class="fact-label" data-i18n="factHeight">РОСТ</span><strong>188 <small>CM</small></strong></div>
+        <div class="fact"><span class="fact-label" data-i18n="factBuild">ТИПАЖ</span><strong data-i18n="factAthletic">Атлетический</strong></div>
+        <div class="fact"><span class="fact-label" data-i18n="factBase">ЛОКАЦИЯ</span><strong data-i18n="factBelarus">Беларусь</strong></div>
+        <a class="fact-link" href="#profile"><span data-i18n="factView">Все параметры</span><span aria-hidden="true">↗</span></a>
+      </div>
+    </aside>
 
     <section class="portfolio-section section-pad" id="portfolio" aria-labelledby="portfolioTitle">
       <div class="section-topline"><span>01 / PORTFOLIO</span><span data-i18n="sectionPortfolioNote">ОТБОР КАДРОВ / ПОРТФОЛИО</span></div>
@@ -122,18 +131,29 @@
       <div class="filters" id="galleryFilters" role="group" aria-label="Photo filters" hidden></div>
       <div class="gallery" id="gallery" aria-live="polite"></div>
       <div class="portfolio-empty" id="portfolioEmpty">
-        <div class="empty-lead">
-          <div class="empty-meta"><span data-i18n="emptyIssue">PHOTOGRAPHY / IN PROGRESS</span><span aria-hidden="true">PM—01</span></div>
-          <strong class="empty-display" data-i18n="emptyHeading">Сильный кадр<br><em>не подменишь.</em></strong>
-          <p class="empty-foot" data-i18n="emptyFoot">Раздел ждёт реальные фотографии Павла. Визуальные материалы здесь — только авторская графика.</p>
-          <span class="empty-signet" aria-hidden="true">P/M</span>
+        <div class="portfolio-pending">
+          <div class="pending-issue"><span class="pending-mark" aria-hidden="true"></span><span data-i18n="pendingEyebrow">ПОРТФОЛИО / В ПОДГОТОВКЕ</span></div>
+          <h3 data-i18n="pendingTitle">Настоящее лицо.<br><em>Настоящие кадры.</em></h3>
+          <p data-i18n="pendingText">Для кастинга нужны реальные фотографии. Здесь появятся актуальные портреты, ростовые кадры и съёмки в движении.</p>
+          <div class="pending-line"><span>PAVEL MARKOV</span><span data-i18n="pendingStatus">ORIGINAL PHOTOGRAPHY / PENDING</span></div>
         </div>
-        <div class="empty-shotlist">
-          <div class="shotlist-head"><span data-i18n="shotlistHead">КАДРЫ ДЛЯ КАСТИНГА</span><span>03 / CORE</span></div>
-          <div class="shotrow"><span class="shot-number">01</span><span class="shot-label">HEADSHOT</span><p data-i18n="emptyShot1">Портрет анфас и ¾, естественный свет</p><span class="shot-arrow" aria-hidden="true">↗</span></div>
-          <div class="shotrow"><span class="shot-number">02</span><span class="shot-label">FULL LENGTH</span><p data-i18n="emptyShot2">Ростовой кадр с честными пропорциями</p><span class="shot-arrow" aria-hidden="true">↗</span></div>
-          <div class="shotrow"><span class="shot-number">03</span><span class="shot-label">MOVEMENT</span><p data-i18n="emptyShot3">Динамика, спортивная пластика, характер</p><span class="shot-arrow" aria-hidden="true">↗</span></div>
-          <div class="shotlist-foot"><span data-i18n="shotlistFoot">ФОТОГРАФИИ БУДУТ ДОБАВЛЕНЫ ПО МЕРЕ ГОТОВНОСТИ</span></div>
+        <div class="shotlist" aria-label="Photo portfolio guide">
+          <div class="shotlist-header"><span data-i18n="shotlistHead">ЧТО ВОЙДЁТ В ПОРТФОЛИО</span><span>01—03</span></div>
+          <article class="shot-card">
+            <span class="shot-number">01</span>
+            <div><h4 data-i18n="shotTitle1">Портрет</h4><p data-i18n="emptyShot1">Естественный свет, анфас и три четверти — без изменения черт лица.</p></div>
+            <span class="shot-symbol" aria-hidden="true">↗</span>
+          </article>
+          <article class="shot-card">
+            <span class="shot-number">02</span>
+            <div><h4 data-i18n="shotTitle2">Полный рост</h4><p data-i18n="emptyShot2">Честные пропорции, нейтральная поза и чёткий силуэт.</p></div>
+            <span class="shot-symbol" aria-hidden="true">↗</span>
+          </article>
+          <article class="shot-card">
+            <span class="shot-number">03</span>
+            <div><h4 data-i18n="shotTitle3">В движении</h4><p data-i18n="emptyShot3">Спортивная динамика, естественная пластика и фактура.</p></div>
+            <span class="shot-symbol" aria-hidden="true">↗</span>
+          </article>
         </div>
       </div>
       <p class="editorial-footnote" id="galleryFootnote" data-i18n="galleryFootnote">Здесь появятся только оригинальные фотографии для реального кастинга.</p>
