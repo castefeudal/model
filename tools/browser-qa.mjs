@@ -174,7 +174,7 @@ try{
 
   // Every photographic contact-sheet image opens its OWN full-resolution
   // source, not an unrelated filtered gallery item.
-  await exec('document.querySelector(".folio-open[data-folio-index=\"4\"]").click()');
+  await exec('document.querySelector(".folio-open[data-folio-index=4]").click()');
   assert(await exec('document.querySelector("#lightbox").open'),"Lookbook photo viewer does not open");
   assert.equal(await exec('document.querySelector("#lbCounter").innerText'),"5 / 6","Wrong archival frame");
   assert(await exec('document.querySelector("#lbImage").getAttribute("src").includes("portrait-character.webp")'),"Lookbook is not displaying source photograph");
