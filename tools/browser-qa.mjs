@@ -120,11 +120,11 @@ try{
   const lookData=await exec('(()=>{const b=[...document.querySelectorAll(".cover-choice")];const i=document.querySelector("#heroImage");return {buttons:b.length,pressed:b.filter(x=>x.getAttribute("aria-pressed")==="true").length,image:i.getAttribute("src"),caption:document.querySelector(".visual-caption").innerText,loaded:i.complete&&i.naturalWidth>0}})()');
   assert(lookData.buttons===3&&lookData.pressed===1&&lookData.loaded,"Editorial look selector failed to initialise");
   assert(lookData.image.includes("portrait-fashion.webp"),"First-look cover is not an actual personal archive image");
-  await exec('document.querySelector("[data-cover=\"1\"]").click()');
+  await exec('document.querySelectorAll("[data-cover]")[1].click()');
   assert(await exec('document.querySelector("#heroImage").getAttribute("src").includes("editorial-markovmade.webp")'),"Second cover selection failed");
-  await exec('document.querySelector("[data-cover=\"2\"]").click()');
+  await exec('document.querySelectorAll("[data-cover]")[2].click()');
   assert(await exec('document.querySelector("#heroImage").getAttribute("src").includes("portrait-athletic.webp")'),"Third cover selection failed");
-  await exec('document.querySelector("[data-cover=\"0\"]").click()');
+  await exec('document.querySelectorAll("[data-cover]")[0].click()');
   assert(await exec('document.querySelector("#heroImage").getAttribute("src").includes("portrait-fashion.webp")'),"Cover did not restore");
 
 
