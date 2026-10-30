@@ -22,8 +22,9 @@ No clip-art flags, dragons, stock models, AI faces or counterfeit acting credits
 | Path | Purpose |
 | --- | --- |
 | `index.html` | Editorial layouts, metadata, gallery and casting-card dialogs |
-| **`issue08.css`** | **The sole active design source:** visual system, all RU / EN / ZH palettes, desktop/mobile layout, focus/accessibility, booking/lightbox dialogs, and print casting card |
-| `atelier.css`, `editions.css`, `clarity.css`, `art-direction.css`, `folio.css`, `premiere.css`, `finish.css` | Previous editions retained for history only; never shipped in the current bundle |
+| **`issue09.css`** | **The single active CSS source:** international visual system, editorial photography, responsive layouts, accessible full-resolution viewer, fast casting desk, PDF print and direct booking |
+| `casting-desk.js` | Concise native-dialog casting overview; renders existing localized, confirmed specifications, never a second hand-maintained dataset |
+| `issue08.css`, `atelier.css`, `editions.css`, `clarity.css`, `art-direction.css`, `folio.css`, `premiere.css`, `finish.css` | Archived previous visual directions; excluded from the current production stylesheet |
 | `bundle.css` | Minified production bundle loaded in browsers (generated) |
 | `tools/build-css.mjs` | Rebuild CSS bundle after changing source stylesheets |
 | `assets/edition-ru.svg`, `assets/edition-en.svg`, `assets/edition-zh.svg` | Original vector art for the three editions |
@@ -185,3 +186,22 @@ The checked-in first-party CJK font subsets have a generated UTF-8 glyph manifes
 **Code owner workflow:** edit **only `issue08.css`** for production visual changes, then run `node tools/build-css.mjs` and `node tools/verify.mjs`. Keep `bundle.css` generated. The verification gate rejects any accidental legacy CSS inclusion, stale bundle, missing self-hosted CJK type, or a bundle above 65 KB. Browser QA covers ten viewports/languages, WCAG AA text contrast, modal flows, archive navigation, copyable casting enquiries, and photo provenance. Lighthouse is a synthetic speed check, not a judgement of photographic art direction or a conversion study.
 
 **Remaining genuine inputs:** recent photographer-approved unretouched headshots/digitals and a short real self-tape. This is an authenticity limitation, not a page-layout defect.
+
+## ISSUE 09 — PRIVATE VIEW / ONE PERSON, TWO WAYS TO DISCOVER
+
+The site is both an image-led personal fashion editorial and a professional, fast casting reference. **This release is not a statement of past agency work, professional bookings or film credits.**
+
+- The first screen combines the authenticated, owner-owned style photograph and a smaller **clearly marked archival neutral face reference**. The smaller portrait opens the quick Casting Desk, not a misleading "current digitals" claim. On narrow devices the portrait thumbnail is omitted from the cover to keep the name and face readable.
+- **Casting Desk** opens via the hero, face preview or first factual strip (native modal). It reuses exactly the live localized rows from `#specGrid`, includes the genuine archive face image, height/build/base, a direct enquiry transition, the PDF comp card and contact. It has no independent, manually maintained list of physical measurements.
+- On phones its factual identity sits immediately beneath the modal heading rather than forcing the visitor to swipe past a second tall portrait.
+- Six distinct original photographs remain featured in the main magazine lookbook. A second small photo gallery is **collapsed by default**; the three additional archive views and their category filters work after the visitor actively expands them. This avoids a second wall of visually duplicated material.
+- The final booking chapter uses a low-contrast photograph from the owner's own branded portrait archive instead of the incidental event signage, preserving clarity of public business contacts.
+- One authored visual source (`issue09.css`) compiles to `bundle.css`. The old editorial CSS files remain in Git history, but are not loaded by visitors.
+- The builder regenerates local OFL Chinese font subsets when `data/i18n.js` or `index.html` changes. The structural checks and browser screenshots catch missing glyphs and layout regressions.
+
+
+**Release integrity:** The browser QA checks mobile Casting Desk sizing, the native dialog and close behavior, the actual booking/PDF handoffs, six owned source photographs, opt-in archive expansion, RU/EN/Chinese glyph rendering and 320px layouts. The production Lighthouse gate also catches invalid image aspect-ratio metadata; source dimensions must be accurate.
+
+**Commission-ready next assets:** a genuine current neutral headshot, plain full-body images, neutral profile angles, accurately remeasured sizing, and an unretouched short on-camera introduction. These cannot be credibly manufactured by the page or a generative model and remain the highest-impact limitations.
+
+Production design is judged against actual desktop/mobile screenshots, a working casting path, legal photo provenance, and measured page load. Lighthouse scores are not a substitute for a casting director's judgement or for new professional photography.

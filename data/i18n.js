@@ -1,5 +1,12 @@
 window.MODEL_I18N = {
   "ru": {
+    "peekAction": "Кастинг-досье",
+    "peekProof": "Архивный портрет",
+    "peekArchive": "Другие ракурсы — раскрыть архив",
+    "peekAria": "Открыть краткий профиль для кастинга",
+    "peekClose": "Закрыть краткую кастинговую анкету",
+    "peekOverline": "КАСТИНГ / ВСЁ ГЛАВНОЕ",
+    "peekDescription": "Фото, параметры и прямой контакт. Всё, что нужно для быстрого предварительного отбора.",
     "folioOpen": "Открыть архивный кадр",
     "folioSwipe": "Листайте фотографии →",
     "compArchiveLabel": "АРХИВНЫЙ ПОРТРЕТ · НЕ АКТУАЛЬНЫЕ КАСТИНГОВЫЕ DIGITALS",
@@ -223,6 +230,13 @@ window.MODEL_I18N = {
     "compCloseAria": "Закрыть кастинг-анкету"
   },
   "en": {
+    "peekAction": "Casting dossier",
+    "peekProof": "Archive portrait",
+    "peekArchive": "More angles — open the archive",
+    "peekAria": "Open quick casting overview",
+    "peekClose": "Close quick casting overview",
+    "peekOverline": "CASTING / AT A GLANCE",
+    "peekDescription": "Portrait, verified details and direct booking contacts — in one clear view.",
     "folioOpen": "Open archival photograph",
     "folioSwipe": "Swipe through the portraits →",
     "compArchiveLabel": "ARCHIVAL PORTRAIT · NOT CURRENT CASTING DIGITALS",
@@ -446,6 +460,13 @@ window.MODEL_I18N = {
     "compCloseAria": "Close casting card"
   },
   "zh": {
+    "peekAction": "快速选角资料",
+    "peekProof": "档案肖像",
+    "peekArchive": "更多角度 · 展开档案",
+    "peekAria": "打开快速选角资料",
+    "peekClose": "关闭快速选角资料",
+    "peekOverline": "选角资料 / 快速浏览",
+    "peekDescription": "肖像、身体参数和直接联系方式，一目了然。",
     "folioOpen": "打开档案照片",
     "folioSwipe": "左右滑动查看照片 →",
     "compArchiveLabel": "个人档案肖像 · 非近期试镜原片",
