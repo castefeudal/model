@@ -108,6 +108,10 @@ try{
   assert(archiveData.digitalsVisible,"Authentic casting photo placeholder must remain available");
   assert(archiveData.screen?.includes("portrait-stage.webp") && archiveData.fashion?.includes("portrait-athletic.webp"),"Distinct editorial images not loaded");
 
+  // The new portrait and expanded photo-story move this lazy image well below the fold.
+  // Decode explicitly rather than falsely treating correct lazy loading as a missing file.
+  await exec('document.querySelector("#editorialSpread img").loading="eager";true');
+  await exec('document.querySelector("#editorialSpread img").decode().then(()=>true).catch(()=>false)');
   const editorial=await exec('(()=>{const s=document.querySelector("#editorialSpread"),d=document.querySelector("#portfolioEmpty"),i=s.querySelector("img");return {has:s.getBoundingClientRect().height>0,portrait:i.complete&&i.naturalWidth>0,alt:i.alt,folded:!d.open,native:d.tagName==="DETAILS",canonical:document.querySelector("link[rel=canonical]").href,og:document.querySelector("meta[property=\\\"og:url\\\"]").content,heading:document.querySelector("#editorialSpreadTitle").innerText};})()');
   assert(editorial.has&&editorial.portrait&&editorial.alt&&editorial.folded&&editorial.native,"Editorial feature/photo disclosure incomplete");
   assert(editorial.canonical.endsWith("?lang="+x.lang)&&editorial.og.endsWith("?lang="+x.lang),"Localized SEO metadata incorrect");
@@ -143,6 +147,21 @@ try{
   assert(await exec('document.querySelector("#compDialog").open'),"Comp card did not open");
   await exec('document.querySelector("#closeComp").click()');
   assert(!(await exec('document.querySelector("#compDialog").open')),"Comp card did not close");
+  // Premiere regression: real inquiry dialog, source archive and accessible labels.
+  const premiere=await exec('(()=>{const frames=[...document.querySelectorAll(".folio-frame img")].map(i=>i.getAttribute("src")),p=document.querySelector(".portrait-interlude img");return {frames:frames.length,distinct:new Set(frames).size,portrait:p?.getAttribute("src"),triggers:document.querySelectorAll("[data-open-booking]").length,form:!!document.querySelector("#bookingForm"),localeTitle:document.querySelector("#bookingTitle")?.innerText};})()');
+  assert(premiere.frames===6&&premiere.distinct===6,"Premiere needs six distinct archive frames");
+  assert(premiere.portrait?.includes("portrait-digital.webp")&&premiere.triggers>=3&&premiere.form,"Premiere casting experience incomplete");
+  await exec('document.querySelector(innerWidth<=880?".hero-shortcuts [data-open-booking]":".hero-actions [data-open-booking]").click()');
+  assert(await exec('document.querySelector("#bookingDialog").open'),"Direct casting enquiry failed to open");
+  const enquiry=await exec('(()=>{const d=document.querySelector("#bookingDialog"),r=d.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:innerWidth,height:innerHeight,email:document.querySelector("#bookingEmail").required,brief:document.querySelector("#bookingDetails").required,copy:!!document.querySelector("#bookingCopy")}})()');
+  assert(enquiry.left>=-2&&enquiry.right<=enquiry.width+2,"Booking dialog exceeds screen width");
+  assert(enquiry.email&&enquiry.brief&&enquiry.copy,"Enquiry validation / fallback absent");
+  const fieldHeights=await exec('["#bookingEmail","#bookingKind","#bookingDetails"].map(sel=>({sel,height:document.querySelector(sel).getBoundingClientRect().height}))');
+  console.log("BOOKING_FIELD_DIMENSIONS "+x.label+" "+JSON.stringify(fieldHeights));
+  assert(fieldHeights[0].height>=42&&fieldHeights[1].height>=42&&fieldHeights[2].height>=100,"Casting enquiry fields lost usable touch dimensions");
+
+  await exec('document.querySelector("[data-close-booking]").click()');
+  assert(!(await exec('document.querySelector("#bookingDialog").open')),"Direct casting enquiry failed to close");
   await screenshot(x.label);
   if(x.label==="EN_DESKTOP"){
    await exec('document.querySelector("[data-filter=portraits]").click()');
@@ -164,6 +183,18 @@ try{
    await exec('document.querySelector("#contact").scrollIntoView({behavior:"instant"})');
    await sleep(450);
    await screenshot("CONTACT");
+  }
+  if(x.label==="EN_DESKTOP"){
+   await exec('document.querySelector(".portrait-interlude").scrollIntoView({behavior:"instant"})');
+   await sleep(440);
+   await screenshot("PORTRAIT_CHAPTER");
+   await exec('document.querySelector(".folio-strip").scrollIntoView({behavior:"instant"})');
+   await sleep(440);
+   await screenshot("LOOKBOOK_GRID");
+   await exec('document.querySelector(".header-enquiry").click()');
+   assert(await exec('document.querySelector("#bookingDialog").open'),"Header booking control not interactive");
+   await screenshot("BOOKING_DIALOG");
+   await exec('document.querySelector("[data-close-booking]").click()');
   }
   if(x.label==="EN_DESKTOP"){
    await exec('document.querySelector("#portfolio").scrollIntoView({behavior:"instant"})');

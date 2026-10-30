@@ -1,6 +1,6 @@
 # PHOTO GUIDE — Профессиональное портфолио
 
-Сейчас в репозитории нет реальных фотографий Павла. Чтобы сайт стал готовым портфолио для кастинга, добавьте **свои недавние, немодифицированные фотографии**.
+В репозитории уже есть личный архив фотографий Павла. Но **нет отдельного подтверждённого актуального комплекта неотретушированных casting digitals**. Для работы с модельными агентствами добавьте свежие фотографии без изменения внешности.
 
 ## Приоритет кадров
 1. `assets/photos/hero.webp` — вертикальный главный портрет, по грудь или пояс, лицо открыто, пространство в кадре под типографику. 1600–2200 px по длинной стороне, до ~500 KB–1 MB.
@@ -55,3 +55,8 @@ The website includes `MODEL_ARCHIVE` in `data/media.js`, drawn from existing use
 
 ### The cover is an archive, not a proof of fresh castings
 Three manually selectable cover images are stored as `MODEL_COVERS`. The first is a styled personal fashion image, the second a branded formal portrait, and the third an athletic image. They are deliberately labelled `archive` or `styled`, and **must not automatically become** `MODEL_PHOTOS` or an agency comp card. Always require unretouched, recent photos and casting measurements for a real talent submission.
+
+
+## Международное портфолио — правило качества
+
+Стилизация и редакционный lookbook формируют образ. Для кастинг-директора решают актуальность лица, полный рост и корректные параметры. Новую редакционную фотографию можно добавлять в MODEL_ARCHIVE с архивным статусом. В MODEL_PHOTOS переносить только оригинальные проверенные casting digitals. Для роли/рекламы отдельно полезны честная видеовизитка и актуальный self-tape; не называйте собственный видеоконтент профессиональной фильмографией.

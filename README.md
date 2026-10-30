@@ -99,7 +99,7 @@ The portfolio opens with a curated *single-image* brand study, not a staged gall
 Each `?lang=ru|en|zh` URL sets its own canonical URL and `og:url` (including before deferred scripts), and `sitemap.xml` lists every edition with reciprocal `hreflang` links. Changing edition updates those values without a page reload. As GitHub Pages serves the same initial HTML shell for all query variants, crawlers must execute the translation scripts to index localized body text; separate prerendered routes would be required for fully server-rendered international SEO.
 
 ### CSS delivery
-The browser downloads one optimized `bundle.css` instead of three blocking CSS files. When editing `atelier.css`, `editions.css` or `clarity.css`, run `node tools/build-css.mjs` and commit the generated bundle. `node tools/verify.mjs` verifies exact freshness.
+The browser downloads one optimized `bundle.css` instead of multiple blocking CSS files. When editing `atelier.css`, `editions.css` or `clarity.css`, run `node tools/build-css.mjs` and commit the generated bundle. `node tools/verify.mjs` verifies exact freshness.
 
 ## Cross-locale benchmarking
 
@@ -133,3 +133,26 @@ Three archive gallery photos now load locally generated WebP thumbnails of 13.9 
 
 ### Mobile hero image delivery
 Three selectable cover looks have locally generated 20.9 KB / 13.9 KB / 21.2 KB WebP thumbnails selected by the native `picture` source below 881px; desktop browsers receive the original higher resolution images. The active source updates when the user switches looks and does not interfere with a later genuine casting hero photo. All visual content is self-hosted on GitHub Pages; switching looks is manual, accessible, and does not use autoplay.
+
+
+## ISSUE 06 — THE HUMAN FRAME (30 October 2026)
+
+An internationally localized **casting-first editorial experience**. This release is not a claim of past agency representation, commercial campaigns, movie roles or model fees.
+
+**Creative direction**
+- Photo-first editorial cover on narrow screens, with the actual accessible H1 layered into the photograph; large split image/type composition on desktop.
+- Three culturally distinct but coherent editions: warm Russian noir, cool international ivory/cobalt, and cinnabar Chinese typography.
+- Documentary archival portrait interlude and staggered six-image contact-sheet book, with source provenance kept clear. No generated replacement face or counterfeit portfolio images.
+- More consistent large-scale typography, white space, photographic rhythm, tablet/motion safeguards, and booker-facing navigation.
+
+**Casting experience**
+- Direct enquiry button in the desktop masthead, hero, mobile hero, and editorial chapter.
+- Native, keyboard-accessible modal with project type, email and brief. Email requests are created locally in a mailto URL; clipboard is a fallback; no endpoint, cookies, analytics or stored personal information.
+- Keep current cast measurements marked approximate, exclude styled archive from the printable comp card, and never invent roles or credits.
+
+**Engineering**
+- Original scripts retained. `premiere.js` is progressive enhancement for the casting request.
+- Edit `folio.css` and `premiere.css` as source files; both are compiled with four existing CSS layers into **one production `bundle.css`** via `node tools/build-css.mjs`.
+- Quality CI checks syntax, translations, archive provenance, image paths, unique HTML IDs and bundle freshness.
+- Chromium smoke runs on pull requests and the main branch, checking RU/EN/ZH responsive rendering, color contrast, keyboard/dialog behaviors and casting flows.
+- Genuine current unretouched headshots, full-length digitals and optional self-tape remain the decisive outstanding production inputs.

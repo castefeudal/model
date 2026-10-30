@@ -49,13 +49,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="./bundle.css">
-  <link rel="stylesheet" href="./folio.css">
+  
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Pavel Markov","alternateName":["Павел Марков","帕维尔·马尔科夫"],"description":"Athletic model and on-camera talent based in Belarus.","height":{"@type":"QuantitativeValue","value":188,"unitCode":"CMT"},"homeLocation":{"@type":"Place","name":"Belarus"},"url":"https://castefeudal.github.io/model/"}</script>
   <script src="./data/profile.js" defer></script>
   <script src="./data/media.js" defer></script>
   <script src="./data/i18n.js" defer></script>
   <script src="./app.js" defer></script>
   <script src="./polish.js" defer></script>
+  <script src="./premiere.js" defer></script>
 </head>
 <body>
   <div class="page-progress" aria-hidden="true"><span id="readingProgress"></span></div>
@@ -71,6 +72,7 @@
       <a href="#contact" data-i18n="navContact">Контакт</a>
     </nav>
     <div class="header-tools">
+      <button class="header-enquiry" type="button" data-open-booking><span data-i18n="bookingAction">Запросить съёмку</span><span aria-hidden="true">↗</span></button>
       <span class="edition-label" data-i18n="editionLabel">IMPERIAL NOIR</span>
       <div class="lang-switch" role="group" aria-label="Выбор языка и темы" data-i18n-aria="langAria">
         <button type="button" class="lang-btn" data-lang="ru" aria-pressed="true" title="Русская редакция"><span class="lang-dot"></span>RU</button>
@@ -89,7 +91,7 @@
         <h1 class="hero-name" id="heroHeading"><span data-i18n="heroName1">ПАВЕЛ</span><em data-i18n="heroName2">МАРКОВ</em></h1>
         <div class="hero-shortcuts">
           <a class="hero-shortcut-primary" href="#portfolio"><span data-i18n="heroQuickGallery">Смотреть кадры</span><span aria-hidden="true">↗</span></a>
-          <button type="button" data-open-card class="hero-shortcut-secondary"><span data-i18n="heroQuickCard">Анкета</span><span aria-hidden="true">↗</span></button>
+          <button type="button" data-open-booking class="hero-shortcut-secondary"><span data-i18n="bookingShort">Запросить съёмку</span><span aria-hidden="true">↗</span></button>
         </div>
         <div class="hero-bottom">
           <div class="hero-intro">
@@ -97,7 +99,7 @@
             <p class="hero-statement" data-i18n="heroLine">Не только внешность. Присутствие.</p>
             <p class="hero-detail" data-i18n="heroDetail">Атлетический типаж. Работа с движением и камерой. Открыт к коммерческим и творческим проектам.</p>
             <div class="hero-actions">
-              <a class="action action-dark" href="#portfolio"><span data-i18n="viewPortfolio">Смотреть портфолио</span><span aria-hidden="true">↗</span></a>
+              <button class="action action-dark" type="button" data-open-booking><span data-i18n="bookingAction">Запросить съёмку</span><span aria-hidden="true">↗</span></button>
               <button class="action action-outline" type="button" data-open-card><span data-i18n="openCard">Кастинг-анкета</span><span aria-hidden="true">↗</span></button>
             </div>
           </div>
@@ -108,6 +110,7 @@
         </div>
       </div>
       <figure class="hero-visual" id="heroVisual">
+        <div class="cover-folio" aria-hidden="true"><span>THE HUMAN FRAME</span><strong>PM / 26</strong></div>
         <picture class="hero-picture"><source id="coverMobileSource" media="(max-width: 880px)" type="image/webp" srcset="./assets/thumbs/portrait-fashion.webp"><img id="heroImage" class="hero-photo" src="./assets/portrait-fashion.webp" width="1000" height="1550" alt="Павел Марков в стилизованном fashion-образе" data-i18n-alt="fashionPortraitAlt" fetchpriority="high" decoding="async"></picture>
         <div class="artwork" id="heroArtwork" role="img" aria-label="Original abstract edition artwork">
           <div class="art-top" aria-hidden="true"><span data-i18n="artSeries">PERSONAL / CASTING</span><span class="art-counter" data-i18n="editionCode">01 / RU</span></div>
@@ -117,6 +120,7 @@
           <div class="art-bottom" aria-hidden="true"><span data-i18n="artFooter">FIELD NOTES / PAVEL MARKOV</span><span>188 — 2026</span></div>
         </div>
         <button class="hero-photo-cta" type="button" data-open-card><span data-i18n="openCard">Кастинг-анкета</span><span aria-hidden="true">↗</span></button>
+        <div class="cover-edition-mark" aria-hidden="true"><span>MODEL</span><span>ON CAMERA</span><span>CASTING</span></div>
         <div class="cover-deck" role="group" aria-label="Выбор образа" data-i18n-aria="coverControlsAria">
           <span class="cover-deck-label" data-i18n="coverIndex">ТРИ ОБРАЗА / ОДИН ЧЕЛОВЕК</span>
           <div class="cover-deck-options">
@@ -139,7 +143,22 @@
       </div>
     </aside>
 
-    <section class="folio-strip" aria-label="Six personal archive portraits"><div class="folio-strip-head"><span class="folio-eyebrow" data-i18n="archiveEyebrow">ЛИЧНЫЙ АРХИВ / ИЗБРАННЫЕ КАДРЫ</span><h2 class="folio-title" data-i18n="folioTitle">Шесть образов. <em>Один человек.</em></h2><span class="folio-counter">01 — 06</span></div><div class="folio-track"><figure class="folio-frame"><img src="./assets/portrait-fashion.webp" alt="Pavel Markov: FASHION / 01" loading="lazy" decoding="async" width="480" height="640" style="object-position:50% 32%"><figcaption><strong>01</strong><span>FASHION / 01</span></figcaption></figure><figure class="folio-frame"><img src="./assets/portrait-digital.webp" alt="Pavel Markov: PORTRAIT / 02" loading="lazy" decoding="async" width="480" height="640" style="object-position:50% 42%"><figcaption><strong>02</strong><span>PORTRAIT / 02</span></figcaption></figure><figure class="folio-frame"><img src="./assets/portrait-athletic.webp" alt="Pavel Markov: ATHLETIC / 03" loading="lazy" decoding="async" width="480" height="640" style="object-position:50% 45%"><figcaption><strong>03</strong><span>ATHLETIC / 03</span></figcaption></figure><figure class="folio-frame"><img src="./assets/portrait-stage.webp" alt="Pavel Markov: STAGE / 04" loading="lazy" decoding="async" width="480" height="640" style="object-position:55% 40%"><figcaption><strong>04</strong><span>STAGE / 04</span></figcaption></figure><figure class="folio-frame"><img src="./assets/portrait-character.webp" alt="Pavel Markov: CHARACTER / 05" loading="lazy" decoding="async" width="480" height="640" style="object-position:50% 35%"><figcaption><strong>05</strong><span>CHARACTER / 05</span></figcaption></figure><figure class="folio-frame"><img src="./assets/editorial-markovmade.webp" alt="Pavel Markov: CLASSIC / 06" loading="lazy" decoding="async" width="480" height="640" style="object-position:50% 32%"><figcaption><strong>06</strong><span>CLASSIC / 06</span></figcaption></figure></div><div class="folio-bottom"><p data-i18n="galleryFootnote">Архивные снимки и стилизованные образы обозначены отдельно.</p><a href="#portfolio" data-i18n="viewPortfolio">Смотреть портфолио</a></div></section>
+
+    <section class="portrait-interlude" aria-labelledby="portraitHeading">
+      <div class="portrait-interlude-image">
+        <img src="./assets/portrait-digital.webp" alt="Павел Марков, портрет из личного архива" data-i18n-alt="portraitAlt" width="1200" height="1500" loading="lazy" decoding="async">
+        <div class="portrait-interlude-caption"><span data-i18n="portraitArchive">АРХИВНЫЙ ПОРТРЕТ / НЕ АКТУАЛЬНЫЕ DIGITALS</span><span>PM — 02/06</span></div>
+      </div>
+      <div class="portrait-interlude-copy">
+        <div class="portrait-interlude-index"><span>THE PERSONAL EDITION</span><span>II. THE FACE</span></div>
+        <span class="portrait-interlude-overline" data-i18n="portraitOverline">ЛИЦО / ХАРАКТЕР / ДВИЖЕНИЕ</span>
+        <h2 id="portraitHeading" data-i18n="portraitHeadline">Внешность привлекает. <em>Присутствие удерживает.</em></h2>
+        <p data-i18n="portraitStory">Атлетическая подготовка, пластика движения и опыт работы с камерой. Разные образы — один узнаваемый характер.</p>
+        <div class="portrait-interlude-bottom"><span>188 CM · ATHLETIC · BELARUS</span><button type="button" data-open-booking><span data-i18n="bookingAction">Запросить съёмку</span><span aria-hidden="true">↗</span></button></div>
+      </div>
+    </section>
+
+    <section class="folio-strip" aria-label="Six personal archive portraits" data-i18n-aria="folioAria"><div class="folio-strip-head"><span class="folio-eyebrow" data-i18n="archiveEyebrow">ЛИЧНЫЙ АРХИВ / ИЗБРАННЫЕ КАДРЫ</span><h2 class="folio-title" data-i18n="folioTitle">Шесть образов. <em>Один человек.</em></h2><span class="folio-counter">01 — 06</span></div><div class="folio-track"><figure class="folio-frame"><img src="./assets/portrait-fashion.webp" alt="Pavel Markov: FASHION / 01" data-i18n-alt="fashionPortraitAlt" loading="lazy" decoding="async" width="480" height="640" style="object-position:50% 32%"><figcaption><strong>01</strong><span data-i18n="folioLook1">FASHION / 01</span></figcaption></figure><figure class="folio-frame"><img src="./assets/portrait-digital.webp" alt="Pavel Markov: PORTRAIT / 02" data-i18n-alt="portraitAlt" loading="lazy" decoding="async" width="480" height="640" style="object-position:50% 42%"><figcaption><strong>02</strong><span data-i18n="folioLook2">PORTRAIT / 02</span></figcaption></figure><figure class="folio-frame"><img src="./assets/portrait-athletic.webp" alt="Pavel Markov: ATHLETIC / 03" data-i18n-alt="athleticPortraitAlt" loading="lazy" decoding="async" width="480" height="640" style="object-position:50% 45%"><figcaption><strong>03</strong><span data-i18n="folioLook3">ATHLETIC / 03</span></figcaption></figure><figure class="folio-frame"><img src="./assets/portrait-stage.webp" alt="Pavel Markov: STAGE / 04" data-i18n-alt="stagePortraitAlt" loading="lazy" decoding="async" width="480" height="640" style="object-position:55% 40%"><figcaption><strong>04</strong><span data-i18n="folioLook4">STAGE / 04</span></figcaption></figure><figure class="folio-frame"><img src="./assets/portrait-character.webp" alt="Pavel Markov: CHARACTER / 05" data-i18n-alt="folioCharacterAlt" loading="lazy" decoding="async" width="480" height="640" style="object-position:50% 35%"><figcaption><strong>05</strong><span data-i18n="folioLook5">CHARACTER / 05</span></figcaption></figure><figure class="folio-frame"><img src="./assets/editorial-markovmade.webp" alt="Pavel Markov: CLASSIC / 06" data-i18n-alt="editorialPortraitAlt" loading="lazy" decoding="async" width="480" height="640" style="object-position:50% 32%"><figcaption><strong>06</strong><span data-i18n="folioLook6">CLASSIC / 06</span></figcaption></figure></div><div class="folio-bottom"><p data-i18n="galleryFootnote">Архивные снимки и стилизованные образы обозначены отдельно.</p><a href="#portfolio" data-i18n="viewPortfolio">Смотреть портфолио</a></div></section>
     <section class="portfolio-section section-pad" id="portfolio" aria-labelledby="portfolioTitle">
       <div class="section-topline"><span>01 / PORTFOLIO</span><span data-i18n="sectionPortfolioNote">ОТБОР КАДРОВ / ПОРТФОЛИО</span></div>
       <div class="section-heading">
@@ -251,7 +270,7 @@
       <div class="section-topline"><span>04 / ABOUT</span><span data-i18n="aboutOverline">ЗА ПРЕДЕЛАМИ КАДРА</span></div>
       <div class="about-layout">
         <h2 class="display-heading" id="aboutTitle" data-i18n="aboutTitle">За <em>кадром.</em></h2>
-        <figure class="about-portrait"><img src="./assets/portrait-character.webp" loading="lazy" decoding="async" width="1000" height="1250" alt="Pavel Markov in an archival artistic character costume"><figcaption><span>CHARACTER / PERSONAL ARCHIVE</span><span>PM / 06</span></figcaption></figure>
+        <figure class="about-portrait"><img src="./assets/portrait-character.webp" loading="lazy" decoding="async" width="1000" height="1250" alt="Pavel Markov in an archival artistic character costume" data-i18n-alt="folioCharacterAlt"><figcaption><span data-i18n="folioAboutCaption">CHARACTER / PERSONAL ARCHIVE</span><span>PM / 06</span></figcaption></figure>
         <div class="about-copy">
           <p class="about-opening" data-i18n="aboutOpening">Я — Павел Марков. Мой язык — движение, характер и работа с людьми.</p>
           <p data-i18n="aboutBody1">Больше 14 лет спорт — часть моей жизни. Силовая подготовка, дисциплина и внимание к деталям движения сформировали мой типаж.</p>
@@ -280,6 +299,26 @@
       <footer class="footer"><span>© <span id="footerYear">2026</span> PAVEL MARKOV</span><span data-i18n="footerNote">THREE EDITIONS / ONE PERSON</span><a href="#top" data-i18n="backTop">НАВЕРХ ↑</a></footer>
     </section>
   </main>
+
+
+  <dialog class="booking-dialog" id="bookingDialog" aria-labelledby="bookingTitle" aria-describedby="bookingLead">
+    <div class="booking-modal">
+      <div class="booking-modal-top"><span class="booking-mark">PM <small>/ CASTING</small></span><button class="booking-close" type="button" data-close-booking aria-label="Закрыть" data-i18n-aria="bookingCloseAria">×</button></div>
+      <div class="booking-modal-content">
+        <div class="booking-modal-heading"><span class="booking-counter" data-i18n="bookingOverline">CASTING / ПРЯМОЙ КОНТАКТ</span><h2 id="bookingTitle" data-i18n="bookingTitle">Обсудим <em>съёмку.</em></h2><p id="bookingLead" data-i18n="bookingLead">Пара деталей — и готовое письмо для обсуждения проекта. Запрос откроется в вашей почтовой программе; данные не отправляются с сайта.</p><div class="booking-facts"><span>188 CM</span><span>ATHLETIC</span><span>BELARUS</span></div></div>
+        <form class="booking-form" id="bookingForm">
+          <label for="bookingEmail" data-i18n="bookingYourEmail">Ваш email для ответа</label><input id="bookingEmail" type="email" name="email" autocomplete="email" required maxlength="140" inputmode="email">
+          <label for="bookingKind" data-i18n="bookingProjectType">Тип проекта</label><select id="bookingKind" name="kind"><option value="fashion" data-i18n="bookingTypeFashion">Fashion / Editorial</option><option value="commercial" data-i18n="bookingTypeCommercial">Реклама / Commercial</option><option value="athletic" data-i18n="bookingTypeAthletic">Спорт / Fitness</option><option value="screen" data-i18n="bookingTypeScreen">Кино / Съёмки</option><option value="other" data-i18n="bookingTypeOther">Другой проект</option></select>
+          <label for="bookingDetails" data-i18n="bookingYourBrief">Где, когда и какой проект</label><textarea id="bookingDetails" name="details" rows="4" maxlength="1500" required data-i18n-placeholder="bookingBriefPlaceholder" placeholder="Локация, даты, задача и формат..."></textarea>
+          <div class="booking-buttons"><button type="submit" class="booking-send"><span data-i18n="bookingSend">Создать письмо</span><span aria-hidden="true">↗</span></button><button type="button" class="booking-copy" id="bookingCopy" data-i18n="bookingCopy">Скопировать текст</button></div>
+          <p class="booking-status" id="bookingStatus" role="status" aria-live="polite"></p>
+          <p class="booking-privacy" data-i18n="bookingPrivacy">Никаких регистраций и загрузок на сервер. Или свяжитесь напрямую:</p>
+          <div class="booking-direct"><a href="mailto:castefeudal@gmail.com">castefeudal@gmail.com ↗</a><a href="https://t.me/markovmade" rel="noopener noreferrer" target="_blank">Telegram ↗</a></div>
+        </form>
+      </div>
+      <div class="booking-modal-foot"><span>PAVEL MARKOV</span><span>BOOKING / DIRECT INQUIRIES</span></div>
+    </div>
+  </dialog>
 
   <dialog class="lightbox" id="lightbox" aria-label="Просмотр фотографий" data-i18n-aria="lightboxAria">
     <button class="lb-close" type="button" id="lbClose" aria-label="Закрыть фотографии" data-i18n-aria="lbCloseAria">×</button>
