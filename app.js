@@ -135,12 +135,11 @@ function setHero(){
  const castingSrc=window.HERO_IMAGE||media[0]?.src;
  const cover=covers[coverIndex]||null;
  const src=castingSrc||cover?.src||window.EDITORIAL_PORTRAIT;
- const mobileSource=qs("#coverMobileSource"),mobileAvif=qs("#coverMobileAvif"),desktopAvif=qs("#coverDesktopAvif");
+ const mobileSource=qs("#coverMobileSource"),desktopAvif=qs("#coverDesktopAvif");
  if(mobileSource)mobileSource.srcset=castingSrc?src:(cover?.mobile&&cover.mobile!==src?cover.mobile+' 1x, '+src+' 2x':src);
  // AVIF remains a compressed rendering of the exact verified original photo.
  // Disable archival sources when a true casting photograph is supplied.
  const selectedAvif=castingSrc?null:cover?.avif||null;
- if(mobileAvif)mobileAvif.srcset=selectedAvif?(cover?.mobileAvif||selectedAvif):'';
  if(desktopAvif)desktopAvif.srcset=selectedAvif||'';
  if(!src)return;
  const figure=qs("#heroVisual"),img=qs("#heroImage"),caption=qs('[data-i18n="artDisclaimer"]');
