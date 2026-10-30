@@ -127,6 +127,8 @@ function setHero(){
  const castingSrc=window.HERO_IMAGE||media[0]?.src;
  const cover=covers[coverIndex]||null;
  const src=castingSrc||cover?.src||window.EDITORIAL_PORTRAIT;
+ const mobileSource=qs("#coverMobileSource");
+ if(mobileSource)mobileSource.srcset=castingSrc?src:(cover?.mobile||src);
  if(!src)return;
  const figure=qs("#heroVisual"),img=qs("#heroImage"),caption=qs('[data-i18n="artDisclaimer"]');
  const deck=qs(".cover-deck"),count=qs(".visual-caption-index");

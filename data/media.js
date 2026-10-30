@@ -116,21 +116,24 @@ window.MODEL_COVERS = [
     "altKey": "fashionPortraitAlt",
     "labelKey": "coverLook1",
     "captionKey": "coverCaption1",
-    "position": "50% 30%"
+    "position": "50% 30%",
+    "mobile": "assets/thumbs/portrait-fashion.webp"
   },
   {
     "src": "assets/editorial-markovmade.webp",
     "altKey": "editorialPortraitAlt",
     "labelKey": "coverLook2",
     "captionKey": "coverCaption2",
-    "position": "50% 32%"
+    "position": "50% 32%",
+    "mobile": "assets/thumbs/editorial-markovmade.webp"
   },
   {
     "src": "assets/portrait-athletic.webp",
     "altKey": "athleticPortraitAlt",
     "labelKey": "coverLook3",
     "captionKey": "coverCaption3",
-    "position": "48% 38%"
+    "position": "48% 38%",
+    "mobile": "assets/thumbs/portrait-athletic.webp"
   }
 ];
 window.MODEL_VIDEOS = [];

@@ -55,6 +55,7 @@ if(!html.includes('<details class="portfolio-empty casting-digitals"'))fail("Acc
 if(!html.includes('src="./assets/portrait-fashion.webp"'))fail("Optimized, visible archival cover image missing");
 if(!html.includes('id="heroImage"')||!html.includes('fetchpriority="high"'))fail("High-priority LCP hero missing");
 if(!html.includes('class="cover-deck"')||!html.includes('data-cover="2"'))fail("Cover selector missing");
+if(!html.includes('id="coverMobileSource"')||!html.includes('assets/thumbs/portrait-fashion.webp'))fail("Mobile responsive initial hero source missing");
 if(!html.includes('data-i18n-alt="fashionPortraitAlt"'))fail("Localized main portrait alt missing");
 for(const k of ["data-i18n-aria","id=\"editorialSpreadTitle\""])if(!html.includes(k))fail("Accessibility data missing: "+k);
 const sm=read("sitemap.xml");
@@ -108,6 +109,7 @@ if(covers.length!==3)fail("Exactly three manually selectable cover looks require
 for(const [i,c] of covers.entries()){
  if(!exists(c.src))fail("Cover #"+i+" asset missing: "+c.src);
  if(!c.altKey||!c.captionKey||!c.labelKey)fail("Cover #"+i+" localized metadata missing");
+ if(!c.mobile||!exists(c.mobile))fail("Cover #"+i+" missing mobile responsive thumbnail");
  for(const l of ["ru","en","zh"])for(const key of [c.altKey,c.captionKey,c.labelKey])if(!d[l][key])fail("Untranslated cover #"+i+" "+l+":"+key);
 }
 if(!html.includes('id="heroImage"')||!html.includes('class="hero-shortcuts"'))fail("Direct portfolio actions missing");

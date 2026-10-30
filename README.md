@@ -130,3 +130,6 @@ The initial LCP photo is an owned 78 KB WebP and is not artificially created to 
 
 ### Thumbnail integrity (issue 04)
 Three archive gallery photos now load locally generated WebP thumbnails of 13.9 KB, 27.7 KB and 116.9 KB instead of full-size sources. High-resolution originals remain available in the accessible lightbox; no photo contents were altered beyond compression and resize. `tools/build_thumbnails.py` and `.github/workflows/thumbnails.yml` regenerate thumbnails on changes; `tools/verify.mjs` fails if a referenced thumbnail is absent.
+
+### Mobile hero image delivery
+Three selectable cover looks have locally generated 20.9 KB / 13.9 KB / 21.2 KB WebP thumbnails selected by the native `picture` source below 881px; desktop browsers receive the original higher resolution images. The active source updates when the user switches looks and does not interfere with a later genuine casting hero photo. All visual content is self-hosted on GitHub Pages; switching looks is manual, accessible, and does not use autoplay.
