@@ -43,9 +43,9 @@ html[data-edition=zh]{
  --contact-bg:#42211d;--contact-fg:#fff2e4;
  --space-paper:#f7efe3;--space-soft:#f2e7d7;
  --space-ink:#392621;--space-muted:#635148;--space-accent:#983429;
- --sans:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
- --display:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
- --serif:"Songti SC","STSong","Noto Serif CJK SC","SimSun",serif;
+ --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
+ --display:"Noto Sans SC","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
+ --serif:"Noto Serif SC","Songti SC","STSong","Noto Serif CJK SC","SimSun",serif;
 }
 html{scroll-padding-top:82px}
 body{background:var(--space-paper);font-size:16px}
