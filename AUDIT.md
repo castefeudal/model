@@ -27,14 +27,15 @@ The project still requires recent verified front/three-quarter/profile/full-body
 
 `node tools/verify.mjs`; `node tools/browser-qa.mjs` with Chrome and local HTTP server; six Lighthouse combinations using `tools/grade.mjs`. Watch mobile LCP especially for ZH. Check the live production build and GitHub Pages deployment SHA after merge.
 
-## Controlled image optimization experiments
+## Controlled image optimization experiments — rejected
 
-Unmodified real archival photo `assets/portrait-fashion.webp` (78,144 B) is the fallback. The compressed 1600px AVIF (44,004 B) is used only above 880px, retaining the original photo's identity. On mobile the reliable WebP source and existing responsive thumbnails remain active.
+The owner-provided `assets/portrait-fashion.webp` original remains unchanged. Temporary AVIF encodings were generated and tested, but neither shipped. All photos stay honest archives rather than invented casting digitals.
 
-| Chinese mobile Lighthouse experiment | Performance | LCP | Decision |
-| --- | ---: | ---: | --- |
-| Native responsive WebP, no remote Latin fonts | 92 | 3.4 s | **Keep** |
-| Full 1600px AVIF on mobile | 77 | 5.6 s | Reject |
-| Smaller 960px AVIF on mobile | 81 | 4.7 s | Reject |
+| Synthetic Lighthouse ZH mobile experiment | Performance | LCP |
+| --- | ---: | ---: |
+| Early responsive WebP + locale-aware fonts | 92 | 3.4s |
+| 1600px AVIF on mobile | 77 | 5.6s |
+| 960px AVIF on mobile | 81 | 4.7s |
+| Later restored mobile WebP in a separate run | 80 | 4.9s |
 
-These values reflect separate synthetic runs, not a causal A/B experiment. The AVIF encoding did not consistently improve mobile loading under throttled conditions, so mobile AVIF was removed rather than attempting to optimize a benchmark score. Added `tools/grade.mjs` category and LCP gate to keep comparable regressions from silently shipping; continue monitoring real visitors' Core Web Vitals.
+The discrepancy between two WebP runs demonstrates **laboratory variance**; these tests alone cannot prove format causality. Since AVIF was not reliably beneficial, it was removed entirely, including the unused generator and workflow. Release criteria prioritize **no missing Chinese glyphs, functional casting navigation, honest photos, and passing 15 real-browser layouts** over synthetic micro-optimizations. A single Lighthouse performance score is not a field Core Web Vitals measurement.
