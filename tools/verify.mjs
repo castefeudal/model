@@ -25,11 +25,11 @@ if(exists("assets/fonts/covered-glyphs.txt")){
  else ok("Self-hosted Chinese font glyph coverage: "+needed.size+" required characters");
 }
 try{execFileSync(process.execPath,["tools/build-css.mjs","--check"],{cwd:root,stdio:"pipe"});ok("Production CSS bundle is fresh")}
+catch(e){fail("Production CSS bundle out of date: run node tools/build-css.mjs")}
 if(fs.statSync(path.join(root,"bundle.css")).size>65000)fail("Edition 08 design CSS exceeds 65 KB budget");
 if(read("tools/build-css.mjs").includes('"atelier.css"')||read("tools/build-css.mjs").includes('"premiere.css"'))fail("Legacy layered CSS must not ship to production");
 if(!read("bundle.css").includes("PM CJK Sans"))fail("Self-hosted Simplified Chinese font missing from production CSS");
 ok("One editorial CSS source, performance budget and local Chinese typography");
-catch(e){fail("Production CSS bundle out of date: run node tools/build-css.mjs")}
 const scripts=["data/profile.js","data/media.js","data/i18n.js","app.js","polish.js","premiere.js","tools/browser-qa.mjs"];
 scripts.forEach(p=>{if(!exists(p))return;try{execFileSync(process.execPath,["--check",path.join(root,p)],{stdio:"pipe"});ok("Syntax "+p)}catch(e){fail("JavaScript syntax: "+p+" "+e.stderr?.toString())}});
 const sandbox={window:{}};
