@@ -143,6 +143,17 @@ try{
   assert(await exec('document.querySelector("#compDialog").open'),"Comp card did not open");
   await exec('document.querySelector("#closeComp").click()');
   assert(!(await exec('document.querySelector("#compDialog").open')),"Comp card did not close");
+  // Premiere regression: real inquiry dialog, source archive and accessible labels.
+  const premiere=await exec('(()=>{const frames=[...document.querySelectorAll(".folio-frame img")].map(i=>i.getAttribute("src")),p=document.querySelector(".portrait-interlude img");return {frames:frames.length,distinct:new Set(frames).size,portrait:p?.getAttribute("src"),triggers:document.querySelectorAll("[data-open-booking]").length,form:!!document.querySelector("#bookingForm"),localeTitle:document.querySelector("#bookingTitle")?.innerText};})()');
+  assert(premiere.frames===6&&premiere.distinct===6,"Premiere needs six distinct archive frames");
+  assert(premiere.portrait?.includes("portrait-digital.webp")&&premiere.triggers>=3&&premiere.form,"Premiere casting experience incomplete");
+  await exec('document.querySelector(innerWidth<=880?".hero-shortcuts [data-open-booking]":".hero-actions [data-open-booking]").click()');
+  assert(await exec('document.querySelector("#bookingDialog").open'),"Direct casting enquiry failed to open");
+  const enquiry=await exec('(()=>{const d=document.querySelector("#bookingDialog"),r=d.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:innerWidth,height:innerHeight,email:document.querySelector("#bookingEmail").required,brief:document.querySelector("#bookingDetails").required,copy:!!document.querySelector("#bookingCopy")}})()');
+  assert(enquiry.left>=-2&&enquiry.right<=enquiry.width+2,"Booking dialog exceeds screen width");
+  assert(enquiry.email&&enquiry.brief&&enquiry.copy,"Enquiry validation / fallback absent");
+  await exec('document.querySelector("[data-close-booking]").click()');
+  assert(!(await exec('document.querySelector("#bookingDialog").open')),"Direct casting enquiry failed to close");
   await screenshot(x.label);
   if(x.label==="EN_DESKTOP"){
    await exec('document.querySelector("[data-filter=portraits]").click()');
