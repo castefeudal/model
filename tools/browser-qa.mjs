@@ -78,7 +78,7 @@ try{
   }
   assert(v.art.includes("edition-"+x.lang+".svg"),"Art not tied to edition");
   assert(v.overflow<=2,"Horizontal overflow "+v.overflow);
-  assert(await exec('!!(document.querySelector("#profile").compareDocumentPosition(document.querySelector("#lookbook") & Node.DOCUMENT_POSITION_FOLLOWING)'),"Casting parameters must precede photo book");
+  assert(await exec('!!(document.querySelector("#profile").compareDocumentPosition(document.querySelector("#lookbook")) & Node.DOCUMENT_POSITION_FOLLOWING)'),"Casting parameters must precede photo book");
   assert(await exec('document.querySelector("#motionToggle")?.innerText.includes(window.MODEL_I18N[document.documentElement.dataset.edition].motionLabel)'),"Motion button lost its visible localized label");
   const clarity=await exec('(()=>{const s=x=>parseFloat(getComputedStyle(document.querySelector(x)).fontSize);return {body:s("body"),detail:s(".hero-detail"),section:s(".section-description"),screen:s(".screen-details>p"),about:s(".about-copy>p:not(.about-opening)"),contact:s(".contact-pending"),nav:s(".site-nav a"),language:s(".lang-btn"),button:s(".hero-actions .action"),specLabel:s(".spec-grid dt"),factLabel:s(".fact-label"),facts:!!document.querySelector(".facts-bar"),shots:document.querySelectorAll(".shot-card").length,portfolioEmpty:!!document.querySelector(".portfolio-pending")};})()');
   console.log("TYPOGRAPHY "+x.label+" "+JSON.stringify(clarity));
