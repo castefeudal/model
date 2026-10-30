@@ -227,7 +227,7 @@ try{
   assert(!(await exec('document.querySelector("#lightbox").open')),"Lookbook photo viewer did not close");
   if(x.width<1920)await screenshot(x.label);
   if(x.label==="EN_DESKTOP"){
-   await exec('document.querySelector("[data-filter=portraits]").focus();document.querySelector("[data-filter=portraits]").click()');
+   await exec('document.querySelector("#archiveCabinet").open=true;document.querySelector("[data-filter=portraits]").focus();document.querySelector("[data-filter=portraits]").click()');
    assert.equal(await exec('document.querySelectorAll("#gallery .gallery-item").length'),1,"Category filter incorrect");
    assert(await exec('document.activeElement.matches("#galleryFilters [data-filter=portraits]")'),"Keyboard focus lost on gallery filter change");
    await exec('document.querySelector("[data-filter=all]").click()');
