@@ -145,6 +145,9 @@ try{
   // Real dialog, not a dead placeholder.
   await exec('document.querySelector("[data-open-card]").click()');
   assert(await exec('document.querySelector("#compDialog").open'),"Comp card did not open");
+  const compImage=await exec('(()=>{const p=document.querySelector("#compPhoto"),i=p.querySelector("img"),cap=p.querySelector(".comp-archive-mark");return {src:i?.getAttribute("src"),ready:i?.complete&&i.naturalWidth>0,label:cap?.textContent.trim(),height:p.getBoundingClientRect().height}})()');
+  assert(compImage.src?.includes("portrait-digital.webp")&&compImage.ready&&compImage.label&&compImage.height>220,"Portable casting card must display a real, labeled archive reference");
+  if(x.label==="EN_DESKTOP"||x.label==="RU_MOBILE")await screenshot("CASTING_CARD_"+x.label);
   await exec('document.querySelector("#closeComp").click()');
   assert(!(await exec('document.querySelector("#compDialog").open')),"Comp card did not close");
   // Premiere regression: real inquiry dialog, source archive and accessible labels.
@@ -160,6 +163,12 @@ try{
   console.log("BOOKING_FIELD_DIMENSIONS "+x.label+" "+JSON.stringify(fieldHeights));
   assert(fieldHeights[0].height>=42&&fieldHeights[1].height>=42&&fieldHeights[2].height>=100,"Casting enquiry fields lost usable touch dimensions");
 
+  if(x.label==="EN_DESKTOP"){
+    await exec('document.querySelector("#bookingEmail").value="casting@example.com";document.querySelector("#bookingDetails").value="Editorial project, Berlin, 2027, 2 days";Object.defineProperty(navigator,"clipboard",{configurable:true,value:{writeText:async t=>{window.__castingCopy=t}}});document.querySelector("#bookingCopy").click();true');
+    await sleep(35);
+    const copied=await exec('window.__castingCopy||""');
+    assert(copied.includes("casting@example.com")&&copied.includes("Berlin")&&copied.includes("Pavel Markov"),"Booking copy does not contain the actual inquiry");
+  }
   await exec('document.querySelector("[data-close-booking]").click()');
   assert(!(await exec('document.querySelector("#bookingDialog").open')),"Direct casting enquiry failed to close");
 
