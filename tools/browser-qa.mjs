@@ -97,6 +97,11 @@ try{
   assert(!clipped.length,"Text clipped outside viewport: "+JSON.stringify(clipped));
 
   assert(v.specs>=7&&v.cardActions>=2&&v.hasGallery,"Casting functions unavailable");
+  const bookingUrls=await exec('Array.from(document.querySelectorAll("#contactMethods a")).map(a=>a.href)');
+  assert(bookingUrls.length>=2,"Public project contact routes are missing");
+  assert(bookingUrls.some(x=>x.startsWith("https://t.me/markovmade?text=")),"Telegram contact has no localized inquiry draft");
+  assert(bookingUrls.some(x=>x.startsWith("mailto:castefeudal@gmail.com?subject=")),"Email contact has no localized subject");
+
   const archiveData=await exec('(()=>({cards:document.querySelectorAll("#gallery .gallery-item").length,images:document.querySelectorAll("#gallery .gallery-item img").length,stamps:document.querySelectorAll("#gallery .gallery-stamp").length,filters:document.querySelectorAll("#galleryFilters .filter").length,screen:document.querySelector(".screen-archive img")?.getAttribute("src"),fashion:document.querySelector(".spread-image img")?.getAttribute("src"),digitalsVisible:!document.querySelector("#portfolioEmpty").hidden}))()');
   assert(archiveData.cards===3 && archiveData.images===3 && archiveData.stamps===3 && archiveData.filters>=4,"Archive gallery is incomplete");
   assert(archiveData.digitalsVisible,"Authentic casting photo placeholder must remain available");
@@ -144,6 +149,9 @@ try{
    await exec('document.querySelector("#screenTitle").scrollIntoView({behavior:"instant"})');
    await sleep(470);
    await screenshot("ON_CAMERA");
+   await exec('document.querySelector("#contact").scrollIntoView({behavior:"instant"})');
+   await sleep(450);
+   await screenshot("CONTACT");
   }
   if(x.label==="EN_DESKTOP"){
    await exec('document.querySelector("#portfolio").scrollIntoView({behavior:"instant"})');

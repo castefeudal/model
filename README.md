@@ -117,3 +117,7 @@ The new layout places the fashion image in a full editorial opening spread, a cu
 ## Edition III / Cover refinement
 
 The first fold is now a full-bleed editorial cover: portrait fills the photographic column rather than sitting in an inset card; a readable gradient carries the image caption. On mobile, direct shortcuts for portfolio and casting card appear immediately under the name rather than hidden below the whole portrait. They stay out of the desktop layout, where the primary CTA buttons remain. The RU/EN language control uses a Latin `ZH` fallback without downloading full CJK fonts; the Chinese edition displays `中文` with its proper font. All affordances are keyboard-accessible and localized; the print card and image integrity rules remain unchanged.
+
+## Public project contacts / provenance
+
+Contact links use channels already publicly listed by the owner on `castefeudal/markovmade/index.html`: Telegram `https://t.me/markovmade`, email `castefeudal@gmail.com`, and Instagram `https://instagram.com/markovmade`. They are general owner-published project contacts, not a modeling agency or a guaranteed dedicated booking desk. The email subject and Telegram enquiry draft are translated into RU/EN/中文. If a private casting-only contact is supplied later, update `data/profile.js` without changing the page templates.

@@ -53,8 +53,8 @@ window.MODEL_I18N = {
     "aboutBody2": "Опыт тренера и создания собственного видеоконтента научил меня уверенно чувствовать себя перед людьми и в кадре. Открыт к съёмкам, где нужны атлетический типаж, характер и естественная подача.",
     "aboutSign": "BELARUS / MODEL & ON-CAMERA TALENT",
     "contactOverline": "БУКИНГ / КАСТИНГ / СОТРУДНИЧЕСТВО",
-    "contactLead": "Коммерческие съёмки, спортивная реклама, fashion, lifestyle и экранные проекты.",
-    "contactDetails": "ПОДТВЕРЖДЁННЫЕ КОНТАКТЫ",
+    "contactLead": "Съёмка, реклама, fashion или экранный проект? Укажите формат, город, даты и задачу — обсудим детали.",
+    "contactDetails": "ОБЩИЕ РАБОЧИЕ КОНТАКТЫ",
     "contactPending": "Контакт для бронирований пока уточняется. Это поле появится после подтверждения адреса или аккаунта.",
     "sharePage": "Поделиться страницей",
     "copyLink": "Скопировать ссылку",
@@ -162,7 +162,9 @@ window.MODEL_I18N = {
     "stagePortraitAlt": "Павел Марков выступает на сцене с микрофоном перед публикой.",
     "stageCaption": "ПУБЛИЧНОЕ ВЫСТУПЛЕНИЕ / АРХИВ 2022",
     "heroQuickGallery": "Смотреть кадры",
-    "heroQuickCard": "Кастинг-анкета"
+    "heroQuickCard": "Кастинг-анкета",
+    "inquirySubject": "Предложение о съёмке для Павла Маркова",
+    "inquiryTelegram": "Здравствуйте, Павел! Хочу обсудить модельную или экранную съёмку. Проект: ____. Даты/город: ____. Формат: ____."
   },
   "en": {
     "skip": "Skip to content",
@@ -218,8 +220,8 @@ window.MODEL_I18N = {
     "aboutBody2": "My work as a trainer and video creator has built confidence working with people and presenting on camera. I am interested in projects that call for an athletic look, character and a natural delivery.",
     "aboutSign": "BELARUS / MODEL & ON-CAMERA TALENT",
     "contactOverline": "FOR DIRECTORS / BRANDS / AGENCIES",
-    "contactLead": "Commercial campaigns, athletic advertising, fashion, lifestyle and screen projects.",
-    "contactDetails": "VERIFIED CONTACT DETAILS",
+    "contactLead": "Casting, commercial production, fashion or a screen project? Share your brief, location, dates and the role.",
+    "contactDetails": "PUBLIC PROJECT CONTACTS",
     "contactPending": "Booking contact details are being confirmed. A direct contact will appear here once verified.",
     "sharePage": "Share this page",
     "copyLink": "Copy link",
@@ -327,7 +329,9 @@ window.MODEL_I18N = {
     "stagePortraitAlt": "Pavel Markov presenting on stage with a microphone before an audience.",
     "stageCaption": "PUBLIC SPEAKING / ARCHIVE 2022",
     "heroQuickGallery": "View the work",
-    "heroQuickCard": "Casting card"
+    "heroQuickCard": "Casting card",
+    "inquirySubject": "Casting enquiry for Pavel Markov",
+    "inquiryTelegram": "Hello Pavel! I'd like to discuss a modelling or on-camera booking. Project: ____. Dates/location: ____. Format: ____."
   },
   "zh": {
     "skip": "跳转到主要内容",
@@ -383,8 +387,8 @@ window.MODEL_I18N = {
     "aboutBody2": "作为健身教练及视频内容创作者，我习惯与人沟通，也积累了镜头前表达的经验。我愿意参与需要运动型外形、人物气质及自然表现的拍摄项目。",
     "aboutSign": "白俄罗斯 / 模特及镜头表现人才",
     "contactOverline": "选角 / 品牌 / 项目合作",
-    "contactLead": "商业广告、运动品牌、时尚拍摄、生活方式与影视选角项目。",
-    "contactDetails": "已核实联系方式",
+    "contactLead": "如需讨论广告、模特或影视项目，请提供项目形式、拍摄城市、日期和具体需求。",
+    "contactDetails": "公开项目联系方式",
     "contactPending": "商务及选角联系方式仍待确认，核实后将在此展示。",
     "sharePage": "分享此页面",
     "copyLink": "复制链接",
@@ -492,6 +496,8 @@ window.MODEL_I18N = {
     "stagePortraitAlt": "帕维尔·马尔科夫在公众面前手持麦克风进行舞台演讲。",
     "stageCaption": "舞台演讲 / 2022年档案",
     "heroQuickGallery": "查看作品",
-    "heroQuickCard": "模特资料"
+    "heroQuickCard": "模特资料",
+    "inquirySubject": "帕维尔·马尔科夫 — 拍摄合作咨询",
+    "inquiryTelegram": "您好，帕维尔！我想讨论模特或视频拍摄合作。项目：____；城市和日期：____；形式：____。"
   }
 };

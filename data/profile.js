@@ -4,7 +4,9 @@ window.MODEL_PROFILE = {
   measurementsEstimated:true, clothes:null, shoes:null, chest:null, hips:null,
   availability:null,
   contacts: {
-    // Add ONLY personally confirmed booking details, e.g. email:"booking@example.com".
-    email:null, telegram:null, instagram:null, agency:null
+    // Publicly published owner contact details sourced from castefeudal/markovmade (index.html).
+    // Public general-purpose channels displayed on the owner's own MARKOVMADE site.
+    // They are NOT a representation agency or a guaranteed dedicated booking desk.
+    email:"castefeudal@gmail.com", telegram:"@markovmade", instagram:"@markovmade", agency:null
   }
 };

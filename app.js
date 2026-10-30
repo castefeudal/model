@@ -112,7 +112,7 @@ function renderVideos(){
  }).join("");
 }
 function renderContacts(){
- const configs=[["email","Email",v=>"mailto:"+v],["telegram","Telegram",v=>"https://t.me/"+v.replace(/^@/,"")],["instagram","Instagram",v=>"https://instagram.com/"+v.replace(/^@/,"")],["agency","Agency",v=>v]];
+ const configs=[["telegram","Telegram",v=>"https://t.me/"+v.replace(/^@/,"")+"?text="+encodeURIComponent(t("inquiryTelegram"))],["email","Email",v=>"mailto:"+v+"?subject="+encodeURIComponent(t("inquirySubject"))],["instagram","Instagram",v=>"https://instagram.com/"+v.replace(/^@/,"")],["agency","Agency",v=>v]];
  const rows=configs.filter(x=>val(p.contacts[x[0]])).map(([key,label,getLink])=>{
  const v=p.contacts[key]; const href=getLink(v);
  if(!(/^(mailto:|https:\/\/)/.test(href)))return "";
