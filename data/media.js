@@ -113,7 +113,6 @@ window.MODEL_ARCHIVE = [
 window.MODEL_COVERS = [
   {
     "src": "assets/portrait-fashion.webp",
-    "avif": "assets/portrait-fashion-1600.avif",
     "altKey": "fashionPortraitAlt",
     "labelKey": "coverLook1",
     "captionKey": "coverCaption1",
@@ -122,7 +121,6 @@ window.MODEL_COVERS = [
   },
   {
     "src": "assets/editorial-markovmade.webp",
-    "avif": "assets/editorial-markovmade-1600.avif",
     "altKey": "editorialPortraitAlt",
     "labelKey": "coverLook2",
     "captionKey": "coverCaption2",

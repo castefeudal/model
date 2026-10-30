@@ -75,8 +75,7 @@ try{
     console.log("LOCAL_CJK_TYPE "+x.label+" "+JSON.stringify(cjk));
     assert(!cjk.remote,"Chinese edition should not request blocked Google font service");
     assert(cjk.fonts.some(f=>f.family==="PM CJK Serif"&&f.status==="loaded"),"Chinese headline font failed to load locally");
-    if(x.width>880)assert(cjk.fonts.some(f=>f.family==="PM CJK Sans"&&f.status==="loaded"),"Desktop Chinese body font failed to load locally");
-    else assert(!cjk.fonts.some(f=>f.family==="PM CJK Sans"&&f.status==="loaded"),"Mobile must avoid downloading the heavy 170KB Chinese sans face");
+    assert(cjk.fonts.some(f=>f.family==="PM CJK Sans"&&f.status==="loaded"),"Chinese UI font failed to load locally");
   }
   assert(v.art.includes("edition-"+x.lang+".svg"),"Art not tied to edition");
   assert(v.overflow<=2,"Horizontal overflow "+v.overflow);
@@ -148,10 +147,6 @@ try{
 
   const portrait=await exec('(()=>{const img=document.querySelector("#heroImage"),comp=document.querySelector("#compPhoto");return {loaded:img.complete&&img.naturalWidth>0,visible:!img.hidden,editorial:document.querySelector("#heroVisual").classList.contains("editorial-cover"),compArchive:!!comp.querySelector(".comp-archive-image"),archiveDisclosure:!!comp.querySelector(".comp-archive-mark")?.textContent.trim(),imageWidth:img.naturalWidth};})()');
   assert(portrait.loaded&&portrait.visible&&portrait.editorial,"Owned editorial image failed to display");
-  const avifDelivery=await exec('(()=>({current:document.querySelector("#heroImage").currentSrc,mobile:document.querySelector("#coverMobileSource").getAttribute("srcset"),desktop:document.querySelector("#coverDesktopAvif").getAttribute("srcset")}))()');
-  assert(avifDelivery.mobile.includes("portrait-fashion.webp")&&avifDelivery.desktop.includes("portrait-fashion-1600.avif"),"Archive photo sources missing");
-  if(x.width<=880)assert(avifDelivery.current.includes("portrait-fashion.webp"),"Mobile should retain reliably measured WebP delivery");
-  else assert(avifDelivery.current.includes("portrait-fashion-1600.avif"),"Desktop should retain optimized AVIF");
   assert(portrait.compArchive&&portrait.archiveDisclosure,"Comp card requires an explicitly labeled archival photograph");
   const lookData=await exec('(()=>{const b=[...document.querySelectorAll(".cover-choice")];const i=document.querySelector("#heroImage");return {buttons:b.length,pressed:b.filter(x=>x.getAttribute("aria-pressed")==="true").length,image:i.getAttribute("src"),caption:document.querySelector(".visual-caption").innerText,loaded:i.complete&&i.naturalWidth>0}})()');
   assert(lookData.buttons===3&&lookData.pressed===1&&lookData.loaded,"Editorial look selector failed to initialise");
@@ -161,7 +156,6 @@ try{
   assert(await exec('document.querySelector("#heroImage").getAttribute("src").includes("editorial-markovmade.webp")'),"Second cover selection failed");
   await exec('document.querySelectorAll("[data-cover]")[2].click()');
   assert(await exec('document.querySelector("#heroImage").getAttribute("src").includes("portrait-athletic.webp")'),"Third cover selection failed");
-  assert(await exec('document.querySelector("#coverDesktopAvif").getAttribute("srcset")===""'),"Athletic cover must disable old AVIF source");
   await exec('document.querySelectorAll("[data-cover]")[0].click()');
   assert(await exec('document.querySelector("#heroImage").getAttribute("src").includes("portrait-fashion.webp")'),"Cover did not restore");
 
