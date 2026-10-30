@@ -154,9 +154,10 @@ try{
   assert(!(await exec('document.querySelector("#archiveCabinet").open')),"The secondary repetitive archive should be closed by default");
   await exec('document.querySelector(innerWidth<=880?".hero-compact-casting":".hero-actions [data-open-casting-peek]").click()');
   assert(await exec('document.querySelector("#castingPeek").open'),"Quick casting overview failed to open");
-  const snap=await exec('(()=>{const d=document.querySelector("#castingPeek"),r=d.getBoundingClientRect(),rows=document.querySelectorAll("#peekSpecs .peek-spec"),img=d.querySelector(".peek-picture img");return {left:r.left,right:r.right,rows:rows.length,real:!!img&&img.getAttribute("src").includes("portrait-digital.webp"),height:document.querySelector(".peek-picture").getBoundingClientRect().height,specs:[...rows].map(v=>v.innerText)}})()');
+  const snap=await exec('(()=>{const d=document.querySelector("#castingPeek"),r=d.getBoundingClientRect(),rows=document.querySelectorAll("#peekSpecs .peek-spec"),img=d.querySelector(".peek-picture img");return {left:r.left,right:r.right,rows:rows.length,real:!!img&&img.getAttribute("src").includes("portrait-digital.webp"),height:(innerWidth<=880?document.querySelector(".peek-mobile-head"):document.querySelector(".peek-picture")).getBoundingClientRect().height,firstSpecTop:rows[0]?.getBoundingClientRect().top,specs:[...rows].map(v=>v.innerText)}})()');
   assert(snap.left>=-2&&snap.right<=x.width+2,"Casting Desk overflows viewport width");
-  assert(snap.rows>=7&&snap.real&&snap.height>=260,"Quick casting profile must show an actual reference photo and real localized specifications");
+  assert(snap.rows>=7&&snap.real&&snap.height>=(x.width<=880?125:260),"Casting Desk must display archival face and verified specifications");
+  if(x.width<=880)assert(snap.firstSpecTop<=(x.height-52),"Mobile casting specs should be visible in the first viewport");
   assert(snap.specs.some(x=>x.includes("188")),"Casting Desk lost the verified height");
   if(["EN_DESKTOP","RU_MOBILE","ZH_MOBILE"].includes(x.label))await screenshot("CASTING_DESK_"+x.label);
   await exec('document.querySelector("#peekClose").click()');
