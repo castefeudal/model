@@ -26,3 +26,7 @@ The project still requires recent verified front/three-quarter/profile/full-body
 ## Validation
 
 `node tools/verify.mjs`; `node tools/browser-qa.mjs` with Chrome and local HTTP server; six Lighthouse combinations using `tools/grade.mjs`. Watch mobile LCP especially for ZH. Check the live production build and GitHub Pages deployment SHA after merge.
+
+## Responsive image delivery
+
+The optimized archival fashion image is delivered in AVIF variants (960/1600; 22.6/44 KB), preserving the 78.1 KB WebP fallback untouched. 1x/2x density sources are first; AVIF is never used for an arbitrary new verified casting image or the non-AVIF athletic cover. Compare Lighthouse after this change. The encoding is lossy compression, not a new or fabricated photograph.

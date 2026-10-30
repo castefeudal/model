@@ -212,3 +212,7 @@ Responsive 1x/2x mobile cover, accessible mobile lookbook controls, progressive 
 ## ISSUE 11 — casting director's route and keyboard reliability
 
 The first-screen mobile primary action opens a factual casting overview, with a direct handoff to the six-photo real archive; the enquiry action remains one tap away. The mobile strip is a keyboard-focusable region supporting arrow navigation, instead of only registering keys while unreachable. The footer retains a legible motion label after hydration; `prefers-reduced-motion` and manual opt-out remain respected. The Chinese edition does **not fetch Google Fonts**: the Latin CSS connection is created only on RU/EN and on a subsequent switch from Chinese. Desktop editorial treatment remains unchanged.
+
+### Verified owner-archive AVIF delivery
+
+`tools/build_hero_avif.py` generates AVIF renditions of the already published original fashion archive, without editing features or image content. Full-size 1600px AVIF = 44,004 B (56% of source); mobile 960px AVIF = 22,610 B (29% of source). The unmodified WebP source remains in the repository for full browser fallback. The hero `<picture>` selects AVIF automatically when supported and the cover selector changes sources together. Authentic casting photos added later automatically disable these archive AVIF sources. Encoding is deterministic via a GitHub Actions workflow with verification.
