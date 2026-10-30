@@ -65,6 +65,13 @@ try{
   console.log("TEST "+x.label+" "+JSON.stringify(v));
   assert.equal(v.edition,x.lang,"Wrong edition after direct language link");
   assert(v.lang.toLowerCase().startsWith(x.lang),"Wrong HTML lang");
+  if(x.lang==="zh"){
+    const cjk=await exec('(()=>({fonts:[...document.fonts].filter(f=>f.family.includes("PM CJK")).map(f=>({family:f.family,status:f.status})),remote:!!document.getElementById("pm-fonts-cjk")}))()');
+    console.log("LOCAL_CJK_TYPE "+x.label+" "+JSON.stringify(cjk));
+    assert(!cjk.remote,"Chinese edition should not request blocked Google font service");
+    assert(cjk.fonts.some(f=>f.family==="PM CJK Serif"&&f.status==="loaded"),"Chinese headline font failed to load locally");
+    assert(cjk.fonts.some(f=>f.family==="PM CJK Sans"&&f.status==="loaded"),"Chinese UI font failed to load locally");
+  }
   assert(v.art.includes("edition-"+x.lang+".svg"),"Art not tied to edition");
   assert(v.overflow<=2,"Horizontal overflow "+v.overflow);
   const clarity=await exec('(()=>{const s=x=>parseFloat(getComputedStyle(document.querySelector(x)).fontSize);return {body:s("body"),detail:s(".hero-detail"),section:s(".section-description"),screen:s(".screen-details>p"),about:s(".about-copy>p:not(.about-opening)"),contact:s(".contact-pending"),nav:s(".site-nav a"),language:s(".lang-btn"),button:s(".hero-actions .action"),specLabel:s(".spec-grid dt"),factLabel:s(".fact-label"),facts:!!document.querySelector(".facts-bar"),shots:document.querySelectorAll(".shot-card").length,portfolioEmpty:!!document.querySelector(".portfolio-pending")};})()');
