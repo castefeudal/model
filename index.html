@@ -37,13 +37,6 @@
       var l=["ru","en","zh"].indexOf(p)>-1?p:(["ru","en","zh"].indexOf(s)>-1?s:"ru");
       document.documentElement.dataset.edition=l;
       document.documentElement.lang=l==="zh"?"zh-CN":l;
-      if(l==="zh"){
-        // Start the editorial headline face early, without involving Google services.
-        var face=document.createElement("link");
-        face.rel="preload";face.as="font";face.type="font/woff2";
-        face.crossOrigin="anonymous";face.href="./assets/fonts/NotoSerifSC-subset.woff2";
-        document.head.appendChild(face);
-      }
       document.querySelector('meta[name="theme-color"]').setAttribute("content",{ru:"#18181a",en:"#f5f6f4",zh:"#f2e5d2"}[l]);
       var canon="https://castefeudal.github.io/model/?lang="+l;
       document.querySelector('link[rel="canonical"]').setAttribute("href",canon);
