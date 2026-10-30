@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-const variants=["ru","en","zh","ru-mobile"],rows=[];
+const variants=["ru","en","zh","ru-mobile","en-mobile","zh-mobile"],rows=[];
 for(const v of variants){
  const file="lighthouse-"+v+".json";
  if(!fs.existsSync(file)){console.error("Missing "+file);process.exitCode=1;continue;}

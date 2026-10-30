@@ -26,8 +26,11 @@ jobs:
           for lang in ru en zh; do
             ./node_modules/.bin/lighthouse "http://127.0.0.1:8765/?lang=$lang" --preset=desktop --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path="lighthouse-$lang.json" --quiet
           done
-      - name: Audit mobile Russian edition
-        run: ./node_modules/.bin/lighthouse "http://127.0.0.1:8765/?lang=ru" --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path="lighthouse-ru-mobile.json" --quiet
+      - name: Audit RU EN and Chinese on mobile
+        run: |
+          for lang in ru en zh; do
+            ./node_modules/.bin/lighthouse "http://127.0.0.1:8765/?lang=$lang" --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path="lighthouse-$lang-mobile.json" --quiet
+          done
       - name: Report measured scores
         run: node tools/grade.mjs
       - name: Upload full audit reports

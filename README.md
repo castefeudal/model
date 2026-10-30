@@ -100,3 +100,7 @@ Each `?lang=ru|en|zh` URL sets its own canonical URL and `og:url` (including bef
 
 ### CSS delivery
 The browser downloads one optimized `bundle.css` instead of three blocking CSS files. When editing `atelier.css`, `editions.css` or `clarity.css`, run `node tools/build-css.mjs` and commit the generated bundle. `node tools/verify.mjs` verifies exact freshness.
+
+## Cross-locale benchmarking
+
+The pinned Lighthouse CI workflow audits all **six** language × device combinations: RU/EN/中文 on desktop and mobile. Reports (including mobile LCP and CLS) are published as downloadable workflow artifacts; synthetic runs vary with GitHub runner/network conditions and are not equivalent to field CWV. The WebP hero is loaded eagerly, the Latin editorial font sheet is non-blocking, Chinese typefaces are fetched only when necessary, and CSS is delivered through the generated single-file production bundle. The social preview uses a deliberately credited branded portrait and a versioned OG image URL to reduce stale social cache risk.
