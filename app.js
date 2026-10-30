@@ -112,6 +112,7 @@ function renderContacts(){
 function setHero(){
  const castingSrc=window.HERO_IMAGE||media[0]?.src;
  const src=castingSrc||window.EDITORIAL_PORTRAIT;
+ if(castingSrc)qs("#editorialAvifSource")?.remove();
  if(!src)return;
  const figure=qs("#heroVisual"), img=qs("#heroImage"), caption=qs('[data-i18n="artDisclaimer"]');
  if(caption){caption.dataset.i18n=castingSrc?"realHeroCaption":"editorialHeroCaption";caption.textContent=t(caption.dataset.i18n);}

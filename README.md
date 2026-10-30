@@ -104,3 +104,6 @@ The browser downloads one optimized `bundle.css` instead of three blocking CSS f
 ## Cross-locale benchmarking
 
 The pinned Lighthouse CI workflow audits all **six** language × device combinations: RU/EN/中文 on desktop and mobile. Reports (including mobile LCP and CLS) are published as downloadable workflow artifacts; synthetic runs vary with GitHub runner/network conditions and are not equivalent to field CWV. The WebP hero is loaded eagerly, the Latin editorial font sheet is non-blocking, Chinese typefaces are fetched only when necessary, and CSS is delivered through the generated single-file production bundle. The social preview uses a deliberately credited branded portrait and a versioned OG image URL to reduce stale social cache risk.
+
+### Modern image formats
+The verified owner-controlled editorial cover now has 11.5 KB / 19.4 KB AVIF sources for different viewports and a 59.7 KB WebP fallback for unsupported browsers; the existing photo gallery is reserved for verified authentic casting images. If an original casting hero is supplied, its source disables the branded AVIF automatically.

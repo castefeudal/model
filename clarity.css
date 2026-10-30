@@ -715,3 +715,6 @@ html[data-edition=zh] .spread-editorial:before{content:"";position:absolute;widt
  .casting-digitals-body{padding:20px 16px}
 }
 @media(prefers-reduced-motion:reduce){.spread-image img,.summary-action{transition:none!important}}
+
+/* AVIF + WebP responsive editorial cover, preserving original containing block. */
+.hero-picture{display:contents}
