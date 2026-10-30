@@ -65,7 +65,7 @@ a,button{-webkit-tap-highlight-color:transparent}
  max-width:var(--max);margin-inline:auto;display:flex;justify-content:space-between;
  gap:18px;padding-top:17px;border-top:1px solid currentColor;
 }
-.section-topline>span:last-child{opacity:.65;text-align:right}
+.section-topline>span:last-child{opacity:1;text-align:right}
 .display-heading{
  font:730 clamp(56px,7.1vw,124px)/.96 var(--display);
  letter-spacing:-.082em;text-wrap:balance
