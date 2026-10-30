@@ -1,6 +1,6 @@
 window.MODEL_I18N = {
   "ru": {
-    "peekAction": "Кастинг-профиль за 15 секунд",
+    "peekAction": "Кастинг-досье",
     "peekProof": "Архивный портрет",
     "peekArchive": "Другие ракурсы — раскрыть архив",
     "peekAria": "Открыть краткий профиль для кастинга",
@@ -230,7 +230,7 @@ window.MODEL_I18N = {
     "compCloseAria": "Закрыть кастинг-анкету"
   },
   "en": {
-    "peekAction": "Casting at a glance",
+    "peekAction": "Casting dossier",
     "peekProof": "Archive portrait",
     "peekArchive": "More angles — open the archive",
     "peekAria": "Open quick casting overview",
