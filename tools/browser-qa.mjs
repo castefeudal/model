@@ -127,7 +127,7 @@ try{
    assert.equal(await exec('document.querySelectorAll("#gallery .gallery-item").length'),1,"Category filter incorrect");
    await exec('document.querySelector("[data-filter=all]").click()');
    assert.equal(await exec('document.querySelectorAll("#gallery .gallery-item").length'),3,"All archive images not restored");
-   await exec('document.querySelector("#gallery [data-index=0]").click()');
+   await exec('document.querySelector("[data-index]").click()');
    assert(await exec('document.querySelector("#lightbox").open'),"Archive image lightbox did not open");
    await exec('document.querySelector("#lbNext").click()');
    assert.equal(await exec('document.querySelector("#lbCounter").innerText'),"2 / 3","Next photo failed");
