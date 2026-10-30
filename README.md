@@ -107,3 +107,9 @@ The pinned Lighthouse CI workflow audits all **six** language × device combinat
 
 ### Modern image formats
 The verified owner-controlled editorial cover now has 11.5 KB / 19.4 KB AVIF sources for different viewports and a 59.7 KB WebP fallback for unsupported browsers; the existing photo gallery is reserved for verified authentic casting images. If an original casting hero is supplied, its source disables the branded AVIF automatically.
+
+## Curated photographic archive / Edition II
+
+Five photos from the owner's own `castefeudal/markovmade` repository are now locally copied and integrated: fashion/editorial, close-up portrait, athletic beach view, stage speaking (source file dated 2022), and costume/character look. The original files remain untouched in the source repository. Their use is **archival / styled editorial only**, explicitly labeled in every language. They are never presented as current agency digitals, verified acting roles, paid model campaigns, or unretouched comp-card photographs. The official `MODEL_PHOTOS` still starts empty and can be populated only with separately verified casting materials.
+
+The new layout places the fashion image in a full editorial opening spread, a curated three-image gallery with filters and full-screen viewer, and a speaking photograph in the on-camera section. The original black-backdrop portrait remains the fast-loading hero. Every image has RU/EN/中文 alt copy, localized captions and an honest archival badge. `data/media.js` explicitly separates `MODEL_ARCHIVE` from `MODEL_PHOTOS`, including a `featured` flag to avoid duplicate photos across the page.

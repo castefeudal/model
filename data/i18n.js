@@ -140,7 +140,7 @@ window.MODEL_I18N = {
     "portraitAlt": "Павел Марков, портрет.",
     "spreadIssue": "01 / ПОРТРЕТ",
     "spreadTitle": "Сначала <em>личность.</em>",
-    "spreadBody": "Один характерный образ вместо случайных фотографий. Брендовый портрет задаёт настроение, а настоящие кастинговые снимки будут представлены отдельно.",
+    "spreadBody": "Уверенный взгляд, выразительная пластика и контраст фактур. Стилизованный образ из личного архива раскрывает ещё одну сторону характера.",
     "spreadCaption": "БРЕНДОВЫЙ ПОРТРЕТ / MARKOVMADE",
     "spreadDisclosure": "СТИЛИЗОВАННЫЙ ОБРАЗ / НЕ КАСТИНГ-ФОТО",
     "spreadLink": "Модельные параметры",
@@ -152,7 +152,8 @@ window.MODEL_I18N = {
     "filtersAria": "Фильтр фотографий",
     "shotlistAria": "План фотографий для кастинга",
     "lightboxAria": "Полноэкранный просмотр фотографий",
-    "cardAria": "Кастинг-анкета"
+    "cardAria": "Кастинг-анкета",
+    "archiveExplainer": "Архивные фотографии и стилизованные брендовые образы разных периодов. Они показывают диапазон, но не заменяют актуальные агентские digitals."
   },
   "en": {
     "skip": "Skip to content",
@@ -295,7 +296,7 @@ window.MODEL_I18N = {
     "portraitAlt": "Pavel Markov, portrait.",
     "spreadIssue": "01 / THE PORTRAIT",
     "spreadTitle": "Presence <em>first.</em>",
-    "spreadBody": "One distinctive branded image is more compelling than an archive of filler. This visual sets the tone; genuine unretouched casting photographs will be shown separately.",
+    "spreadBody": "Direct gaze, expressive movement, confident composition. A styled image from the personal archive, showing another side of the character.",
     "spreadCaption": "BRAND PORTRAIT / MARKOVMADE",
     "spreadDisclosure": "STYLED EDITORIAL / NOT A CASTING HEADSHOT",
     "spreadLink": "View casting profile",
@@ -307,7 +308,8 @@ window.MODEL_I18N = {
     "filtersAria": "Photo gallery filters",
     "shotlistAria": "Casting photography plan",
     "lightboxAria": "Full-screen photo viewer",
-    "cardAria": "Casting specifications card"
+    "cardAria": "Casting specifications card",
+    "archiveExplainer": "Archived photographs and styled brand imagery from different periods. They show range, but do not replace current agency digitals."
   },
   "zh": {
     "skip": "跳转到主要内容",
@@ -450,7 +452,7 @@ window.MODEL_I18N = {
     "portraitAlt": "帕维尔·马尔科夫肖像。",
     "spreadIssue": "01 / 人物肖像",
     "spreadTitle": "先看<em>人物。</em>",
-    "spreadBody": "精选一张有辨识度的品牌形象照，而非大量无意义的图片。该画面体现气质；真实且未经改变面部特征的选角照片将单独展示。",
+    "spreadBody": "直视镜头、鲜明的肢体表现和画面层次。这组来自个人档案的风格化作品呈现人物的另一面。",
     "spreadCaption": "品牌视觉肖像 / MARKOVMADE",
     "spreadDisclosure": "品牌视觉作品 / 不作为选角证件照",
     "spreadLink": "查看选角资料",
@@ -462,6 +464,7 @@ window.MODEL_I18N = {
     "filtersAria": "照片筛选",
     "shotlistAria": "选角照片拍摄要求",
     "lightboxAria": "全屏照片查看",
-    "cardAria": "模特选角资料"
+    "cardAria": "模特选角资料",
+    "archiveExplainer": "来自不同阶段的照片和风格化品牌素材，用于展示个人气质与表现范围，不替代近期经纪公司选角照。"
   }
 };

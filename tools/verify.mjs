@@ -10,7 +10,7 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","atelier.css","editions.css","clarity.css","bundle.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
+const required=["index.html","atelier.css","editions.css","clarity.css","bundle.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -20,7 +20,7 @@ const scripts=["data/profile.js","data/media.js","data/i18n.js","app.js","polish
 scripts.forEach(p=>{if(!exists(p))return;try{execFileSync(process.execPath,["--check",path.join(root,p)],{stdio:"pipe"});ok("Syntax "+p)}catch(e){fail("JavaScript syntax: "+p+" "+e.stderr?.toString())}});
 const sandbox={window:{}};
 for(const p of scripts.slice(0,3))if(exists(p))vm.runInNewContext(read(p),sandbox,{filename:p});
-const d=sandbox.window.MODEL_I18N,p=sandbox.window.MODEL_PROFILE,photos=sandbox.window.MODEL_PHOTOS||[],videos=sandbox.window.MODEL_VIDEOS||[];
+const d=sandbox.window.MODEL_I18N,p=sandbox.window.MODEL_PROFILE,photos=sandbox.window.MODEL_PHOTOS||[],archive=sandbox.window.MODEL_ARCHIVE||[],videos=sandbox.window.MODEL_VIDEOS||[];
 for(const l of ["ru","en","zh"])if(!d[l])fail("Missing language: "+l);
 if(d?.ru && d?.en && d?.zh){
  const sets=Object.fromEntries(["ru","en","zh"].map(l=>[l,new Set(Object.keys(d[l]))]));
@@ -83,6 +83,22 @@ for(const v of videos){
  if(!v.src?.startsWith("assets/video/")&&!/^https:\/\/www\.youtube\.com\/embed\/[\w-]{11}$/.test(v.src))fail("Invalid video path "+v.src);
  if(v.src.startsWith("assets/video/")&&!exists(v.src))fail("Video missing "+v.src);
 }
+const actualArchive=new Set();
+for(const img of archive){
+ if(!img.src?.startsWith("assets/portrait-"))fail("Archive photo path not in curated set: "+img.src);
+ if(!categories.has(img.category))fail("Archive category is invalid: "+img.category);
+ if(!exists(img.src))fail("Archive photo missing "+img.src);
+ if(!img.archive)fail("Unlabelled archived image "+img.src);
+ if(!img.alt?.ru||!img.alt?.en||!img.alt?.zh)fail("Missing archive alt translations "+img.src);
+ if(!img.caption?.ru||!img.caption?.en||!img.caption?.zh)fail("Missing archive caption translations "+img.src);
+ if(actualArchive.has(img.src))fail("Duplicate archive image "+img.src);
+ actualArchive.add(img.src);
+}
+if(archive.length<5)fail("At least five verified source archive images expected");
+if(archive.filter(im=>im.featured).length!==2)fail("Two lead archive images should be used outside the gallery");
+if(!html.includes('src="./assets/portrait-fashion.webp"'))fail("Fashion editorial spread missing");
+if(!html.includes('src="./assets/portrait-stage.webp"'))fail("On-stage proof image missing");
+if(!html.includes('id="archiveHeading"'))fail("Archive gallery heading missing");
 if(sandbox.window.HERO_IMAGE&&!exists(sandbox.window.HERO_IMAGE))fail("Hero asset missing");
 if(sandbox.window.EDITORIAL_PORTRAIT&&!exists(sandbox.window.EDITORIAL_PORTRAIT))fail("Editorial portrait file missing");
 ok("Media paths & contacts");

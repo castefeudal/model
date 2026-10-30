@@ -2,7 +2,7 @@
 (() => {
   "use strict";
   const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
-  const dict=window.MODEL_I18N||{},profile=window.MODEL_PROFILE||{},photos=window.MODEL_PHOTOS||[];
+  const dict=window.MODEL_I18N||{},profile=window.MODEL_PROFILE||{},photos=window.MODEL_PHOTOS||[],archive=window.MODEL_ARCHIVE||[];
   const t=key=>dict[(document.documentElement.lang||"ru").split("-")[0]]?.[key]||dict.en?.[key]||key;
   const header=$(".site-header"),progress=$("#readingProgress"),menu=$("#siteNav"),toggle=$("#menuToggle");
   const navLinks=$$("#siteNav a[href^='#']");
@@ -66,7 +66,7 @@
   },true);
   // Gallery can be switched to a dense contact-sheet view for casting.
   const filters=$("#galleryFilters"),gallery=$("#gallery");
-  if(filters&&gallery&&photos.length>=3){
+  if(filters&&gallery&&(photos.length+archive.filter(im=>!im.featured).length)>=3){
     const switcher=document.createElement("button");
     switcher.type="button";
     switcher.className="filter view-toggle";

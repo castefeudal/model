@@ -92,6 +92,11 @@ try{
   assert(!clipped.length,"Text clipped outside viewport: "+JSON.stringify(clipped));
 
   assert(v.specs>=7&&v.cardActions>=2&&v.hasGallery,"Casting functions unavailable");
+  const archiveData=await exec('(()=>({cards:document.querySelectorAll("#gallery .gallery-item").length,images:document.querySelectorAll("#gallery .gallery-item img").length,stamps:document.querySelectorAll("#gallery .gallery-stamp").length,filters:document.querySelectorAll("#galleryFilters .filter").length,screen:document.querySelector(".screen-archive img")?.getAttribute("src"),fashion:document.querySelector(".spread-image img")?.getAttribute("src"),digitalsVisible:!document.querySelector("#portfolioEmpty").hidden}))()');
+  assert(archiveData.cards===3 && archiveData.images===3 && archiveData.stamps===3 && archiveData.filters>=4,"Archive gallery is incomplete");
+  assert(archiveData.digitalsVisible,"Authentic casting photo placeholder must remain available");
+  assert(archiveData.screen?.includes("portrait-stage.webp") && archiveData.fashion?.includes("portrait-fashion.webp"),"Distinct editorial images not loaded");
+
   const editorial=await exec('(()=>{const s=document.querySelector("#editorialSpread"),d=document.querySelector("#portfolioEmpty"),i=s.querySelector("img");return {has:s.getBoundingClientRect().height>0,portrait:i.complete&&i.naturalWidth>0,alt:i.alt,folded:!d.open,native:d.tagName==="DETAILS",canonical:document.querySelector("link[rel=canonical]").href,og:document.querySelector("meta[property=\\\"og:url\\\"]").content,heading:document.querySelector("#editorialSpreadTitle").innerText};})()');
   assert(editorial.has&&editorial.portrait&&editorial.alt&&editorial.folded&&editorial.native,"Editorial feature/photo disclosure incomplete");
   assert(editorial.canonical.endsWith("?lang="+x.lang)&&editorial.og.endsWith("?lang="+x.lang),"Localized SEO metadata incorrect");
@@ -117,6 +122,24 @@ try{
   await exec('document.querySelector("#closeComp").click()');
   assert(!(await exec('document.querySelector("#compDialog").open')),"Comp card did not close");
   await screenshot(x.label);
+  if(x.label==="EN_DESKTOP"){
+   await exec('document.querySelector("[data-filter=portraits]").click()');
+   assert.equal(await exec('document.querySelectorAll("#gallery .gallery-item").length'),1,"Category filter incorrect");
+   await exec('document.querySelector("[data-filter=all]").click()');
+   assert.equal(await exec('document.querySelectorAll("#gallery .gallery-item").length'),3,"All archive images not restored");
+   await exec('document.querySelector("#gallery [data-index=0]").click()');
+   assert(await exec('document.querySelector("#lightbox").open'),"Archive image lightbox did not open");
+   await exec('document.querySelector("#lbNext").click()');
+   assert.equal(await exec('document.querySelector("#lbCounter").innerText'),"2 / 3","Next photo failed");
+   await exec('document.querySelector("#lbClose").click()');
+   assert(!(await exec('document.querySelector("#lightbox").open')),"Lightbox did not close");
+   await exec('document.querySelector("#archiveHeading").scrollIntoView({behavior:"instant"})');
+   await sleep(520);
+   await screenshot("ARCHIVE_GALLERY");
+   await exec('document.querySelector("#screenTitle").scrollIntoView({behavior:"instant"})');
+   await sleep(470);
+   await screenshot("ON_CAMERA");
+  }
   if(x.label==="EN_DESKTOP"){
    await exec('document.querySelector("#portfolio").scrollIntoView({behavior:"instant"})');
    await sleep(500);await screenshot("PORTFOLIO");

@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const p=window.MODEL_PROFILE, media=window.MODEL_PHOTOS||[],videos=window.MODEL_VIDEOS||[],dict=window.MODEL_I18N;
+const p=window.MODEL_PROFILE,media=window.MODEL_PHOTOS||[],archive=window.MODEL_ARCHIVE||[],videos=window.MODEL_VIDEOS||[],dict=window.MODEL_I18N;
 const qs=s=>document.querySelector(s), qsa=s=>Array.from(document.querySelectorAll(s));
 const locale=new URLSearchParams(location.search).get("lang");
 let persisted="ru";
@@ -68,13 +68,26 @@ function setLanguage(next){
  document.querySelector('meta[name="description"]').content=lang==="ru"?"Павел Марков — модель и талант для съёмок. Рост 188 см, атлетический типаж, Беларусь.":lang==="zh"?"帕维尔·马尔科夫个人模特与选角作品集。身高188厘米，运动型外形，来自白俄罗斯。":"Pavel Markov: model and on-camera talent. 188 cm, athletic build, based in Belarus.";
  renderSpecs();renderGallery();renderVideos();renderContacts();
 }
+const captionText=im=>typeof im.caption==="object"?(im.caption[lang]||im.caption.en||"PAVEL MARKOV"):im.caption||"PAVEL MARKOV";
 function renderGallery(){
+ const items=[...media,...archive.filter(im=>!im.featured)];
  const cats=["all","portraits","editorial","athletic","commercial","cinematic"];
- const available=cats.filter(c=>c==="all"||media.some(im=>im.category===c));
- const filters=qs("#galleryFilters");filters.hidden=media.length<2||available.length<2;
+ const available=cats.filter(c=>c==="all"||items.some(im=>im.category===c));
+ const filters=qs("#galleryFilters");
+ filters.hidden=items.length<2||available.length<2;
+ if(!available.includes(filter))filter="all";
  filters.innerHTML=available.map(c=>'<button type="button" class="filter" data-filter="'+c+'" aria-pressed="'+(filter===c)+'">'+safe(t(c==="athletic"?"athleticFilter":c))+'</button>').join("");
- visible=media.filter(im=>filter==="all"||im.category===filter);
- qs("#gallery").innerHTML=visible.map((im,i)=>'<button class="gallery-item '+(i%5===0?"wide":i%5===1?"narrow":"")+'" data-index="'+i+'" type="button" aria-label="'+safe((im.alt?.[lang]||im.alt?.en||t("photo")))+ '"><img src="'+safe(im.src)+'" loading="lazy" decoding="async" alt="'+safe(im.alt?.[lang]||im.alt?.en||"Pavel Markov")+'" style="object-position:'+safe(im.position||"50% 50%")+'"><span class="gallery-caption"><span>'+safe(im.caption||"PAVEL MARKOV")+'</span><span>'+(i+1).toString().padStart(2,"0")+' / '+visible.length.toString().padStart(2,"0")+'</span></span></button>').join("");
+ visible=items.filter(im=>filter==="all"||im.category===filter);
+ const cards=visible.map((im,i)=>{
+   const label=im.alt?.[lang]||im.alt?.en||t("photo");
+   const caption=captionText(im);
+   const stamp=im.archive?t("archiveBadge"):t("castingBadge");
+   return '<button class="gallery-item '+(i===0?"gallery-first":i===1?"gallery-second":"gallery-third")+'" data-index="'+i+'" type="button" aria-label="'+safe(label)+'">'+
+    '<span class="gallery-frame"><img src="'+safe(im.src)+'" loading="lazy" decoding="async" width="840" height="1080" alt="'+safe(label)+'" style="object-position:'+safe(im.position||"50% 50%")+'">'+
+    '<span class="gallery-stamp">'+safe(stamp)+'</span><span class="gallery-open" aria-hidden="true">↗</span></span>'+
+    '<span class="gallery-caption"><span>'+safe(caption)+'</span><span>'+String(i+1).padStart(2,"0")+' / '+String(visible.length).padStart(2,"0")+'</span></span></button>';
+ });
+ qs("#gallery").innerHTML=cards.join("");
  qs("#portfolioEmpty").hidden=media.length>0;
  qs("#galleryFootnote").hidden=media.length>0;
 }
@@ -84,7 +97,7 @@ function openLightbox(index){
  const im=visible[active];qs("#lbImage").src=im.full||im.src;
  qs("#lbImage").onerror=()=>{qs("#lbImage").removeAttribute("src");qs("#lbCaption").textContent=t("missingImage")};
  qs("#lbImage").alt=im.alt?.[lang]||im.alt?.en||"Pavel Markov";
- qs("#lbCaption").textContent=im.caption||"PAVEL MARKOV";
+ qs("#lbCaption").textContent=captionText(im);
  qs("#lbCounter").textContent=(active+1)+" / "+visible.length;
  [visible[(active+1)%visible.length],visible[(active-1+visible.length)%visible.length]].forEach(x=>{if(x){const image=new Image();image.src=x.full||x.src;}});
  if(!qs("#lightbox").open){lastFocus=document.activeElement;qs("#lightbox").showModal();}
