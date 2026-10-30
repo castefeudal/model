@@ -149,6 +149,29 @@ try{
     assert(!(await exec('document.querySelector("#siteNav").classList.contains("open")')),"Escape did not close navigation");
   }
 
+  // ISSUE 09 / casting-director first: a factual profile in one click.
+  assert(!(await exec('document.querySelector("#castingPeek").open')),"Casting Desk should not cover the initial portrait");
+  assert(!(await exec('document.querySelector("#archiveCabinet").open')),"The secondary repetitive archive should be closed by default");
+  await exec('document.querySelector(innerWidth<=880?".hero-compact-casting":".hero-actions [data-open-casting-peek]").click()');
+  assert(await exec('document.querySelector("#castingPeek").open'),"Quick casting overview failed to open");
+  const snap=await exec('(()=>{const d=document.querySelector("#castingPeek"),r=d.getBoundingClientRect(),rows=document.querySelectorAll("#peekSpecs .peek-spec"),img=d.querySelector(".peek-picture img");return {left:r.left,right:r.right,rows:rows.length,real:!!img&&img.getAttribute("src").includes("portrait-digital.webp"),height:document.querySelector(".peek-picture").getBoundingClientRect().height,specs:[...rows].map(v=>v.innerText)}})()');
+  assert(snap.left>=-2&&snap.right<=x.width+2,"Casting Desk overflows viewport width");
+  assert(snap.rows>=7&&snap.real&&snap.height>=260,"Quick casting profile must show an actual reference photo and real localized specifications");
+  assert(snap.specs.some(x=>x.includes("188")),"Casting Desk lost the verified height");
+  if(["EN_DESKTOP","RU_MOBILE","ZH_MOBILE"].includes(x.label))await screenshot("CASTING_DESK_"+x.label);
+  await exec('document.querySelector("#peekClose").click()');
+  assert(!(await exec('document.querySelector("#castingPeek").open')),"Casting overview did not close");
+  if(x.label==="EN_DESKTOP"){
+    await exec('document.querySelector(".hero-proof").click()');
+    assert(await exec('document.querySelector("#castingPeek").open'),"Archival face teaser must open Casting Desk");
+    await exec('document.querySelector("#peekEnquiry").click()');
+    assert(await exec('document.querySelector("#bookingDialog").open')&&!(await exec('document.querySelector("#castingPeek").open')),"Casting Desk booking handoff is broken");
+    await exec('document.querySelector("[data-close-booking]").click()');
+    await exec('document.querySelector(".hero-proof").click()');
+    await exec('document.querySelector("#peekComp").click()');
+    assert(await exec('document.querySelector("#compDialog").open'),"Casting Desk printable comp-card handoff failed");
+    await exec('document.querySelector("#closeComp").click()');
+  }
   // Real dialog, not a dead placeholder.
   await exec('document.querySelector("[data-open-card]").click()');
   assert(await exec('document.querySelector("#compDialog").open'),"Comp card did not open");
@@ -204,7 +227,7 @@ try{
    assert.equal(await exec('document.querySelector("#lbCounter").innerText'),"2 / 3","Next photo failed");
    await exec('document.querySelector("#lbClose").click()');
    assert(!(await exec('document.querySelector("#lightbox").open')),"Lightbox did not close");
-   await exec('document.querySelector("#archiveHeading").scrollIntoView({behavior:"instant"})');
+   await exec('document.querySelector("#archiveCabinet").open=true;document.querySelector("#archiveHeading").scrollIntoView({behavior:"instant"})');
    await sleep(520);
    await screenshot("ARCHIVE_GALLERY");
    await exec('document.querySelector("#screenTitle").scrollIntoView({behavior:"instant"})');
