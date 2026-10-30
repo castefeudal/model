@@ -168,3 +168,7 @@ An internationally localized **casting-first editorial experience**. This releas
 - This release improves visual completeness **without fabricating representation, past clients, acting roles, image provenance or up-to-date measurements**.
 
 **Remaining source-data prerequisites (not solvable by CSS):** one current unretouched face portrait, full-length original casting digitals, verified clothes/shoe measurements, and a current 30–60-second on-camera introduction if a film-facing showreel is desired.
+
+### Locally hosted CJK type
+
+The Chinese edition uses OFL-licensed, version-pinned Noto Sans SC and Noto Serif SC **subset WOFF2** files in `assets/fonts/`. A CI builder `tools/build_cjk_font.py` regenerates those assets from Google's upstream OFL font revisions and publishes licence texts. Production never contacts Google Fonts for CJK glyphs, which is important in mainland China. If Chinese copy changes, rerun the builder so `covered-glyphs.txt` and assets stay in sync; the structural gate rejects missing glyph coverage. The generator uses pinned upstream source commits and stores no external URLs in the runtime CSS.
