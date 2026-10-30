@@ -10,10 +10,20 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
+const required=["index.html","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
+if(exists("assets/fonts/covered-glyphs.txt")){
+ const all=read("data/i18n.js")+html;
+ const needed=new Set([...all].filter(ch=>(ch.codePointAt(0)>=0x3400&&ch.codePointAt(0)<=0x9FFF)||
+  (ch.codePointAt(0)>=0x3000&&ch.codePointAt(0)<=0x303F)||
+  (ch.codePointAt(0)>=0xFF00&&ch.codePointAt(0)<=0xFFEF)));
+ const covered=new Set([...read("assets/fonts/covered-glyphs.txt")]);
+ const missing=[...needed].filter(ch=>!covered.has(ch));
+ if(missing.length)fail("CJK font subset lacks new localized characters: "+missing.join(""));
+ else ok("Self-hosted Chinese font glyph coverage: "+needed.size+" required characters");
+}
 try{execFileSync(process.execPath,["tools/build-css.mjs","--check"],{cwd:root,stdio:"pipe"});ok("Production CSS bundle is fresh")}
 catch(e){fail("Production CSS bundle out of date: run node tools/build-css.mjs")}
 const scripts=["data/profile.js","data/media.js","data/i18n.js","app.js","polish.js","premiere.js","tools/browser-qa.mjs"];
