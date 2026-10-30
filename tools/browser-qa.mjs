@@ -119,9 +119,9 @@ try{
   assert(await exec('document.querySelector("#portfolioEmpty").open'),"Casting photo requirements cannot be opened");
   await exec('document.querySelector("#portfolioEmpty").open=false');
 
-  const portrait=await exec('(()=>{const img=document.querySelector("#heroImage"),comp=document.querySelector("#compPhoto");return {loaded:img.complete&&img.naturalWidth>0,visible:!img.hidden,editorial:document.querySelector("#heroVisual").classList.contains("editorial-cover"),compPending:comp.textContent.includes("PHOTO / PENDING"),imageWidth:img.naturalWidth};})()');
+  const portrait=await exec('(()=>{const img=document.querySelector("#heroImage"),comp=document.querySelector("#compPhoto");return {loaded:img.complete&&img.naturalWidth>0,visible:!img.hidden,editorial:document.querySelector("#heroVisual").classList.contains("editorial-cover"),compArchive:!!comp.querySelector(".comp-archive-image"),archiveDisclosure:!!comp.querySelector('[data-i18n="compArchiveLabel"]')?.textContent.trim(),imageWidth:img.naturalWidth};})()');
   assert(portrait.loaded&&portrait.visible&&portrait.editorial,"Owned editorial image failed to display");
-  assert(portrait.compPending,"Branded editorial cover must not be passed off as a casting headshot");
+  assert(portrait.compArchive&&portrait.archiveDisclosure,"Comp card requires an explicitly labeled archival photograph");
   const lookData=await exec('(()=>{const b=[...document.querySelectorAll(".cover-choice")];const i=document.querySelector("#heroImage");return {buttons:b.length,pressed:b.filter(x=>x.getAttribute("aria-pressed")==="true").length,image:i.getAttribute("src"),caption:document.querySelector(".visual-caption").innerText,loaded:i.complete&&i.naturalWidth>0}})()');
   assert(lookData.buttons===3&&lookData.pressed===1&&lookData.loaded,"Editorial look selector failed to initialise");
   assert(lookData.image.includes("portrait-fashion.webp"),"First-look cover is not an actual personal archive image");
@@ -162,6 +162,20 @@ try{
 
   await exec('document.querySelector("[data-close-booking]").click()');
   assert(!(await exec('document.querySelector("#bookingDialog").open')),"Direct casting enquiry failed to close");
+
+  // Every photographic contact-sheet image opens its OWN full-resolution
+  // source, not an unrelated filtered gallery item.
+  await exec('document.querySelector(".folio-open[data-folio-index=\"4\"]").click()');
+  assert(await exec('document.querySelector("#lightbox").open'),"Lookbook photo viewer does not open");
+  assert.equal(await exec('document.querySelector("#lbCounter").innerText'),"5 / 6","Wrong archival frame");
+  assert(await exec('document.querySelector("#lbImage").getAttribute("src").includes("portrait-character.webp")'),"Lookbook is not displaying source photograph");
+  await exec('document.querySelector("#lbNext").click()');
+  assert.equal(await exec('document.querySelector("#lbCounter").innerText'),"6 / 6","Lookbook next failed");
+  await exec('document.querySelector("#lbNext").click()');
+  assert.equal(await exec('document.querySelector("#lbCounter").innerText'),"1 / 6","Lookbook wrap-around failed");
+  if(x.label==="EN_DESKTOP"){await exec('document.querySelector("#lbImage").decode().then(()=>true).catch(()=>false)');await screenshot("FULLSCREEN_ARCHIVE");}
+  await exec('document.querySelector("#lbClose").click()');
+  assert(!(await exec('document.querySelector("#lightbox").open')),"Lookbook photo viewer did not close");
   await screenshot(x.label);
   if(x.label==="EN_DESKTOP"){
    await exec('document.querySelector("[data-filter=portraits]").click()');
