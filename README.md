@@ -35,7 +35,7 @@ No clip-art flags, dragons, stock models, AI faces or counterfeit acting credits
 | `tools/verify.mjs` | No-dependency integrity/translation/syntax checks |
 | `tools/browser-qa.mjs` | Actual Chromium tests at desktop/tablet/mobile widths and for all editions |
 
-**Current media limitation:** Real photos and videos have not yet been supplied. The elaborate image compositions are deliberately **abstract vector art** and are not presented as Pavel's photographs. Authentic, recent headshots and full-body shots are essential before sending this as a finished casting portfolio.
+**Media integrity:** The site uses one explicitly credited branded editorial portrait, plus original vector edition art. That portrait is not a certified untouched casting headshot and is excluded from the official comp card. Genuine casting photographs, showreel and a verified booking contact are still required.
 
 ## Features
 
@@ -87,3 +87,11 @@ When authentic headshots are provided, set `window.HERO_IMAGE` and
   is deliberately excluded from the printable comp card.
 - `atelier.css` and `editions.css` are legacy foundations; `clarity.css` is loaded last.
 
+
+## New editorial spread / selected portrait
+
+The portfolio opens with a curated *single-image* brand study, not a staged gallery of fabricated shoots. The same owned MarkovMade portrait is intentionally reframed and clearly labeled editorial, while actual headshots and full-length casting photographs remain separate. Their requirements are accessible through the expandable native `details` element. On photo upload, the real photo gallery appears automatically. All copy, image alternative text, navigation labels and expandable information are localized for RU/EN/中文.
+
+## International search metadata
+
+Each `?lang=ru|en|zh` URL sets its own canonical URL and `og:url` (including before deferred scripts), and `sitemap.xml` lists every edition with reciprocal `hreflang` links. Changing edition updates those values without a page reload. As GitHub Pages serves the same initial HTML shell for all query variants, crawlers must execute the translation scripts to index localized body text; separate prerendered routes would be required for fully server-rendered international SEO.

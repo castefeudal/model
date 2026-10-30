@@ -88,6 +88,13 @@ try{
   assert(v.headingLeft>=-5&&v.headingRight<=x.width+5,"Heading outside viewport");
   assert(v.headingScroll<=4,"Heading text overflow "+v.headingScroll);
   assert(v.specs>=7&&v.cardActions>=2&&v.hasGallery,"Casting functions unavailable");
+  const editorial=await exec('(()=>{const s=document.querySelector("#editorialSpread"),d=document.querySelector("#portfolioEmpty"),i=s.querySelector("img");return {has:s.getBoundingClientRect().height>0,portrait:i.complete&&i.naturalWidth>0,alt:i.alt,folded:!d.open,native:d.tagName==="DETAILS",canonical:document.querySelector("link[rel=canonical]").href,og:document.querySelector("meta[property=\\\"og:url\\\"]").content,heading:document.querySelector("#editorialSpreadTitle").innerText};})()');
+  assert(editorial.has&&editorial.portrait&&editorial.alt&&editorial.folded&&editorial.native,"Editorial feature/photo disclosure incomplete");
+  assert(editorial.canonical.endsWith("?lang="+x.lang)&&editorial.og.endsWith("?lang="+x.lang),"Localized SEO metadata incorrect");
+  await exec('document.querySelector("#portfolioEmpty").open=true');
+  assert(await exec('document.querySelector("#portfolioEmpty").open'),"Casting photo requirements cannot be opened");
+  await exec('document.querySelector("#portfolioEmpty").open=false');
+
   const portrait=await exec('(()=>{const img=document.querySelector("#heroImage"),comp=document.querySelector("#compPhoto");return {loaded:img.complete&&img.naturalWidth>0,visible:!img.hidden,editorial:document.querySelector("#heroVisual").classList.contains("editorial-cover"),compPending:comp.textContent.includes("PHOTO / PENDING"),imageWidth:img.naturalWidth};})()');
   assert(portrait.loaded&&portrait.visible&&portrait.editorial,"Owned editorial image failed to display");
   assert(portrait.compPending,"Branded editorial cover must not be passed off as a casting headshot");
@@ -118,7 +125,7 @@ try{
  assert.equal(change.edition,"en");assert.equal(change.probe,"retained");assert(change.url.includes("lang=en"));assert(change.text.includes("PAVEL"));
  await exec('document.querySelector(".lang-btn[data-lang=zh]").click();true');
  change=await exec('({edition:document.documentElement.dataset.edition,text:document.querySelector("#heroHeading").innerText,url:location.search,probe:window.__editionProbe,lang:document.documentElement.lang})');
- assert.equal(change.edition,"zh");assert.equal(change.probe,"retained");assert(change.url.includes("lang=zh"));assert(change.text.includes("帕维尔"));assert.equal(change.lang,"zh-CN");
+ assert.equal(change.edition,"zh");assert.equal(change.probe,"retained");assert(change.url.includes("lang=zh"));assert(change.text.includes("帕维尔"));assert.equal(change.lang,"zh-CN"); assert.equal(await exec('document.querySelector("link[rel=canonical]").href.endsWith("?lang=zh")'),true,"Canonicals must update on language switch");
  await exec('document.querySelector(".lang-btn[data-lang=ru]").click();true');
  assert.equal(await exec('document.documentElement.dataset.edition'),"ru");
  if(errors.length)throw Error("Runtime exceptions: "+errors.join(" | "));

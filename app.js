@@ -44,7 +44,12 @@ function setLanguage(next){
  }
  try{localStorage.setItem("pm-lang",lang)}catch{}
  const url=new URL(location.href);url.searchParams.set("lang",lang);history.replaceState(null,"",url);
- qsa("[data-i18n]").forEach(node=>{const k=node.dataset.i18n;if(dict[lang][k])node.innerHTML=dict[lang][k]});
+ const canonical="https://castefeudal.github.io/model/?lang="+lang;
+ document.querySelector('link[rel="canonical"]')?.setAttribute("href",canonical);
+ document.querySelector('meta[property="og:url"]')?.setAttribute("content",canonical);
+ qsa("[data-i18n]").forEach(node=>{const k=node.dataset.i18n;if(Object.hasOwn(dict[lang],k))node.innerHTML=dict[lang][k]});
+ qsa("[data-i18n-alt]").forEach(node=>node.setAttribute("alt",t(node.dataset.i18nAlt)));
+ qsa("[data-i18n-aria]").forEach(node=>node.setAttribute("aria-label",t(node.dataset.i18nAria)));
  qsa(".lang-btn").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));
  qs("#menuToggle").setAttribute("aria-label",t("menu"));
  document.querySelector('meta[property="og:locale"]')?.setAttribute("content",lang==="ru"?"ru_RU":lang==="zh"?"zh_CN":"en_US");
@@ -97,29 +102,25 @@ function renderContacts(){
 }
 function setHero(){
  const castingSrc=window.HERO_IMAGE||media[0]?.src;
- const editorialSrc=window.EDITORIAL_PORTRAIT;
- const src=castingSrc||editorialSrc;
+ const src=castingSrc||window.EDITORIAL_PORTRAIT;
  if(!src)return;
- const visual=qs("#heroVisual"), img=qs("#heroImage"), caption=qs('[data-i18n="artDisclaimer"]');
- // Editorial visual from an owned brand project is not a verified casting photo.
- if(caption){
-   caption.dataset.i18n=castingSrc?"realHeroCaption":"editorialHeroCaption";
-   caption.textContent=t(caption.dataset.i18n);
- }
- img.src=src;
- img.alt=castingSrc?(media[0]?.alt?.[lang]||t("portraitAlt")):t("editorialPortraitAlt");
- img.onload=()=>{
-   img.hidden=false;
-   visual.classList.add("hero-image-ready");
-   if(!castingSrc)visual.classList.add("editorial-cover");
+ const figure=qs("#heroVisual"), img=qs("#heroImage"), caption=qs('[data-i18n="artDisclaimer"]');
+ if(caption){caption.dataset.i18n=castingSrc?"realHeroCaption":"editorialHeroCaption";caption.textContent=t(caption.dataset.i18n);}
+ const render=()=>{
+   if(!img.naturalWidth)return;
+   img.hidden=false;figure.classList.add("hero-image-ready");
+   figure.classList.toggle("editorial-cover",!castingSrc);
    qs("#heroArtwork").hidden=true;
-   // Only confirmed genuine casting media may be used on the printable card.
    if(castingSrc){
      qs("#compPhoto").style.backgroundImage='url("'+src.replace(/["\\]/g,"")+'")';
      qs("#compPhoto").textContent="";
    }
  };
- img.onerror=()=>{img.hidden=true;qs("#heroArtwork").hidden=false;visual.classList.remove("hero-image-ready","editorial-cover")};
+ img.alt=castingSrc?(media[0]?.alt?.[lang]||t("portraitAlt")):t("editorialPortraitAlt");
+ img.onload=render;
+ img.onerror=()=>{img.hidden=true;qs("#heroArtwork").hidden=false;figure.classList.remove("hero-image-ready","editorial-cover");};
+ if(img.currentSrc!==new URL(src,document.baseURI).href && img.src!==new URL(src,document.baseURI).href)img.src=src;
+ if(img.complete&&img.naturalWidth>0)render();
 }
 function copyLink(){
  const url=new URL(location.href);url.searchParams.set("lang",lang);
@@ -140,7 +141,9 @@ qs("#lightbox").addEventListener("close",()=>lastFocus?.focus());
 document.addEventListener("keydown",e=>{if(!qs("#lightbox").open)return;if(e.key==="ArrowRight")openLightbox(active+1);if(e.key==="ArrowLeft")openLightbox(active-1)});
 let touchX=0;qs("#lightbox").addEventListener("touchstart",e=>{touchX=e.changedTouches[0].clientX},{passive:true});
 qs("#lightbox").addEventListener("touchend",e=>{const d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>45)openLightbox(active+(d<0?1:-1))},{passive:true});
-qsa("[data-open-card]").forEach(b=>b.addEventListener("click",()=>qs("#compDialog").showModal()));
+let lastCardFocus=null;
+qsa("[data-open-card]").forEach(b=>b.addEventListener("click",()=>{lastCardFocus=document.activeElement;qs("#compDialog").showModal()}));
+qs("#compDialog").addEventListener("close",()=>lastCardFocus?.focus());
 qs("#closeComp").addEventListener("click",()=>qs("#compDialog").close());
 qs("#printButton").addEventListener("click",()=>{document.body.classList.add("print-comp");window.print()});
 window.addEventListener("afterprint",()=>document.body.classList.remove("print-comp"));

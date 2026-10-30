@@ -27,6 +27,7 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Pavel Markov — model and on-camera talent">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="color-scheme" content="light dark">
   <meta name="twitter:image" content="https://castefeudal.github.io/model/assets/social-cover.png">
   <title>Павел Марков — Model / Actor / On-camera Talent</title>
   <script>
@@ -37,6 +38,10 @@
       document.documentElement.dataset.edition=l;
       document.documentElement.lang=l==="zh"?"zh-CN":l;
       document.querySelector('meta[name="theme-color"]').setAttribute("content",{ru:"#18181a",en:"#f5f6f4",zh:"#f2e5d2"}[l]);
+      var canon="https://castefeudal.github.io/model/?lang="+l;
+      document.querySelector('link[rel="canonical"]').setAttribute("href",canon);
+      document.querySelector('meta[property="og:url"]').setAttribute("content",canon);
+      document.title=l==="ru"?"Павел Марков — модель / кастинг":l==="en"?"Pavel Markov — Model / On-camera Talent":"帕维尔·马尔科夫 — 模特与镜头作品集";
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +63,7 @@
   <div class="meta-rail"><span data-i18n="railLeft">ПАВЕЛ МАРКОВ / ЛИЧНЫЙ КАСТИНГ-БУК</span><span class="rail-center">PM — <span data-i18n="editionIndex">РЕДАКЦИЯ 01 / 03</span></span><span data-i18n="railRight">БЕЛАРУСЬ · МЕЖДУНАРОДНЫЕ ПРОЕКТЫ</span></div>
   <header class="site-header" id="top">
     <a class="wordmark" href="#top" aria-label="Pavel Markov — home">P<span class="wordmark-slash">/</span>M<span class="wordmark-point">.</span></a>
-    <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+    <nav class="site-nav" id="siteNav" aria-label="Главная навигация" data-i18n-aria="navAria">
       <a href="#portfolio" data-i18n="navPortfolio">Портфолио</a>
       <a href="#profile" data-i18n="navProfile">Параметры</a>
       <a href="#screen" data-i18n="navScreen">Работа в кадре</a>
@@ -67,12 +72,12 @@
     </nav>
     <div class="header-tools">
       <span class="edition-label" data-i18n="editionLabel">IMPERIAL NOIR</span>
-      <div class="lang-switch" role="group" aria-label="Choose language and visual edition">
+      <div class="lang-switch" role="group" aria-label="Выбор языка и темы" data-i18n-aria="langAria">
         <button type="button" class="lang-btn" data-lang="ru" aria-pressed="true" title="Русская редакция"><span class="lang-dot"></span>RU</button>
         <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English edition"><span class="lang-dot"></span>EN</button>
         <button type="button" class="lang-btn" data-lang="zh" aria-pressed="false" title="中文版本"><span class="lang-dot"></span>中文</button>
       </div>
-      <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Открыть меню"><span></span><span></span></button>
+      <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Открыть меню" data-i18n-aria="menu"><span></span><span></span></button>
     </div>
   </header>
 
@@ -99,7 +104,7 @@
         </div>
       </div>
       <figure class="hero-visual" id="heroVisual">
-        <img id="heroImage" class="hero-photo" alt="" fetchpriority="high" hidden>
+        <img id="heroImage" class="hero-photo" src="./assets/editorial-markovmade.webp" width="1600" height="1067" alt="Стилизованный портрет Павла Маркова из проекта MarkovMade" data-i18n-alt="editorialPortraitAlt" fetchpriority="high" decoding="async">
         <div class="artwork" id="heroArtwork" role="img" aria-label="Original abstract edition artwork">
           <div class="art-top" aria-hidden="true"><span data-i18n="artSeries">PERSONAL / CASTING</span><span class="art-counter" data-i18n="editionCode">01 / RU</span></div>
           <span class="art-stamp" aria-hidden="true" data-i18n="artStamp">Ф / М</span>
@@ -113,7 +118,7 @@
       <a href="#portfolio" class="scroll-note"><span data-i18n="scroll">Листайте</span><span aria-hidden="true">↓</span></a>
     </section>
 
-    <aside class="facts-bar" aria-label="Casting profile at a glance">
+    <aside class="facts-bar" aria-label="Главное для кастинга" data-i18n-aria="factsAria">
       <div class="facts-inner">
         <div class="fact"><span class="fact-label" data-i18n="factHeight">РОСТ</span><strong>188 <small>CM</small></strong></div>
         <div class="fact"><span class="fact-label" data-i18n="factBuild">ТИПАЖ</span><strong data-i18n="factAthletic">Атлетический</strong></div>
@@ -128,16 +133,37 @@
         <h2 class="display-heading" id="portfolioTitle" data-i18n="portfolioTitle">Кадр <em>решает.</em></h2>
         <p class="section-description" data-i18n="portfolioIntro">Портрет, пластика, характер. Галерея подготовлена для оригинальных съёмок — без чужих лиц и искусственных «кастинг-фото».</p>
       </div>
-      <div class="filters" id="galleryFilters" role="group" aria-label="Photo filters" hidden></div>
+      <div class="editorial-spread" id="editorialSpread" aria-labelledby="editorialSpreadTitle">
+        <figure class="spread-portrait">
+          <div class="spread-image">
+            <img src="./assets/editorial-markovmade.webp" alt="Портрет из проекта MarkovMade: белый смокинг на тёмном фоне" data-i18n-alt="editorialPortraitAlt" loading="lazy" decoding="async" width="1600" height="1067">
+            <span class="spread-photo-index" aria-hidden="true">PM / 01</span>
+          </div>
+          <figcaption class="spread-caption"><span data-i18n="spreadCaption">BRAND EDITORIAL / MARKOVMADE</span><span>01 — 2026</span></figcaption>
+        </figure>
+        <div class="spread-editorial">
+          <span class="spread-identifier" data-i18n="spreadIssue">01 / THE PORTRAIT</span>
+          <span class="spread-oversize" aria-hidden="true">P<span>/</span>M</span>
+          <h3 id="editorialSpreadTitle" data-i18n="spreadTitle">Сначала <em>личность.</em></h3>
+          <p class="spread-body" data-i18n="spreadBody">Один выразительный образ вместо десятков случайных изображений. Брендовая съёмка отражает настроение, но не заменяет настоящие фотографии для кастинга.</p>
+          <div class="spread-footer">
+            <span data-i18n="spreadDisclosure">BRANDED VISUAL / NOT A CASTING HEADSHOT</span>
+            <a href="#profile" class="spread-link"><span data-i18n="spreadLink">Смотреть параметры</span><span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="filters" id="galleryFilters" role="group" aria-label="Фильтры фотографий" data-i18n-aria="filtersAria" hidden></div>
       <div class="gallery" id="gallery" aria-live="polite"></div>
-      <div class="portfolio-empty" id="portfolioEmpty">
+      <details class="portfolio-empty casting-digitals" id="portfolioEmpty">
+        <summary class="casting-summary"><span class="summary-indicator" aria-hidden="true"></span><span class="summary-copy"><strong data-i18n="digitalsSummary">Профессиональные фотографии для кастинга</strong><small data-i18n="digitalsDescription">Кадры в подготовке — открыть список необходимых фото</small></span><span class="summary-action" aria-hidden="true">+</span></summary>
+        <div class="casting-digitals-body">
         <div class="portfolio-pending">
           <div class="pending-issue"><span class="pending-mark" aria-hidden="true"></span><span data-i18n="pendingEyebrow">ПОРТФОЛИО / В ПОДГОТОВКЕ</span></div>
           <h3 data-i18n="pendingTitle">Настоящее лицо.<br><em>Настоящие кадры.</em></h3>
           <p data-i18n="pendingText">Для кастинга нужны реальные фотографии. Здесь появятся актуальные портреты, ростовые кадры и съёмки в движении.</p>
           <div class="pending-line"><span>PAVEL MARKOV</span><span data-i18n="pendingStatus">ORIGINAL PHOTOGRAPHY / PENDING</span></div>
         </div>
-        <div class="shotlist" aria-label="Photo portfolio guide">
+        <div class="shotlist" aria-label="План настоящих фотографий" data-i18n-aria="shotlistAria">
           <div class="shotlist-header"><span data-i18n="shotlistHead">ЧТО ВОЙДЁТ В ПОРТФОЛИО</span><span>01—03</span></div>
           <article class="shot-card">
             <span class="shot-number">01</span>
@@ -156,6 +182,7 @@
           </article>
         </div>
       </div>
+      </details>
       <p class="editorial-footnote" id="galleryFootnote" data-i18n="galleryFootnote">Здесь появятся только оригинальные фотографии для реального кастинга.</p>
     </section>
 
@@ -229,13 +256,13 @@
     </section>
   </main>
 
-  <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+  <dialog class="lightbox" id="lightbox" aria-label="Просмотр фотографий" data-i18n-aria="lightboxAria">
     <button class="lb-close" type="button" id="lbClose" aria-label="Close viewer">×</button>
     <button class="lb-arrow lb-prev" type="button" id="lbPrev" aria-label="Previous photo">←</button>
     <div class="lb-stage"><img id="lbImage" alt=""><p id="lbCaption"></p></div>
     <button class="lb-arrow lb-next" type="button" id="lbNext" aria-label="Next photo">→</button><span class="lb-counter" id="lbCounter"></span>
   </dialog>
-  <dialog class="comp-dialog" id="compDialog" aria-label="Casting card">
+  <dialog class="comp-dialog" id="compDialog" aria-label="Кастинг-анкета" data-i18n-aria="cardAria">
     <div class="comp-toolbar"><strong data-i18n="cardTitle">CASTING CARD / PAVEL MARKOV</strong><div><button type="button" class="comp-print" id="printButton" data-i18n="printCard">Печать / PDF</button><button type="button" id="closeComp" aria-label="Close casting card">×</button></div></div>
     <div class="comp-sheet" id="compSheet"><div class="comp-brand"><span>PM.</span><span>MODEL / ACTOR / TALENT</span></div><h2>PAVEL<br>MARKOV</h2>
       <div class="comp-body"><div class="comp-photo" id="compPhoto"><span>PHOTO / PENDING</span></div><div class="comp-info"><p data-i18n="cardIntro">MODEL / ACTOR / ON-CAMERA TALENT</p><dl id="compSpecs"></dl><div class="comp-contact" id="compContact"></div></div></div>

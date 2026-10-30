@@ -48,6 +48,15 @@ if(!html.includes('href="./clarity.css"'))fail("Clarity stylesheet not linked");
 for(const id of ["portfolioEmpty","specGrid","contactMethods","compDialog","readingProgress"])if(!html.includes('id="'+id+'"'))fail("Missing UX element "+id);
 if(!html.includes('class="facts-bar"'))fail("Casting profile quick facts are missing");
 if(!html.includes('class="shot-card"'))fail("Photo portfolio guide is missing");
+if(!html.includes('class="editorial-spread"'))fail("Curated portrait feature missing");
+if(!html.includes('<details class="portfolio-empty casting-digitals"'))fail("Accessible authentic-photo requirements missing");
+if(!html.includes('src="./assets/editorial-markovmade.webp"'))fail("Hero lacks early image src; LCP regression");
+if(!html.includes('data-i18n-alt="editorialPortraitAlt"'))fail("Localised image alt missing");
+for(const k of ["data-i18n-aria","id=\"editorialSpreadTitle\""])if(!html.includes(k))fail("Accessibility data missing: "+k);
+const sm=read("sitemap.xml");
+for(const lang of ["ru","en","zh"])if(!sm.includes("?lang="+lang))fail("Sitemap missing locale "+lang);
+if((sm.match(/<url>/g)||[]).length!==3)fail("Three canonical URLs expected in sitemap");
+
 
 
 for(const cssfile of ["atelier.css","editions.css","clarity.css"]){
