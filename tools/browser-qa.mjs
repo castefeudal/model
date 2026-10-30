@@ -87,6 +87,10 @@ try{
 
   assert(v.headingLeft>=-5&&v.headingRight<=x.width+5,"Heading outside viewport");
   assert(v.headingScroll<=4,"Heading text overflow "+v.headingScroll);
+  const clipped=await exec('(()=>{const selectors=[".hero-name",".portfolio-section .display-heading",".spread-editorial h3",".profile-statement .display-heading",".screen-intro .display-heading",".about-layout .display-heading",".contact-heading"];return selectors.flatMap(sel=>Array.from(document.querySelectorAll(sel)).map(e=>{const r=document.createRange();r.selectNodeContents(e);const b=r.getBoundingClientRect();return {name:sel,left:+b.left.toFixed(1),right:+b.right.toFixed(1)}})).filter(x=>x.left < -6 || x.right>innerWidth+6)})()');
+  console.log("CLIPPED_HEADINGS "+x.label+" "+JSON.stringify(clipped));
+  assert(!clipped.length,"Text clipped outside viewport: "+JSON.stringify(clipped));
+
   assert(v.specs>=7&&v.cardActions>=2&&v.hasGallery,"Casting functions unavailable");
   const editorial=await exec('(()=>{const s=document.querySelector("#editorialSpread"),d=document.querySelector("#portfolioEmpty"),i=s.querySelector("img");return {has:s.getBoundingClientRect().height>0,portrait:i.complete&&i.naturalWidth>0,alt:i.alt,folded:!d.open,native:d.tagName==="DETAILS",canonical:document.querySelector("link[rel=canonical]").href,og:document.querySelector("meta[property=\\\"og:url\\\"]").content,heading:document.querySelector("#editorialSpreadTitle").innerText};})()');
   assert(editorial.has&&editorial.portrait&&editorial.alt&&editorial.folded&&editorial.native,"Editorial feature/photo disclosure incomplete");
@@ -100,6 +104,13 @@ try{
   assert(portrait.compPending,"Branded editorial cover must not be passed off as a casting headshot");
 
   if(x.width<=760)assert(v.menuVisible,"Mobile navigation unavailable");
+  if(x.width<=1050){
+    await exec('document.querySelector("#menuToggle").click()');
+    assert(await exec('document.querySelector("#siteNav").classList.contains("open") && document.querySelector("#menuToggle").getAttribute("aria-expanded")==="true"'),"Navigation did not open");
+    await exec('document.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true}))');
+    assert(!(await exec('document.querySelector("#siteNav").classList.contains("open"')),"Escape did not close navigation");
+  }
+
   // Real dialog, not a dead placeholder.
   await exec('document.querySelector("[data-open-card]").click()');
   assert(await exec('document.querySelector("#compDialog").open'),"Comp card did not open");

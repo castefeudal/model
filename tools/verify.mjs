@@ -10,10 +10,12 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","atelier.css","editions.css","clarity.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
+const required=["index.html","atelier.css","editions.css","clarity.css","bundle.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
+try{execFileSync(process.execPath,["tools/build-css.mjs","--check"],{cwd:root,stdio:"pipe"});ok("Production CSS bundle is fresh")}
+catch(e){fail("Production CSS bundle out of date: run node tools/build-css.mjs")}
 const scripts=["data/profile.js","data/media.js","data/i18n.js","app.js","polish.js"];
 scripts.forEach(p=>{if(!exists(p))return;try{execFileSync(process.execPath,["--check",path.join(root,p)],{stdio:"pipe"});ok("Syntax "+p)}catch(e){fail("JavaScript syntax: "+p+" "+e.stderr?.toString())}});
 const sandbox={window:{}};
@@ -38,13 +40,13 @@ if(!html.includes('rel="canonical"'))fail("Missing canonical");
 if(!html.includes('name="description"'))fail("Missing description");
 if(!html.includes('application/ld+json'))fail("Missing structured data");
 if(!html.includes('id="compDialog"'))fail("Missing comp card");
-if(!html.includes('href="./atelier.css"')||!html.includes('href="./editions.css"'))fail("Edition styles are not linked");
+if(!html.includes('href="./bundle.css"'))fail("Production CSS bundle not linked");
 for(const edition of ["ru","en","zh"]){
  if(!read("editions.css").includes('data-edition="'+edition+'"'))fail("Missing theme "+edition);
  if(!read("editions.css").includes('edition-'+edition+'.svg'))fail("Missing art binding "+edition);
 }
 if(!html.includes('data-i18n="heroName1"')||!html.includes('data-i18n="heroName2"'))fail("Heading is not localized");
-if(!html.includes('href="./clarity.css"'))fail("Clarity stylesheet not linked");
+if(!html.includes('href="./bundle.css"'))fail("Production CSS bundle not linked");
 for(const id of ["portfolioEmpty","specGrid","contactMethods","compDialog","readingProgress"])if(!html.includes('id="'+id+'"'))fail("Missing UX element "+id);
 if(!html.includes('class="facts-bar"'))fail("Casting profile quick facts are missing");
 if(!html.includes('class="shot-card"'))fail("Photo portfolio guide is missing");
@@ -59,7 +61,7 @@ if((sm.match(/<url>/g)||[]).length!==3)fail("Three canonical URLs expected in si
 
 
 
-for(const cssfile of ["atelier.css","editions.css","clarity.css"]){
+for(const cssfile of ["atelier.css","editions.css","clarity.css","bundle.css"]){
  const css=read(cssfile);
  for(const m of css.matchAll(/url\((['"]?)([^)'"]+)\1\)/g)){
    const v=m[2];if(v.startsWith("http")||v.startsWith("data:"))continue;

@@ -24,7 +24,9 @@ No clip-art flags, dragons, stock models, AI faces or counterfeit acting credits
 | `index.html` | Editorial layouts, metadata, gallery and casting-card dialogs |
 | `atelier.css` | Entire core layout, mobile, accessibility and A4 print |
 | `editions.css` | Locale-specific foundations for RU / EN / ZH |
-| `clarity.css` | Final responsive layout, reading sizes, contrast and casting usability; edit here before touching legacy CSS |
+| `clarity.css` | Final responsive layout, reading sizes, contrast and casting usability |
+| `bundle.css` | Minified production bundle loaded in browsers (generated) |
+| `tools/build-css.mjs` | Rebuild CSS bundle after changing source stylesheets |
 | `assets/edition-ru.svg`, `assets/edition-en.svg`, `assets/edition-zh.svg` | Original vector art for the three editions |
 | `data/i18n.js` | RU / EN / 简体中文 translation strings |
 | `app.js` | Instant language + edition change, profile, gallery, lightbox, verified contact links, print |
@@ -95,3 +97,6 @@ The portfolio opens with a curated *single-image* brand study, not a staged gall
 ## International search metadata
 
 Each `?lang=ru|en|zh` URL sets its own canonical URL and `og:url` (including before deferred scripts), and `sitemap.xml` lists every edition with reciprocal `hreflang` links. Changing edition updates those values without a page reload. As GitHub Pages serves the same initial HTML shell for all query variants, crawlers must execute the translation scripts to index localized body text; separate prerendered routes would be required for fully server-rendered international SEO.
+
+### CSS delivery
+The browser downloads one optimized `bundle.css` instead of three blocking CSS files. When editing `atelier.css`, `editions.css` or `clarity.css`, run `node tools/build-css.mjs` and commit the generated bundle. `node tools/verify.mjs` verifies exact freshness.
