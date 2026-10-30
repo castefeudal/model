@@ -119,7 +119,7 @@ try{
   assert(await exec('document.querySelector("#portfolioEmpty").open'),"Casting photo requirements cannot be opened");
   await exec('document.querySelector("#portfolioEmpty").open=false');
 
-  const portrait=await exec('(()=>{const img=document.querySelector("#heroImage"),comp=document.querySelector("#compPhoto");return {loaded:img.complete&&img.naturalWidth>0,visible:!img.hidden,editorial:document.querySelector("#heroVisual").classList.contains("editorial-cover"),compArchive:!!comp.querySelector(".comp-archive-image"),archiveDisclosure:!!comp.querySelector('[data-i18n="compArchiveLabel"]')?.textContent.trim(),imageWidth:img.naturalWidth};})()');
+  const portrait=await exec('(()=>{const img=document.querySelector("#heroImage"),comp=document.querySelector("#compPhoto");return {loaded:img.complete&&img.naturalWidth>0,visible:!img.hidden,editorial:document.querySelector("#heroVisual").classList.contains("editorial-cover"),compArchive:!!comp.querySelector(".comp-archive-image"),archiveDisclosure:!!comp.querySelector(".comp-archive-mark")?.textContent.trim(),imageWidth:img.naturalWidth};})()');
   assert(portrait.loaded&&portrait.visible&&portrait.editorial,"Owned editorial image failed to display");
   assert(portrait.compArchive&&portrait.archiveDisclosure,"Comp card requires an explicitly labeled archival photograph");
   const lookData=await exec('(()=>{const b=[...document.querySelectorAll(".cover-choice")];const i=document.querySelector("#heroImage");return {buttons:b.length,pressed:b.filter(x=>x.getAttribute("aria-pressed")==="true").length,image:i.getAttribute("src"),caption:document.querySelector(".visual-caption").innerText,loaded:i.complete&&i.naturalWidth>0}})()');
