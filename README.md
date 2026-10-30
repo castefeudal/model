@@ -172,3 +172,5 @@ An internationally localized **casting-first editorial experience**. This releas
 ### Locally hosted CJK type
 
 The Chinese edition uses OFL-licensed, version-pinned Noto Sans SC and Noto Serif SC **subset WOFF2** files in `assets/fonts/`. A CI builder `tools/build_cjk_font.py` regenerates those assets from Google's upstream OFL font revisions and publishes licence texts. Production never contacts Google Fonts for CJK glyphs, which is important in mainland China. If Chinese copy changes, rerun the builder so `covered-glyphs.txt` and assets stay in sync; the structural gate rejects missing glyph coverage. The generator uses pinned upstream source commits and stores no external URLs in the runtime CSS.
+
+The checked-in first-party CJK font subsets have a generated UTF-8 glyph manifest. The build does not infer glyph completeness from synthetic Lighthouse scores: Chromium must render both local typefaces, and structural checks compare the current Chinese copy against the committed manifest.
