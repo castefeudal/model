@@ -156,6 +156,10 @@ try{
   const enquiry=await exec('(()=>{const d=document.querySelector("#bookingDialog"),r=d.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:innerWidth,height:innerHeight,email:document.querySelector("#bookingEmail").required,brief:document.querySelector("#bookingDetails").required,copy:!!document.querySelector("#bookingCopy")}})()');
   assert(enquiry.left>=-2&&enquiry.right<=enquiry.width+2,"Booking dialog exceeds screen width");
   assert(enquiry.email&&enquiry.brief&&enquiry.copy,"Enquiry validation / fallback absent");
+  const fieldHeights=await exec('["#bookingEmail","#bookingKind","#bookingDetails"].map(sel=>({sel,height:document.querySelector(sel).getBoundingClientRect().height}))');
+  console.log("BOOKING_FIELD_DIMENSIONS "+x.label+" "+JSON.stringify(fieldHeights));
+  assert(fieldHeights[0].height>=42&&fieldHeights[1].height>=42&&fieldHeights[2].height>=100,"Casting enquiry fields lost usable touch dimensions");
+
   await exec('document.querySelector("[data-close-booking]").click()');
   assert(!(await exec('document.querySelector("#bookingDialog").open')),"Direct casting enquiry failed to close");
   await screenshot(x.label);
