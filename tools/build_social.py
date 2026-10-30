@@ -31,7 +31,7 @@ draw.rectangle((23, 22, 167, 76), fill=(29, 28, 32))
 draw.text((42, 34), "P / M", fill=IVORY, font=font(SANS, 24))
 draw.rectangle((25, 560, 425, 607), fill=(29, 28, 32))
 draw.text((44, 574), "THE HUMAN FRAME  /  2026", fill=IVORY, font=font(SANS, 14))
-draw.text((x, 44), "PERSONAL EDITION     /     ISSUE 07", fill=ACCENT, font=font(SANS, 15))
+draw.text((x, 44), "THE HUMAN FRAME     /     ISSUE 08", fill=ACCENT, font=font(SANS, 15))
 draw.line((x, 94, W - 48, 94), fill=(91, 87, 89), width=2)
 
 def fit_label(value, max_width, size):
