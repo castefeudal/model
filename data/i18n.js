@@ -1,5 +1,12 @@
 window.MODEL_I18N = {
   "ru": {
+    "folioNavAria": "Управление фотосерией",
+    "folioPrevAria": "Предыдущий кадр",
+    "folioNextAria": "Следующий кадр",
+    "motionLabel": "Анимация",
+    "motionDisable": "Отключить анимацию",
+    "motionEnable": "Включить анимацию",
+    "motionSystem": "Анимация отключена настройками устройства",
     "peekAction": "Кастинг-досье",
     "peekProof": "Архивный портрет",
     "peekArchive": "Другие ракурсы — раскрыть архив",
@@ -230,6 +237,13 @@ window.MODEL_I18N = {
     "compCloseAria": "Закрыть кастинг-анкету"
   },
   "en": {
+    "folioNavAria": "Lookbook navigation",
+    "folioPrevAria": "Previous photograph",
+    "folioNextAria": "Next photograph",
+    "motionLabel": "Motion",
+    "motionDisable": "Disable motion",
+    "motionEnable": "Enable motion",
+    "motionSystem": "Motion disabled by system preferences",
     "peekAction": "Casting dossier",
     "peekProof": "Archive portrait",
     "peekArchive": "More angles — open the archive",
@@ -460,6 +474,13 @@ window.MODEL_I18N = {
     "compCloseAria": "Close casting card"
   },
   "zh": {
+    "folioNavAria": "作品图集导航",
+    "folioPrevAria": "上一张照片",
+    "folioNextAria": "下一张照片",
+    "motionLabel": "动画",
+    "motionDisable": "关闭动画",
+    "motionEnable": "打开动画",
+    "motionSystem": "系统设置已关闭动画",
     "peekAction": "快速选角资料",
     "peekProof": "档案肖像",
     "peekArchive": "更多角度 · 展开档案",
