@@ -37,7 +37,8 @@ window.MODEL_ARCHIVE = [
       "zh": "近景肖像 / 档案"
     },
     "position": "50% 42%",
-    "archive": true
+    "archive": true,
+    "thumbnail": "assets/thumbs/portrait-digital.webp"
   },
   {
     "src": "assets/portrait-athletic.webp",
@@ -87,7 +88,8 @@ window.MODEL_ARCHIVE = [
       "zh": "人物造型 / 档案"
     },
     "position": "50% 45%",
-    "archive": true
+    "archive": true,
+    "thumbnail": "assets/thumbs/portrait-character.webp"
   },
   {
     "src": "assets/editorial-markovmade.webp",
@@ -103,7 +105,8 @@ window.MODEL_ARCHIVE = [
       "zh": "经典形象 / 风格化品牌档案"
     },
     "position": "50% 32%",
-    "archive": true
+    "archive": true,
+    "thumbnail": "assets/thumbs/editorial-markovmade.webp"
   }
 ];
 // Verified video clips may be added here when available.

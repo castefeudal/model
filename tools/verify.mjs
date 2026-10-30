@@ -93,6 +93,7 @@ for(const img of archive){
  if(!img.alt?.ru||!img.alt?.en||!img.alt?.zh)fail("Missing archive alt translations "+img.src);
  if(!img.caption?.ru||!img.caption?.en||!img.caption?.zh)fail("Missing archive caption translations "+img.src);
  if(actualArchive.has(img.src))fail("Duplicate archive image "+img.src);
+ if(img.thumbnail){if(!img.thumbnail.startsWith("assets/thumbs/"))fail("Unexpected thumbnail path "+img.thumbnail);if(!exists(img.thumbnail))fail("Thumbnail missing "+img.thumbnail)}
  actualArchive.add(img.src);
 }
 if(archive.length<5)fail("At least five verified source archive images expected");

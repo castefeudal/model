@@ -84,7 +84,7 @@ function renderGallery(){
    const caption=captionText(im);
    const stamp=im.archive?t("archiveBadge"):t("castingBadge");
    return '<button class="gallery-item '+(i===0?"gallery-first":i===1?"gallery-second":"gallery-third")+'" data-index="'+i+'" type="button">'+
-    '<span class="gallery-frame"><img src="'+safe(im.src)+'" loading="lazy" decoding="async" width="840" height="1080" alt="'+safe(label)+'" style="object-position:'+safe(im.position||"50% 50%")+'">'+
+    '<span class="gallery-frame"><img src="'+safe(im.thumbnail||im.src)+'" loading="lazy" decoding="async" width="840" height="1080" alt="'+safe(label)+'" style="object-position:'+safe(im.position||"50% 50%")+'">'+
     '<span class="gallery-stamp">'+safe(stamp)+'</span><span class="gallery-open" aria-hidden="true">↗</span></span>'+
     '<span class="gallery-caption"><span>'+safe(caption)+'</span><span>'+String(i+1).padStart(2,"0")+' / '+String(visible.length).padStart(2,"0")+'</span></span></button>';
  });

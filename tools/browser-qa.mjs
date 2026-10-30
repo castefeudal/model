@@ -104,6 +104,7 @@ try{
 
   const archiveData=await exec('(()=>({cards:document.querySelectorAll("#gallery .gallery-item").length,images:document.querySelectorAll("#gallery .gallery-item img").length,stamps:document.querySelectorAll("#gallery .gallery-stamp").length,filters:document.querySelectorAll("#galleryFilters .filter").length,screen:document.querySelector(".screen-archive img")?.getAttribute("src"),fashion:document.querySelector(".spread-image img")?.getAttribute("src"),digitalsVisible:!document.querySelector("#portfolioEmpty").hidden}))()');
   assert(archiveData.cards===3 && archiveData.images===3 && archiveData.stamps===3 && archiveData.filters>=4,"Archive gallery is incomplete");
+  assert(await exec('Array.from(document.querySelectorAll("#gallery .gallery-item img")).every(x=>x.getAttribute("src").startsWith("assets/thumbs/"))'),"Gallery must use optimized thumbnails; full quality images reserved for lightbox");
   assert(archiveData.digitalsVisible,"Authentic casting photo placeholder must remain available");
   assert(archiveData.screen?.includes("portrait-stage.webp") && archiveData.fashion?.includes("portrait-athletic.webp"),"Distinct editorial images not loaded");
 
