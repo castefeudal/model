@@ -205,3 +205,6 @@ The site is both an image-led personal fashion editorial and a professional, fas
 **Commission-ready next assets:** a genuine current neutral headshot, plain full-body images, neutral profile angles, accurately remeasured sizing, and an unretouched short on-camera introduction. These cannot be credibly manufactured by the page or a generative model and remain the highest-impact limitations.
 
 Production design is judged against actual desktop/mobile screenshots, a working casting path, legal photo provenance, and measured page load. Lighthouse scores are not a substitute for a casting director's judgement or for new professional photography.
+
+## Edition 10 — directors cut
+Responsive 1x/2x mobile cover, accessible mobile lookbook controls, progressive motion with an opt-out and reduced-motion, localized casting data copy. The archived photography remains honestly labelled.

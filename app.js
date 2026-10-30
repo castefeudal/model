@@ -69,6 +69,7 @@ function setLanguage(next){
 
  document.querySelector('meta[name="description"]').content=lang==="ru"?"Павел Марков — модель и талант для съёмок. Рост 188 см, атлетический типаж, Беларусь.":lang==="zh"?"帕维尔·马尔科夫个人模特与选角作品集。身高188厘米，运动型外形，来自白俄罗斯。":"Pavel Markov: model and on-camera talent. 188 cm, athletic build, based in Belarus.";
  renderSpecs();renderGallery();renderVideos();renderContacts();setHero();
+ document.dispatchEvent(new Event('pm:languagechange'));
 }
 const captionText=im=>typeof im.caption==="object"?(im.caption[lang]||im.caption.en||"PAVEL MARKOV"):im.caption||"PAVEL MARKOV";
 function renderGallery(){
@@ -134,7 +135,7 @@ function setHero(){
  const cover=covers[coverIndex]||null;
  const src=castingSrc||cover?.src||window.EDITORIAL_PORTRAIT;
  const mobileSource=qs("#coverMobileSource");
- if(mobileSource)mobileSource.srcset=castingSrc?src:(cover?.mobile||src);
+ if(mobileSource)mobileSource.srcset=castingSrc?src:(cover?.mobile&&cover.mobile!==src?cover.mobile+' 1x, '+src+' 2x':src);
  if(!src)return;
  const figure=qs("#heroVisual"),img=qs("#heroImage"),caption=qs('[data-i18n="artDisclaimer"]');
  const deck=qs(".cover-deck"),count=qs(".visual-caption-index");

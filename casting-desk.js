@@ -48,5 +48,17 @@
   }
   $("#peekEnquiry")?.addEventListener("click",()=>handoff(".header-enquiry"));
   $("#peekComp")?.addEventListener("click",()=>handoff(".profile-action"));
-  for (const b of document.querySelectorAll(".lang-btn")) b.addEventListener("click",()=>queueMicrotask(render));
+  const tr=key=>window.MODEL_I18N?.[document.documentElement.dataset.edition]?.[key]||window.MODEL_I18N?.en?.[key]||key;
+  $("#peekCopy")?.addEventListener("click",async()=>{
+    render();
+    const rows=[...dialog.querySelectorAll("#peekSpecs .peek-spec")].map(el=>{
+      const key=el.querySelector("span")?.textContent.trim(),value=el.querySelector("strong")?.textContent.trim();
+      return key&&value?key+": "+value:null;
+    }).filter(Boolean);
+    const link=new URL(location.href);link.searchParams.set("lang",document.documentElement.dataset.edition||"ru");
+    const content=["PAVEL MARKOV","MODEL / ON-CAMERA TALENT",...rows,"",tr("measurementDisclaimer"),link.href].join("\n");
+    const ok=window.PMExperience?.copyText?await window.PMExperience.copyText(content):false;
+    $("#peekCopyStatus").textContent=tr(ok?"specsCopied":"copyUnavailable");
+  });
+  for (const b of document.querySelectorAll(".lang-btn")) b.addEventListener("click",()=>queueMicrotask(()=>{render();$("#peekCopyStatus").textContent="";}));
 })();
