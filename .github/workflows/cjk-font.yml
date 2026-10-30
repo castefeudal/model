@@ -4,6 +4,8 @@ on:
     branches: [main, "feat/**"]
     paths:
       - tools/build_cjk_font.py
+      - data/i18n.js
+      - index.html
       - .github/workflows/cjk-font.yml
   workflow_dispatch:
 permissions:
