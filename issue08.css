@@ -31,7 +31,7 @@ html[data-edition="en"]{
  --button-bg:#1b2e4d;--button-ink:#fff;
 }
 html[data-edition="zh"]{
- --paper:#f4e9d8;--paper2:#ead7c2;--ink:#3c2822;--soft:#756253;
+ --paper:#f4e9d8;--paper2:#ead7c2;--ink:#3c2822;--soft:#60483f;
  --hair:#d5bdaa;--accent:#a4392f;
  --hero-dark:#241816;--section-dark:#462921;--section-text:#fff1de;
  --nav-bg:#f4e9d8;--nav-text:#3c2822;--contact-bg:#40241f;--contact-text:#fff1df;
@@ -136,7 +136,7 @@ html[data-edition="zh"] .lang-btn[data-lang="zh"] .lang-latin{display:none}
 .hero-photo{filter:saturate(.88) contrast(1.03);transition:opacity .4s var(--ease)}
 .hero-visual:after{
  content:"";z-index:2;position:absolute;inset:0;pointer-events:none;
- background:linear-gradient(90deg,rgba(8,9,12,.92),rgba(8,9,12,.65) 39%,rgba(8,9,12,.11) 77%,rgba(8,9,12,.1)),
+ background:linear-gradient(90deg,rgba(8,9,12,.9),rgba(8,9,12,.55) 32%,rgba(8,9,12,.05) 67%,rgba(8,9,12,.06)),
  linear-gradient(0deg,rgba(6,7,10,.8),transparent 34%,transparent 67%,rgba(6,7,10,.18))
 }
 .hero-visual:before{content:"";display:none}
@@ -336,7 +336,7 @@ html[data-edition="zh"] .portrait-interlude h2 em{font-family:inherit;font-style
 
 /* Chapter II: gallery with no fake campaign details. */
 .folio-strip{
- max-width:none;padding:clamp(96px,9vw,160px) var(--g);
+ max-width:none;padding:clamp(65px,6vw,105px) var(--g);
  background:var(--paper);color:var(--ink)
 }
 .folio-strip-head,.folio-track,.folio-bottom{max-width:var(--max);margin-left:auto;margin-right:auto}
