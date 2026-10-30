@@ -27,8 +27,14 @@ The project still requires recent verified front/three-quarter/profile/full-body
 
 `node tools/verify.mjs`; `node tools/browser-qa.mjs` with Chrome and local HTTP server; six Lighthouse combinations using `tools/grade.mjs`. Watch mobile LCP especially for ZH. Check the live production build and GitHub Pages deployment SHA after merge.
 
-## Responsive image delivery
+## Controlled image optimization experiments
 
-The optimized archival fashion image is delivered in AVIF variants (960/1600; 22.6/44 KB), preserving the 78.1 KB WebP fallback untouched. 1x/2x density sources are first; AVIF is never used for an arbitrary new verified casting image or the non-AVIF athletic cover. Compare Lighthouse after this change. The encoding is lossy compression, not a new or fabricated photograph.
+Unmodified real archival photo `assets/portrait-fashion.webp` (78,144 B) is the fallback. The compressed 1600px AVIF (44,004 B) is used only above 880px, retaining the original photo's identity. On mobile the reliable WebP source and existing responsive thumbnails remain active.
 
-Initial AVIF Lighthouse measurements showed a **regression** on ZH mobile (LCP 5.6 s, score 77) when the full-size 1600px AVIF was selected for a 412px-wide hero. This experiment was not shipped. The revised mobile source always uses the 960px asset, and the high-density full-size rendition remains desktop-only; repeat CI before publishing.
+| Chinese mobile Lighthouse experiment | Performance | LCP | Decision |
+| --- | ---: | ---: | --- |
+| Native responsive WebP, no remote Latin fonts | 92 | 3.4 s | **Keep** |
+| Full 1600px AVIF on mobile | 77 | 5.6 s | Reject |
+| Smaller 960px AVIF on mobile | 81 | 4.7 s | Reject |
+
+These values reflect separate synthetic runs, not a causal A/B experiment. The AVIF encoding did not consistently improve mobile loading under throttled conditions, so mobile AVIF was removed rather than attempting to optimize a benchmark score. Added `tools/grade.mjs` category and LCP gate to keep comparable regressions from silently shipping; continue monitoring real visitors' Core Web Vitals.
