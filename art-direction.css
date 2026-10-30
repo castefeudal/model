@@ -5,6 +5,7 @@
  * Use original source styles for utility and printing; this file is the final art direction.
  */
 :root{
+ --sans:"Manrope",Arial,sans-serif;
  --issue-outer:clamp(22px,4.25vw,86px);
  --issue-rule:color-mix(in srgb,var(--space-ink) 20%,transparent);
  --issue-cream:#f2ede5;--issue-char:#202024;
@@ -740,3 +741,7 @@ html[data-edition=zh] .contact-lead{font-family:var(--serif);line-height:1.5}
  .hero-actions .action,.contact-methods a{transition:none!important}
  .spread-portrait:hover .spread-image img{transform:none!important}
 }
+
+/* White labels on the dark casting summary; prevent inherited light-page grey. */
+.facts-bar .fact-label{color:#f7f2eb!important;opacity:1!important}
+html[data-edition=zh] .facts-bar .fact-label{color:#fff4e5!important}
