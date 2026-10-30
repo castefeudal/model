@@ -10,7 +10,7 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt","assets/fonts/serif-covered-glyphs.txt",".nojekyll"];
+const required=["index.html","issue09.css","casting-desk.js","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt","assets/fonts/serif-covered-glyphs.txt",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -26,11 +26,12 @@ if(exists("assets/fonts/covered-glyphs.txt")){
 }
 try{execFileSync(process.execPath,["tools/build-css.mjs","--check"],{cwd:root,stdio:"pipe"});ok("Production CSS bundle is fresh")}
 catch(e){fail("Production CSS bundle out of date: run node tools/build-css.mjs")}
-if(fs.statSync(path.join(root,"bundle.css")).size>65000)fail("Edition 08 design CSS exceeds 65 KB budget");
+if(fs.statSync(path.join(root,"bundle.css")).size>78000)fail("Edition 09 design CSS exceeds 78 KB budget");
 if(read("tools/build-css.mjs").includes('"atelier.css"')||read("tools/build-css.mjs").includes('"premiere.css"'))fail("Legacy layered CSS must not ship to production");
 if(!read("bundle.css").includes("PM CJK Sans"))fail("Self-hosted Simplified Chinese font missing from production CSS");
+if(!read("tools/build-css.mjs").includes('"issue09.css"'))fail("Single design source must be ISSUE 09");
 ok("One editorial CSS source, performance budget and local Chinese typography");
-const scripts=["data/profile.js","data/media.js","data/i18n.js","app.js","polish.js","premiere.js","tools/browser-qa.mjs"];
+const scripts=["data/profile.js","data/media.js","data/i18n.js","app.js","polish.js","premiere.js","casting-desk.js","tools/browser-qa.mjs"];
 scripts.forEach(p=>{if(!exists(p))return;try{execFileSync(process.execPath,["--check",path.join(root,p)],{stdio:"pipe"});ok("Syntax "+p)}catch(e){fail("JavaScript syntax: "+p+" "+e.stderr?.toString())}});
 const sandbox={window:{}};
 for(const p of scripts.slice(0,3))if(exists(p))vm.runInNewContext(read(p),sandbox,{filename:p});
@@ -66,6 +67,11 @@ if(!html.includes('rel="canonical"'))fail("Missing canonical");
 if(!html.includes('name="description"'))fail("Missing description");
 if(!html.includes('application/ld+json'))fail("Missing structured data");
 if(!html.includes('id="compDialog"'))fail("Missing comp card");
+if(!html.includes('id="castingPeek"')||!html.includes('id="peekSpecs"'))fail("Casting Desk is missing");
+if(!html.includes('id="archiveCabinet"'))fail("Secondary archive must be opt-in");
+if(!html.includes('class="contact-backdrop"'))fail("Authentic contact photographic backdrop missing");
+for(const k of ["peekAction","peekArchive","peekAria","peekDescription","peekOverline","peekClose"])for(const l of ["ru","en","zh"])if(!read("data/i18n.js").includes('"'+k+'"'))fail("Missing casting desk translation: "+l+":"+k);
+
 if(!html.includes('href="./bundle.css"'))fail("Production CSS bundle not linked");
 for(const edition of ["ru","en","zh"]){
  if(!read("editions.css").includes('data-edition="'+edition+'"'))fail("Missing theme "+edition);
@@ -97,7 +103,7 @@ if(!html.includes('data-open-booking')||!html.includes('id="bookingDialog"'))fai
 for(const key of ["bookingAction","bookingTitle","bookingYourBrief","bookingEmailSubject","bookingOpening","bookingPrivacy","portraitHeadline","portraitStory"]){
   for(const l of ["ru","en","zh"])if(!d?.[l]?.[key])fail("Premiere translation "+l+":"+key);
 }
-if(!html.includes('src="./premiere.js"')||!read("tools/build-css.mjs").includes('"issue08.css"'))fail("Edition 08 must ship its single consolidated art-directed stylesheet");
+if(!html.includes('src="./premiere.js"')||!html.includes('src="./casting-desk.js"')||!read("tools/build-css.mjs").includes('"issue09.css"'))fail("Edition 09 must ship its single design source and casting desk");
 ok("Premiere: 6 source images, booking controls and tri-lingual copy");
 const sm=read("sitemap.xml");
 for(const lang of ["ru","en","zh"])if(!sm.includes("?lang="+lang))fail("Sitemap missing locale "+lang);
@@ -105,7 +111,7 @@ if((sm.match(/<url>/g)||[]).length!==3)fail("Three canonical URLs expected in si
 
 
 
-for(const cssfile of ["atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css"]){
+for(const cssfile of ["atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","issue09.css"]){
  const css=read(cssfile);
  for(const m of css.matchAll(/url\((['"]?)([^)'"]+)\1\)/g)){
    const v=m[2];if(v.startsWith("http")||v.startsWith("data:"))continue;
