@@ -73,7 +73,7 @@
     switcher.setAttribute("aria-pressed","false");
     const renderLabel=()=>switcher.textContent=gallery.classList.contains("contact-sheet")?t("editorialView"):t("contactSheet");
     renderLabel();
-    const mount=()=>{if(filters.contains(switcher))return;filters.after(switcher);switcher.hidden=false};
+    const mount=()=>{if(switcher.parentElement!==filters.parentElement)filters.parentElement.append(switcher);switcher.hidden=false};
     mount();
     switcher.addEventListener("click",()=>{
       const on=gallery.classList.toggle("contact-sheet");

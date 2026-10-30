@@ -1097,3 +1097,28 @@ html[data-edition=zh] .hero-visual.editorial-cover .hero-photo{
 @media(max-width:640px){
  .visual-caption{min-height:75px!important;padding-top:22px!important;padding-bottom:16px!important}
 }
+
+
+/* Toolbar belongs to one visual row; not a detached control under the filters. */
+.archive-controls{
+ display:flex;align-items:flex-start;justify-content:space-between;
+ flex-wrap:wrap;gap:12px 20px;margin-bottom:clamp(24px,3vw,40px)
+}
+.archive-controls #galleryFilters{
+ flex:1;min-width:0;margin:0!important
+}
+.archive-controls .view-toggle{
+ min-height:44px;margin:0!important;padding:10px 15px;
+ border:1px solid var(--space-border);background:transparent;
+ color:var(--space-ink);white-space:nowrap;
+ font:750 12px/1.4 var(--sans);letter-spacing:.025em;
+ align-self:flex-start
+}
+.archive-controls .view-toggle:hover,.archive-controls .view-toggle[aria-pressed=true]{
+ color:var(--space-paper);background:var(--space-ink);border-color:var(--space-ink)
+}
+@media(max-width:760px){
+ .archive-controls{display:block;margin-bottom:18px}
+ .archive-controls .view-toggle{display:none!important}
+ .archive-controls #galleryFilters{margin:0!important;padding-bottom:12px}
+}
