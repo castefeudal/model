@@ -1,0 +1,41 @@
+name: Lighthouse benchmarks
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Serve static site
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/pavel-server.log 2>&1 &
+          for i in $(seq 1 30); do curl --silent --fail http://127.0.0.1:8765/ > /dev/null && exit 0; sleep 1; done
+          exit 1
+      - name: Install Lighthouse
+        run: npm install --no-save --no-fund --no-audit lighthouse@13.5.0
+      - name: Audit three desktop editions
+        run: |
+          for lang in ru en zh; do
+            ./node_modules/.bin/lighthouse "http://127.0.0.1:8765/?lang=$lang" --preset=desktop --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path="lighthouse-$lang.json" --quiet
+          done
+      - name: Audit mobile Russian edition
+        run: ./node_modules/.bin/lighthouse "http://127.0.0.1:8765/?lang=ru" --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path="lighthouse-ru-mobile.json" --quiet
+      - name: Report measured scores
+        run: node tools/grade.mjs
+      - name: Upload full audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: |
+            lighthouse-*.json
+            lighthouse-scorecard.md
+          retention-days: 14
