@@ -81,6 +81,10 @@ try{
   assert(v.headingLeft>=-5&&v.headingRight<=x.width+5,"Heading outside viewport");
   assert(v.headingScroll<=4,"Heading text overflow "+v.headingScroll);
   assert(v.specs>=7&&v.cardActions>=2&&v.hasGallery,"Casting functions unavailable");
+  const portrait=await exec('(()=>{const img=document.querySelector("#heroImage"),comp=document.querySelector("#compPhoto");return {loaded:img.complete&&img.naturalWidth>0,visible:!img.hidden,editorial:document.querySelector("#heroVisual").classList.contains("editorial-cover"),compPending:comp.textContent.includes("PHOTO / PENDING"),imageWidth:img.naturalWidth};})()');
+  assert(portrait.loaded&&portrait.visible&&portrait.editorial,"Owned editorial image failed to display");
+  assert(portrait.compPending,"Branded editorial cover must not be passed off as a casting headshot");
+
   if(x.width<=760)assert(v.menuVisible,"Mobile navigation unavailable");
   // Real dialog, not a dead placeholder.
   await exec('document.querySelector("[data-open-card]").click()');

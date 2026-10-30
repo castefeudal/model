@@ -63,3 +63,14 @@ node tools/browser-qa.mjs
 ## Photo and contact setup
 
 Read [PHOTO_GUIDE.md](PHOTO_GUIDE.md) to add only actual pictures of Pavel into `assets/photos/` and `data/media.js`. The gallery and cover appear automatically. Update only publicly confirmed email / Telegram / Instagram in `data/profile.js`; no working email is invented. Exact clothes, shoes and travel availability also remain unset until confirmed.
+
+
+## Editorial portrait provenance
+The first-screen brand artwork is now sourced from an asset already published in the
+owner's own `castefeudal/markovmade` repository:
+`assets/media/hero-portrait-1600w.webp`.
+A local optimized copy is stored here as `assets/editorial-markovmade.webp`.
+This is **branded editorial imagery**, not a certified natural, unretouched casting
+headshot. It is excluded from the comp card and from the real-photo portfolio.
+When authentic headshots are provided, set `window.HERO_IMAGE` and
+`window.MODEL_PHOTOS` in `data/media.js` to replace the editorial cover.

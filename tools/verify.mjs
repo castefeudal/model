@@ -10,7 +10,7 @@ const root=path.resolve(import.meta.dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","atelier.css","editions.css","clarity.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
+const required=["index.html","atelier.css","editions.css","clarity.css","app.js","polish.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/social-cover.png","assets/favicon.svg",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -72,6 +72,7 @@ for(const v of videos){
  if(v.src.startsWith("assets/video/")&&!exists(v.src))fail("Video missing "+v.src);
 }
 if(sandbox.window.HERO_IMAGE&&!exists(sandbox.window.HERO_IMAGE))fail("Hero asset missing");
+if(sandbox.window.EDITORIAL_PORTRAIT&&!exists(sandbox.window.EDITORIAL_PORTRAIT))fail("Editorial portrait file missing");
 ok("Media paths & contacts");
 if(errors.length){console.error("\nFAILED:\n"+errors.map(x=>"- "+x).join("\n"));process.exit(1)}
 console.log("\nPASS — portfolio structure, localized content, JavaScript syntax and file paths.");

@@ -50,7 +50,7 @@ function setLanguage(next){
  document.querySelector('meta[property="og:locale"]')?.setAttribute("content",lang==="ru"?"ru_RU":lang==="zh"?"zh_CN":"en_US");
  document.title=lang==="ru"?"Павел Марков — модель / актёр / съёмки":lang==="zh"?"帕维尔·马尔科夫 — 模特与镜头表现":"Pavel Markov — Model / Actor / On-camera Talent";
  const heroPhoto=qs("#heroImage");
- if(heroPhoto && !heroPhoto.hidden)heroPhoto.alt=media[0]?.alt?.[lang]||"Pavel Markov portrait";
+ if(heroPhoto && !heroPhoto.hidden)heroPhoto.alt=(window.HERO_IMAGE||media[0]?.src)?(media[0]?.alt?.[lang]||t("portraitAlt")):t("editorialPortraitAlt");
  document.querySelector('meta[name="description"]').content=lang==="ru"?"Павел Марков — модель и талант для съёмок. Рост 188 см, атлетический типаж, Беларусь.":lang==="zh"?"帕维尔·马尔科夫个人模特与选角作品集。身高188厘米，运动型外形，来自白俄罗斯。":"Pavel Markov: model and on-camera talent. 188 cm, athletic build, based in Belarus.";
  renderSpecs();renderGallery();renderVideos();renderContacts();
 }
@@ -96,11 +96,30 @@ function renderContacts(){
  qs("#compContact").innerHTML=configs.filter(x=>val(p.contacts[x[0]])).map(x=>'<div>'+safe(x[1])+': '+safe(p.contacts[x[0]])+'</div>').join("");
 }
 function setHero(){
- const src=window.HERO_IMAGE||media[0]?.src;
+ const castingSrc=window.HERO_IMAGE||media[0]?.src;
+ const editorialSrc=window.EDITORIAL_PORTRAIT;
+ const src=castingSrc||editorialSrc;
  if(!src)return;
- const img=qs("#heroImage");img.src=src;img.alt=media[0]?.alt?.[lang]||"Pavel Markov portrait";
- img.onload=()=>{img.hidden=false;qs("#heroVisual").classList.add("hero-image-ready");qs("#heroArtwork").hidden=true;qs("#compPhoto").style.backgroundImage='url("'+src.replace(/["\\]/g,"")+'")';qs("#compPhoto").textContent="";};
- img.onerror=()=>{img.hidden=true;qs("#heroArtwork").hidden=false;};
+ const visual=qs("#heroVisual"), img=qs("#heroImage"), caption=qs('[data-i18n="artDisclaimer"]');
+ // Editorial visual from an owned brand project is not a verified casting photo.
+ if(caption){
+   caption.dataset.i18n=castingSrc?"realHeroCaption":"editorialHeroCaption";
+   caption.textContent=t(caption.dataset.i18n);
+ }
+ img.src=src;
+ img.alt=castingSrc?(media[0]?.alt?.[lang]||t("portraitAlt")):t("editorialPortraitAlt");
+ img.onload=()=>{
+   img.hidden=false;
+   visual.classList.add("hero-image-ready");
+   if(!castingSrc)visual.classList.add("editorial-cover");
+   qs("#heroArtwork").hidden=true;
+   // Only confirmed genuine casting media may be used on the printable card.
+   if(castingSrc){
+     qs("#compPhoto").style.backgroundImage='url("'+src.replace(/["\\]/g,"")+'")';
+     qs("#compPhoto").textContent="";
+   }
+ };
+ img.onerror=()=>{img.hidden=true;qs("#heroArtwork").hidden=false;visual.classList.remove("hero-image-ready","editorial-cover")};
 }
 function copyLink(){
  const url=new URL(location.href);url.searchParams.set("lang",lang);

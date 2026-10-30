@@ -133,7 +133,11 @@ window.MODEL_I18N = {
     "shotTitle1": "Портрет",
     "shotTitle2": "Полный рост",
     "shotTitle3": "Движение",
-    "pendingStatus": "ОРИГИНАЛЬНЫЕ ФОТО / В ПОДГОТОВКЕ"
+    "pendingStatus": "ОРИГИНАЛЬНЫЕ ФОТО / В ПОДГОТОВКЕ",
+    "editorialHeroCaption": "Брендовый портрет из проекта MarkovMade. Для кастингов нужны оригинальные фотографии.",
+    "editorialPortraitAlt": "Стилизованный портрет в белом смокинге на тёмном фоне из проекта MarkovMade.",
+    "realHeroCaption": "Фотография для модельного портфолио.",
+    "portraitAlt": "Павел Марков, портрет."
   },
   "en": {
     "skip": "Skip to content",
@@ -269,7 +273,11 @@ window.MODEL_I18N = {
     "shotTitle1": "Headshots",
     "shotTitle2": "Full length",
     "shotTitle3": "Movement",
-    "pendingStatus": "AUTHENTIC PHOTOS / COMING SOON"
+    "pendingStatus": "AUTHENTIC PHOTOS / COMING SOON",
+    "editorialHeroCaption": "Branded portrait from MarkovMade. Original, unretouched casting photos are still required.",
+    "editorialPortraitAlt": "Stylized portrait in a white tuxedo against a dark backdrop, from the MarkovMade project.",
+    "realHeroCaption": "Model portfolio photograph.",
+    "portraitAlt": "Pavel Markov, portrait."
   },
   "zh": {
     "skip": "跳转到主要内容",
@@ -405,6 +413,10 @@ window.MODEL_I18N = {
     "shotTitle1": "人物肖像",
     "shotTitle2": "全身照片",
     "shotTitle3": "动态表现",
-    "pendingStatus": "真人拍摄 / 筹备中"
+    "pendingStatus": "真人拍摄 / 筹备中",
+    "editorialHeroCaption": "来自 MarkovMade 项目的品牌肖像。正式选角仍需提供未改变面部特征的真实照片。",
+    "editorialPortraitAlt": "MarkovMade 项目中的风格化肖像：白色礼服、黑色背景。",
+    "realHeroCaption": "模特作品集肖像。",
+    "portraitAlt": "帕维尔·马尔科夫肖像。"
   }
 };
