@@ -23,7 +23,10 @@
     if(!b)return;
     b.setAttribute('aria-pressed',String(!canAnimate()));
     b.setAttribute('aria-label',t(canAnimate()?'motionDisable':reduced.matches?'motionSystem':'motionEnable'));
-    b.title=b.getAttribute('aria-label');b.disabled=reduced.matches;const icon=document.createElement('span');icon.setAttribute('aria-hidden','true');icon.textContent=canAnimate()?'II':'\u25b7';b.replaceChildren(icon);
+    b.title=b.getAttribute('aria-label');b.disabled=reduced.matches;const icon=b.querySelector('[aria-hidden="true"]');
+    if(icon)icon.textContent=canAnimate()?'Ⅱ':'▷';
+    const label=b.querySelector('[data-i18n="motionLabel"]');
+    if(label)label.textContent=t('motionLabel');
     if(!canAnimate())document.getAnimations().forEach(a=>a.cancel());
     document.dispatchEvent(new Event('pm:motionchange'));
   }

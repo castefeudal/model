@@ -57,7 +57,7 @@ a,button{-webkit-tap-highlight-color:transparent}
 .skip-link:focus{top:12px}
 .meta-rail{display:none!important}
 .page-progress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:301;pointer-events:none}
-.page-progress>span{display:block;width:0;height:100%;background:var(--accent);transition:width .1s linear}
+.page-progress>span{display:block;width:100%;height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left center;will-change:transform}
 .section-topline,.section-kicker,.overline,.folio-eyebrow,.archive-eyebrow{
  font:800 11px/1.45 var(--font);letter-spacing:.12em;text-transform:uppercase
 }
@@ -553,6 +553,13 @@ html[data-edition="zh"] .spread-editorial h3 em{font-family:var(--serif);font-st
  margin-top:17px;padding:8px 0;border:0;border-bottom:1px solid var(--ink);
  color:var(--ink);background:transparent;font:800 12px/1.5 var(--font)
 }
+.profile-contact-link{
+ display:inline-flex;align-items:center;gap:15px;margin-top:16px;
+ padding:10px 0;border-bottom:1px solid currentColor;
+ font:800 13px/1.45 var(--font);text-decoration:none;
+ transition:color .2s var(--ease)
+}
+.profile-contact-link:hover{color:var(--accent)}
 .profile-data{padding-top:10px}
 .profile-data>.overline{color:var(--soft);padding-bottom:20px}
 .spec-grid{border-top:1px solid var(--hair)}
@@ -1100,7 +1107,7 @@ html[data-edition="zh"] .booking-modal-heading h2 em{font-style:normal;line-heig
  .contact-lead{font-size:clamp(30px,6.8vw,43px)}
  .contact-methods a{font-size:14px;min-height:70px}
  .footer{flex-wrap:wrap;gap:13px;font-size:10px}
- .footer span:nth-child(2){display:none}
+ .footer > span:nth-child(2){display:none}
  .lb-stage{padding:65px 15px 98px}
  .lb-stage img{max-height:calc(100% - 85px)}
  .lb-arrow{width:42px;height:42px}

@@ -52,7 +52,11 @@ const tests=[
  {label:"RU_TABLET",lang:"ru",width:768,height:1024},
  {label:"EN_SMALL_LAPTOP",lang:"en",width:1024,height:768},
  {label:"RU_320",lang:"ru",width:320,height:740},
- {label:"ZH_320",lang:"zh",width:320,height:740}
+ {label:"ZH_320",lang:"zh",width:320,height:740},
+ {label:"EN_320",lang:"en",width:320,height:740},
+ {label:"RU_WIDE",lang:"ru",width:1920,height:1080},
+ {label:"EN_WIDE",lang:"en",width:1920,height:1080},
+ {label:"ZH_WIDE",lang:"zh",width:1920,height:1080}
 ];
 let errors=[],passed=[];
 try{
@@ -74,6 +78,8 @@ try{
   }
   assert(v.art.includes("edition-"+x.lang+".svg"),"Art not tied to edition");
   assert(v.overflow<=2,"Horizontal overflow "+v.overflow);
+  assert(await exec('!!(document.querySelector("#profile").compareDocumentPosition(document.querySelector("#lookbook")) & Node.DOCUMENT_POSITION_FOLLOWING)'),"Casting parameters must precede photo book");
+  assert(await exec('document.querySelector("#motionToggle")?.innerText.includes(window.MODEL_I18N[document.documentElement.dataset.edition].motionLabel)'),"Motion button lost its visible localized label");
   const clarity=await exec('(()=>{const s=x=>parseFloat(getComputedStyle(document.querySelector(x)).fontSize);return {body:s("body"),detail:s(".hero-detail"),section:s(".section-description"),screen:s(".screen-details>p"),about:s(".about-copy>p:not(.about-opening)"),contact:s(".contact-pending"),nav:s(".site-nav a"),language:s(".lang-btn"),button:s(".hero-actions .action"),specLabel:s(".spec-grid dt"),factLabel:s(".fact-label"),facts:!!document.querySelector(".facts-bar"),shots:document.querySelectorAll(".shot-card").length,portfolioEmpty:!!document.querySelector(".portfolio-pending")};})()');
   console.log("TYPOGRAPHY "+x.label+" "+JSON.stringify(clarity));
   assert(clarity.body>=16,"Body smaller than 16px");
@@ -108,6 +114,9 @@ try{
   assert(bookingUrls.length>=2,"Public project contact routes are missing");
   assert(bookingUrls.some(x=>x.startsWith("https://t.me/markovmade?text=")),"Telegram contact has no localized inquiry draft");
   assert(bookingUrls.some(x=>x.startsWith("mailto:castefeudal@gmail.com?subject=")),"Email contact has no localized subject");
+  const direct=await exec('Array.from(document.querySelectorAll("[data-direct-enquiry]")).map(a=>a.getAttribute("href"))');
+  const subject=await exec('window.MODEL_I18N[document.documentElement.dataset.edition].bookingEmailSubject');
+  assert(direct.length===2&&direct.every(h=>h==="mailto:castefeudal@gmail.com?subject="+encodeURIComponent(subject)),"Direct booking links must be localized and require no form");
 
   const archiveData=await exec('(()=>({cards:document.querySelectorAll("#gallery .gallery-item").length,images:document.querySelectorAll("#gallery .gallery-item img").length,stamps:document.querySelectorAll("#gallery .gallery-stamp").length,filters:document.querySelectorAll("#galleryFilters .filter").length,screen:document.querySelector(".screen-archive img")?.getAttribute("src"),fashion:document.querySelector(".spread-image img")?.getAttribute("src"),digitalsVisible:!document.querySelector("#portfolioEmpty").hidden}))()');
   assert(archiveData.cards===3 && archiveData.images===3 && archiveData.stamps===3 && archiveData.filters>=4,"Archive gallery is incomplete");
@@ -184,8 +193,8 @@ try{
   // Premiere regression: real inquiry dialog, source archive and accessible labels.
   const premiere=await exec('(()=>{const frames=[...document.querySelectorAll(".folio-frame img")].map(i=>i.getAttribute("src")),p=document.querySelector(".portrait-interlude img");return {frames:frames.length,distinct:new Set(frames).size,portrait:p?.getAttribute("src"),triggers:document.querySelectorAll("[data-open-booking]").length,form:!!document.querySelector("#bookingForm"),localeTitle:document.querySelector("#bookingTitle")?.innerText};})()');
   assert(premiere.frames===6&&premiere.distinct===6,"Premiere needs six distinct archive frames");
-  assert(premiere.portrait?.includes("portrait-digital.webp")&&premiere.triggers>=3&&premiere.form,"Premiere casting experience incomplete");
-  await exec('document.querySelector(innerWidth<=880?".hero-shortcuts [data-open-booking]":".hero-actions [data-open-booking]").click()');
+  assert(premiere.portrait?.includes("portrait-digital.webp")&&premiere.triggers>=2&&premiere.form,"Premiere casting experience incomplete");
+  await exec('document.querySelector(".header-enquiry").click()');
   assert(await exec('document.querySelector("#bookingDialog").open'),"Direct casting enquiry failed to open");
   const enquiry=await exec('(()=>{const d=document.querySelector("#bookingDialog"),r=d.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:innerWidth,height:innerHeight,email:document.querySelector("#bookingEmail").required,brief:document.querySelector("#bookingDetails").required,copy:!!document.querySelector("#bookingCopy")}})()');
   assert(enquiry.left>=-2&&enquiry.right<=enquiry.width+2,"Booking dialog exceeds screen width");
@@ -216,10 +225,11 @@ try{
   if(x.label==="EN_DESKTOP"){await exec('document.querySelector("#lbImage").decode().then(()=>true).catch(()=>false)');await screenshot("FULLSCREEN_ARCHIVE");}
   await exec('document.querySelector("#lbClose").click()');
   assert(!(await exec('document.querySelector("#lightbox").open')),"Lookbook photo viewer did not close");
-  await screenshot(x.label);
+  if(x.width<1920)await screenshot(x.label);
   if(x.label==="EN_DESKTOP"){
-   await exec('document.querySelector("[data-filter=portraits]").click()');
+   await exec('document.querySelector("#archiveCabinet").open=true;document.querySelector("[data-filter=portraits]").focus();document.querySelector("[data-filter=portraits]").click()');
    assert.equal(await exec('document.querySelectorAll("#gallery .gallery-item").length'),1,"Category filter incorrect");
+   assert(await exec('document.activeElement.matches("#galleryFilters [data-filter=portraits]")'),"Keyboard focus lost on gallery filter change");
    await exec('document.querySelector("[data-filter=all]").click()');
    assert.equal(await exec('document.querySelectorAll("#gallery .gallery-item").length'),3,"All archive images not restored");
    await exec('document.querySelector("[data-index]").click()');

@@ -7,13 +7,12 @@
   const header=$(".site-header"),progress=$("#readingProgress"),menu=$("#siteNav"),toggle=$("#menuToggle");
   const navLinks=$$("#siteNav a[href^='#']");
   const supportsObserver="IntersectionObserver" in window;
-  const prefersReduce=window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   let queued=false;
   function updateScroll(){
     queued=false;
     const scrolled=Math.max(0,window.scrollY||0);
     const travel=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
-    if(progress)progress.style.width=Math.min(100,100*scrolled/travel).toFixed(2)+"%";
+    if(progress)progress.style.transform="scaleX("+Math.min(1,scrolled/travel).toFixed(4)+")";
     if(header)header.classList.toggle("compact",scrolled>75);
   }
   function schedule(){if(!queued){queued=true;requestAnimationFrame(updateScroll)}}
@@ -31,16 +30,6 @@
   });
   navLinks.forEach(link=>link.addEventListener("click",closeMenu));
   if(supportsObserver){
-    const io=new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){entry.target.classList.add("is-visible");io.unobserve(entry.target);}
-      });
-    },{threshold:.09,rootMargin:"0px 0px -20px 0px"});
-    if(!prefersReduce){
-      const selector=".section-heading,.profile-statement,.profile-data,.screen-intro,.screen-details,.about-layout .display-heading,.about-copy,.contact-heading,.contact-side,.empty-lead,.empty-card";
-      $$(selector).forEach(el=>{el.classList.add("reveal");io.observe(el)});
-      document.body.classList.add("motion-enabled");
-    }
     const sections=$$("main section[id]");
     const navio=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
