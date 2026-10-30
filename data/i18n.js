@@ -132,7 +132,8 @@ window.MODEL_I18N = {
     "pendingText": "Здесь будут только актуальные фотографии Павла: портреты, полный рост и съёмки в движении. Иллюстрации не выдаются за модельные фотографии.",
     "shotTitle1": "Портрет",
     "shotTitle2": "Полный рост",
-    "shotTitle3": "Движение"
+    "shotTitle3": "Движение",
+    "pendingStatus": "ОРИГИНАЛЬНЫЕ ФОТО / В ПОДГОТОВКЕ"
   },
   "en": {
     "skip": "Skip to content",
@@ -267,7 +268,8 @@ window.MODEL_I18N = {
     "pendingText": "This section will feature authentic, up-to-date photos of Pavel: headshots, full-length frames and movement. Artwork is never passed off as a casting photo.",
     "shotTitle1": "Headshots",
     "shotTitle2": "Full length",
-    "shotTitle3": "Movement"
+    "shotTitle3": "Movement",
+    "pendingStatus": "AUTHENTIC PHOTOS / COMING SOON"
   },
   "zh": {
     "skip": "跳转到主要内容",
@@ -402,6 +404,7 @@ window.MODEL_I18N = {
     "pendingText": "本区将展示帕维尔本人的近期肖像、全身照和动态影像。插画只作为视觉设计，不会替代真实选角照片。",
     "shotTitle1": "人物肖像",
     "shotTitle2": "全身照片",
-    "shotTitle3": "动态表现"
+    "shotTitle3": "动态表现",
+    "pendingStatus": "真人拍摄 / 筹备中"
   }
 };
