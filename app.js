@@ -57,7 +57,7 @@ function setLanguage(next){
  qsa("[data-i18n-aria]").forEach(node=>node.setAttribute("aria-label",t(node.dataset.i18nAria)));
  qsa("[data-folio-index]").forEach(node=>{
    const index=Number(node.dataset.folioIndex);
-   node.setAttribute("aria-label",t("folioOpen")+" "+String(index+1).padStart(2,"0")+" / "+String(archive.length).padStart(2,"0"));
+   node.setAttribute("aria-label",t("archiveBadge")+" / "+String(index+1).padStart(2,"0")+" — "+t("folioOpen")+" "+String(index+1).padStart(2,"0")+" / "+String(archive.length).padStart(2,"0"));
  });
  qsa(".folio-frame-archival").forEach((node,index)=>{
    node.textContent=t("archiveBadge")+" / "+String(index+1).padStart(2,"0");
