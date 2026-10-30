@@ -8,7 +8,7 @@ SRC = ROOT / "assets"
 DEST = SRC / "thumbs"
 DEST.mkdir(parents=True, exist_ok=True)
 
-FILES = ("portrait-digital.webp", "portrait-character.webp", "editorial-markovmade.webp")
+FILES = ("portrait-fashion.webp", "portrait-athletic.webp", "portrait-digital.webp", "portrait-character.webp", "editorial-markovmade.webp")
 MAX_EDGE = 900
 
 for filename in FILES:
