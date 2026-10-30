@@ -38,7 +38,7 @@ html[data-edition="zh"]{
  --button-bg:#75372e;--button-ink:#fff5e7;
  --font:"PM CJK Sans","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
  --display:"PM CJK Sans","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
- --serif:"PM CJK Serif","Songti SC","Noto Serif CJK SC",Georgia,serif
+ --serif:"PM CJK Serif","PM CJK Sans","Songti SC","Noto Serif CJK SC",Georgia,serif
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px)}
