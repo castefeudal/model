@@ -58,6 +58,9 @@
   </script>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="./bundle.css">
+  <!-- The media desk is below the fold; load its independent styles without delaying the cover. -->
+  <link rel="stylesheet" href="./press-kit.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./press-kit.css"></noscript>
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Pavel Markov","alternateName":["Павел Марков","帕维尔·马尔科夫"],"description":"Athletic model and on-camera talent based in Belarus.","height":{"@type":"QuantitativeValue","value":188,"unitCode":"CMT"},"homeLocation":{"@type":"Place","name":"Belarus"},"url":"https://castefeudal.github.io/model/"}</script>
   <script src="./data/profile.js" defer></script>

@@ -12,7 +12,7 @@ const compressedSize=text=>gzipSync(text,{level:9}).length;
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","issue09.css","casting-desk.js","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt","assets/fonts/serif-covered-glyphs.txt",".nojekyll"];
+const required=["index.html","issue09.css","press-kit.css","press-kit.js","casting-desk.js","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt","assets/fonts/serif-covered-glyphs.txt",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -76,6 +76,7 @@ if(!html.includes('class="contact-backdrop"'))fail("Authentic contact photograph
 for(const k of ["peekAction","peekArchive","peekAria","peekDescription","peekOverline","peekClose"])for(const l of ["ru","en","zh"])if(!read("data/i18n.js").includes('"'+k+'"'))fail("Missing casting desk translation: "+l+":"+k);
 
 if(!html.includes('href="./bundle.css"'))fail("Production CSS bundle not linked");
+if(!html.includes('href="./press-kit.css"'))fail("Download desk CSS missing");
 for(const edition of ["ru","en","zh"]){
  if(!read("editions.css").includes('data-edition="'+edition+'"'))fail("Missing theme "+edition);
  if(!read("editions.css").includes('edition-'+edition+'.svg'))fail("Missing art binding "+edition);
@@ -114,7 +115,7 @@ if((sm.match(/<url>/g)||[]).length!==3)fail("Three canonical URLs expected in si
 
 
 
-for(const cssfile of ["atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","issue09.css"]){
+for(const cssfile of ["press-kit.css","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","issue09.css"]){
  const css=read(cssfile);
  for(const m of css.matchAll(/url\((['"]?)([^)'"]+)\1\)/g)){
    const v=m[2];if(v.startsWith("http")||v.startsWith("data:"))continue;

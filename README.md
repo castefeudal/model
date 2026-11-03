@@ -265,3 +265,7 @@ CSS but introduces no third-party UI framework. `tools/browser-qa.mjs` checks th
 three language cards, real links, keyboard interaction, responsive layout and
 media-desk screenshots. `tools/check_press_kit.py` opens every PDF and validates
 all archive members, image count, SHA-256, metadata and PDF text extraction.
+
+### Critical rendering optimization (signature edition)
+
+The core site is a single generated `bundle.css` from `issue09.css`. The substantial, below-the-fold International Press Office has a separate `press-kit.css` loaded non-render-blockingly (`media="print"` switched to `all` on load, with a `noscript` fallback). Only the two new Hero controls' critical CSS stays in the core bundle. This avoids making the first portrait wait for 10 KB of unrelated media-desk styles. Keep the module's complete design in `press-kit.css` and run `node tools/build-css.mjs` when core styles change.
