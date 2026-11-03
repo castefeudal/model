@@ -44,9 +44,18 @@
       document.title=l==="ru"?"Павел Марков — модель / кастинг":l==="en"?"Pavel Markov — Model / On-camera Talent":"帕维尔·马尔科夫 — 模特与镜头作品集";
     })();
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <script>
+    // Latin editions keep non-blocking editorial fonts.
+    // Chinese display fonts are self-hosted: no redundant Google font fetch.
+    if (document.documentElement.dataset.edition !== "zh") {
+      const displayFonts = document.createElement("link");
+      displayFonts.rel = "preload";
+      displayFonts.as = "style";
+      displayFonts.href = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Manrope:wght@400;500;600;700;800&display=swap";
+      displayFonts.onload = function () { this.onload = null; this.rel = "stylesheet"; };
+      document.head.append(displayFonts);
+    }
+  </script>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="./bundle.css">
   
@@ -92,7 +101,7 @@
         <h1 class="hero-name" id="heroHeading"><span data-i18n="heroName1">ПАВЕЛ</span><em data-i18n="heroName2">МАРКОВ</em></h1>
         <div class="hero-shortcuts">
           <a class="hero-shortcut-primary" href="#lookbook"><span data-i18n="heroQuickGallery">Смотреть кадры</span><span aria-hidden="true">↗</span></a>
-          <a href="mailto:castefeudal@gmail.com" data-direct-enquiry class="hero-shortcut-secondary"><span data-i18n="bookingShort">Запросить съёмку</span><span aria-hidden="true">↗</span></a>
+          <a href="https://t.me/markovmade" data-direct-telegram class="hero-shortcut-secondary" target="_blank" rel="noopener noreferrer"><span data-i18n="heroMessage">Написать в Telegram</span><span aria-hidden="true">↗</span></a>
         </div>
         <div class="hero-bottom">
           <div class="hero-intro">
@@ -100,7 +109,7 @@
             <p class="hero-statement" data-i18n="heroLine">Не только внешность. Присутствие.</p>
             <p class="hero-detail" data-i18n="heroDetail">Атлетический типаж. Работа с движением и камерой. Открыт к коммерческим и творческим проектам.</p>
             <div class="hero-actions">
-              <a class="action action-dark" href="mailto:castefeudal@gmail.com" data-direct-enquiry><span data-i18n="bookingAction">Запросить съёмку</span><span aria-hidden="true">↗</span></a>
+              <a class="action action-dark" href="https://t.me/markovmade" data-direct-telegram target="_blank" rel="noopener noreferrer"><span data-i18n="heroMessage">Написать в Telegram</span><span aria-hidden="true">↗</span></a>
               <button class="action action-outline" type="button" data-open-casting-peek><span data-i18n="peekAction">Быстрый кастинг-профиль</span><span aria-hidden="true">↗</span></button>
             </div>
             <button class="hero-compact-casting" type="button" data-open-casting-peek><span data-i18n="peekAction">Быстрый кастинг-профиль</span><span aria-hidden="true">↗</span></button>
@@ -150,22 +159,8 @@
     </aside>
 
 
-    <section class="portrait-interlude" aria-labelledby="portraitHeading">
-      <div class="portrait-interlude-image">
-        <img src="./assets/portrait-digital.webp" alt="Павел Марков, портрет из личного архива" data-i18n-alt="portraitAlt" width="1200" height="1500" loading="lazy" decoding="async">
-        <div class="portrait-interlude-caption"><span data-i18n="portraitArchive">АРХИВНЫЙ ПОРТРЕТ / НЕ АКТУАЛЬНЫЕ DIGITALS</span><span>PM — 02/06</span></div>
-      </div>
-      <div class="portrait-interlude-copy">
-        <div class="portrait-interlude-index"><span>THE PERSONAL EDITION</span><span>I. THE FACE</span></div>
-        <span class="portrait-interlude-overline" data-i18n="portraitOverline">ЛИЦО / ХАРАКТЕР / ДВИЖЕНИЕ</span>
-        <h2 id="portraitHeading" data-i18n="portraitHeadline">Внешность привлекает. <em>Присутствие удерживает.</em></h2>
-        <p data-i18n="portraitStory">Атлетическая подготовка, пластика движения и опыт работы с камерой. Разные образы — один узнаваемый характер.</p>
-        <div class="portrait-interlude-bottom"><span>188 CM · ATHLETIC · BELARUS</span><button type="button" data-open-booking><span data-i18n="bookingAction">Запросить съёмку</span><span aria-hidden="true">↗</span></button></div>
-      </div>
-    </section>
-
     <section class="profile-section section-pad" id="profile" aria-labelledby="profileTitle">
-      <div class="section-topline"><span>02 / CASTING PROFILE</span><span data-i18n="profileOverline">ПАРАМЕТРЫ ДЛЯ КАСТИНГА</span></div>
+      <div class="section-topline"><span>01 / CASTING PROFILE</span><span data-i18n="profileOverline">ПАРАМЕТРЫ ДЛЯ КАСТИНГА</span></div>
       <div class="profile-layout">
         <div class="profile-statement">
           <h2 class="display-heading" id="profileTitle" data-i18n="profileTitle">Факты. <em>Не поза.</em></h2>
@@ -179,6 +174,20 @@
           <dl class="spec-grid" id="specGrid"></dl>
           <p class="data-note" data-i18n="measurementDisclaimer">Вес и талия ориентировочные. Уточняются перед подтверждением съёмок.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="portrait-interlude" aria-labelledby="portraitHeading">
+      <div class="portrait-interlude-image">
+        <img src="./assets/portrait-digital.webp" alt="Павел Марков, портрет из личного архива" data-i18n-alt="portraitAlt" width="1200" height="1500" loading="lazy" decoding="async">
+        <div class="portrait-interlude-caption"><span data-i18n="portraitArchive">АРХИВНЫЙ ПОРТРЕТ / НЕ АКТУАЛЬНЫЕ DIGITALS</span><span>PM — 02/06</span></div>
+      </div>
+      <div class="portrait-interlude-copy">
+        <div class="portrait-interlude-index"><span>THE PERSONAL EDITION</span><span>II. THE PERSON</span></div>
+        <span class="portrait-interlude-overline" data-i18n="portraitOverline">ЛИЦО / ХАРАКТЕР / ДВИЖЕНИЕ</span>
+        <h2 id="portraitHeading" data-i18n="portraitHeadline">Внешность привлекает. <em>Присутствие удерживает.</em></h2>
+        <p data-i18n="portraitStory">Атлетическая подготовка, пластика движения и опыт работы с камерой. Разные образы — один узнаваемый характер.</p>
+        <div class="portrait-interlude-bottom"><span>188 CM · ATHLETIC · BELARUS</span><button type="button" data-open-booking><span data-i18n="bookingAction">Запросить съёмку</span><span aria-hidden="true">↗</span></button></div>
       </div>
     </section>
 
