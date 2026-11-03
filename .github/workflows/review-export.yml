@@ -1,7 +1,7 @@
 name: Export source for production review
 on:
   push:
-    branches: [feat/production-motion-audit]
+    branches: [feat/production-motion-audit, feat/directors-edition-20261103]
     paths: [.github/workflows/review-export.yml]
   workflow_dispatch:
 permissions:
