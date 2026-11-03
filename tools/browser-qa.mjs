@@ -111,7 +111,7 @@ try{
   assert(!clipped.length,"Text clipped outside viewport: "+JSON.stringify(clipped));
 
   assert(v.specs>=7&&v.cardActions>=2&&v.hasGallery,"Casting functions unavailable");
-  const kit=await exec('(()=>({cards:document.querySelectorAll(".kit-card").length,zip:document.querySelectorAll(".kit-download[download]").length,all:!!document.querySelector(".kit-complete-link[download]"),nav:!!document.querySelector(".site-nav a[href="#downloads"]")}))()');
+  const kit=await exec('(()=>({cards:document.querySelectorAll(".kit-card").length,zip:document.querySelectorAll(".kit-download[download]").length,all:!!document.querySelector(".kit-complete-link[download]"),nav:Array.from(document.querySelectorAll(".site-nav a")).some(x=>x.hash==="#downloads")}))()');
   assert(kit.cards===3 && kit.zip===3 && kit.all && kit.nav,"International download desk incomplete");
   const bookingUrls=await exec('Array.from(document.querySelectorAll("#contactMethods a")).map(a=>a.href)');
   assert(bookingUrls.length>=2,"Public project contact routes are missing");
