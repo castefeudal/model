@@ -1,0 +1,41 @@
+{
+  "documentCount": 9,
+  "international": {
+    "bytes": 9365321,
+    "sha256": "7dcedc769f408844275e711ffb225905213abf94f8c21f16582a67232dabcd3f",
+    "zip": "./downloads/Pavel_Markov_Complete_Archive.zip"
+  },
+  "issued": "2026-11-03",
+  "locales": {
+    "en": {
+      "bytes": 3624986,
+      "compPdf": "./downloads/pdfs/en/Pavel_Markov_Comp_Card.pdf",
+      "parametersPdf": "./downloads/pdfs/en/Pavel_Markov_Parameters.pdf",
+      "preview": "./downloads/previews/EN.webp",
+      "profilePdf": "./downloads/pdfs/en/Pavel_Markov_Casting_Profile.pdf",
+      "sha256": "54650955225b831fa27a4d536d8839dbd7cc8c6fd85df78837c3b5f2be931fe7",
+      "zip": "./downloads/Pavel_Markov_Casting_Kit_EN.zip"
+    },
+    "ru": {
+      "bytes": 3635588,
+      "compPdf": "./downloads/pdfs/ru/Pavel_Markov_Comp_Card.pdf",
+      "parametersPdf": "./downloads/pdfs/ru/Pavel_Markov_Parameters.pdf",
+      "preview": "./downloads/previews/RU.webp",
+      "profilePdf": "./downloads/pdfs/ru/Pavel_Markov_Casting_Profile.pdf",
+      "sha256": "f60caf5923cd1d4784bcdc21826877c00214c7dd5ab122c83d2cfff866c91882",
+      "zip": "./downloads/Pavel_Markov_Casting_Kit_RU.zip"
+    },
+    "zh": {
+      "bytes": 3668505,
+      "compPdf": "./downloads/pdfs/zh/Pavel_Markov_Comp_Card.pdf",
+      "parametersPdf": "./downloads/pdfs/zh/Pavel_Markov_Parameters.pdf",
+      "preview": "./downloads/previews/ZH.webp",
+      "profilePdf": "./downloads/pdfs/zh/Pavel_Markov_Casting_Profile.pdf",
+      "sha256": "0a986e4b58d5cb77eb5c9c6b1583cf0693027e30acb4c2e56e62fbe00d6601bc",
+      "zip": "./downloads/Pavel_Markov_Casting_Kit_ZH.zip"
+    }
+  },
+  "photoCount": 6,
+  "schema": "pm-download-catalog/v1",
+  "version": "2026.11.03"
+}
