@@ -55,10 +55,14 @@
       const key=el.querySelector("span")?.textContent.trim(),value=el.querySelector("strong")?.textContent.trim();
       return key&&value?key+": "+value:null;
     }).filter(Boolean);
-    const link=new URL(location.href);link.searchParams.set("lang",document.documentElement.dataset.edition||"ru");
+    const link=new URL(location.href);link.searchParams.set("lang",document.documentElement.dataset.edition||"ru");link.searchParams.set("view","casting");
     const content=["PAVEL MARKOV","MODEL / ON-CAMERA TALENT",...rows,"",tr("measurementDisclaimer"),link.href].join("\n");
     const ok=window.PMExperience?.copyText?await window.PMExperience.copyText(content):false;
     $("#peekCopyStatus").textContent=tr(ok?"specsCopied":"copyUnavailable");
   });
   for (const b of document.querySelectorAll(".lang-btn")) b.addEventListener("click",()=>queueMicrotask(()=>{render();$("#peekCopyStatus").textContent="";}));
+  // Shareable, locale-preserving casting dossier link.
+  if(new URLSearchParams(location.search).get("view")==="casting"){
+    requestAnimationFrame(()=>{if(!dialog.open)open()});
+  }
 })();
