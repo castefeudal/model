@@ -79,6 +79,7 @@ try{
   assert(v.art.includes("edition-"+x.lang+".svg"),"Art not tied to edition");
   assert(v.overflow<=2,"Horizontal overflow "+v.overflow);
   assert(await exec('!!(document.querySelector("#profile").compareDocumentPosition(document.querySelector("#lookbook")) & Node.DOCUMENT_POSITION_FOLLOWING)'),"Casting parameters must precede photo book");
+  assert(await exec('!!(document.querySelector("#profile").compareDocumentPosition(document.querySelector(".portrait-interlude")) & Node.DOCUMENT_POSITION_FOLLOWING)'),"Casting parameters must precede the secondary portrait chapter");
   assert(await exec('document.querySelector("#motionToggle")?.innerText.includes(window.MODEL_I18N[document.documentElement.dataset.edition].motionLabel)'),"Motion button lost its visible localized label");
   const clarity=await exec('(()=>{const s=x=>parseFloat(getComputedStyle(document.querySelector(x)).fontSize);return {body:s("body"),detail:s(".hero-detail"),section:s(".section-description"),screen:s(".screen-details>p"),about:s(".about-copy>p:not(.about-opening)"),contact:s(".contact-pending"),nav:s(".site-nav a"),language:s(".lang-btn"),button:s(".hero-actions .action"),specLabel:s(".spec-grid dt"),factLabel:s(".fact-label"),facts:!!document.querySelector(".facts-bar"),shots:document.querySelectorAll(".shot-card").length,portfolioEmpty:!!document.querySelector(".portfolio-pending")};})()');
   console.log("TYPOGRAPHY "+x.label+" "+JSON.stringify(clarity));
@@ -101,7 +102,7 @@ try{
   assert(v.headingLeft>=-5&&v.headingRight<=x.width+5,"Heading outside viewport");
   assert(v.headingScroll<=4,"Heading text overflow "+v.headingScroll);
   const coverUX=await exec('(()=>{const box=document.querySelector(".hero-shortcuts");const z=document.querySelector(".lang-btn[data-lang=zh]");const r=box.getBoundingClientRect();return {shortcuts:getComputedStyle(box).display,visible:r.height>0 && r.width>0,buttons:box.querySelectorAll("a,button").length,chineseLabel:z.innerText.trim(),imageDisplay:getComputedStyle(document.querySelector("#heroVisual")).backgroundColor}})()');
-  if(x.width<=880)assert(coverUX.shortcuts==="grid" && coverUX.visible && coverUX.buttons===2,"Mobile casting actions missing");
+  if(x.width<=880)assert(coverUX.shortcuts==="grid" && coverUX.visible && coverUX.buttons===3,"Mobile casting actions missing");
   if(x.width>880)assert(coverUX.shortcuts==="none","Desktop should keep original primary actions");
   assert(coverUX.chineseLabel===(x.lang==="zh"?"中文":"ZH"),"Chinese language switch is not legible in "+x.lang);
 
@@ -110,13 +111,15 @@ try{
   assert(!clipped.length,"Text clipped outside viewport: "+JSON.stringify(clipped));
 
   assert(v.specs>=7&&v.cardActions>=2&&v.hasGallery,"Casting functions unavailable");
+  const kit=await exec('(()=>({cards:document.querySelectorAll(".kit-card").length,zip:document.querySelectorAll(".kit-download[download]").length,all:!!document.querySelector(".kit-complete-link[download]"),nav:Array.from(document.querySelectorAll(".site-nav a")).some(x=>x.hash==="#downloads")}))()');
+  assert(kit.cards===3 && kit.zip===3 && kit.all && kit.nav,"International download desk incomplete");
   const bookingUrls=await exec('Array.from(document.querySelectorAll("#contactMethods a")).map(a=>a.href)');
   assert(bookingUrls.length>=2,"Public project contact routes are missing");
   assert(bookingUrls.some(x=>x.startsWith("https://t.me/markovmade?text=")),"Telegram contact has no localized inquiry draft");
   assert(bookingUrls.some(x=>x.startsWith("mailto:castefeudal@gmail.com?subject=")),"Email contact has no localized subject");
-  const direct=await exec('Array.from(document.querySelectorAll("[data-direct-enquiry]")).map(a=>a.getAttribute("href"))');
-  const subject=await exec('window.MODEL_I18N[document.documentElement.dataset.edition].bookingEmailSubject');
-  assert(direct.length===2&&direct.every(h=>h==="mailto:castefeudal@gmail.com?subject="+encodeURIComponent(subject)),"Direct booking links must be localized and require no form");
+  const direct=await exec('Array.from(document.querySelectorAll("[data-direct-telegram]")).map(a=>a.getAttribute("href"))');
+  const inquiry=await exec('window.MODEL_I18N[document.documentElement.dataset.edition].inquiryTelegram');
+  assert(direct.length===2&&direct.every(h=>h==="https://t.me/markovmade?text="+encodeURIComponent(inquiry)),"Hero must offer localized direct Telegram enquiry");
 
   const archiveData=await exec('(()=>({cards:document.querySelectorAll("#gallery .gallery-item").length,images:document.querySelectorAll("#gallery .gallery-item img").length,stamps:document.querySelectorAll("#gallery .gallery-stamp").length,filters:document.querySelectorAll("#galleryFilters .filter").length,screen:document.querySelector(".screen-archive img")?.getAttribute("src"),fashion:document.querySelector(".spread-image img")?.getAttribute("src"),digitalsVisible:!document.querySelector("#portfolioEmpty").hidden}))()');
   assert(archiveData.cards===3 && archiveData.images===3 && archiveData.stamps===3 && archiveData.filters>=4,"Archive gallery is incomplete");
@@ -247,6 +250,9 @@ try{
    await exec('document.querySelector("#contact").scrollIntoView({behavior:"instant"})');
    await sleep(450);
    await screenshot("CONTACT");
+    await exec('document.querySelector("#downloads").scrollIntoView({behavior:"instant"})');
+    await sleep(460);
+    await screenshot("DOWNLOADS_RU");
   }
   if(x.label==="EN_DESKTOP"){
    await exec('document.querySelector(".portrait-interlude").scrollIntoView({behavior:"instant"})');
@@ -255,6 +261,9 @@ try{
    await exec('document.querySelector(".folio-strip").scrollIntoView({behavior:"instant"})');
    await sleep(440);
    await screenshot("LOOKBOOK_GRID");
+    await exec('document.querySelector("#downloads").scrollIntoView({behavior:"instant"})');
+    await sleep(460);
+    await screenshot("DOWNLOADS_EN");
    await exec('document.querySelector(".header-enquiry").click()');
    assert(await exec('document.querySelector("#bookingDialog").open'),"Header booking control not interactive");
    await screenshot("BOOKING_DIALOG");
@@ -267,6 +276,9 @@ try{
   if(x.label==="ZH_MOBILE"){
    await exec('document.querySelector("#profile").scrollIntoView({behavior:"instant"})');
    await sleep(450);await screenshot("PROFILE_ZH");
+    await exec('document.querySelector("#downloads").scrollIntoView({behavior:"instant"})');
+    await sleep(460);
+    await screenshot("DOWNLOADS_ZH_MOBILE");
   }
   passed.push(x.label);
  }
@@ -282,6 +294,12 @@ try{
  assert.equal(change.edition,"zh");assert.equal(change.probe,"retained");assert(change.url.includes("lang=zh"));assert(change.text.includes("帕维尔"));assert.equal(change.lang,"zh-CN"); assert.equal(await exec('document.querySelector("link[rel=canonical]").href.endsWith("?lang=zh")'),true,"Canonicals must update on language switch");
  await exec('document.querySelector(".lang-btn[data-lang=ru]").click();true');
  assert.equal(await exec('document.documentElement.dataset.edition'),"ru");
+  // A casting permalink must open the real native, localized dossier.
+  await go("http://127.0.0.1:8765/?lang=en&view=casting");
+  await sleep(90);
+  assert(await exec('document.querySelector("#castingPeek").open'),"Casting permalink did not open the dossier");
+  assert(await exec('document.querySelector("#peekSpecs").children.length>=7'),"Casting permalink lost verified measurements");
+  await exec('document.querySelector("#peekClose").click()');
  if(errors.length)throw Error("Runtime exceptions: "+errors.join(" | "));
  console.log("PASS: "+passed.join(", ")+"; theme-switch RU→EN→ZH→RU without reload; dialogs; URLs; no JS exceptions.");
 }catch(err){console.error("FAIL — "+err.stack);process.exitCode=1}

@@ -118,6 +118,13 @@ function renderDirectEnquiry(){
    ?"mailto:"+address+"?subject="+encodeURIComponent(t("bookingEmailSubject"))
    :"#contact";
  qsa("[data-direct-enquiry]").forEach(link=>link.setAttribute("href",href));
+ const telegram=p.contacts?.telegram?.replace(/^@/,"");
+ const telegramHref=telegram?"https://t.me/"+encodeURIComponent(telegram)+"?text="+encodeURIComponent(t("inquiryTelegram")):"#contact";
+ qsa("[data-direct-telegram]").forEach(link=>{
+  link.setAttribute("href",telegramHref);
+  if(telegram){link.setAttribute("target","_blank");link.setAttribute("rel","noopener noreferrer")}
+  else{link.removeAttribute("target");link.removeAttribute("rel")}
+ });
 }
 function renderContacts(){
  const configs=[["telegram","Telegram",v=>"https://t.me/"+v.replace(/^@/,"")+"?text="+encodeURIComponent(t("inquiryTelegram"))],["email","Email",v=>"mailto:"+v+"?subject="+encodeURIComponent(t("inquirySubject"))],["instagram","Instagram",v=>"https://instagram.com/"+v.replace(/^@/,"")],["agency","Agency",v=>v]];

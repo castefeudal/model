@@ -4,13 +4,15 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
+import {gzipSync} from "node:zlib";
 import { execFileSync } from "node:child_process";
 
 const root=path.resolve(import.meta.dirname,"..");
+const compressedSize=text=>gzipSync(text,{level:9}).length;
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
-const required=["index.html","issue09.css","casting-desk.js","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt","assets/fonts/serif-covered-glyphs.txt",".nojekyll"];
+const required=["index.html","issue09.css","press-kit.css","press-kit.js","casting-desk.js","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","app.js","polish.js","premiere.js","data/profile.js","data/media.js","data/i18n.js","assets/edition-ru.svg","assets/edition-en.svg","assets/edition-zh.svg","assets/editorial-markovmade.webp","assets/editorial-markovmade-960.avif","assets/editorial-markovmade-1600.avif","assets/portrait-fashion.webp","assets/portrait-athletic.webp","assets/portrait-digital.webp","assets/portrait-stage.webp","assets/portrait-character.webp","assets/social-cover.png","assets/favicon.svg","assets/fonts/NotoSansSC-subset.woff2","assets/fonts/NotoSerifSC-subset.woff2","assets/fonts/covered-glyphs.txt","assets/fonts/serif-covered-glyphs.txt",".nojekyll"];
 required.forEach(p=>{if(!exists(p))fail("Missing "+p)});
 assert(exists("index.html"),"index missing");
 const html=read("index.html");
@@ -26,7 +28,8 @@ if(exists("assets/fonts/covered-glyphs.txt")){
 }
 try{execFileSync(process.execPath,["tools/build-css.mjs","--check"],{cwd:root,stdio:"pipe"});ok("Production CSS bundle is fresh")}
 catch(e){fail("Production CSS bundle out of date: run node tools/build-css.mjs")}
-if(fs.statSync(path.join(root,"bundle.css")).size>78000)fail("Edition 09 design CSS exceeds 78 KB budget");
+if(fs.statSync(path.join(root,"bundle.css")).size>85000)fail("Signature edition source CSS exceeds 85 KB budget");
+if(compressedSize(read("bundle.css"))>19000)fail("Signature edition compressed CSS exceeds 19 KB transfer budget");
 if(read("tools/build-css.mjs").includes('"atelier.css"')||read("tools/build-css.mjs").includes('"premiere.css"'))fail("Legacy layered CSS must not ship to production");
 if(!read("bundle.css").includes("PM CJK Sans"))fail("Self-hosted Simplified Chinese font missing from production CSS");
 if(!read("tools/build-css.mjs").includes('"issue09.css"'))fail("Single design source must be ISSUE 09");
@@ -73,6 +76,7 @@ if(!html.includes('class="contact-backdrop"'))fail("Authentic contact photograph
 for(const k of ["peekAction","peekArchive","peekAria","peekDescription","peekOverline","peekClose"])for(const l of ["ru","en","zh"])if(!read("data/i18n.js").includes('"'+k+'"'))fail("Missing casting desk translation: "+l+":"+k);
 
 if(!html.includes('href="./bundle.css"'))fail("Production CSS bundle not linked");
+if(!html.includes('href="./press-kit.css"'))fail("Download desk CSS missing");
 for(const edition of ["ru","en","zh"]){
  if(!read("editions.css").includes('data-edition="'+edition+'"'))fail("Missing theme "+edition);
  if(!read("editions.css").includes('edition-'+edition+'.svg'))fail("Missing art binding "+edition);
@@ -111,7 +115,7 @@ if((sm.match(/<url>/g)||[]).length!==3)fail("Three canonical URLs expected in si
 
 
 
-for(const cssfile of ["atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","issue09.css"]){
+for(const cssfile of ["press-kit.css","atelier.css","editions.css","clarity.css","art-direction.css","bundle.css","folio.css","premiere.css","finish.css","issue08.css","issue09.css"]){
  const css=read(cssfile);
  for(const m of css.matchAll(/url\((['"]?)([^)'"]+)\1\)/g)){
    const v=m[2];if(v.startsWith("http")||v.startsWith("data:"))continue;

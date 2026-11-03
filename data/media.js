@@ -21,6 +21,7 @@ window.MODEL_ARCHIVE = [
     },
     "position": "50% 32%",
     "archive": true,
+    "presskit_approved": true,
     "featured": true
   },
   {
@@ -38,6 +39,7 @@ window.MODEL_ARCHIVE = [
     },
     "position": "50% 42%",
     "archive": true,
+    "presskit_approved": true,
     "thumbnail": "assets/thumbs/portrait-digital.webp"
   },
   {
@@ -55,6 +57,7 @@ window.MODEL_ARCHIVE = [
     },
     "position": "50% 45%",
     "archive": true,
+    "presskit_approved": true,
     "featured": true
   },
   {
@@ -72,6 +75,7 @@ window.MODEL_ARCHIVE = [
     },
     "position": "55% 40%",
     "archive": true,
+    "presskit_approved": true,
     "featured": true
   },
   {
@@ -89,6 +93,7 @@ window.MODEL_ARCHIVE = [
     },
     "position": "50% 45%",
     "archive": true,
+    "presskit_approved": true,
     "thumbnail": "assets/thumbs/portrait-character.webp"
   },
   {
@@ -106,6 +111,7 @@ window.MODEL_ARCHIVE = [
     },
     "position": "50% 32%",
     "archive": true,
+    "presskit_approved": true,
     "thumbnail": "assets/thumbs/editorial-markovmade.webp"
   }
 ];
