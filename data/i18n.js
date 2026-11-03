@@ -31,7 +31,7 @@ window.MODEL_I18N = {
     "portraitArchive": "АРХИВНЫЙ ПОРТРЕТ / НЕ АКТУАЛЬНЫЕ DIGITALS",
     "portraitOverline": "ПОРТРЕТ / ХАРАКТЕР / ПЛАСТИКА",
     "portraitHeadline": "Внешность привлекает. <em>Присутствие удерживает.</em>",
-    "portraitStory": "188 см, атлетический типаж и многолетняя спортивная практика. Перед камерой важны не только пропорции — но и движение, энергия, характер.",
+    "portraitStory": "Это фотографии из личного архива, снятые в разное время. Для профессионального кастинга нужны актуальные снимки без ретуши и точные параметры.",
     "bookingCloseAria": "Закрыть запрос на съёмку",
     "bookingOverline": "ПРЯМОЙ КОНТАКТ / КАСТИНГ",
     "bookingTitle": "Обсудим <em>съёмку.</em>",
@@ -67,7 +67,7 @@ window.MODEL_I18N = {
     "heroEyebrow": "ПЕРСОНАЛЬНОЕ ПОРТФОЛИО / 2026",
     "heroRole": "МОДЕЛЬ / ДЛЯ РЕКЛАМЫ И СЪЁМОК",
     "heroLine": "Лицо замечают. <em>Характер запоминают.</em>",
-    "heroDetail": "188 см. Атлетический типаж, пластика движения, опыт работы перед камерой и публичных выступлений. Открыт к рекламе, fashion и экранным проектам.",
+    "heroDetail": "Рост 188 см. Атлетический типаж, спортивная подготовка, собственные видеосъёмки и опыт публичных выступлений. Для fashion, рекламы и экранных проб.",
     "viewPortfolio": "Смотреть портфолио",
     "openCard": "Кастинг-анкета",
     "height": "Рост",
@@ -104,7 +104,7 @@ window.MODEL_I18N = {
     "screenTag": "MOVEMENT / CHARACTER / PRESENCE",
     "aboutOverline": "ЗА КАДРОМ",
     "aboutTitle": "Человек <em>за кадром.</em>",
-    "aboutOpening": "Моя отправная точка — движение. Мой инструмент — дисциплина. Мне интересны образы, у которых есть характер.",
+    "aboutOpening": "Спорт научил меня работать с телом и движением. Создание видео — уверенно держаться перед камерой. Хочу использовать эти навыки в новых съёмках.",
     "aboutBody1": "Больше 14 лет спорт остаётся важной частью моей жизни. Он сформировал мою физическую подготовку, дисциплину и внимание к деталям движения.",
     "aboutBody2": "Опыт тренера и создания собственного видеоконтента научил меня уверенно чувствовать себя перед людьми и в кадре. Открыт к съёмкам, где нужны атлетический типаж, характер и естественная подача.",
     "aboutSign": "BELARUS / MODEL & ON-CAMERA TALENT",
@@ -234,7 +234,8 @@ window.MODEL_I18N = {
     "lbCloseAria": "Закрыть просмотр фотографии",
     "lbPrevAria": "Предыдущая фотография",
     "lbNextAria": "Следующая фотография",
-    "compCloseAria": "Закрыть кастинг-анкету"
+    "compCloseAria": "Закрыть кастинг-анкету",
+    "heroMessage": "Написать в Telegram"
   },
   "en": {
     "folioNavAria": "Lookbook navigation",
@@ -268,7 +269,7 @@ window.MODEL_I18N = {
     "portraitArchive": "ARCHIVE PORTRAIT / NOT CURRENT CASTING DIGITALS",
     "portraitOverline": "PORTRAIT / CHARACTER / MOVEMENT",
     "portraitHeadline": "The look catches the eye. <em>Presence holds it.</em>",
-    "portraitStory": "188 cm, an athletic build and years of physical practice. On camera it is more than measurements: movement, energy and character matter.",
+    "portraitStory": "These photographs come from my personal archive and were taken at different times. Professional casting also needs recent unretouched photographs and exact measurements.",
     "bookingCloseAria": "Close casting enquiry",
     "bookingOverline": "DIRECT INQUIRIES / CASTING",
     "bookingTitle": "Let's make <em>something.</em>",
@@ -304,7 +305,7 @@ window.MODEL_I18N = {
     "heroEyebrow": "PERSONAL PORTFOLIO / 2026",
     "heroRole": "MODEL / COMMERCIAL & SCREEN CASTING",
     "heroLine": "The face is noticed. <em>Presence is remembered.</em>",
-    "heroDetail": "188 cm. Athletic build, confident movement, on-camera content and live presenting experience. Open to fashion, commercial and screen projects.",
+    "heroDetail": "188 cm. Athletic build, extensive physical training, independently produced video and live presenting. Available for fashion, commercial and screen auditions.",
     "viewPortfolio": "Explore portfolio",
     "openCard": "Casting card",
     "height": "Height",
@@ -341,7 +342,7 @@ window.MODEL_I18N = {
     "screenTag": "FORM / CHARACTER / SCREEN",
     "aboutOverline": "BEHIND THE FRAME",
     "aboutTitle": "Beyond <em>the image.</em>",
-    "aboutOpening": "Movement is where I began. Discipline is what sustains it. I'm drawn to work that asks for character, not just a silhouette.",
+    "aboutOpening": "Sport taught me how to work with movement. Creating video taught me to speak naturally on camera. I want to bring both into new projects.",
     "aboutBody1": "Sport has been an important part of my life for over 14 years. It shaped my physical training, discipline and attention to movement.",
     "aboutBody2": "My work as a trainer and video creator has built confidence working with people and presenting on camera. I am interested in projects that call for an athletic look, character and a natural delivery.",
     "aboutSign": "BELARUS / MODEL & ON-CAMERA TALENT",
@@ -471,7 +472,8 @@ window.MODEL_I18N = {
     "lbCloseAria": "Close photo viewer",
     "lbPrevAria": "Previous photo",
     "lbNextAria": "Next photo",
-    "compCloseAria": "Close casting card"
+    "compCloseAria": "Close casting card",
+    "heroMessage": "Message on Telegram"
   },
   "zh": {
     "folioNavAria": "作品图集导航",
@@ -708,6 +710,7 @@ window.MODEL_I18N = {
     "lbCloseAria": "关闭照片查看器",
     "lbPrevAria": "上一张照片",
     "lbNextAria": "下一张照片",
-    "compCloseAria": "关闭选角资料卡"
+    "compCloseAria": "关闭选角资料卡",
+    "heroMessage": "Telegram 联系"
   }
 };
