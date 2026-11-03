@@ -102,7 +102,7 @@ try{
   assert(v.headingLeft>=-5&&v.headingRight<=x.width+5,"Heading outside viewport");
   assert(v.headingScroll<=4,"Heading text overflow "+v.headingScroll);
   const coverUX=await exec('(()=>{const box=document.querySelector(".hero-shortcuts");const z=document.querySelector(".lang-btn[data-lang=zh]");const r=box.getBoundingClientRect();return {shortcuts:getComputedStyle(box).display,visible:r.height>0 && r.width>0,buttons:box.querySelectorAll("a,button").length,chineseLabel:z.innerText.trim(),imageDisplay:getComputedStyle(document.querySelector("#heroVisual")).backgroundColor}})()');
-  if(x.width<=880)assert(coverUX.shortcuts==="grid" && coverUX.visible && coverUX.buttons===2,"Mobile casting actions missing");
+  if(x.width<=880)assert(coverUX.shortcuts==="grid" && coverUX.visible && coverUX.buttons===3,"Mobile casting actions missing");
   if(x.width>880)assert(coverUX.shortcuts==="none","Desktop should keep original primary actions");
   assert(coverUX.chineseLabel===(x.lang==="zh"?"中文":"ZH"),"Chinese language switch is not legible in "+x.lang);
 
@@ -111,6 +111,8 @@ try{
   assert(!clipped.length,"Text clipped outside viewport: "+JSON.stringify(clipped));
 
   assert(v.specs>=7&&v.cardActions>=2&&v.hasGallery,"Casting functions unavailable");
+  const kit=await exec('(()=>({cards:document.querySelectorAll(".kit-card").length,zip:document.querySelectorAll(".kit-download[download]").length,all:!!document.querySelector(".kit-complete-link[download]"),nav:!!document.querySelector(".site-nav a[href=#downloads]")}))()');
+  assert(kit.cards===3 && kit.zip===3 && kit.all && kit.nav,"International download desk incomplete");
   const bookingUrls=await exec('Array.from(document.querySelectorAll("#contactMethods a")).map(a=>a.href)');
   assert(bookingUrls.length>=2,"Public project contact routes are missing");
   assert(bookingUrls.some(x=>x.startsWith("https://t.me/markovmade?text=")),"Telegram contact has no localized inquiry draft");
@@ -248,6 +250,9 @@ try{
    await exec('document.querySelector("#contact").scrollIntoView({behavior:"instant"})');
    await sleep(450);
    await screenshot("CONTACT");
+    await exec('document.querySelector("#downloads").scrollIntoView({behavior:"instant"})');
+    await sleep(460);
+    await screenshot("DOWNLOADS_RU");
   }
   if(x.label==="EN_DESKTOP"){
    await exec('document.querySelector(".portrait-interlude").scrollIntoView({behavior:"instant"})');
@@ -256,6 +261,9 @@ try{
    await exec('document.querySelector(".folio-strip").scrollIntoView({behavior:"instant"})');
    await sleep(440);
    await screenshot("LOOKBOOK_GRID");
+    await exec('document.querySelector("#downloads").scrollIntoView({behavior:"instant"})');
+    await sleep(460);
+    await screenshot("DOWNLOADS_EN");
    await exec('document.querySelector(".header-enquiry").click()');
    assert(await exec('document.querySelector("#bookingDialog").open'),"Header booking control not interactive");
    await screenshot("BOOKING_DIALOG");
@@ -268,6 +276,9 @@ try{
   if(x.label==="ZH_MOBILE"){
    await exec('document.querySelector("#profile").scrollIntoView({behavior:"instant"})');
    await sleep(450);await screenshot("PROFILE_ZH");
+    await exec('document.querySelector("#downloads").scrollIntoView({behavior:"instant"})');
+    await sleep(460);
+    await screenshot("DOWNLOADS_ZH_MOBILE");
   }
   passed.push(x.label);
  }

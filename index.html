@@ -67,6 +67,7 @@
   <script src="./polish.js" defer></script>
   <script src="./premiere.js" defer></script>
   <script src="./experience.js" defer></script>
+  <script src="./press-kit.js" defer></script>
 </head>
 <body>
   <div class="page-progress" aria-hidden="true"><span id="readingProgress"></span></div>
@@ -79,6 +80,7 @@
       <a href="#lookbook" data-i18n="navPortfolio">Портфолио</a>
       <a href="#screen" data-i18n="navScreen">Работа в кадре</a>
       <a href="#about" data-i18n="navAbout">Обо мне</a>
+      <a href="#downloads" data-i18n="navKit">Скачать досье</a>
       <a href="#contact" data-i18n="navContact">Контакт</a>
     </nav>
     <div class="header-tools">
@@ -102,6 +104,7 @@
         <div class="hero-shortcuts">
           <a class="hero-shortcut-primary" href="#lookbook"><span data-i18n="heroQuickGallery">Смотреть кадры</span><span aria-hidden="true">↗</span></a>
           <a href="https://t.me/markovmade" data-direct-telegram class="hero-shortcut-secondary" target="_blank" rel="noopener noreferrer"><span data-i18n="heroMessage">Написать в Telegram</span><span aria-hidden="true">↗</span></a>
+          <a class="hero-shortcut-kit" href="#downloads"><span data-i18n="heroDownload">Скачать кастинг-досье</span><span aria-hidden="true">↓</span></a>
         </div>
         <div class="hero-bottom">
           <div class="hero-intro">
@@ -111,6 +114,7 @@
             <div class="hero-actions">
               <a class="action action-dark" href="https://t.me/markovmade" data-direct-telegram target="_blank" rel="noopener noreferrer"><span data-i18n="heroMessage">Написать в Telegram</span><span aria-hidden="true">↗</span></a>
               <button class="action action-outline" type="button" data-open-casting-peek><span data-i18n="peekAction">Быстрый кастинг-профиль</span><span aria-hidden="true">↗</span></button>
+              <a class="action action-kit" href="#downloads"><span data-i18n="heroDownload">Скачать кастинг-досье</span><span aria-hidden="true">↓</span></a>
             </div>
             <button class="hero-compact-casting" type="button" data-open-casting-peek><span data-i18n="peekAction">Быстрый кастинг-профиль</span><span aria-hidden="true">↗</span></button>
           </div>
@@ -299,9 +303,41 @@
       </div>
     </section>
 
+
+    <!-- International media desk: every download resolves to a versioned, reproducible static file. -->
+    <section class="kit-section" id="downloads" aria-labelledby="kitTitle">
+      <div class="kit-topline"><span>07 / INTERNATIONAL PRESS OFFICE</span><span data-i18n="kitEdition">PORTFOLIO / CASTING DOCUMENTS</span><span>PM · 2026</span></div>
+      <div class="kit-opening">
+        <div class="kit-opening-title"><span class="kit-supratitle" data-i18n="kitEyebrow">ДЛЯ АГЕНТСТВ, БРЕНДОВ И РЕЖИССЁРОВ</span><h2 id="kitTitle"><span data-i18n="kitTitleA">ВАШЕ</span><em data-i18n="kitTitleB">ДОСЬЕ.</em></h2></div>
+        <div class="kit-opening-copy"><p data-i18n="kitLead">Все материалы для предварительного кастинга: реальная фотоподборка, параметры, comp card, портфолио и прямые контакты. В одном архиве, на вашем языке.</p><div class="kit-figures"><span><strong>06</strong><small data-i18n="kitStatPhotos">ФОТОГРАФИЙ</small></span><span><strong>09</strong><small data-i18n="kitStatPdfs">PDF / ЯЗЫК</small></span><span><strong>03</strong><small data-i18n="kitStatLanguages">ЯЗЫКА</small></span></div></div>
+      </div>
+      <div class="kit-grid" aria-label="International casting kit editions">
+        <article class="kit-card" data-kit-locale="ru">
+          <div class="kit-card-head"><span>01 / 03</span><span>RU · IMPERIAL NOIR</span></div>
+          <a class="kit-cover" href="./downloads/pdfs/ru/Pavel_Markov_Casting_Profile.pdf" target="_blank" rel="noopener" aria-label="Открыть PDF-профиль на русском языке"><img src="./downloads/previews/RU.webp" width="390" height="553" alt="Обложка русской редакции международного кастинг-досье" loading="lazy" decoding="async"><span class="kit-cover-corner" aria-hidden="true">PDF ↗</span></a>
+          <div class="kit-card-copy"><span class="kit-card-kicker">01 / RUSSIAN</span><h3 data-i18n="kitRussian">Русская редакция</h3><p data-i18n="kitCardSummary">9 документов, 6 реальных снимков, параметры и контакты.</p><div class="kit-card-meta"><span data-kit-size="ru">ZIP</span><span>PDF + PHOTO / V.2026.11</span></div><a class="kit-download" href="./downloads/Pavel_Markov_Casting_Kit_RU.zip" download><span data-i18n="kitDownload">Скачать комплект</span><span aria-hidden="true">↓</span></a><a class="kit-pdf-link" href="./downloads/pdfs/ru/Pavel_Markov_Comp_Card.pdf" target="_blank" rel="noopener"><span data-i18n="kitViewComp">Открыть comp card PDF</span> ↗</a></div>
+        </article>
+        <article class="kit-card" data-kit-locale="en">
+          <div class="kit-card-head"><span>02 / 03</span><span>EN · INTERNATIONAL ATELIER</span></div>
+          <a class="kit-cover" href="./downloads/pdfs/en/Pavel_Markov_Casting_Profile.pdf" target="_blank" rel="noopener" aria-label="Open the English casting profile PDF"><img src="./downloads/previews/EN.webp" width="390" height="553" alt="English casting dossier cover preview" loading="lazy" decoding="async"><span class="kit-cover-corner" aria-hidden="true">PDF ↗</span></a>
+          <div class="kit-card-copy"><span class="kit-card-kicker">02 / ENGLISH</span><h3 data-i18n="kitEnglish">English edition</h3><p data-i18n="kitCardSummary">9 документов, 6 реальных снимков, параметры и контакты.</p><div class="kit-card-meta"><span data-kit-size="en">ZIP</span><span>PDF + PHOTO / V.2026.11</span></div><a class="kit-download" href="./downloads/Pavel_Markov_Casting_Kit_EN.zip" download><span data-i18n="kitDownload">Скачать комплект</span><span aria-hidden="true">↓</span></a><a class="kit-pdf-link" href="./downloads/pdfs/en/Pavel_Markov_Comp_Card.pdf" target="_blank" rel="noopener"><span data-i18n="kitViewComp">Открыть comp card PDF</span> ↗</a></div>
+        </article>
+        <article class="kit-card" data-kit-locale="zh">
+          <div class="kit-card-head"><span>03 / 03</span><span>ZH · CINNABAR EDITION</span></div>
+          <a class="kit-cover" href="./downloads/pdfs/zh/Pavel_Markov_Casting_Profile.pdf" target="_blank" rel="noopener" aria-label="打开中文选角资料 PDF"><img src="./downloads/previews/ZH.webp" width="390" height="553" alt="中文版选角档案封面" loading="lazy" decoding="async"><span class="kit-cover-corner" aria-hidden="true">PDF ↗</span></a>
+          <div class="kit-card-copy"><span class="kit-card-kicker">03 / 中文</span><h3 data-i18n="kitChinese">中文版</h3><p data-i18n="kitCardSummary">9 документов, 6 реальных снимков, параметры и контакты.</p><div class="kit-card-meta"><span data-kit-size="zh">ZIP</span><span>PDF + PHOTO / V.2026.11</span></div><a class="kit-download" href="./downloads/Pavel_Markov_Casting_Kit_ZH.zip" download><span data-i18n="kitDownload">Скачать комплект</span><span aria-hidden="true">↓</span></a><a class="kit-pdf-link" href="./downloads/pdfs/zh/Pavel_Markov_Comp_Card.pdf" target="_blank" rel="noopener"><span data-i18n="kitViewComp">Открыть comp card PDF</span> ↗</a></div>
+        </article>
+      </div>
+      <div class="kit-complete">
+        <div class="kit-complete-art" aria-hidden="true"><span>PM / 03 EDITIONS</span><strong>ALL<br>ACCESS.</strong><span>ONE PERSON / THREE EDITIONS</span></div>
+        <div class="kit-complete-info"><span class="kit-complete-kicker">04 / WORLDWIDE</span><h3 data-i18n="kitAllTitle">Весь архив. <em>Три языка.</em></h3><p data-i18n="kitAllLead">Все документы на русском, английском и китайском. Шесть подлинных архивных фотографий вложены один раз, без дубликатов.</p><div class="kit-complete-bottom"><span data-kit-size="all">ZIP · INTERNATIONAL</span><a href="./downloads/Pavel_Markov_Complete_Archive.zip" download class="kit-complete-link"><span data-i18n="kitAllDownload">Скачать полный архив</span><span aria-hidden="true">↓</span></a></div></div>
+      </div>
+      <p class="kit-legal" data-i18n="kitLegal">Фотографии из личного архива, не актуальные агентские digitals. Коммерческое использование только по согласованию с правообладателем.</p>
+    </section>
+
     <section class="contact-section section-pad" id="contact" aria-labelledby="contactTitle">
       <img class="contact-backdrop" src="./assets/editorial-markovmade.webp" alt="" loading="lazy" decoding="async" width="900" height="1200" aria-hidden="true">
-      <div class="section-topline"><span>07 / CASTING INQUIRIES</span><span data-i18n="contactOverline">ДЛЯ РЕЖИССЁРОВ, БРЕНДОВ И АГЕНТСТВ</span></div>
+      <div class="section-topline"><span>08 / CASTING INQUIRIES</span><span data-i18n="contactOverline">ДЛЯ РЕЖИССЁРОВ, БРЕНДОВ И АГЕНТСТВ</span></div>
       <div class="contact-layout">
         <div class="contact-main"><h2 class="contact-heading" id="contactTitle"><span data-i18n="contactHead1">В КАДР</span><em data-i18n="contactHead2">ВМЕСТЕ.</em></h2><p class="contact-lead" data-i18n="contactLead">Коммерческие, fashion, спортивные и экранные проекты. Открыт к предложениям.</p></div>
         <div class="contact-side">

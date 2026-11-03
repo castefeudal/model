@@ -1,0 +1,70 @@
+name: Build verified international press kits
+on:
+  push:
+    branches: [main, 'feat/**']
+    paths:
+      - tools/build_press_kit.py
+      - tools/check_press_kit.py
+      - data/profile.js
+      - data/media.js
+      - data/i18n.js
+      - assets/portrait-*.webp
+      - assets/editorial-markovmade.webp
+      - assets/fonts/NotoSansSC-subset.woff2
+      - assets/fonts/NotoSerifSC-subset.woff2
+      - .github/workflows/press-kit.yml
+  pull_request:
+    paths:
+      - tools/build_press_kit.py
+      - tools/check_press_kit.py
+      - data/profile.js
+      - data/media.js
+      - data/i18n.js
+      - .github/workflows/press-kit.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: press-kit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install print fonts and PDF dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-arphic-gbsn00lp
+          python -m pip install --quiet 'reportlab>=4.0,<5' 'Pillow>=10,<13' 'fonttools[woff]>=4.45,<5' 'PyMuPDF>=1.24,<2' brotli
+      - name: Build owner-approved localized ZIP archives and PDF exports
+        run: python tools/build_press_kit.py
+      - name: Verify every archive, checksum, PDF, language and public photo
+        run: python tools/check_press_kit.py
+      - name: Upload archival review copies
+        uses: actions/upload-artifact@v4
+        with:
+          name: verified-casting-kits
+          path: downloads/
+          retention-days: 3
+      - name: Commit stable GitHub Pages download assets
+        if: github.event_name == 'push'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add downloads/
+          if ! git diff --cached --quiet; then
+            git commit -m 'Publish verified RU EN ZH casting kits and PDF downloads'
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase "origin/${GITHUB_REF_NAME}"
+            git push origin HEAD:"${GITHUB_REF_NAME}"
+          fi

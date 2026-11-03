@@ -4,9 +4,11 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
+import {gzipSync} from "node:zlib";
 import { execFileSync } from "node:child_process";
 
 const root=path.resolve(import.meta.dirname,"..");
+const compressedSize=text=>gzipSync(text,{level:9}).length;
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const exists=p=>fs.existsSync(path.join(root,p));
 const errors=[],ok=msg=>console.log("✓ "+msg),fail=msg=>errors.push(msg);
@@ -26,7 +28,8 @@ if(exists("assets/fonts/covered-glyphs.txt")){
 }
 try{execFileSync(process.execPath,["tools/build-css.mjs","--check"],{cwd:root,stdio:"pipe"});ok("Production CSS bundle is fresh")}
 catch(e){fail("Production CSS bundle out of date: run node tools/build-css.mjs")}
-if(fs.statSync(path.join(root,"bundle.css")).size>78000)fail("Edition 09 design CSS exceeds 78 KB budget");
+if(fs.statSync(path.join(root,"bundle.css")).size>85000)fail("Signature edition source CSS exceeds 85 KB budget");
+if(compressedSize(read("bundle.css"))>19000)fail("Signature edition compressed CSS exceeds 19 KB transfer budget");
 if(read("tools/build-css.mjs").includes('"atelier.css"')||read("tools/build-css.mjs").includes('"premiere.css"'))fail("Legacy layered CSS must not ship to production");
 if(!read("bundle.css").includes("PM CJK Sans"))fail("Self-hosted Simplified Chinese font missing from production CSS");
 if(!read("tools/build-css.mjs").includes('"issue09.css"'))fail("Single design source must be ISSUE 09");

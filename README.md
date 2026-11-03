@@ -221,3 +221,47 @@ Responsive 1x/2x mobile cover, accessible mobile lookbook controls, progressive 
 - Existing real archive is presented in more intentional editorial crops; the stage photograph is landscape on wide screens. Main photo and profile data are not fabricated.
 - Mobile-first detail and type refinements, shorter repeated photographic chapters, no unnecessary remote Latin font request during initial Chinese edition load.
 - See [DIRECTORS_EDITION_AUDIT.md](DIRECTORS_EDITION_AUDIT.md) for actual change scope, previous CI baseline and content limitations.
+
+## Signature Edition / International Casting Kit (03 Nov 2026)
+
+### Verified public downloads
+
+The site's dedicated **International Press Office** provides four static downloads:
+`Pavel_Markov_Casting_Kit_RU.zip`, `Pavel_Markov_Casting_Kit_EN.zip`,
+`Pavel_Markov_Casting_Kit_ZH.zip`, and `Pavel_Markov_Complete_Archive.zip`.
+
+Each language archive contains nine actual, fully localized PDF documents and the
+six real, approved source photographs. It includes a manifest and individual
+SHA-256 file checksums; actual ZIP sizes and PDF previews are read from
+`downloads/catalog.json`, never fabricated in the interface. The international
+ZIP stores the six photographs **once**. All present archive images are labelled
+as archival rather than contemporary unretouched agency digitals.
+
+Regenerate with Python 3.11+, Node.js 22+, the OFL CJK fonts in `assets/fonts`,
+DejaVu Sans and `fonts-arphic-gbsn00lp` (on Ubuntu):
+
+```bash
+python -m pip install 'reportlab>=4,<5' 'Pillow>=10,<13' 'fonttools[woff]>=4.45,<5' 'PyMuPDF>=1.24,<2' brotli
+python tools/build_press_kit.py
+python tools/check_press_kit.py
+```
+
+`.github/workflows/press-kit.yml` performs the same build, verifies the real
+archives and commits **stable** generated downloads for GitHub Pages on branch
+pushes. Temporary Actions artifacts are QA backups, not the public download URLs.
+
+`data/profile.js`, `data/media.js`, and `data/i18n.js` remain the only site truth
+for public facts. Reusing an archive image in a downloadable kit requires an
+explicit `presskit_approved:true` entry on the source media record. Do not add
+passports, IDs, agreements, private contact information, fabricated credits or
+unverified professional casting measurements. Photo reuse rights remain subject
+to the actual rightsholder's authorization.
+
+### Quality gates
+
+The main CSS bundle has a meaningful **85 KB uncompressed / 19 KB gzipped**
+source/transfer limit; the additional multilingual press-office design increases
+CSS but introduces no third-party UI framework. `tools/browser-qa.mjs` checks the
+three language cards, real links, keyboard interaction, responsive layout and
+media-desk screenshots. `tools/check_press_kit.py` opens every PDF and validates
+all archive members, image count, SHA-256, metadata and PDF text extraction.
