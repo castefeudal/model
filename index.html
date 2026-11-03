@@ -11,9 +11,6 @@
   <link rel="alternate" hreflang="en" href="https://castefeudal.github.io/model/?lang=en">
   <link rel="alternate" hreflang="zh-CN" href="https://castefeudal.github.io/model/?lang=zh">
   <link rel="alternate" hreflang="x-default" href="https://castefeudal.github.io/model/">
-  <!-- Give the actual first contentful photograph a head start over large editorial scripts. -->
-  <link rel="preload" as="image" href="./assets/portrait-fashion.webp" media="(min-width: 881px)" fetchpriority="high">
-  <link rel="preload" as="image" href="./assets/thumbs/portrait-fashion.webp" imagesrcset="./assets/thumbs/portrait-fashion.webp 1x, ./assets/portrait-fashion.webp 2x" imagesizes="100vw" media="(max-width: 880px)" fetchpriority="high">
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
   <meta property="og:type" content="profile">
@@ -50,15 +47,6 @@
   <script>
     // Latin editions keep non-blocking editorial fonts.
     // Chinese display fonts are self-hosted: no redundant Google font fetch.
-    if (document.documentElement.dataset.edition === "zh") {
-      const localSerif = document.createElement("link");
-      localSerif.rel = "preload";
-      localSerif.as = "font";
-      localSerif.type = "font/woff2";
-      localSerif.crossOrigin = "anonymous";
-      localSerif.href = "./assets/fonts/NotoSerifSC-subset.woff2";
-      document.head.append(localSerif);
-    }
     if (document.documentElement.dataset.edition !== "zh") {
       const displayFonts = document.createElement("link");
       displayFonts.rel = "preload";
