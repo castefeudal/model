@@ -212,3 +212,12 @@ Production design is judged against actual desktop/mobile screenshots, a working
 
 ## Edition 10 — directors cut
 Responsive 1x/2x mobile cover, accessible mobile lookbook controls, progressive motion with an opt-out and reduced-motion, localized casting data copy. The archived photography remains honestly labelled.
+
+## Director's Edition — 3 November 2026
+
+- Casting-first order: hero → physical specifications → personal archive → curated lookbook → capabilities → contact.
+- Two primary hero actions go directly to verified Telegram `@markovmade` with language-specific enquiry drafts; email and the detailed booking dialog remain accessible.
+- Casting Desk permalink: `?lang=en&view=casting` (also RU and ZH). The copied dossier includes this deep link.
+- Existing real archive is presented in more intentional editorial crops; the stage photograph is landscape on wide screens. Main photo and profile data are not fabricated.
+- Mobile-first detail and type refinements, shorter repeated photographic chapters, no unnecessary remote Latin font request during initial Chinese edition load.
+- See [DIRECTORS_EDITION_AUDIT.md](DIRECTORS_EDITION_AUDIT.md) for actual change scope, previous CI baseline and content limitations.
